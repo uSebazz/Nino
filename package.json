@@ -1,0 +1,13 @@
+{
+	"name": "nino",
+	"main": "src/index.js",
+	"type": "module",
+	"dependencies": {
+		"@sapphire/framework": "^2.4.1",
+		"discord.js": "^13.6.0",
+		"dotenv": "^16.0.0"
+	},
+	"scripts": {
+		"start": "node src/index.js"
+	}
+}

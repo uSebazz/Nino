@@ -1,0 +1,9 @@
+{
+	"printWidth": 100,
+	"useTabs": true,
+	"tabWidth": 3,
+	"singleQuote": true,
+	"quoteProps": "as-needed",
+	"endOfLine": "lf",
+	"disableLanguages": []
+}
