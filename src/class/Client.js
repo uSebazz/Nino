@@ -3,6 +3,9 @@ import {
 	ApplicationCommandRegistries,
 	RegisterBehavior,
 } from '@sapphire/framework';
+import {
+	emotes
+} from '../lib/emotes.js';
 import 'dotenv/config';
 
 export class Nino extends SapphireClient {
@@ -32,6 +35,7 @@ export class Nino extends SapphireClient {
 			allowedMentions: { repliedUser: false },
 			defaultPrefix: 'n/',
 		});
+		this.emotes = emotes;
 	}
 	async login(token = process.env.token) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
