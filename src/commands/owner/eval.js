@@ -1,5 +1,5 @@
-import { Command } from '@sapphire/framework';
-import { Message, MessageButton, MessageActionRow, Formatters } from 'discord.js';
+import { Command, ApplicationCommandRegistry } from '@sapphire/framework';
+import { CommandInteraction, MessageButton, MessageActionRow, Formatters } from 'discord.js';
 import { promisify, inspect } from 'util';
 import { exec } from 'child_process';
 
@@ -7,30 +7,46 @@ export class EvalCode extends Command {
 	constructor(context, options) {
 		super(context, {
 			...options,
-			name: 'eval',
-			description: 'Evaluate code',
-			aliases: ['e', 'evaluate'],
 			preconditions: ['OwnerOnly'],
 		});
 	}
 	/**
-	 * @param { Message } message
-	 * @returns
+	 *
+	 * @param { CommandInteraction } interaction
 	 */
-	async messageRun(message, args) {
+	async chatInputRun(interaction) {
+		const code = interaction.options.getString('code', true);
 		let evalued = undefined;
-		if (args.finished) {
-			message.channel.send('You not provide a code lol');
-		}
-		let x = await args.rest('string').catch((e) => String);
+
 		try {
-			evalued = await eval(x);
+			evalued = await eval(code);
 			evalued = inspect(evalued, { depth: 0 });
-		} catch (e) {
-			evalued = e.toString();
+		} catch (err) {
+			evalued = err.message;
 		}
 
-		const mensaje = Formatters.codeBlock('js', evalued.slice(0, 1950));
-		await message.reply({ content: mensaje });
+		let evaluado = Formatters.codeBlock('js', evalued.slice(0, 1950));
+
+		await interaction.reply({
+			content: evaluado,
+		});
+	}
+	/**
+	 *
+	 * @param { ApplicationCommandRegistry } registery
+	 */
+	registerApplicationCommands(registery) {
+		registery.registerChatInputCommand({
+			name: 'eval',
+			description: 'evaluate a code',
+			options: [
+				{
+					type: 'STRING',
+					required: true,
+					name: 'code',
+					description: 'Code to evaluate',
+				},
+			],
+		});
 	}
 }
