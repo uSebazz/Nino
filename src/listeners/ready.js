@@ -1,4 +1,5 @@
 import { Listener } from '@sapphire/framework';
+import colors from 'colors';
 
 export class ReadyListener extends Listener {
 	constructor(context, options) {
@@ -8,8 +9,8 @@ export class ReadyListener extends Listener {
 			event: 'ready',
 		});
 	}
-	run(client) {
-		let { username, id } = client.user;
-		console.log(`Ready in ${username} (${id})`);
+	async run(client) {
+		let { tag } = client.user;
+		console.log(`${new Date().toLocaleString()}`.blue, `| ${tag} is now On!`);
 	}
 }

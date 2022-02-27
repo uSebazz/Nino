@@ -11,8 +11,7 @@ export class PingCommand extends Command {
 		});
 	}
 	/**
-	 *
-	 * @param {Message} message
+	 * @param { Message } message
 	 * @returns
 	 */
 	async messageRun(message) {

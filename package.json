@@ -2,8 +2,10 @@
 	"name": "nino",
 	"main": "src/index.js",
 	"type": "module",
+	"private": true,
 	"dependencies": {
 		"@sapphire/framework": "^2.4.1",
+		"colors": "^1.4.0",
 		"discord.js": "^13.6.0",
 		"dotenv": "^16.0.0"
 	},

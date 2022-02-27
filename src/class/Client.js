@@ -12,7 +12,7 @@ export class Nino extends SapphireClient {
 			defaultPrefix: 'n/',
 		});
 	}
-    async log(token = process.env.token) {
-        await this.login(token)
-    }
+	async login(token = process.env.token) {
+		await super.login(token);
+	}
 }
