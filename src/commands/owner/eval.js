@@ -69,7 +69,7 @@ export class EvalCode extends Command {
 	registerApplicationCommands(registery) {
 		registery.registerChatInputCommand({
 			name: 'eval',
-			description: 'evaluate a code',
+			description: 'Evaluate a code',
 			options: [
 				{
 					type: 'STRING',
@@ -81,7 +81,7 @@ export class EvalCode extends Command {
 					type: 'STRING',
 					required: true,
 					name: 'type',
-					description: 'type of evaluate',
+					description: 'Type of code evaluation',
 					choices: [
 						{
 							name: '-n',
