@@ -1,5 +1,5 @@
 import { Command, ApplicationCommandRegistry } from '@sapphire/framework';
-import { CommandInteraction, MessageButton, MessageActionRow, Formatters } from 'discord.js';
+import { CommandInteraction, Formatters } from 'discord.js';
 import { promisify, inspect } from 'util';
 import { exec } from 'child_process';
 
