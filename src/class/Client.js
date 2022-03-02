@@ -9,6 +9,7 @@ import {
 	LogLevel,
 } from '@sapphire/framework';
 import { NinoManager } from './Manager.js';
+import { Model, defaultData } from '../lib/database/guildConfig.js';
 
 await mongoose
 	.connect(process.env.mongourl)
@@ -37,6 +38,15 @@ export class Nino extends SapphireClient {
 			},
 			logger: {
 				level: LogLevel.Debug,
+			},
+			i18n: {
+				fetchLanguage: async (context) => {
+					if (!context.guild) return 'en-US';
+
+					const guild = await Model.findOne({ guild: context.guild.id }).lean();
+					if (!guild) guild = await Model.create(defaultData(context.guild.id));
+					return guild.config.language;
+				},
 			},
 			retryLimit: 2,
 			disableMentions: 'everyone',

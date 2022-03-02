@@ -1,6 +1,13 @@
 import { Command, ApplicationCommandRegistry } from '@sapphire/framework';
 import { CommandInteraction, Formatters } from 'discord.js';
 import { promisify, inspect } from 'util';
+import {
+	resolveKey,
+	fetchLanguage,
+	sendLocalized,
+	editLocalized,
+	replyLocalized,
+} from '@sapphire/plugin-i18next';
 import { exec } from 'child_process';
 
 export class EvalCode extends Command {

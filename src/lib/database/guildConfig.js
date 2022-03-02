@@ -1,11 +1,25 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const Schema = new Schema({
-	guild: String,
+/**
+ *
+ * @param { String } guildId
+ */
+export const defaultData = (guildId) => ({
+	guild: guildId,
 	config: {
-		language: String,
-		//mas cosas dsp.
+		language: 'es-ES',
 	},
 });
 
-export const Model = model('GuildConfig', Schema);
+const GuildConfigSchema = new mongoose.Schema(
+	{
+		guild: String,
+		config: {
+			language: String,
+			//mas cosas dsp.
+		},
+	},
+	{ versionKey: false }
+);
+
+export const Model = mongoose.model('GuildConfig', GuildConfigSchema);
