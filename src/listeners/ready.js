@@ -11,6 +11,7 @@ export class ReadyListener extends Listener {
 	}
 	async run(client) {
 		let { tag } = client.user;
+		client.manager.init(client.user.id);
 		console.log(colors.blue(`${new Date().toLocaleString()}`), `| ${tag} is now On!`);
 	}
 }

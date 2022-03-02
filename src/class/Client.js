@@ -1,10 +1,18 @@
+import 'dotenv/config';
+import '@sapphire/plugin-i18next/register';
+import mongoose from 'mongoose';
+import colors from 'colors';
 import {
 	SapphireClient,
 	ApplicationCommandRegistries,
 	RegisterBehavior,
+	LogLevel,
 } from '@sapphire/framework';
-import { emotes } from '../lib/emotes.js';
-import 'dotenv/config';
+import { NinoManager } from './Manager.js';
+
+await mongoose
+	.connect(process.env.mongourl)
+	.then(() => console.log(colors.blue(`${new Date().toLocaleString()}`), `| Mongoose Connected`));
 
 export class Nino extends SapphireClient {
 	constructor() {
@@ -27,14 +35,18 @@ export class Nino extends SapphireClient {
 					},
 				],
 			},
+			logger: {
+				level: LogLevel.Debug,
+			},
 			retryLimit: 2,
 			disableMentions: 'everyone',
 			fetchAllMembers: true,
 			allowedMentions: { repliedUser: false },
 			defaultPrefix: 'n/',
+			loadMessageCommandListeners: true,
 		});
-		this.emotes = emotes;
 		this.devs = ['899339781132124220', '762143188655144991', '752336035228418059'];
+		this.manager = new NinoManager(this);
 	}
 	async login(token = process.env.token) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
