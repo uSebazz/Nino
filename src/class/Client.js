@@ -43,7 +43,7 @@ export class Nino extends SapphireClient {
 				fetchLanguage: async (context) => {
 					if (!context.guild) return 'en-US';
 
-					const guild = await Model.findOne({ guild: context.guild.id }).lean();
+					let guild = await Model.findOne({ guild: context.guild.id }).lean();
 					if (!guild) guild = await Model.create(defaultData(context.guild.id));
 					return guild.config.language;
 				},
