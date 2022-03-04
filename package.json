@@ -9,7 +9,7 @@
 		"colors": "^1.4.0",
 		"discord.js": "^13.6.0",
 		"dotenv": "^16.0.0",
-		"erela.js": "^2.3.3",
+		"lavaclient": "^4.0.8-rc.2",
 		"mongoose": "^6.2.4"
 	},
 	"scripts": {

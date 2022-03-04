@@ -9,9 +9,14 @@ export class ReadyListener extends Listener {
 			event: 'ready',
 		});
 	}
-	async run(client) {
+	async run() {
+		/**
+		 * @type {import('../class/Client').Nino}
+		 */
+		const client = this.container.client;
+
 		let { tag } = client.user;
-		client.manager.init(client.user.id);
+		client.music.connect(client.user.id);
 		console.log(colors.blue(`${new Date().toLocaleString()}`), `| ${tag} is now On!`);
 	}
 }

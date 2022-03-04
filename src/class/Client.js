@@ -8,7 +8,7 @@ import {
 	RegisterBehavior,
 	LogLevel,
 } from '@sapphire/framework';
-import { NinoManager } from './Manager.js';
+import { NinoMusic } from './Music.js';
 import { Model, defaultData } from '../lib/database/guildConfig.js';
 
 await mongoose
@@ -56,7 +56,7 @@ export class Nino extends SapphireClient {
 			loadMessageCommandListeners: true,
 		});
 		this.devs = ['899339781132124220', '762143188655144991', '752336035228418059'];
-		this.manager = new NinoManager(this);
+		this.music = new NinoMusic(this);
 	}
 	async login(token = process.env.token) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);

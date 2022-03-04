@@ -1,5 +1,7 @@
 import { Command, ApplicationCommandRegistry } from '@sapphire/framework';
-import { CommandInteraction } from 'discord.js';
+import { resolveKey } from '@sapphire/plugin-i18next';
+import { NinoUtils } from '../../lib/utils.js';
+import { CommandInteraction, MessageEmbed } from 'discord.js';
 
 export class PlayMusicCommand extends Command {
 	constructor(context, options) {
@@ -19,42 +21,13 @@ export class PlayMusicCommand extends Command {
 		 */
 
 		const client = this.container.client;
-		const { options, member, guild } = interaction;
-		const { channel } = interaction.member.voices;
+		const emote = new NinoUtils().emojis;
+		const color = new NinoUtils().colors;
+		const { options, guild } = interaction;
+		const { channel } = interaction.member.voice;
 
 		switch (options.getSubcommand()) {
 			case 'play': {
-				const track = options.getString('track');
-
-				const player = client.manager.create({
-					guild: guild.id,
-					voiceChannel: channel.id,
-					textChannel: interaction.channel.id,
-					selfDeafen: true,
-					volume: 80,
-				});
-
-				if (player.state != 'CONNECTED') await player.connect();
-				let rest;
-
-				try {
-					rest = player.search(track, interaction.user);
-					if (!player) return;
-
-					if (rest.loadType === 'LOAD_FAILED') {
-						if (!player.queue.current) player.destroy();
-						throw rest.exception;
-					}
-				} catch (err) {
-					await interaction.reply('Error, srry.');
-					console.log(err);
-				}
-
-				switch ((await rest).loadType) {
-					case 'NO_MATCHES': {
-						if (!player.queue.current) await player.destroy();
-					}
-				}
 			}
 		}
 	}
@@ -84,8 +57,8 @@ export class PlayMusicCommand extends Command {
 				],
 			},
 			{
-				guildIds: ['945033113673801799'],
-				idHints: [],
+				guildIds: ['945033113673801799', '846937568753745921'],
+				idHints: ['948394148334018652'],
 			}
 		);
 	}

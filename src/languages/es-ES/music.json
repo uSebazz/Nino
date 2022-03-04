@@ -1,0 +1,11 @@
+{
+	"play": {
+		"no_matches": "{{emote}} - **{{user}}**, No pude encontrar nada acerca de la canción `{{track}}`",
+		"track_loaded": {
+			"description": "{{emoji}} !Canción **[{{track}}]({{uri}})** añadida a la cola¡"
+		}
+	},
+	"error": {
+		"catch": "{{emote}} - **{{user}}**, Parece que un error inesperado ha ocurrido, reportalo rapido en https://discord.gg/nino"
+	}
+}
