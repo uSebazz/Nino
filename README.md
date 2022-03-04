@@ -7,5 +7,5 @@
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=uSebazz_Nino&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=uSebazz_Nino)
 [![](https://img.shields.io/badge/discord.js-v13.6.0-blue.svg?logo=npm)](https://github.com/discordjs)
 [![Sapphire](https://img.shields.io/npm/v/@sapphire/framework?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/@sapphire/framework)
-[![DevServer](https://discordapp.com/api/guilds/945033113673801799/widget.png?style=shield)](https://discord.gg/SbsFVV5dNG)
+[![DevServer](https://discordapp.com/api/guilds/945033113673801799/widget.png?style=shield)](https://discord.gg/6ADTea2FXz)
 > Bot usado por 100k usuarios y 300 servidores aproximadamente<3
