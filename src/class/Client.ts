@@ -12,7 +12,7 @@ import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { NinoMusic } from './Music';
 import { Model, defaultData } from '../lib/database/guildConfig';
 
-mongoose.connect(process.env.mongurl).then(() => {
+mongoose.connect(process.env.mongourl).then(() => {
 	console.log(colors.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
 });
 
