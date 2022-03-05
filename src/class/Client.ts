@@ -12,13 +12,6 @@ import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { NinoMusic } from './Music';
 import { Model, defaultData } from '../lib/database/guildConfig';
 
-async () => {
-	await mongoose
-		.connect(process.env.mongourl)
-		.then(() =>
-			console.log(colors.blue(`${new Date().toLocaleString()}`), `| Mongoose Connected`)
-		);
-};
 
 export class Nino extends SapphireClient {
 	readonly music: NinoMusic;
