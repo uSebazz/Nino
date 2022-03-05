@@ -1,2 +1,2 @@
 import { Nino } from './class/Client';
-new Nino().start(process.env.token);  //a
+new Nino().start(process.env.token);

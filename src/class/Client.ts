@@ -12,6 +12,9 @@ import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { NinoMusic } from './Music';
 import { Model, defaultData } from '../lib/database/guildConfig';
 
+mongoose.connect(process.env.mongurl).then(() => {
+	console.log(colors.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
+});
 
 export class Nino extends SapphireClient {
 	readonly music: NinoMusic;
@@ -45,8 +48,8 @@ export class Nino extends SapphireClient {
 					let guild = await Model.findOne({ guild: context.guild.id }).lean();
 					if (!guild) guild = await Model.create(defaultData(context.guild.id));
 					return guild.config.language;
-				}
-			  },
+				},
+			},
 			retryLimit: 2,
 			allowedMentions: { repliedUser: false },
 			defaultPrefix: 'n/',
