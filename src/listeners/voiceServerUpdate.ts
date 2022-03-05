@@ -1,7 +1,7 @@
 import { Listener } from '@sapphire/framework';
 
 export class VoiceServerUpdateListener extends Listener {
-	constructor(context, options) {
+	public constructor(context: Listener.Context, options: Listener.Options) {
 		super(context, {
 			...options,
 			emitter: 'ws',
@@ -9,9 +9,6 @@ export class VoiceServerUpdateListener extends Listener {
 		});
 	}
 	async run(data) {
-		/**
-		 * @type {import('../class/Client').Nino}
-		 */
 		const client = this.container.client;
 
 		client.music.handleVoiceUpdate(data);

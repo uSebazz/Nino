@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"outDir": "./lib",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"strict": false,
+		"target": "esnext",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"]
+}

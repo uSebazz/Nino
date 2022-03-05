@@ -8,15 +8,21 @@ import {
 	RegisterBehavior,
 	LogLevel,
 } from '@sapphire/framework';
-import { NinoMusic } from './Music.js';
-import { Model, defaultData } from '../lib/database/guildConfig.js';
+import { InternationalizationContext } from '@sapphire/plugin-i18next';
+import { NinoMusic } from './Music';
+import { Model, defaultData } from '../lib/database/guildConfig';
 
-await mongoose
-	.connect(process.env.mongourl)
-	.then(() => console.log(colors.blue(`${new Date().toLocaleString()}`), `| Mongoose Connected`));
+async () => {
+	await mongoose
+		.connect(process.env.mongourl)
+		.then(() =>
+			console.log(colors.blue(`${new Date().toLocaleString()}`), `| Mongoose Connected`)
+		);
+};
 
 export class Nino extends SapphireClient {
-	constructor() {
+	readonly music: NinoMusic;
+	public constructor() {
 		super({
 			intents: 16071,
 			partials: [
@@ -40,26 +46,29 @@ export class Nino extends SapphireClient {
 				level: LogLevel.Debug,
 			},
 			i18n: {
-				fetchLanguage: async (context) => {
+				fetchLanguage: async (context: InternationalizationContext) => {
 					if (!context.guild) return 'en-US';
 
 					let guild = await Model.findOne({ guild: context.guild.id }).lean();
 					if (!guild) guild = await Model.create(defaultData(context.guild.id));
 					return guild.config.language;
-				},
-			},
+				}
+			  },
 			retryLimit: 2,
-			disableMentions: 'everyone',
-			fetchAllMembers: true,
 			allowedMentions: { repliedUser: false },
 			defaultPrefix: 'n/',
 			loadMessageCommandListeners: true,
 		});
-		this.devs = ['899339781132124220', '762143188655144991', '752336035228418059'];
-		this.music = new NinoMusic(this);
+		this.music = new NinoMusic();
 	}
-	async login(token = process.env.token) {
+	async start(token: string) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
 		await super.login(token);
+	}
+}
+
+declare module '@sapphire/framework' {
+	interface SapphireClient {
+		readonly music: NinoMusic;
 	}
 }

@@ -12,20 +12,13 @@ import { NinoUtils } from '../../lib/utils.js';
 import { exec } from 'child_process';
 
 export class EvalCode extends Command {
-	constructor(context, options) {
+	public constructor(context: Command.Context, options: Command.Options) {
 		super(context, {
 			...options,
 			preconditions: ['OwnerOnly'],
 		});
 	}
-	/**
-	 *
-	 * @param { CommandInteraction } interaction
-	 */
-	async chatInputRun(interaction) {
-		/**
-		 * @type {import('../../class/client').Nino}
-		 */
+	async chatInputRun(interaction: CommandInteraction) {
 		const { options } = interaction;
 
 		const code = options.getString('code', true);
@@ -70,11 +63,7 @@ export class EvalCode extends Command {
 			content: mensaje,
 		});
 	}
-	/**
-	 *
-	 * @param { ApplicationCommandRegistry } registery
-	 */
-	registerApplicationCommands(registery) {
+	registerApplicationCommands(registery: ApplicationCommandRegistry) {
 		registery.registerChatInputCommand({
 			name: 'eval',
 			description: 'Evaluate a code',

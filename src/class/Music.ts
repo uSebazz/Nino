@@ -7,11 +7,10 @@ export class NinoMusic extends MusicClient {
 		const { client } = container;
 		super({
 			sendGatewayPayload: (id, payload) => {
-				client.guilds.cache.get(id).shard.send(payload);
+				client.guilds.cache.get(id)?.shard?.send(payload);
 			},
 			connection: {
 				host: process.env.ip,
-				identifier: 'NinoLink',
 				password: process.env.pass,
 				port: 25786,
 				secure: false,

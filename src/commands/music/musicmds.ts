@@ -1,41 +1,31 @@
 import { Command, ApplicationCommandRegistry } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import { NinoUtils } from '../../lib/utils.js';
-import { CommandInteraction, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
+import type { GuildMember, CommandInteraction } from 'discord.js';
 
 export class PlayMusicCommand extends Command {
-	constructor(context, options) {
+	public constructor(context: Command.Context, options: Command.Options) {
 		super(context, {
 			...options,
 			preconditions: ['inVoiceChannel'],
 			requiredClientPermissions: ['CONNECT', 'SPEAK'],
 		});
 	}
-	/**
-	 *
-	 * @param { CommandInteraction } interaction
-	 */
-	async chatInputRun(interaction) {
-		/**
-		 * @type {import('../../class/client').Nino}
-		 */
-
+	async chatInputRun(interaction: CommandInteraction) {
 		const client = this.container.client;
 		const emote = new NinoUtils().emojis;
 		const color = new NinoUtils().colors;
+		const member = interaction.member as GuildMember;
 		const { options, guild } = interaction;
-		const { channel } = interaction.member.voice;
+		const { channel } = member.voice;
 
 		switch (options.getSubcommand()) {
 			case 'play': {
 			}
 		}
 	}
-	/**
-	 *
-	 * @param { ApplicationCommandRegistry } registery
-	 */
-	registerApplicationCommands(registery) {
+	registerApplicationCommands(registery: ApplicationCommandRegistry) {
 		registery.registerChatInputCommand(
 			{
 				name: 'music',

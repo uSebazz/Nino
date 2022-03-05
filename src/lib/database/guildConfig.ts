@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { serverConfig } from '../function/types';
 
 /**
  *
@@ -11,15 +12,14 @@ export const defaultData = (guildId) => ({
 	},
 });
 
-const GuildConfigSchema = new mongoose.Schema(
+const serverConfigSchema = new mongoose.Schema(
 	{
 		guild: String,
 		config: {
 			language: String,
-			//mas cosas dsp.
 		},
 	},
 	{ versionKey: false }
 );
 
-export const Model = mongoose.model('GuildConfig', GuildConfigSchema);
+export const Model = mongoose.model<serverConfig>('serverConfig', serverConfigSchema);

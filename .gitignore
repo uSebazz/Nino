@@ -1,3 +1,4 @@
 # Ignoring stupid files
 /.env
 /node_modules
+/lib
