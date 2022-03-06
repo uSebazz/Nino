@@ -10,9 +10,3 @@ export class OwnerOnly extends Precondition {
 			  });
 	}
 }
-
-declare module '@sapphire/framework' {
-	export interface Preconditions {
-		OwnerOnly: never;
-	}
-}

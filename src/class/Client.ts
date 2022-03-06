@@ -64,13 +64,11 @@ export class Nino extends SapphireClient {
 }
 
 declare module '@sapphire/framework' {
-	interface SapphireClient {
+	export interface SapphireClient {
 		readonly music: NinoMusic;
 	}
-}
-
-declare module '@sapphire/framework' {
 	export interface Preconditions {
 		inVoiceChannel: never;
+		OwnerOnly: never;
 	}
 }
