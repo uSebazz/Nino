@@ -68,3 +68,9 @@ declare module '@sapphire/framework' {
 		readonly music: NinoMusic;
 	}
 }
+
+declare module '@sapphire/framework' {
+	export interface Preconditions {
+		inVoiceChannel: never;
+	}
+}

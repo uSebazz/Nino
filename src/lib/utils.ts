@@ -10,5 +10,3 @@ export class NinoUtils {
 		},
 	};
 }
-
-console.log(new NinoUtils().emojis.fail);

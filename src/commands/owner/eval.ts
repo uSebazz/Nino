@@ -8,7 +8,7 @@ import {
 	editLocalized,
 	replyLocalized,
 } from '@sapphire/plugin-i18next';
-import { NinoUtils } from '../../lib/utils.js';
+import { NinoUtils } from '../../lib/utils';
 import { exec } from 'child_process';
 
 export class EvalCode extends Command {

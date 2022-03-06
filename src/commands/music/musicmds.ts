@@ -1,6 +1,6 @@
 import { Command, ApplicationCommandRegistry } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { NinoUtils } from '../../lib/utils.js';
+import { NinoUtils } from '../../lib/utils';
 import { MessageEmbed } from 'discord.js';
 import type { GuildMember, CommandInteraction } from 'discord.js';
 

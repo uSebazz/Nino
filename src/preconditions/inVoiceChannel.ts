@@ -1,10 +1,10 @@
 import { Precondition } from '@sapphire/framework';
-import type { CommandInteraction, GuildMember } from 'discord.js';
+import type { CommandInteraction, GuildMember, VoiceBasedChannel } from 'discord.js';
 
-export class inVoiceChannelPrecondition extends Precondition {
+export class inVoiceChannel extends Precondition {
 	public override chatInputRun(interaction: CommandInteraction) {
 		const member = interaction.member as GuildMember;
-		const vChannel = member.voice.channel;
+		const vChannel = member.voice.channel as VoiceBasedChannel;
 
 		if (!vChannel) {
 			return this.error({
@@ -12,11 +12,5 @@ export class inVoiceChannelPrecondition extends Precondition {
 			});
 		}
 		return this.ok();
-	}
-}
-
-declare module '@sapphire/framework' {
-	export interface Preconditions {
-		inVoiceChannel: never;
 	}
 }
