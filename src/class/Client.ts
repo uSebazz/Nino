@@ -80,7 +80,7 @@ export class Nino extends SapphireClient {
 
 		musicEvents.forEach(async (filePath) => {
 			const event: Event<keyof PlayerEvents> = await this.importFile(filePath);
-			this.on(event.event, event.run);
+			this.music.on(event.event, event.run);
 		});
 	}
 }
