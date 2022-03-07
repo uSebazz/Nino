@@ -2,6 +2,7 @@ import 'dotenv/config';
 import '@sapphire/plugin-i18next/register';
 import mongoose from 'mongoose';
 import colors from 'colors';
+import glob from 'glob';
 import {
 	SapphireClient,
 	ApplicationCommandRegistries,
@@ -9,11 +10,25 @@ import {
 	LogLevel,
 } from '@sapphire/framework';
 import { InternationalizationContext } from '@sapphire/plugin-i18next';
-import { NinoMusic } from './Music';
 import { Model, defaultData } from '../lib/database/guildConfig';
+import { NinoMusic } from './Music';
+import { load } from '@lavaclient/spotify';
+import { promisify } from 'util';
+import { PlayerEvents } from 'lavaclient';
+import { Event } from './musicEvent';
+
+const globPromise = promisify(glob);
 
 mongoose.connect(process.env.mongourl).then(() => {
 	console.log(colors.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
+});
+
+load({
+	client: {
+		id: process.env.id,
+		secret: process.env.secret,
+	},
+	autoResolveYoutubeTracks: true,
 });
 
 export class Nino extends SapphireClient {
@@ -38,9 +53,6 @@ export class Nino extends SapphireClient {
 					},
 				],
 			},
-			logger: {
-				level: LogLevel.Debug,
-			},
 			i18n: {
 				fetchLanguage: async (context: InternationalizationContext) => {
 					if (!context.guild) return 'en-US';
@@ -53,13 +65,23 @@ export class Nino extends SapphireClient {
 			retryLimit: 2,
 			allowedMentions: { repliedUser: false },
 			defaultPrefix: 'n/',
-			loadMessageCommandListeners: true,
 		});
 		this.music = new NinoMusic();
 	}
 	async start(token: string) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
 		await super.login(token);
+	}
+	async importFile(filePath: string) {
+		return (await import(filePath))?.default;
+	}
+	async loadMusic() {
+		const musicEvents = await globPromise(`${__dirname}/../lib/music/*{.ts,.js}`);
+
+		musicEvents.forEach(async (filePath) => {
+			const event: Event<keyof PlayerEvents> = await this.importFile(filePath);
+			this.on(event.event, event.run);
+		});
 	}
 }
 
