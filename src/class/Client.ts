@@ -16,6 +16,7 @@ import { load } from '@lavaclient/spotify';
 import { promisify } from 'util';
 import { PlayerEvents } from 'lavaclient';
 import { Event } from './musicEvent';
+import { Message } from 'discord.js';
 
 const globPromise = promisify(glob);
 
@@ -70,17 +71,19 @@ export class Nino extends SapphireClient {
 	}
 	async start(token: string) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
+		//this.loadMusic();
 		await super.login(token);
 	}
 	async importFile(filePath: string) {
 		return (await import(filePath))?.default;
 	}
-	async loadMusic() {
+	async loadMusic(message: Message) {
+		const player = this.music.players.get(message.guild.id);
 		const musicEvents = await globPromise(`${__dirname}/../lib/music/*{.ts,.js}`);
 
 		musicEvents.forEach(async (filePath) => {
 			const event: Event<keyof PlayerEvents> = await this.importFile(filePath);
-			this.on(event.event, event.run);
+			player.on(event.event, event.run);
 		});
 	}
 }
