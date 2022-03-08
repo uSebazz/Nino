@@ -1,4 +1,4 @@
-import { Node as MusicClient, PlayerEvents } from 'lavaclient';
+import { Node as MusicClient } from 'lavaclient';
 import { container } from '@sapphire/framework';
 import colors from 'colors';
 

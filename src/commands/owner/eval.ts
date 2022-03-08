@@ -64,37 +64,43 @@ export class EvalCode extends Command {
 		});
 	}
 	registerApplicationCommands(registery: ApplicationCommandRegistry) {
-		registery.registerChatInputCommand({
-			name: 'eval',
-			description: 'Evaluate a code',
-			options: [
-				{
-					type: 'STRING',
-					required: true,
-					name: 'code',
-					description: 'Code to evaluate',
-				},
-				{
-					type: 'STRING',
-					required: true,
-					name: 'type',
-					description: 'Type of code evaluation',
-					choices: [
-						{
-							name: '-n',
-							value: '1',
-						},
-						{
-							name: '-a',
-							value: '2',
-						},
-						{
-							name: '-e',
-							value: '3',
-						},
-					],
-				},
-			],
-		});
+		registery.registerChatInputCommand(
+			{
+				name: 'eval',
+				description: 'Evaluate a code',
+				options: [
+					{
+						type: 'STRING',
+						required: true,
+						name: 'code',
+						description: 'Code to evaluate',
+					},
+					{
+						type: 'STRING',
+						required: true,
+						name: 'type',
+						description: 'Type of code evaluation',
+						choices: [
+							{
+								name: '-n',
+								value: '1',
+							},
+							{
+								name: '-a',
+								value: '2',
+							},
+							{
+								name: '-e',
+								value: '3',
+							},
+						],
+					},
+				],
+			},
+			{
+				guildIds: ['866576958136647691'],
+				idHints: ['950410114202992650'],
+			}
+		);
 	}
 }
