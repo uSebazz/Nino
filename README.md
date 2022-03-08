@@ -9,4 +9,9 @@
 [![Sapphire](https://img.shields.io/npm/v/@sapphire/framework?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/@sapphire/framework)
 [![DevServer](https://discordapp.com/api/guilds/945033113673801799/widget.png?style=shield)](https://discord.gg/SbsFVV5dNG)
 [![](https://img.shields.io/github/languages/top/uSebazz/Nino)]()
-> Bot usado por 100k usuarios y 300 servidores aproximadamente<3
+> Bot usado por 100.000 usuarios y 300 servidores aproximadamente<3
+
+## 🌺 Características
+  ### Bot Completo
+  Cuenta con: 
+ * Multilenguaje Español 🇪🇸 e inglés 🇺🇲
