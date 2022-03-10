@@ -1,11 +1,24 @@
 {
 	"play": {
-		"no_matches": "{{emote}} - **{{user}}**, No pude encontrar nada acerca de la canción `{{track}}`",
-		"track_loaded": {
-			"description": "{{emoji}} !Canción **[{{track}}]({{uri}})** añadida a la cola¡"
+		"spotify": {
+			"track": "{{emote}} ¡Canción [**{{track}}**]({{uri}}) añadida con éxito!\n> **Pedida por:** {{requester}}\n> **Artista:** {{art}}\n> **Duración:** `{time}`",
+			"artist": "{{emote} ¡Top **{{tracks}}** canciones del artista [**{{art}}**]({{uri}}) añadidas con éxito!\n>**Pedida por:** {{requester}}\n> **Followers:** {{follow}}\n> **Género principal:** {{gen}}",
+			"playlist": "{{emoji}} ¡Playlist [**{{name}}**]({{uri}}) Añadida con éxito!\n> **Canciones:** {{tracks}}\n> **Descripción:** {{desc}}\n> **Dueño:** {{owner}}",
+			"album": "{{emoji}} ¡Album **{{album}}** añadido con éxito!\n> **Canciones:** {{track}}\n> **Label:** {{desc}}\n> **Artista:** {{art}}"
+		},
+		"results": {
+			"playlist": "{{emoji}} ¡Playlist [**{{name}}**]({{uri}}) Añadida con éxito!\n> **Canciones:** {{tracks}}"
 		}
 	},
 	"error": {
-		"catch": "{{emote}} - **{{user}}**, Parece que un error inesperado ha ocurrido, reportalo rapido en https://discord.gg/nino"
+		"catch": "{{emote}} - **{{user}}**, Parece que un error inesperado ha ocurrido, reportalo rapido en https://dc.nino.fun/",
+		"player": "{{emote}} - **{{user}}**, Debes estar en el mismo **canal** que yo para poder usar este comando.",
+		"found": "No he podido encontrar lo que buscabas. :(",
+		"err": "Ha ocurrido un error al momento de reproducir la canción. {{emoji}}"
+	},
+	"permissions": {
+		"view": "{{emote}} - **{{user}}**, No tengo **permisos** para ver tu canal de voz.",
+		"connect": "{{emote}} - **{{user}}**, No tengo **permisos** para unirme a tu canal de voz.",
+		"speak": "{{emote}} - **{{user}}**, No tengo **permisos** para `hablar` en tu canal de voz."
 	}
 }

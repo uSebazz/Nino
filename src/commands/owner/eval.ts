@@ -98,7 +98,7 @@ export class EvalCode extends Command {
 				],
 			},
 			{
-				guildIds: ['866576958136647691'],
+				guildIds: ['951101886684082176'],
 				idHints: ['950410114202992650'],
 			}
 		);

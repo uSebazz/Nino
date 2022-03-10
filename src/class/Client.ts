@@ -2,23 +2,18 @@ import 'dotenv/config';
 import '@sapphire/plugin-i18next/register';
 import mongoose from 'mongoose';
 import colors from 'colors';
-import glob from 'glob';
 import {
 	SapphireClient,
 	ApplicationCommandRegistries,
 	RegisterBehavior,
 	LogLevel,
 } from '@sapphire/framework';
+import type { TextChannel, ThreadChannel, NewsChannel } from 'discord.js';
 import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { Model, defaultData } from '../lib/database/guildConfig';
 import { NinoMusic } from './Music';
 import { load } from '@lavaclient/spotify';
-import { promisify } from 'util';
-import { PlayerEvents } from 'lavaclient';
-import { Event } from './musicEvent';
-import { Message } from 'discord.js';
-
-const globPromise = promisify(glob);
+import { Queue } from '../lib/function/queue';
 
 mongoose.connect(process.env.mongourl).then(() => {
 	console.log(colors.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
@@ -71,22 +66,11 @@ export class Nino extends SapphireClient {
 	}
 	async start(token: string) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
-		//this.loadMusic();
 		await super.login(token);
 	}
-	async importFile(filePath: string) {
-		return (await import(filePath))?.default;
-	}
-	async loadMusic(message: Message) {
-		const player = this.music.players.get(message.guild.id);
-		const musicEvents = await globPromise(`${__dirname}/../lib/music/*{.ts,.js}`);
-
-		musicEvents.forEach(async (filePath) => {
-			const event: Event<keyof PlayerEvents> = await this.importFile(filePath);
-			player.on(event.event, event.run);
-		});
-	}
 }
+
+export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null;
 
 declare module '@sapphire/framework' {
 	export interface SapphireClient {
@@ -95,5 +79,11 @@ declare module '@sapphire/framework' {
 	export interface Preconditions {
 		inVoiceChannel: never;
 		OwnerOnly: never;
+	}
+}
+
+declare module 'lavaclient' {
+	export interface Player {
+		readonly queue: Queue;
 	}
 }
