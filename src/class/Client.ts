@@ -66,6 +66,7 @@ export class Nino extends SapphireClient {
 	}
 	async start(token: string) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
+		//this.loadMusic();
 		await super.login(token);
 	}
 }
