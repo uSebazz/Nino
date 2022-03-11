@@ -13,7 +13,7 @@
 	"error": {
 		"catch": "{{emote}} - **{{user}}**, Parece que un error inesperado ha ocurrido, reportalo rapido en https://dc.nino.fun/",
 		"player": "{{emote}} - **{{user}}**, Debes estar en el mismo **canal** que yo para poder usar este comando.",
-		"found": "No he podido encontrar lo que buscabas. :(",
+		"found": "Seems i can't find the song you requested... :(",
 		"err": "Ha ocurrido un error al momento de reproducir la canción. {{emoji}}"
 	},
 	"permissions": {
