@@ -14,4 +14,5 @@
 ## 🌺 Características
   ### Bot Completo
   Cuenta con: 
- * Multilenguaje Español 🇪🇸 e inglés 🇺🇲
+ * Soporte a varios lenguajes, Inglés y Español.
+
