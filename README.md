@@ -34,3 +34,5 @@ npm i
 ```
 
 ¡Y ya está!
+
+Valga la redundancia, rellena lo necesario en el env y ejecuta npm run start
