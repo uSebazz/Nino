@@ -1,5 +1,5 @@
 import { Listener } from '@sapphire/framework';
-import colors from 'colors';
+import chalk from 'chalk';
 
 export class ReadyListener extends Listener {
 	public constructor(context: Listener.Context, options: Listener.Options) {
@@ -14,6 +14,4 @@ export class ReadyListener extends Listener {
 
 		let { tag } = client.user!;
 		client.music.connect(client.user!.id);
-		console.log(colors.blue(`${new Date().toLocaleString()}`), `| ${tag} is now On!`);
-	}
-}
+		console.log(chalk.blue(new Date().toLocaleString()}), `| Initialized ${tag} successfully`)
