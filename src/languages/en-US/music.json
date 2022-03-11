@@ -7,7 +7,7 @@
 			"album": "{{emoji}} ¡Album **{{album}}** añadido con éxito!\n> **Canciones:** {{track}}\n> **Label:** {{desc}}\n> **Artista:** {{art}}"
 		},
 		"results": {
-			"playlist": "{{emoji}} ¡Playlist [**{{name}}**]({{uri}}) Añadida con éxito!\n> **Canciones:** {{tracks}}"
+			"playlist": "{{emoji}} ¡Playlist [**{{name}}**]({{uri}}) added successfully!\n> **Canciones:** {{tracks}}"
 		}
 	},
 	"error": {
