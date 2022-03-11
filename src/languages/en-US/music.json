@@ -1,8 +1,8 @@
 {
 	"play": {
-		"no_matches": ""
+		"no_matches": "There's no matches for that song!"
 	},
 	"error": {
-		"catch": ""
+		"catch": "Error?"
 	}
 }
