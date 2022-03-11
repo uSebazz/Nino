@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import '@lavaclient/queue';
 import '@sapphire/plugin-i18next/register';
 import mongoose from 'mongoose';
 import colors from 'colors';
@@ -13,7 +14,6 @@ import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { Model, defaultData } from '../lib/database/guildConfig';
 import { NinoMusic } from './Music';
 import { load } from '@lavaclient/spotify';
-import { Queue } from '../lib/function/queue';
 
 mongoose.connect(process.env.mongourl).then(() => {
 	console.log(colors.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
@@ -66,7 +66,6 @@ export class Nino extends SapphireClient {
 	}
 	async start(token: string) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
-		//this.loadMusic();
 		await super.login(token);
 	}
 }
@@ -83,8 +82,8 @@ declare module '@sapphire/framework' {
 	}
 }
 
-declare module 'lavaclient' {
-	export interface Player {
-		readonly queue: Queue;
+declare module '@lavaclient/queue' {
+	interface Queue {
+		channel: MessageChannel;
 	}
 }
