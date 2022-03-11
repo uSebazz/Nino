@@ -14,4 +14,23 @@
 ## 🌺 Características
   ### Bot Completo
   Cuenta con: 
- * Multilenguaje Español 🇪🇸 e inglés 🇺🇲
+ * Soporte a varios lenguajes, Inglés y Español.
+
+# SELF-HOST
+## ¿Cómo self-hostear a Nino?
+Muy facil, sigue estos pasos y será muy rápido.
+
+Ejecuta en la terminal:
+```
+git clone https://github.com/uSebazz/Nino nino
+```
+
+```
+cd nino
+```
+
+```
+npm i
+```
+
+¡Y ya está!
