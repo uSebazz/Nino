@@ -14,4 +14,6 @@ export class ReadyListener extends Listener {
 
 		let { tag } = client.user!;
 		client.music.connect(client.user!.id);
-		console.log(chalk.blue(new Date().toLocaleString()}), `| Initialized ${tag} successfully`)
+		console.log(chalk.blue(new Date().toLocaleString()), `| Initialized ${tag} successfully`);
+	}
+}
