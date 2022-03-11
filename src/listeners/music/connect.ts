@@ -1,4 +1,5 @@
 import { Listener, container } from '@sapphire/framework';
+import chalk from 'chalk';
 
 export class connectNodeListener extends Listener {
 	constructor(context: Listener.Context, options: Listener.Options) {
@@ -10,6 +11,6 @@ export class connectNodeListener extends Listener {
 	}
 
 	run() {
-		console.log(new Date().toLocaleString().blue, `| Lavalink node "NinoLink" connected.`);
+		console.log(chalk.blue(new Date().toLocaleString()), `| Lavalink node "NinoLink" connected.`);
 	}
 }

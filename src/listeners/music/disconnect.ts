@@ -1,4 +1,5 @@
 import { Listener, container } from '@sapphire/framework';
+import chalk from 'chalk';
 
 export class disconnectListener extends Listener {
 	constructor(context: Listener.Context, options: Listener.Options) {
@@ -9,6 +10,9 @@ export class disconnectListener extends Listener {
 		});
 	}
 	async run() {
-		console.log(new Date().toLocaleString().blue, '| Lavalink node "NinoLink" disconnected.');
+		console.log(
+			chalk.blue(new Date().toLocaleString()),
+			'| Lavalink node "NinoLink" disconnected.'
+		);
 	}
 }

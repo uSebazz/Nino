@@ -2,13 +2,13 @@ import 'dotenv/config';
 import '@lavaclient/queue';
 import '@sapphire/plugin-i18next/register';
 import mongoose from 'mongoose';
-import colors from 'colors';
 import {
 	SapphireClient,
 	ApplicationCommandRegistries,
 	RegisterBehavior,
 	LogLevel,
 } from '@sapphire/framework';
+import chalk from 'chalk';
 import type { TextChannel, ThreadChannel, NewsChannel } from 'discord.js';
 import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { Model, defaultData } from '../lib/database/guildConfig';
@@ -16,7 +16,7 @@ import { NinoMusic } from './Music';
 import { load } from '@lavaclient/spotify';
 
 mongoose.connect(process.env.mongourl).then(() => {
-	console.log(colors.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
+	console.log(chalk.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
 });
 
 load({

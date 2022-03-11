@@ -1,4 +1,5 @@
 import { Listener, container } from '@sapphire/framework';
+import chalk from 'chalk';
 
 export class errorNodeListener extends Listener {
 	constructor(context: Listener.Context, options: Listener.Options) {
@@ -11,7 +12,7 @@ export class errorNodeListener extends Listener {
 
 	run(error) {
 		console.log(
-			`${new Date().toLocaleString()}`.blue,
+			chalk.blue(`${new Date().toLocaleString()}`),
 			`| Lavalink node "NinoLink" error: ${error}`
 		);
 	}
