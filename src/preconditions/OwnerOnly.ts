@@ -6,7 +6,7 @@ export class OwnerOnly extends Precondition {
 		return ['899339781132124220'].includes(interaction.user.id)
 			? this.ok()
 			: this.error({
-					message: 'Only my owner/developer can use this command.',
+					message: '> Oops... this command is restricted to my developer...',
 			  });
 	}
 }
