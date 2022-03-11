@@ -16,27 +16,3 @@
   Cuenta con: 
  * Soporte a varios lenguajes, Inglés y Español.
 
-# SELF-HOST
-## ¿Cómo self-hostear a Nino?
-Muy facil, sigue estos pasos y será muy rápido.
-
-Ejecuta en la terminal:
-```
-git clone https://github.com/uSebazz/Nino nino
-```
-
-```
-cd nino
-```
-
-```
-npm i
-```
-o
-```
-yarn add
-```
-
-¡Y ya está!
-
-Valga la redundancia, rellena lo necesario en el env y ejecuta npm run start
