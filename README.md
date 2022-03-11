@@ -32,6 +32,10 @@ cd nino
 ```
 npm i
 ```
+o
+```
+yarn add
+```
 
 ¡Y ya está!
 
