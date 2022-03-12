@@ -211,26 +211,55 @@ export class MusicCommands extends Command {
 								tracks = results.tracks;
 								await interaction.reply({
 									embeds: [
-										new MessageEmbed().setDescription(
-											await resolveKey(interaction.channel, 'music:results.playlist', {
-												emoji: utils.emojis.music,
-												name: results.playlistInfo.name,
-												uri: query,
-												tracks: tracks.length,
-											})
-										),
+										new MessageEmbed()
+											.setDescription(
+												await resolveKey(
+													interaction.channel,
+													'music:results.playlist',
+													{
+														emoji: utils.emojis.music,
+														name: results.playlistInfo.name,
+														uri: query,
+														tracks: tracks.length,
+													}
+												)
+											)
+											.setColor('WHITE'),
 									],
 								});
 								break;
 							}
+							case 'TRACK_LOADED':
 
-							///....
+							case 'SEARCH_RESULT': {
+								const [track] = results.tracks;
+								tracks = [track];
+
+								await interaction.reply({
+									embeds: [
+										new MessageEmbed()
+											.setDescription(
+												await resolveKey(
+													interaction.channel,
+													'music:play.results.track',
+													{
+														emoji: utils.emojis.music,
+														name: track.info.title,
+														uri: track.info.uri,
+														time: convertTime(track.info.length),
+													}
+												)
+											)
+											.setColor('WHITE'),
+									],
+								});
+							}
 						}
 					}
 
 					if (!player) {
 						player = this.container.client.music.createPlayer(interaction.guildId);
-						player.queue.channel = interaction.channel;
+						player.queue.channel = interaction.channel as MessageChannel;
 						await player.connect(channel.id, { deafened: true });
 					}
 					const started = player.playing || player.paused;
