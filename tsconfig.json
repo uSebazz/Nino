@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"declaration": true,
+		"allowJs": true,
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"outDir": "./lib",
