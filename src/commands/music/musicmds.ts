@@ -230,7 +230,7 @@ export class MusicCommands extends Command {
 
 					if (!player) {
 						player = this.container.client.music.createPlayer(interaction.guildId);
-						player.queue.channel = interaction.channel as MessageChannel;
+						player.queue.channel = interaction.channel;
 						await player.connect(channel.id, { deafened: true });
 					}
 					const started = player.playing || player.paused;

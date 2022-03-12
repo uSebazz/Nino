@@ -1,7 +1,7 @@
 {
 	"play": {
 		"spotify": {
-			"track": "{{emote}} ¡Canción [**{{track}}**]({{uri}}) añadida con éxito!\n> **Pedida por:** {{requester}}\n> **Artista:** {{art}}\n> **Duración:** `{time}`",
+			"track": "{{emote}} ¡Canción [**{{track}}**]({{uri}}) añadida con éxito!\n> **Pedida por:** {{requester}}\n> **Artista:** {{art}}\n> **Duración:** `{{time}}`",
 			"artist": "{{emote} ¡Top **{{tracks}}** canciones del artista [**{{art}}**]({{uri}}) añadidas con éxito!\n>**Pedida por:** {{requester}}\n> **Followers:** {{follow}}\n> **Género principal:** {{gen}}",
 			"playlist": "{{emoji}} ¡Playlist [**{{name}}**]({{uri}}) Añadida con éxito!\n> **Canciones:** {{tracks}}\n> **Descripción:** {{desc}}\n> **Dueño:** {{owner}}",
 			"album": "{{emoji}} ¡Album **{{album}}** añadido con éxito!\n> **Canciones:** {{track}}\n> **Label:** {{desc}}\n> **Artista:** {{art}}"

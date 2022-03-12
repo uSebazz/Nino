@@ -1,5 +1,14 @@
 import { Node as MusicClient } from 'lavaclient';
+import { load } from '@lavaclient/spotify';
 import { container } from '@sapphire/framework';
+
+load({
+	client: {
+		id: process.env.id,
+		secret: process.env.secret,
+	},
+	autoResolveYoutubeTracks: true,
+});
 
 export class NinoMusic extends MusicClient {
 	constructor() {

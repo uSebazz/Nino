@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import '@lavaclient/queue';
 import '@sapphire/plugin-i18next/register';
 import mongoose from 'mongoose';
 import {
@@ -9,22 +8,14 @@ import {
 	LogLevel,
 } from '@sapphire/framework';
 import chalk from 'chalk';
-import type { TextChannel, ThreadChannel, NewsChannel } from 'discord.js';
+import type { TextChannel, ThreadChannel, NewsChannel, TextBasedChannel } from 'discord.js';
 import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { Model, defaultData } from '../lib/database/guildConfig';
 import { NinoMusic } from './Music';
-import { load } from '@lavaclient/spotify';
+import { load } from '@lavaclient/queue';
 
 mongoose.connect(process.env.mongourl).then(() => {
 	console.log(chalk.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
-});
-
-load({
-	client: {
-		id: process.env.id,
-		secret: process.env.secret,
-	},
-	autoResolveYoutubeTracks: true,
 });
 
 export class Nino extends SapphireClient {
@@ -66,11 +57,12 @@ export class Nino extends SapphireClient {
 	}
 	async start(token: string) {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
+		load();
 		await super.login(token);
 	}
 }
 
-export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null;
+export type MessageChannel = TextBasedChannel | TextChannel | ThreadChannel | NewsChannel | null;
 
 declare module '@sapphire/framework' {
 	export interface SapphireClient {
