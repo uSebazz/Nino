@@ -16,7 +16,7 @@ import { env } from '../lib/function/env';
 import { load } from '@lavaclient/queue';
 
 mongoose.connect(env.mongourl).then(() => {
-	container.logger.info('Mongoose connection established');
+	container.logger.info(`Mongoose connection established successfully at ${mongoose.connection.readyState}ms`);
 });
 
 export class Nino extends SapphireClient {
