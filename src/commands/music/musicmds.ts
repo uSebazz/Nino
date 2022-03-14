@@ -272,7 +272,12 @@ export class MusicCommands extends Command {
 						await player.queue.start();
 					}
 				} catch (err) {
-					console.log(err);
+					await interaction.reply({
+						content: await resolveKey(interaction.channel, 'music:error.catch', {
+							user: interaction.user.tag,
+							emoji: utils.emojis.fail,
+						}),
+					});
 				}
 			}
 		}

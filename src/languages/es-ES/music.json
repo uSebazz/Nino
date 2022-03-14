@@ -11,6 +11,10 @@
 			"track": "{{emoji}} ¡Canción [**{{name}}**]({{uri}}) Añadida con éxito!\n> **Duración:** `{{time}}`"
 		}
 	},
+	"events": {
+		"track_start": "{{emoji}} Reproduciendo ahora [**{{track}}**]({{uri}})\n> **Pedido por:** {{requester}}\n> **Duración:** `{{time}}`",
+		"buttons": {}
+	},
 	"error": {
 		"catch": "{{emote}} - **{{user}}**, Parece que un error inesperado ha ocurrido, reportalo rapido en https://dc.nino.fun/",
 		"player": "{{emote}} - **{{user}}**, Debes estar en el mismo **canal** que yo para poder usar este comando.",

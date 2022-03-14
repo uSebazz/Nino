@@ -1,5 +1,4 @@
 import { Listener } from '@sapphire/framework';
-import chalk from 'chalk';
 
 export class ReadyListener extends Listener {
 	public constructor(context: Listener.Context, options: Listener.Options) {
@@ -14,6 +13,6 @@ export class ReadyListener extends Listener {
 
 		let { tag } = client.user!;
 		client.music.connect(client.user!.id);
-		console.log(chalk.blue(new Date().toLocaleString()), `| Initialized ${tag} successfully`);
+		this.container.logger.info(`Initialized ${tag} successfully`);
 	}
 }

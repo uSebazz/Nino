@@ -1,11 +1,12 @@
 import { Node as MusicClient } from 'lavaclient';
+import { env } from '../lib/function/env';
 import { load } from '@lavaclient/spotify';
 import { container } from '@sapphire/framework';
 
 load({
 	client: {
-		id: process.env.id,
-		secret: process.env.secret,
+		id: env.id,
+		secret: env.secret,
 	},
 	autoResolveYoutubeTracks: true,
 });
@@ -18,8 +19,8 @@ export class NinoMusic extends MusicClient {
 				client.guilds.cache.get(id)?.shard?.send(payload);
 			},
 			connection: {
-				host: process.env.ip,
-				password: process.env.pass,
+				host: env.ip,
+				password: env.pass,
 				port: 25786,
 				secure: false,
 			},

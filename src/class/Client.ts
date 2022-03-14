@@ -1,21 +1,22 @@
-import 'dotenv/config';
 import '@sapphire/plugin-i18next/register';
+import '@sapphire/plugin-logger/register';
 import mongoose from 'mongoose';
 import {
 	SapphireClient,
 	ApplicationCommandRegistries,
 	RegisterBehavior,
 	LogLevel,
+	container,
 } from '@sapphire/framework';
-import chalk from 'chalk';
 import type { TextChannel, ThreadChannel, NewsChannel, TextBasedChannel } from 'discord.js';
 import { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { Model, defaultData } from '../lib/database/guildConfig';
 import { NinoMusic } from './Music';
+import { env } from '../lib/function/env';
 import { load } from '@lavaclient/queue';
 
-mongoose.connect(process.env.mongourl).then(() => {
-	console.log(chalk.blue(`${new Date().toLocaleString()}`), '| Mongoose Connected');
+mongoose.connect(env.mongourl).then(() => {
+	container.logger.info('Mongoose connection established');
 });
 
 export class Nino extends SapphireClient {
@@ -48,6 +49,9 @@ export class Nino extends SapphireClient {
 					if (!guild) guild = await Model.create(defaultData(context.guild.id));
 					return guild.config.language;
 				},
+			},
+			logger: {
+				level: LogLevel.Debug,
 			},
 			retryLimit: 2,
 			allowedMentions: { repliedUser: false },

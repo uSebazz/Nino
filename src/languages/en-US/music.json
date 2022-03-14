@@ -11,6 +11,9 @@
 			"track": "{{emoji}} Song [**{{name}}**]({{uri}}) added successfully!"
 		}
 	},
+	"events": {
+		"track_start": "{{emote}} ¡Song [**{{track}}**]({{uri}}) added successfully!\n> **Requested by:** {{requester}}\n> **Artist:** {{art}}\n> **Duration:** `{{time}}`"
+	},
 	"error": {
 		"catch": "{{emote}} - **{{user}}**, It seems that an unexpected error has occurred, please report it quickly at https://dc.nino.fun/",
 		"player": "{{emote}} - **{{user}}**, You must be on the same **channel** as me in order to use this command.",
