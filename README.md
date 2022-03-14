@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0; border-radius: 10px;" alt="🌸 Nino" src="https://cdn.discordapp.com/avatars/887306474097881100/c44a6b17c041c81825dc8ebceae0e59f.webp?size=4096">
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0; border-radius: 100%;" alt="🌸 Nino" src="https://cdn.discordapp.com/avatars/887306474097881100/c44a6b17c041c81825dc8ebceae0e59f.webp?size=4096">
   
 # Nino
 🍂 Multi-functional discord bot
