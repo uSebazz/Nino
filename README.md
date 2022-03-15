@@ -9,7 +9,7 @@
 [![Sapphire](https://img.shields.io/npm/v/@sapphire/framework?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/@sapphire/framework)
 [![DevServer](https://discordapp.com/api/guilds/945033113673801799/widget.png?style=shield)](https://discord.gg/SbsFVV5dNG)
 [![](https://img.shields.io/github/languages/top/uSebazz/Nino)]()
-> Bot used for 100.000k users and 300 guilds aprox<3
+> Bot used by 100.000k users and 300 guilds <3
 
 ## 🌺 Features
   ### Full Bot
