@@ -5,7 +5,8 @@ module.exports = {
     node: true,
   },
   extends: [
-    "@casper124578/eslint-config"
+    "@casper124578/eslint-config",
+    "prettier"
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
