@@ -12,7 +12,15 @@
 		}
 	},
 	"events": {
-		"track_start": "{{emote}} ¡Song [**{{track}}**]({{uri}}) added successfully!\n> **Requested by:** {{requester}}\n> **Artist:** {{art}}\n> **Duration:** `{{time}}`"
+		"track_start": "{{emote}} ¡Song [**{{track}}**]({{uri}}) added successfully!\n> **Requested by:** {{requester}}\n> **Artist:** {{art}}\n> **Duration:** `{{time}}`",
+		"buttons": {
+			"track": {
+				"1": "Shuffle",
+				"2": "Stop",
+				"3": "Pause",
+				"4": "Next"
+			}
+		}
 	},
 	"error": {
 		"catch": "{{emote}} - **{{user}}**, It seems that an unexpected error has occurred, please report it quickly at https://dc.nino.fun/",

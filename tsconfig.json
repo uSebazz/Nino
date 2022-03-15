@@ -10,7 +10,11 @@
 		"strict": false,
 		"target": "esnext",
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
+		"emitDecoratorMetadata": true,
+		"baseUrl": "./src",
+		"paths": {
+			"#lib": ["/lib/utils"]
+		}
 	},
 	"include": ["src"],
 	"exclude": ["node_modules"]

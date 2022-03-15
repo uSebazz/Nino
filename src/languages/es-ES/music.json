@@ -13,13 +13,24 @@
 	},
 	"events": {
 		"track_start": "{{emoji}} Reproduciendo ahora [**{{track}}**]({{uri}})\n> **Pedido por:** {{requester}}\n> **Duración:** `{{time}}`",
-		"buttons": {}
+		"buttons": {
+			"track": {
+				"1": "Revolver",
+				"2": "Detener",
+				"3": "Pausar",
+				"4": "Siguiente"
+			}
+		},
+		"player": {
+			"notracks": "No se puede usar esto, ya que no hay más canciónes."
+		}
 	},
 	"error": {
 		"catch": "{{emote}} - **{{user}}**, Parece que un error inesperado ha ocurrido, reportalo rapido en https://dc.nino.fun/",
 		"player": "{{emote}} - **{{user}}**, Debes estar en el mismo **canal** que yo para poder usar este comando.",
 		"found": "No he podido encontrar lo que buscabas. :(",
-		"err": "Ha ocurrido un error al momento de reproducir la canción. {{emoji}}"
+		"err": "Ha ocurrido un error al momento de reproducir la canción. {{emoji}}",
+		"channel": "{{emote}} Debes estar en <#{{channel}}> para poder usar los botones."
 	},
 	"permissions": {
 		"view": "{{emote}} - **{{user}}**, No tengo **permisos** para ver tu canal de voz.",

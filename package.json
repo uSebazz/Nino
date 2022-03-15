@@ -1,7 +1,13 @@
 {
 	"name": "nino",
+	"version": "2.0.1",
+	"description": "Multipurpose Discord Bot built on Sapphire Framework",
+	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
+	"license": "Apache-2.0",
 	"main": "src/index.ts",
-	"private": true,
+	"imports": {
+		"#lib": "./src/lib/utils.ts"
+	},
 	"dependencies": {
 		"@lavaclient/queue": "^2.0.6",
 		"@lavaclient/spotify": "^3.0.0",
@@ -11,11 +17,20 @@
 		"discord.js": "latest",
 		"lavaclient": "^4.0.8-rc.2",
 		"mongoose": "^6.2.4",
-		"ts-dotenv": "^0.8.3",
-		"ts-node": "^10.6.0",
+		"ts-dotenv": "^0.8.3"
+	},
+	"devDependencies": {
+		"@bitomic/eslint-config": "^1.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.15.0",
+		"@typescript-eslint/parser": "^5.15.0",
+		"eslint": "^8.11.0",
+		"ts-node": "^10.7.0",
 		"typescript": "^4.6.2"
 	},
 	"scripts": {
-		"start": "ts-node ./src/index.ts"
+		"start": "ts-node ./src/index.ts",
+		"eslint-err": "eslint src/ --ext .ts --cache",
+		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
+
 	}
 }

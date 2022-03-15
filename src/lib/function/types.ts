@@ -1,5 +1,5 @@
 export interface serverConfig {
-	guild: String;
+	guild: string;
 	config: {
 		language: string;
 	};
