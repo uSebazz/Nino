@@ -4,7 +4,7 @@
 	"description": "Multipurpose Discord Bot built on Sapphire Framework",
 	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
 	"license": "Apache-2.0",
-	"main": "src/index.ts",
+	"main": "src/main.ts",
 	"imports": {
 		"#lib": "./src/lib/utils.ts"
 	},
@@ -20,17 +20,16 @@
 		"ts-dotenv": "^0.8.3"
 	},
 	"devDependencies": {
-		"@bitomic/eslint-config": "^1.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.15.0",
 		"@typescript-eslint/parser": "^5.15.0",
 		"eslint": "^8.11.0",
+		"eslint-config-prettier": "^8.5.0",
 		"ts-node": "^10.7.0",
 		"typescript": "^4.6.2"
 	},
 	"scripts": {
-		"start": "ts-node ./src/index.ts",
+		"start": "ts-node ./src/main.ts",
 		"eslint-err": "eslint src/ --ext .ts --cache",
 		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
-
 	}
 }
