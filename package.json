@@ -4,9 +4,9 @@
 	"description": "Multipurpose Discord Bot built on Sapphire Framework",
 	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
 	"license": "Apache-2.0",
-	"main": "src/main.ts",
+	"main": "dist/main.js",
 	"imports": {
-		"#lib": "./src/lib/utils.ts"
+		"#lib/*": "./dist/lib/*.js"
 	},
 	"dependencies": {
 		"@lavaclient/queue": "^2.0.6",
@@ -17,19 +17,23 @@
 		"discord.js": "latest",
 		"lavaclient": "^4.0.8-rc.2",
 		"mongoose": "^6.2.4",
-		"ts-dotenv": "^0.8.3"
+		"ts-dotenv": "^0.8.3",
+		"tsc-watch": "^4.6.2",
+		"tsup": "^5.12.1"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.15.0",
 		"@typescript-eslint/parser": "^5.15.0",
 		"eslint": "^8.11.0",
 		"eslint-config-prettier": "^8.5.0",
-		"ts-node": "^10.7.0",
 		"typescript": "^4.6.2"
 	},
 	"scripts": {
-		"start": "ts-node ./src/main.ts",
+		"start": "node ./dist/main.js",
+		"build": "tsc -b -w src",
+		"build:start": "tsup --watch --onSuccess \"yarn start\"",
 		"eslint-err": "eslint src/ --ext .ts --cache",
 		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
-	}
+	},
+	"packageManager": "yarn@3.2.0"
 }

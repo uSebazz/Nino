@@ -1,5 +1,10 @@
-# Ignoring stupid files
+# Ignoring environment
 /.env
+
+# Ignoring node modules and other modules
 /node_modules
-/lib
+/dist
+
+# Ignoring lint cache and tsbuildinfo
 /.eslintcache
+/tsconfig.tsbuildinfo

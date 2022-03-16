@@ -5,7 +5,7 @@ import type { serverConfig } from '../function/types';
  *
  * @param { String } guildId
  */
-export const defaultData = (guildId) => ({
+export const defaultData = (guildId: string) => ({
 	guild: guildId,
 	config: {
 		language: 'es-ES',

@@ -1,0 +1,11 @@
+{
+	"extends": "../tsconfig.data.json",
+	"compilerOptions": {
+		/* Custom Paths */
+		"baseUrl": ".",
+		"paths": {
+			"#lib/*": ["lib/*"]
+		},
+		"noEmit": true
+	}
+}

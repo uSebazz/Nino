@@ -1,0 +1,37 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ESnext",
+		"skipLibCheck": true,
+		"strict": false,
+		"sourceMap": true,
+
+		/* Paths */
+		"outDir": "./dist",
+		"rootDir": "./src",
+
+		/* The "No" Corner */
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+
+		/* Strict */
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+
+		/* Others Configurations */
+		"declaration": true,
+		"allowJs": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"]
+}

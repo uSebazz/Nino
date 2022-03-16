@@ -8,7 +8,7 @@ export class VoiceStateUpdateListener extends Listener {
 			event: 'VOICE_STATE_UPDATE',
 		});
 	}
-	async run(data) {
+	async run(data: never) {
 		const { client } = this.container;
 
 		client.music.handleVoiceUpdate(data);

@@ -8,7 +8,7 @@ export class VoiceServerUpdateListener extends Listener {
 			event: 'VOICE_SERVER_UPDATE',
 		});
 	}
-	async run(data) {
+	async run(data: never) {
 		const { client } = this.container;
 
 		client.music.handleVoiceUpdate(data);

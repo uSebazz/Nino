@@ -12,7 +12,7 @@ export class EvalCode extends Command {
 			preconditions: ['OwnerOnly'],
 		});
 	}
-	async chatInputRun(interaction: CommandInteraction) {
+	public override async chatInputRun(interaction: CommandInteraction) {
 		const { options } = interaction;
 
 		const code = options.getString('code', true);
@@ -57,7 +57,7 @@ export class EvalCode extends Command {
 			content: mensaje,
 		});
 	}
-	registerApplicationCommands(registery: ApplicationCommandRegistry) {
+	public override registerApplicationCommands(registery: ApplicationCommandRegistry) {
 		registery.registerChatInputCommand(
 			{
 				name: 'eval',

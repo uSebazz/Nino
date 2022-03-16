@@ -17,10 +17,6 @@ module.exports = {
         '@typescript-eslint'
     ],
     'rules': {
-        'linebreak-style': [
-            'error',
-            'unix'
-        ],
         'quotes': [
             'error',
             'single'

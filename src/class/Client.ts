@@ -22,7 +22,7 @@ mongoose.connect(env.mongourl).then(() => {
 });
 
 export class Nino extends SapphireClient {
-	readonly music: NinoMusic;
+	public override music: NinoMusic;
 	public constructor() {
 		super({
 			intents: 16071,

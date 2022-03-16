@@ -67,7 +67,8 @@ export class trackStartListener extends Listener {
 			],
 		});
 
-		const filter = async (int) => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const filter = async (int: any) => {
 			if (
 				int.guild.me.voice.channel &&
 				int.guild.me.voice.channelId === int.member.voice.channelId

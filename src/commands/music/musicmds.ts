@@ -1,12 +1,13 @@
 import type { ApplicationCommandRegistry } from '@sapphire/framework';
 import { Command } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { NinoUtils } from '../../lib/utils';
+import { NinoUtils } from '#lib/utils';
 import { SpotifyItemType } from '@lavaclient/spotify';
 import { convertTime } from '../../lib/function/time';
 import { MessageEmbed } from 'discord.js';
 import type { CommandInteraction, GuildMember } from 'discord.js';
 import type { MessageChannel } from '../../class/Client';
+import type { Addable } from '@lavaclient/queue';
 
 export class MusicCommands extends Command {
 	public constructor(context: Command.Context, options: Command.Options) {
@@ -15,11 +16,12 @@ export class MusicCommands extends Command {
 			preconditions: ['inVoiceChannel'],
 		});
 	}
-	async chatInputRun(interaction: CommandInteraction) {
+	public override async chatInputRun(interaction: CommandInteraction) {
 		const member = interaction.member as GuildMember;
 		const utils = new NinoUtils();
 		const { options } = interaction;
 		const { channel } = member.voice;
+		if (channel === null) return;
 
 		switch (options.getSubcommand()) {
 			case 'play': {
@@ -65,7 +67,7 @@ export class MusicCommands extends Command {
 
 					const query = options.getString('track');
 					let player = this.container.client.music.players.get(interaction.guild.id);
-					let tracks = [];
+					let tracks: Addable[] = [];
 
 					if (player && player.channelId !== channel.id) {
 						return interaction.reply({
@@ -272,9 +274,9 @@ export class MusicCommands extends Command {
 													'music:play.results.track',
 													{
 														emoji: utils.emojis.music,
-														name: track.info.title,
-														uri: track.info.uri,
-														time: convertTime(track.info.length),
+														name: track?.info.title,
+														uri: track?.info.uri,
+														time: convertTime(track?.info.length),
 													}
 												)
 											)
@@ -310,7 +312,7 @@ export class MusicCommands extends Command {
 			}
 		}
 	}
-	registerApplicationCommands(registery: ApplicationCommandRegistry) {
+	public override registerApplicationCommands(registery: ApplicationCommandRegistry) {
 		registery.registerChatInputCommand(
 			{
 				name: 'music',
