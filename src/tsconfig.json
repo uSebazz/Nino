@@ -5,7 +5,6 @@
 		"baseUrl": ".",
 		"paths": {
 			"#lib/*": ["lib/*"]
-		},
-		"noEmit": true
+		}
 	}
 }

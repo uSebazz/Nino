@@ -32,6 +32,6 @@
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true
 	},
-	"include": ["src"],
+	"include": ["./src", "./src/languages/**/*.json"],
 	"exclude": ["node_modules"]
 }

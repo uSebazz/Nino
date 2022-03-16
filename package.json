@@ -31,7 +31,7 @@
 	"scripts": {
 		"start": "node ./dist/main.js",
 		"build": "tsc -b -w src",
-		"build:start": "tsup --watch --onSuccess \"yarn start\"",
+		"build:start": "tsc-watch -b src --onSuccess \"yarn start\"",
 		"eslint-err": "eslint src/ --ext .ts --cache",
 		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
 	},
