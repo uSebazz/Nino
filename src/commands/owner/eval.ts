@@ -54,7 +54,7 @@ export class EvalCode extends Command {
 		const mensaje = Formatters.codeBlock('js', evalued.slice(0, 1950));
 
 		await interaction.reply({
-			content: mensaje,
+			content: `¡Evaluado correctamente! ${mensaje}`,
 		});
 	}
 	public override registerApplicationCommands(registery: ApplicationCommandRegistry) {
