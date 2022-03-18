@@ -9,7 +9,7 @@ export class errorNodeListener extends Listener {
 		});
 	}
 
-	run(error: unknown) {
+	run(error) {
 		container.logger.error(`Lavalink node "NinoLink" error: ${error}`);
 	}
 }

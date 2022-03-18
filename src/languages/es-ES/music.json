@@ -22,7 +22,15 @@
 			}
 		},
 		"player": {
-			"notracks": "No se puede usar esto, ya que no hay más canciónes."
+			"notracks": "No se puede usar esto, ya que no hay más canciónes.",
+			"shuffle": "¡La lista se ha revolvido exitósamente!",
+			"leave": "Desconectadá con exito, fue un gusto reproducir musica para ti. :)",
+			"paused": {
+				"pause": "pauso",
+				"resumed": "resumio"
+			},
+			"paused_txt": "¡La lista se {{ctx}} con éxito!",
+			"skip": "¡Canción saltada con éxito!"
 		}
 	},
 	"error": {

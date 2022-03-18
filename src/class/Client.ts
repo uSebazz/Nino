@@ -8,7 +8,7 @@ import {
 	RegisterBehavior,
 	SapphireClient,
 } from '@sapphire/framework';
-import type { NewsChannel, TextBasedChannel, TextChannel, ThreadChannel } from 'discord.js';
+import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js';
 import type { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { defaultData, Model } from '../lib/database/guildConfig';
 import { NinoMusic } from './Music';
@@ -68,7 +68,7 @@ export class Nino extends SapphireClient {
 	}
 }
 
-export type MessageChannel = TextBasedChannel | TextChannel | ThreadChannel | NewsChannel | null;
+export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null;
 
 declare module '@sapphire/framework' {
 	export interface SapphireClient {
