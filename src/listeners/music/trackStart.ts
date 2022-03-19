@@ -112,7 +112,7 @@ export class trackStartListener extends Listener {
 				}
 
 				case '2': {
-					player?.disconnect() &&
+					player.disconnect() &&
 						this.container.client.music.destroyPlayer(player.guildId);
 
 					await int.reply({

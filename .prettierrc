@@ -4,6 +4,5 @@
 	"tabWidth": 4,
 	"singleQuote": true,
 	"quoteProps": "as-needed",
-	"endOfLine": "lf",
-	"disableLanguages": []
+	"endOfLine": "lf"
 }
