@@ -1,4 +1,4 @@
-import { Nino } from './class/Client';
+import { Nino } from './class/client';
 import { env } from './lib/function/env';
 import { container } from '@sapphire/framework';
 

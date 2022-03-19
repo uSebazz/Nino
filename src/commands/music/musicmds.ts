@@ -1,12 +1,12 @@
 import type { ApplicationCommandRegistry } from '@sapphire/framework';
 import { Command } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { NinoUtils } from '#lib/utils';
+import { NinoUtils } from '../../lib/utils';
 import { SpotifyItemType } from '@lavaclient/spotify';
 import { convertTime } from '../../lib/function/time';
 import { MessageEmbed } from 'discord.js';
 import type { CommandInteraction, GuildMember } from 'discord.js';
-import type { MessageChannel } from '../../class/Client';
+import type { MessageChannel } from '../../class/client';
 import type { Addable } from '@lavaclient/queue';
 
 export class MusicCommands extends Command {
@@ -316,7 +316,7 @@ export class MusicCommands extends Command {
 		registery.registerChatInputCommand(
 			{
 				name: 'music',
-				description: 'SubCommands for a music',
+				description: 'Sub Commands for a music',
 				options: [
 					{
 						name: 'play',

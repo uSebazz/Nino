@@ -5,17 +5,16 @@
 	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
 	"license": "Apache-2.0",
 	"main": "dist/main.js",
-	"imports": {
-		"#lib/*": "./dist/lib/*.js"
-	},
 	"dependencies": {
 		"@lavaclient/queue": "^2.0.6",
 		"@lavaclient/spotify": "^3.0.0",
 		"@sapphire/decorators": "^4.3.1",
 		"@sapphire/discord.js-utilities": "^4.9.1",
+		"@sapphire/fetch": "^2.3.0",
 		"@sapphire/framework": "^3.0.0-next.93f24bd.0",
 		"@sapphire/plugin-i18next": "^2.2.3",
 		"@sapphire/plugin-logger": "^2.2.0",
+		"@sapphire/type": "^2.2.0",
 		"@sapphire/utilities": "^3.5.0",
 		"discord.js": "latest",
 		"lavaclient": "^4.0.8-rc.2",

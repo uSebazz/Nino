@@ -11,7 +11,7 @@ import {
 import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js';
 import type { InternationalizationContext } from '@sapphire/plugin-i18next';
 import { defaultData, Model } from '../lib/database/guildConfig';
-import { NinoMusic } from './Music';
+import { NinoMusic } from './music';
 import { env } from '../lib/function/env';
 import { load } from '@lavaclient/queue';
 
