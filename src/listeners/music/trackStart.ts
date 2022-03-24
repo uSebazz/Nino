@@ -26,23 +26,23 @@ export class trackStartListener extends Listener {
 
 		const button1 = new MessageButton()
 			.setStyle('SECONDARY')
-			.setCustomId('1')
-			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.1'));
+			.setCustomId('shuffle')
+			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.shuffle'));
 
 		const button2 = new MessageButton()
 			.setStyle('DANGER')
-			.setCustomId('2')
-			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.2'));
+			.setCustomId('stop')
+			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.stop'));
 
 		const button3 = new MessageButton()
 			.setStyle('PRIMARY')
-			.setCustomId('3')
-			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.3'));
+			.setCustomId('pause')
+			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.pause'));
 
 		const button4 = new MessageButton()
 			.setStyle('PRIMARY')
-			.setCustomId('4')
-			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.4'));
+			.setCustomId('skip')
+			.setLabel(await resolveKey(queue.channel, 'music:events.buttons.track.skip'));
 
 		const embed = new MessageEmbed()
 			.setDescription(
@@ -92,7 +92,7 @@ export class trackStartListener extends Listener {
 
 		col.on('collect', async (int) => {
 			switch (int.customId) {
-				case '1': {
+				case 'shuffle': {
 					if (player.queue.tracks.length === 0 || player.queue.tracks.length === 1) {
 						return int.reply({
 							content: await resolveKey(
@@ -111,7 +111,7 @@ export class trackStartListener extends Listener {
 					break;
 				}
 
-				case '2': {
+				case 'stop': {
 					player.disconnect() &&
 						this.container.client.music.destroyPlayer(player.guildId);
 
@@ -120,11 +120,10 @@ export class trackStartListener extends Listener {
 						ephemeral: true,
 					});
 
-					col.stop();
-					break;
+					return col.stop();
 				}
 
-				case '3': {
+				case 'pause': {
 					player.pause(!player.paused);
 					const ctx = player.paused
 						? await resolveKey(queue.channel, 'music:events.player.paused.pause')
@@ -139,7 +138,7 @@ export class trackStartListener extends Listener {
 					break;
 				}
 
-				case '4': {
+				case 'skip': {
 					if (player.queue.tracks.length === 0) {
 						return int.reply({
 							content: await resolveKey(
@@ -148,17 +147,12 @@ export class trackStartListener extends Listener {
 							),
 							ephemeral: true,
 						});
-					} else {
-						player?.queue.next() &&
-							int.reply({
-								content: await resolveKey(
-									queue.channel,
-									'music:events.player.skip'
-								),
-							});
-						await col.stop();
 					}
-					break;
+					player?.queue.next() &&
+						int.reply({
+							content: await resolveKey(queue.channel, 'music:events.player.skip'),
+						});
+					return col.stop();
 				}
 			}
 		});

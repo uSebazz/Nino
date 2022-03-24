@@ -17,6 +17,8 @@
 		"@sapphire/prettier-config": "^1.4.0",
 		"@sapphire/type": "^2.2.0",
 		"@sapphire/utilities": "^3.5.0",
+		"canvas": "^2.9.1",
+		"delay": "^5.0.0",
 		"discord.js": "latest",
 		"lavaclient": "^4.0.8-rc.2",
 		"mongoose": "^6.2.4",

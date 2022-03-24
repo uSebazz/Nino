@@ -11,10 +11,9 @@ import { canSendMessages } from '@sapphire/discord.js-utilities';
 import { inspect, promisify } from 'node:util';
 import { exec } from 'child_process';
 import Type from '@sapphire/type';
-import type { ChatInputCommand } from '@sapphire/framework';
 import type { Message, CommandInteraction } from 'discord.js';
 
-@ApplyOptions<ChatInputCommand.Options>({
+@ApplyOptions<NinoCommand.Options>({
 	description: 'Evalúa cualquier código JavaScript (Comando restringido para las personas)',
 	preconditions: ['OwnerOnly'],
 })
@@ -37,7 +36,7 @@ export class EvalCommand extends NinoCommand {
 		['Abort', 'none'],
 	];
 
-	public override registerApplicationCommands(registry: ChatInputCommand.Registry) {
+	public override registerApplicationCommands(registry: NinoCommand.Registry) {
 		registry.registerChatInputCommand(
 			(builder) =>
 				builder
@@ -95,7 +94,7 @@ export class EvalCommand extends NinoCommand {
 		);
 	}
 
-	public override async chatInputRun(interaction: ChatInputCommand.Interaction) {
+	public override async chatInputRun(interaction: NinoCommand.Int) {
 		const message = await interaction.deferReply({ ephemeral: true, fetchReply: true });
 
 		const code = interaction.options.getString('code');

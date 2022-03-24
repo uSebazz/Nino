@@ -11,14 +11,20 @@
 			"track": "{{emoji}} ¡Canción [**{{name}}**]({{uri}}) Añadida con éxito!\n> **Duración:** `{{time}}`"
 		}
 	},
+	"skip": {
+		"done": "¡Canción **{{track}}** Skipeada correctamente!",
+		"notrack": "No hay más canciones para saltar.",
+		"noplayer": "No se esta reproduciendo musica actualmente owo"
+	},
 	"events": {
 		"track_start": "{{emoji}} Reproduciendo ahora [**{{track}}**]({{uri}})\n> **Pedido por:** {{requester}}\n> **Duración:** `{{time}}`",
+		"old_state_update": "Me fui de <#{{vc}}> ya que no hay nadie.",
 		"buttons": {
 			"track": {
-				"1": "Revolver",
-				"2": "Detener",
-				"3": "Pausar",
-				"4": "Siguiente"
+				"shuffle": "Revolver",
+				"stop": "Detener",
+				"pause": "Pausar",
+				"skip": "Siguiente"
 			}
 		},
 		"player": {

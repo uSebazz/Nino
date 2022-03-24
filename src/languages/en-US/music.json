@@ -13,20 +13,33 @@
 	},
 	"events": {
 		"track_start": "{{emote}} ¡Song [**{{track}}**]({{uri}}) added successfully!\n> **Requested by:** {{requester}}\n> **Artist:** {{art}}\n> **Duration:** `{{time}}`",
+		"old_state_update": "I left <#{{vc}}>, since there is no one.",
 		"buttons": {
 			"track": {
-				"1": "Shuffle",
-				"2": "Stop",
-				"3": "Pause",
-				"4": "Next"
+				"shuffle": "Shuffle",
+				"stop": "Stop",
+				"pause": "Pause",
+				"skip": "Skip"
 			}
+		},
+		"player": {
+			"notracks": "You can't use this, as there are no more songs.",
+			"shuffle": "The list has been successfully shuffled!",
+			"leave": "Successfully disconnected, it was a pleasure to play music for you. :)",
+			"paused": {
+				"pause": "paused",
+				"resumed": "resumed"
+			},
+			"paused_txt": "List was {{ctx}} successfully!",
+			"skip": "Song skipped successfully!"
 		}
 	},
 	"error": {
 		"catch": "{{emote}} - **{{user}}**, It seems that an unexpected error has occurred, please report it quickly at https://dc.nino.fun/",
 		"player": "{{emote}} - **{{user}}**, You must be on the same **channel** as me in order to use this command.",
 		"found": "Seems i can't find the song you requested... :(",
-		"err": "An error occurred while playing the song. {{emoji}}"
+		"err": "An error occurred while playing the song. {{emoji}}",
+		"channel": "{{emote}} You must be in <#{{channel}}> to be able to use the buttons."
 	},
 	"permissions": {
 		"view": "{{emote}} - **{{user}}**, I do not have **permission** to view your voice channel.",
