@@ -8,6 +8,10 @@
 		/* Paths */
 		"outDir": "./dist",
 		"rootDir": "./src",
+		"baseUrl": "./src",
+		"paths": {
+		 "@/*": ["./src/*"]
+		}
 
 		/* Others Configurations */
 		"allowJs": true,

@@ -10,7 +10,7 @@
 [![DevServer](https://discordapp.com/api/guilds/945033113673801799/widget.png?style=shield)](https://discord.gg/SbsFVV5dNG)
 [![](https://img.shields.io/github/languages/top/uSebazz/Nino)]()
 
-> Bot used by 100.000k users and 300 guilds <3
+> Bot used by 100k users and 300 guilds <3
 
 ## 🌺 Features
 
