@@ -1,16 +1,11 @@
-import { Listener } from '@sapphire/framework';
+import { Listener } from '@sapphire/framework'
+import { ApplyOptions } from '@sapphire/decorators'
+import { GatewayDispatchEvents } from 'discord-api-types'
+import type { VoiceStateUpdate } from 'lavaclient'
 
+@ApplyOptions<Listener.Options>({ event: GatewayDispatchEvents.VoiceStateUpdate, emitter: 'ws' })
 export class VoiceStateUpdateListener extends Listener {
-	public constructor(context: Listener.Context, options: Listener.Options) {
-		super(context, {
-			...options,
-			emitter: 'ws',
-			event: 'VOICE_STATE_UPDATE',
-		});
-	}
-	async run(data: never) {
-		const { client } = this.container;
-
-		client.music.handleVoiceUpdate(data);
+	public run(data: VoiceStateUpdate): void {
+		this.container.client.music.handleVoiceUpdate(data)
 	}
 }

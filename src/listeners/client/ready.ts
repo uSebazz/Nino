@@ -1,18 +1,11 @@
-import { Listener } from '@sapphire/framework';
+import { Listener, type Events } from '@sapphire/framework'
+import { ApplyOptions } from '@sapphire/decorators'
+import type { Client } from 'discord.js'
 
-export class ReadyListener extends Listener {
-	public constructor(context: Listener.Context, options: Listener.Options) {
-		super(context, {
-			...options,
-			once: true,
-			event: 'ready',
-		});
-	}
-	async run() {
-		const { client } = this.container;
-
-		const { tag } = client.user;
-		client.music.connect(client.user.id);
-		this.container.logger.info(`Initialized ${tag} successfully`);
+@ApplyOptions<Listener.Options>({ event: 'ready', once: true })
+export class readyListener extends Listener<typeof Events.ClientReady> {
+	public run(client: Client): void {
+		this.container.logger.info(`Logged in as ${client.user?.tag as string}`)
+		this.container.client.music.connect(client.user?.id)
 	}
 }

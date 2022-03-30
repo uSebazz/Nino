@@ -1,14 +1,14 @@
 import { Precondition, type PreconditionResult } from '@sapphire/framework'
 import type { CommandInteraction, GuildMember } from 'discord.js'
 
-export class inVoiceChannel extends Precondition {
+export class channelFull extends Precondition {
 	public override chatInputRun(interaction: CommandInteraction): PreconditionResult {
-		const member = interaction.member as GuildMember
-		const vChannel = member.voice.channel
+		const guildMember = interaction.member as GuildMember
+		const vChannel = guildMember.voice.channel
 
-		if (!vChannel) {
+		if (!vChannel?.full) {
 			return this.error({
-				message: 'You must be in voice channel to use this command.',
+				message: 'That channel is full, i can\'t join',
 			})
 		}
 		return this.ok()

@@ -5,6 +5,9 @@
 	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
 	"license": "Apache-2.0",
 	"main": "dist/main.js",
+	"imports": {
+		"@/*": "./src/*.js"
+	},
 	"dependencies": {
 		"@lavaclient/queue": "^2.0.6",
 		"@lavaclient/spotify": "^3.0.0",
@@ -17,7 +20,6 @@
 		"@sapphire/prettier-config": "^1.4.0",
 		"@sapphire/type": "^2.2.0",
 		"@sapphire/utilities": "^3.5.0",
-		"canvas": "^2.9.1",
 		"delay": "^5.0.0",
 		"discord.js": "latest",
 		"lavaclient": "^4.0.8-rc.2",
@@ -25,17 +27,19 @@
 		"ts-dotenv": "^0.8.3"
 	},
 	"devDependencies": {
+		"@types/node": "^17.0.23",
 		"@typescript-eslint/eslint-plugin": "5.16.0",
 		"@typescript-eslint/parser": "5.16.0",
 		"eslint": "8.11.0",
 		"eslint-config-prettier": "8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
 		"tsc-watch": "4.6.2",
 		"typescript": "4.6.2"
 	},
 	"scripts": {
 		"start": "node ./dist/main.js",
-		"build": "tsc -b -w src",
-		"build:start": "tsc-watch -b src --onSuccess \"yarn start\"",
+		"build": "tsc",
+		"build:start": "tsc-watch --onSuccess \"yarn start\"",
 		"eslint-err": "eslint src/ --ext .ts --cache",
 		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
 	},

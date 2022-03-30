@@ -1,7 +1,0 @@
-{
-	"extends": "../tsconfig.data.json",
-	"compilerOptions": {
-		/* Custom Paths */
-		"baseUrl": "."
-	}
-}

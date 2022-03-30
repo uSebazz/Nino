@@ -1,5 +1,6 @@
 {
 	"play": {
+		"test": "test",
 		"spotify": {
 			"track": "{{emote}} ¡Song [**{{track}}**]({{uri}}) added successfully!\n> **Requested by:** {{requester}}\n> **Artist:** {{art}}\n> **Duration:** `{{time}}`",
 			"artist": "{{emote} ¡Top **{{tracks}}** artist's songs [**{{art}}**]({{uri}}) added successfullt!\n>**Requested by:** {{requester}}\n> **Followers:** {{follow}}\n> **Main genre** {{gen}}",

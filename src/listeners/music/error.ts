@@ -1,15 +1,9 @@
-import { container, Listener } from '@sapphire/framework';
+import { container, Listener } from '@sapphire/framework'
+import { ApplyOptions } from '@sapphire/decorators'
 
-export class errorNodeListener extends Listener {
-	constructor(context: Listener.Context, options: Listener.Options) {
-		super(context, {
-			...options,
-			event: 'error',
-			emitter: container.client.music,
-		});
-	}
-
-	run(error) {
-		container.logger.error(`Lavalink node "NinoLink" error: ${error}`);
+@ApplyOptions<Listener.Options>({ event: 'error', emitter: container.client.music })
+export class errorListener extends Listener {
+	public run(error: Error): void {
+		container.logger.error(error)
 	}
 }

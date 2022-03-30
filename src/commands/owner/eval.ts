@@ -1,40 +1,41 @@
-import { NinoCommand } from '../../class/command';
-import { seconds } from '../../lib/function/times';
-import { clean } from '../../lib/function/clean';
-import { ApplyOptions } from '@sapphire/decorators';
-import { codeBlock, filterNullAndUndefinedAndEmpty, isThenable } from '@sapphire/utilities';
-import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch';
-import { bold, hideLinkEmbed } from '@discordjs/builders';
-import { setTimeout as sleep } from 'node:timers/promises';
-import { Stopwatch } from '@sapphire/stopwatch';
-import { canSendMessages } from '@sapphire/discord.js-utilities';
-import { inspect, promisify } from 'node:util';
-import { exec } from 'child_process';
-import Type from '@sapphire/type';
-import type { Message, CommandInteraction } from 'discord.js';
+import { NinoCommand } from '../../class/command'
+import { seconds } from '../../lib/function/times'
+import { clean } from '../../lib/function/clean'
+import { ApplyOptions } from '@sapphire/decorators'
+import { codeBlock, filterNullAndUndefinedAndEmpty, isThenable } from '@sapphire/utilities'
+import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch'
+import { bold, hideLinkEmbed } from '@discordjs/builders'
+import { setTimeout as sleep } from 'node:timers/promises'
+import { Stopwatch } from '@sapphire/stopwatch'
+import { canSendMessages } from '@sapphire/discord.js-utilities'
+import { inspect, promisify } from 'node:util'
+import { exec } from 'child_process'
+import Type from '@sapphire/type'
+import type { APIMessage } from 'discord-api-types/v9'
+import type { CommandInteraction, Message } from 'discord.js'
 
 @ApplyOptions<NinoCommand.Options>({
 	description: 'Evalúa cualquier código JavaScript (Comando restringido para las personas)',
-	preconditions: ['OwnerOnly'],
+	preconditions: ['ownerOnly'],
 })
 export class EvalCommand extends NinoCommand {
-	readonly #timeout = 60000;
+	readonly #timeout = 60000
 
-	readonly #language: [name: string, value: string][] = [
+	readonly #language: Array<[name: string, value: string]> = [
 		['JavaScript', 'js'],
 		['TypeScript', 'ts'],
 		['JSON', 'json'],
 		['Raw text', 'txt'],
-	];
+	]
 
-	readonly #outputChoices: [name: string, value: string][] = [
+	readonly #outputChoices: Array<[name: string, value: string]> = [
 		['Reply', 'reply'],
 		['File', 'file'],
 		['Hastebin', 'hastebin'],
 		['Console', 'console'],
 		['Exec', 'exec'],
 		['Abort', 'none'],
-	];
+	]
 
 	public override registerApplicationCommands(registry: NinoCommand.Registry) {
 		registry.registerChatInputCommand(
@@ -44,7 +45,10 @@ export class EvalCommand extends NinoCommand {
 					.setDescription(this.description)
 					.setDefaultPermission(true)
 					.addStringOption((option) =>
-						option.setName('code').setDescription('Código a evaluar').setRequired(true)
+						option
+							.setName('code')
+							.setDescription('Código a evaluar')
+							.setRequired(true)
 					)
 					.addIntegerOption((option) =>
 						option
@@ -66,7 +70,9 @@ export class EvalCommand extends NinoCommand {
 					.addBooleanOption((builder) =>
 						builder
 							.setName('async')
-							.setDescription('Este código debe ser evaluado de forma asíncrona.')
+							.setDescription(
+								'Este código debe ser evaluado de forma asíncrona.'
+							)
 					)
 					.addBooleanOption((builder) =>
 						builder
@@ -78,7 +84,9 @@ export class EvalCommand extends NinoCommand {
 					.addBooleanOption((builder) =>
 						builder
 							.setName('silent')
-							.setDescription('El bot no debe dar una respuesta sobre la evaluación.')
+							.setDescription(
+								'El bot no debe dar una respuesta sobre la evaluación.'
+							)
 					)
 					.addBooleanOption((builder) =>
 						builder
@@ -91,22 +99,25 @@ export class EvalCommand extends NinoCommand {
 				guildIds: ['951101886684082176'],
 				idHints: ['954750745079586856'],
 			}
-		);
+		)
 	}
 
 	public override async chatInputRun(interaction: NinoCommand.Int) {
-		const message = await interaction.deferReply({ ephemeral: true, fetchReply: true });
+		const message = await interaction.deferReply({
+			ephemeral: true,
+			fetchReply: true,
+		})
 
-		const code = interaction.options.getString('code');
-		const depth = interaction.options.getInteger('depth') ?? 0;
-		const language = interaction.options.getString('language') ?? 'ts';
-		const outputTo = interaction.options.getString('output-to') ?? 'reply';
-		const async = interaction.options.getBoolean('async') ?? false;
-		const noTimeout = interaction.options.getBoolean('no-timeout') ?? false;
-		const silent = interaction.options.getBoolean('silent') ?? false;
-		const showHidden = interaction.options.getBoolean('show-hidden') ?? false;
+		const code = interaction.options.getString('code') as string
+		const depth = interaction.options.getInteger('depth') ?? 0
+		const language = interaction.options.getString('language') ?? 'ts'
+		const outputTo = interaction.options.getString('output-to') ?? 'reply'
+		const async = interaction.options.getBoolean('async') ?? false
+		const noTimeout = interaction.options.getBoolean('no-timeout') ?? false
+		const silent = interaction.options.getBoolean('silent') ?? false
+		const showHidden = interaction.options.getBoolean('show-hidden') ?? false
 
-		const timeout = noTimeout ? Infinity : this.#timeout;
+		const timeout = noTimeout ? Infinity : this.#timeout
 
 		const { success, result, time, type } = await this.timedEval(interaction, {
 			message: message as Message,
@@ -115,15 +126,15 @@ export class EvalCommand extends NinoCommand {
 			depth,
 			showHidden,
 			timeout,
-		});
+		})
 
 		if (silent) {
-			if (!success && result && (result as unknown as Error).stack)
-				this.container.logger.fatal((result as unknown as Error).stack);
-			return null;
+			if (!success && result && (result as unknown as Error['stack'])) {
+				this.container.logger.fatal(result as unknown as Error['stack'])
+			}
 		}
 
-		const footer = codeBlock('ts', type);
+		const footer = codeBlock('ts', type)
 
 		return this.handleReply(interaction, {
 			hastebinUnavailable: false,
@@ -139,15 +150,16 @@ export class EvalCommand extends NinoCommand {
 			footer,
 			language,
 			outputTo: outputTo as 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none',
-		});
+		})
 	}
 
-	private async timedEval(
+	private timedEval(
 		interaction: CommandInteraction,
 		{ timeout, ...evalParameters }: EvalParameters
 	) {
-		if (timeout === Infinity || timeout === 0)
-			return this.eval(interaction, { timeout, ...evalParameters });
+		if (timeout === Infinity || timeout === 0) {
+			return this.eval(interaction, { timeout, ...evalParameters })
+		}
 
 		return Promise.race([
 			sleep(timeout).then(() => ({
@@ -157,50 +169,53 @@ export class EvalCommand extends NinoCommand {
 				type: 'EvalTimeoutError',
 			})),
 			this.eval(interaction, { timeout, ...evalParameters }),
-		]);
+		])
 	}
 
 	private async eval(
 		_interaction: CommandInteraction,
 		{ message, code, async, depth, showHidden }: EvalParameters
 	) {
-		const stopwatch = new Stopwatch();
-		let success: boolean;
-		let syncTime = '';
-		let asyncTime = '';
-		let result: unknown;
-		let thenable = false;
-		let type: Type;
+		const stopwatch = new Stopwatch()
+		let success: boolean
+		let syncTime = ''
+		let asyncTime = ''
+		let result: unknown
+		let thenable = false
+		let type: Type | null = null
 
 		try {
-			if (async) code = `(async () => {\n${code}\n})();`;
+			if (async) code = `(async () => {\n${code}\n})()`
 
+			// @ts-expect-error value is never read, this is so `msg` is possible as an alias when sending the eval.
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const msg = message;
+			const msg = message
 
+			// @ts-expect-error value is never read, this is so `msg` is possible as an alias when sending the eval.
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const interaction = _interaction;
+			const interaction = _interaction
 
 			// eslint-disable-next-line no-eval
-			result = eval(code);
-			syncTime = stopwatch.toString();
-			type = new Type(result);
+			result = eval(code)
+			syncTime = stopwatch.toString()
+			type = new Type(result)
 			if (isThenable(result)) {
-				thenable = true;
-				stopwatch.restart();
-				result = await result;
-				asyncTime = stopwatch.toString();
+				thenable = true
+				stopwatch.restart()
+				// eslint-disable-next-line @typescript-eslint/await-thenable
+				result = await result
+				asyncTime = stopwatch.toString()
 			}
-			success = true;
+			success = true
 		} catch (error) {
-			if (!syncTime.length) syncTime = stopwatch.toString();
-			if (thenable && !asyncTime.length) asyncTime = stopwatch.toString();
-			if (!type) type = new Type(error);
-			result = error;
-			success = false;
+			if (!syncTime.length) syncTime = stopwatch.toString()
+			if (thenable && !asyncTime.length) asyncTime = stopwatch.toString()
+			if (!type) type = new Type(error)
+			result = error
+			success = false
 		}
 
-		stopwatch.stop();
+		stopwatch.stop()
 		if (typeof result !== 'string') {
 			result =
 				result instanceof Error
@@ -208,179 +223,182 @@ export class EvalCommand extends NinoCommand {
 					: inspect(result, {
 							depth,
 							showHidden,
-					  });
+					  })
 		}
 		return {
 			success,
 			type: type,
-			time: this.formatTime(syncTime, asyncTime ?? ''),
+			time: this.formatTime(syncTime, asyncTime),
 			result: clean(result as string),
-		};
+		}
 	}
-	private async handleReply(interaction: CommandInteraction, options: EvalReplyParameters) {
-		const typeFooter = `${bold('Type')}:${options.footer}`;
-		const timeTaken = options.time;
+
+	private async handleReply(
+		interaction: CommandInteraction,
+		options: EvalReplyParameters
+	): Promise<APIMessage | Message<boolean> | null> {
+		const typeFooter = ` ${bold('Type')}:${options.footer}`
+		const timeTaken = options.time
 
 		switch (options.outputTo) {
 			case 'file': {
 				if (canSendMessages(interaction.channel)) {
-					const output = 'Envía el resultado como un archivo.';
+					const output = 'Sent the result as a file.'
 					const content = [output, typeFooter, timeTaken] //
 						.filter(filterNullAndUndefinedAndEmpty)
-						.join('\n');
+						.join('\n')
 
-					const attachment = Buffer.from(options.result);
-					const name = `output.${options.language}`;
+					const attachment = Buffer.from(options.result)
+					const name = `output.${options.language}`
 
-					return interaction.editReply({ content, files: [{ attachment, name }] });
+					return interaction.editReply({ content, files: [{ attachment, name }] })
 				}
 
-				options.fileUnavailable = true;
-				this.getOtherTypeOutput(options);
+				options.fileUnavailable = true
+				this.getOtherTypeOutput(options)
 
-				return this.handleReply(interaction, options);
+				return this.handleReply(interaction, options)
 			}
 			case 'hastebin': {
 				if (!options.url) {
-					options.url = await this.getHaste(
-						options.result,
-						options.language ?? 'md'
-					).catch(() => null);
+					options.url = await this.getHaste(options.result, options.language).catch(
+						() => null
+					)
 				}
 
 				if (options.url) {
-					const hastebinUrl = `Enviado el resultado a hastebin: ${hideLinkEmbed(
+					const hastebinUrl = `Sent the result to hastebin: ${hideLinkEmbed(
 						options.url
-					)}`;
+					)}`
 
 					const content = [hastebinUrl, typeFooter, timeTaken] //
 						.filter(filterNullAndUndefinedAndEmpty)
-						.join('\n');
+						.join('\n')
 
-					return interaction.editReply({ content });
+					return interaction.editReply({ content })
 				}
 
-				options.hastebinUnavailable = true;
+				options.hastebinUnavailable = true
 
-				this.getOtherTypeOutput(options);
+				this.getOtherTypeOutput(options)
 
-				return this.handleReply(interaction, options);
+				return this.handleReply(interaction, options)
 			}
 			case 'console': {
-				this.container.logger.info(options.result);
-				const output = 'Envía el resultado a la consola.';
+				this.container.logger.info(options.result)
+				const output = 'Sent the result to console.'
 
 				const content = [output, typeFooter, timeTaken] //
 					.filter(filterNullAndUndefinedAndEmpty)
-					.join('\n');
+					.join('\n')
 
-				return interaction.editReply({ content });
-			}
-			case 'none': {
-				return interaction.editReply({ content: '¡Cancelado!' });
+				return interaction.editReply({ content })
 			}
 			case 'exec': {
 				try {
-					const { stdout, stderr } = await promisify(exec)(options.code);
+					const { stdout, stderr } = await promisify(exec)(options.code)
 
 					if (!stdout && !stderr) {
-						console.log('Comando invalido (exec)');
+						this.container.logger.warn('No output from exec.')
 					}
 
 					if (stdout.length > 1950) {
-						options.url = await this.getHaste(stdout, options.language ?? 'md').catch(
+						options.url = await this.getHaste(stdout, options.language).catch(
 							() => null
-						);
+						)
 					}
 
 					if (options.url) {
 						const hastebinUrl = `Enviado el resultado a hastebin: ${hideLinkEmbed(
 							options.url
-						)}`;
+						)}`
 
 						const content = [hastebinUrl] //
 							.filter(filterNullAndUndefinedAndEmpty)
-							.join('\n');
-						return interaction.editReply({ content });
+							.join('\n')
+						return interaction.editReply({ content })
 					}
 
-					const output = codeBlock(options.language ?? 'ts', stdout);
+					const output = codeBlock(options.language, stdout)
 
-					const content = `${bold('Input')}:${output}\n${options.time}`;
+					const content = `${bold('Input')}:${output}\n${options.time}`
 
-					return interaction.editReply({ content });
+					return interaction.editReply({ content })
 				} catch (err) {
-					const output = codeBlock(options.language ?? 'ts', err);
-					const content = `${bold('Error')}\n${output}\n${options.time}`;
+					const output = codeBlock(options.language, err)
+					const content = `${bold('Error')}\n${output}\n${options.time}`
 
-					interaction.editReply({ content });
+					return interaction.editReply({ content })
 				}
-				break;
+			}
+			case 'none': {
+				return interaction.editReply({ content: 'Aborted!' })
 			}
 			case 'reply':
 			default: {
 				if (options.result.length > 1950) {
-					options.replyUnavailable = true;
-					this.getOtherTypeOutput(options);
+					options.replyUnavailable = true
+					this.getOtherTypeOutput(options)
 
-					return this.handleReply(interaction, options);
+					return this.handleReply(interaction, options)
 				}
 
 				if (options.success) {
 					const parsedInput = `${bold('Input')}:${codeBlock(
 						options.language,
 						options.code
-					)}`;
+					)}`
 					const parsedOutput = `${bold('Output')}:${codeBlock(
 						options.language,
 						options.result
-					)}`;
+					)}`
 
 					const content = [parsedInput, parsedOutput, typeFooter, timeTaken]
 						.filter(Boolean)
-						.join('\n');
-					return interaction.editReply({ content });
+						.join('\n')
+					return interaction.editReply({ content })
 				}
 
-				const output = codeBlock(options.language ?? 'ts', options.result);
-				const content = `${bold('Error')}:${output}\n${bold('Type')}:${options.footer}\n${
-					options.time
-				}`;
-				return interaction.editReply({ content });
+				const output = codeBlock(options.language, options.result)
+				const content = `${bold('Error')}:${output}\n${bold('Type')}:${
+					options.footer
+				}\n${options.time}`
+				return interaction.editReply({ content })
 			}
 		}
 	}
+
 	private getOtherTypeOutput(options: EvalReplyParameters) {
 		if (!options.replyUnavailable) {
-			options.outputTo = 'reply';
-			return;
+			options.outputTo = 'reply'
+			return
 		}
 
 		if (!options.hastebinUnavailable) {
-			options.outputTo = 'hastebin';
-			return;
+			options.outputTo = 'hastebin'
+			return
 		}
 
 		if (!options.fileUnavailable) {
-			options.outputTo = 'file';
-			return;
+			options.outputTo = 'file'
+			return
 		}
 
 		if (!options.consoleUnavailable) {
-			options.outputTo = 'console';
-			return;
+			options.outputTo = 'console'
+			return
 		}
 
 		if (!options.execUnavailable) {
-			options.outputTo = 'exec';
-			return;
+			options.outputTo = 'exec'
+			return
 		}
 
-		options.outputTo = 'none';
+		options.outputTo = 'none'
 	}
 
 	private formatTime(syncTime: string, asyncTime?: string) {
-		return asyncTime ? `⏱ ${asyncTime}<${syncTime}>` : `⏱ ${syncTime}`;
+		return asyncTime ? `⏱ ${asyncTime}<${syncTime}>` : `⏱ ${syncTime}`
 	}
 
 	private async getHaste(result: string, language = 'js') {
@@ -391,36 +409,36 @@ export class EvalCommand extends NinoCommand {
 				body: result,
 			},
 			FetchResultTypes.JSON
-		);
-		return `https://hastebin.skyra.pw/${key}.${language}`;
+		)
+		return `https://hastebin.skyra.pw/${key}.${language}`
 	}
 }
 
 interface HastebinResponse {
-	key: string;
+	key: string
 }
 
 interface EvalReplyParameters {
-	hastebinUnavailable: boolean;
-	replyUnavailable: boolean;
-	consoleUnavailable: boolean;
-	fileUnavailable: boolean;
-	execUnavailable: boolean;
-	url: string | null;
-	code: string;
-	success: boolean;
-	result: string;
-	time: string;
-	footer: string;
-	language: string;
-	outputTo: 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none';
+	hastebinUnavailable: boolean
+	replyUnavailable: boolean
+	consoleUnavailable: boolean
+	fileUnavailable: boolean
+	execUnavailable: boolean
+	url: string | null
+	code: string
+	success: boolean
+	result: string
+	time: string
+	footer: string
+	language: string
+	outputTo: 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none'
 }
 
 interface EvalParameters {
-	message: Message;
-	code: string;
-	async: boolean;
-	showHidden: boolean;
-	depth: number;
-	timeout: number;
+	message: Message
+	code: string
+	async: boolean
+	showHidden: boolean
+	depth: number
+	timeout: number
 }

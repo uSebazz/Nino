@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import type { serverConfig } from '../function/types';
+import mongoose from 'mongoose'
+import type { serverConfig } from '../function/types'
 
 /**
  *
@@ -10,7 +10,7 @@ export const defaultData = (guildId: string) => ({
 	config: {
 		language: 'es-ES',
 	},
-});
+})
 
 const serverConfigSchema = new mongoose.Schema(
 	{
@@ -20,6 +20,6 @@ const serverConfigSchema = new mongoose.Schema(
 		},
 	},
 	{ versionKey: false }
-);
+)
 
-export const Model = mongoose.model<serverConfig>('serverConfig', serverConfigSchema);
+export const Model = mongoose.model<serverConfig>('serverConfig', serverConfigSchema)
