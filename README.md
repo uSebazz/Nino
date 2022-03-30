@@ -19,3 +19,15 @@
 It has:
 
 -   English and Spanish language support.
+
+### Required
+
+.env file
+```markdown
+DISCORD_TOKEN= Your bot token
+LAVALINK_IP= Your lavalink host ip
+LAVALINK_PASS= Your lavalink host password
+MONGO_URL= Mongodb Database link
+SPOTIFY_ID= Secret id of spotify api
+SPOTIFY_SECRET= Secret token of spotify api
+```
