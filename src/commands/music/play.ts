@@ -126,9 +126,73 @@ export class PlayMusicCommand extends NinoCommand {
 					break
 				}
 				case 'youtubemusic': {
+					const result = await this.container.client.music.rest.loadTracks(
+						/^https?:\/\//.test(query) ? query : `ytmsearch:${query}`
+					)
+
+					switch (result.loadType) {
+						case 'LOAD_FAILED': {
+							this.container.logger.error('Failed to load tracks')
+							break
+						}
+						case 'NO_MATCHES': {
+							await interaction.reply('No matches found')
+							break
+						}
+						case 'PLAYLIST_LOADED': {
+							tracks = result.tracks as Addable[]
+
+							await interaction.reply(
+								`Loaded playlist ${result.playlistInfo.name}`
+							)
+							break
+						}
+						case 'SEARCH_RESULT': {
+							const [track] = result.tracks
+							tracks = [track] as Addable[]
+
+							await interaction.reply(
+								`Search result of ${track?.info.title as string}`
+							)
+							break
+						}
+					}
+
 					break
 				}
 				case 'soundcloud': {
+					const result = await this.container.client.music.rest.loadTracks(
+						/^https?:\/\//.test(query) ? query : `scsearch:${query}`
+					)
+
+					switch (result.loadType) {
+						case 'LOAD_FAILED': {
+							this.container.logger.error('Failed to load tracks')
+							break
+						}
+						case 'NO_MATCHES': {
+							await interaction.reply('No matches found')
+							break
+						}
+						case 'PLAYLIST_LOADED': {
+							tracks = result.tracks as Addable[]
+
+							await interaction.reply(
+								`Loaded playlist ${result.playlistInfo.name}`
+							)
+							break
+						}
+						case 'SEARCH_RESULT': {
+							const [track] = result.tracks
+							tracks = [track] as Addable[]
+
+							await interaction.reply(
+								`Search result of ${track?.info.title as string}`
+							)
+							break
+						}
+					}
+
 					break
 				}
 			}
