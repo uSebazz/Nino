@@ -56,7 +56,7 @@ export class PlayMusicCommand extends NinoCommand {
 		options: PlayMusicCommandOptions
 	): Promise<void> {
 		const query = options.song
-		let tracks: Addable[] = []
+		let tracks: unknown = []
 		let player = this.container.client.music.players.get(interaction.guild?.id as string)
 
 		if (this.container.client.music.spotify.isSpotifyUrl(query)) {
@@ -89,7 +89,7 @@ export class PlayMusicCommand extends NinoCommand {
 					break
 				}
 			}
-
+		} else {
 			switch (options.output) {
 				case 'youtube': {
 					const result = await this.container.client.music.rest.loadTracks(
@@ -98,6 +98,7 @@ export class PlayMusicCommand extends NinoCommand {
 
 					switch (result.loadType) {
 						case 'LOAD_FAILED': {
+							this.container.logger.error(result.exception)
 							this.container.logger.error('Failed to load tracks')
 							break
 						}
@@ -106,7 +107,8 @@ export class PlayMusicCommand extends NinoCommand {
 							break
 						}
 						case 'PLAYLIST_LOADED': {
-							tracks = result.tracks as Addable[]
+							// eslint-disable-next-line prefer-destructuring
+							tracks = result.tracks
 
 							await interaction.reply(
 								`Loaded playlist ${result.playlistInfo.name}`
@@ -115,7 +117,7 @@ export class PlayMusicCommand extends NinoCommand {
 						}
 						case 'SEARCH_RESULT': {
 							const [track] = result.tracks
-							tracks = [track] as Addable[]
+							tracks = [track]
 
 							await interaction.reply(
 								`Search result of ${track?.info.title as string}`
@@ -140,7 +142,8 @@ export class PlayMusicCommand extends NinoCommand {
 							break
 						}
 						case 'PLAYLIST_LOADED': {
-							tracks = result.tracks as Addable[]
+							// eslint-disable-next-line prefer-destructuring
+							tracks = result.tracks
 
 							await interaction.reply(
 								`Loaded playlist ${result.playlistInfo.name}`
@@ -149,7 +152,7 @@ export class PlayMusicCommand extends NinoCommand {
 						}
 						case 'SEARCH_RESULT': {
 							const [track] = result.tracks
-							tracks = [track] as Addable[]
+							tracks = [track]
 
 							await interaction.reply(
 								`Search result of ${track?.info.title as string}`
@@ -175,7 +178,8 @@ export class PlayMusicCommand extends NinoCommand {
 							break
 						}
 						case 'PLAYLIST_LOADED': {
-							tracks = result.tracks as Addable[]
+							// eslint-disable-next-line prefer-destructuring
+							tracks = result.tracks
 
 							await interaction.reply(
 								`Loaded playlist ${result.playlistInfo.name}`
@@ -184,7 +188,7 @@ export class PlayMusicCommand extends NinoCommand {
 						}
 						case 'SEARCH_RESULT': {
 							const [track] = result.tracks
-							tracks = [track] as Addable[]
+							tracks = [track]
 
 							await interaction.reply(
 								`Search result of ${track?.info.title as string}`
@@ -192,28 +196,29 @@ export class PlayMusicCommand extends NinoCommand {
 							break
 						}
 					}
-
 					break
 				}
 			}
-			if (!player) {
-				player = this.container.client.music.createPlayer(interaction.guildId as string)
-				player.queue.channel = interaction.channel as MessageChannel
+		}
 
-				player.connect(options.channel.id, {
-					deafened: true,
-				})
-			}
-			const started = player.playing || player.paused
+		if (!player) {
+			player = this.container.client.music.createPlayer(interaction.guildId as string)
+			player.queue.channel = interaction.channel as MessageChannel
 
-			player.queue.add(tracks, {
-				requester: interaction.user.id,
+			player.connect(options.channel.id, {
+				deafened: true,
 			})
+		}
+		const started = player.playing || player.paused
 
-			if (!started) {
-				await player.setVolume(50)
-				await player.queue.start()
-			}
+		player.queue.add(tracks as Addable, {
+			requester: interaction.user.id,
+		})
+		this.container.logger.info(tracks)
+
+		if (!started) {
+			await player.setVolume(50)
+			await player.queue.start()
 		}
 	}
 }
