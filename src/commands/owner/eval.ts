@@ -102,6 +102,10 @@ export class EvalCommand extends NinoCommand {
 		)
 	}
 
+	public override async messageRun(message: Message) {
+		await message.reply('come pene')
+	}
+
 	public override async chatInputRun(interaction: NinoCommand.Int) {
 		const message = await interaction.deferReply({
 			ephemeral: true,

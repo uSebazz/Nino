@@ -12,7 +12,7 @@
 		"rootDir": "./src",
 		"baseUrl": "./src",
 		"paths": {
-			"#root/*": ["./src/*"]
+			"@/*": ["./src/*"]
 		},
 
 		/* The "No" Corner */

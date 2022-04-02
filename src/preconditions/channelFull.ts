@@ -8,7 +8,7 @@ export class channelFull extends Precondition {
 
 		if (!vChannel?.full) {
 			return this.error({
-				message: 'That channel is full, i can\'t join',
+				message: "That channel is full, i can't join",
 			})
 		}
 		return this.ok()

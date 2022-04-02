@@ -19,7 +19,9 @@ export class VoiceStateUpdateListener extends Listener<typeof Events.VoiceStateU
 		if (
 			!oldState.guild.members.cache.get(this.container.client.user?.id as string)?.voice
 				.channelId
-		) { return }
+		) {
+			return
+		}
 
 		if (
 			oldState.guild.members.cache.get(this.container.client.user?.id as string)?.voice

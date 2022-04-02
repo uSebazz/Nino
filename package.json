@@ -6,7 +6,7 @@
 	"license": "Apache-2.0",
 	"main": "dist/main.js",
 	"imports": {
-		"@/*": "./src/*.js"
+		"@/*": "./dist/*.js"
 	},
 	"dependencies": {
 		"@lavaclient/queue": "^2.0.6",
@@ -24,6 +24,7 @@
 		"discord.js": "latest",
 		"lavaclient": "^4.0.8-rc.2",
 		"mongoose": "^6.2.4",
+		"spotify-card": "^1.2.1",
 		"ts-dotenv": "^0.8.3"
 	},
 	"devDependencies": {
@@ -39,6 +40,7 @@
 		"start": "node ./dist/main.js",
 		"build": "tsc",
 		"build:start": "tsc-watch --onSuccess \"yarn start\"",
+		"clean": "node scripts/clean.mjs",
 		"eslint-err": "eslint src/ --ext .ts --cache",
 		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
 	},

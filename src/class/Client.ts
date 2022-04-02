@@ -7,7 +7,7 @@ import {
 	RegisterBehavior,
 	SapphireClient,
 } from '@sapphire/framework'
-import { defaultData, Model } from '../lib/database/guildConfig'
+import { Model, defaultData } from '../lib/database/guildConfig'
 import { connect, connection } from 'mongoose'
 import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
 import { env } from '../lib/function/env'
@@ -26,6 +26,8 @@ export class Nino extends SapphireClient {
 	public override music: NinoMusic
 	public constructor() {
 		super({
+			defaultPrefix: 'n!',
+			loadMessageCommandListeners: true,
 			allowedMentions: { repliedUser: false },
 			i18n: {
 				fetchLanguage: async (context: InternationalizationContext) => {
