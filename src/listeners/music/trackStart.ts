@@ -13,6 +13,9 @@ export class trackStartListener extends Listener {
 		const img = await generate({
 			url: queue.current?.uri as string,
 			displayArtist: true,
+			//progressBar: true,
+			//currentTime: player?.position as number,
+			//totalTime: queue.current?.length as number,
 			songData: {
 				title: queue.current!.title,
 				cover: `https://img.youtube.com/vi/${
