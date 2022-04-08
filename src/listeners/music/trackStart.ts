@@ -8,14 +8,11 @@ import { MessageAttachment } from 'discord.js'
 @ApplyOptions<Listener.Options>({ event: 'trackStart', emitter: container.client.music })
 export class trackStartListener extends Listener {
 	public async run(queue: Queue): Promise<void> {
-		//const player = this.container.client.music.players.get(queue.channel?.guildId as string)
+		//const player = this.container.client.music.players.get(queue.channel!.guildId)
 
 		const img = await generate({
-			url: queue.current?.uri as string,
 			displayArtist: true,
-			//progressBar: true,
-			//currentTime: player?.position as number,
-			//totalTime: queue.current?.length as number,
+			url: queue.current!.uri,
 			songData: {
 				title: queue.current!.title,
 				cover: `https://img.youtube.com/vi/${

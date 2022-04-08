@@ -1,3 +1,10 @@
 {
-	"ping": "Pong! Latencia de la api: {{ping}}ms. Latencia de los mensajes: {{diff}}ms."
+	"ping": "Pong! Latencia de la api: {{ping}}ms. Latencia de los mensajes: {{diff}}ms.",
+	"stats": {
+		"titles": {
+			"stats": "Estadísticas",
+			"uptime": " tiempo de actividad",
+			"usage": "uso del sistema"
+		}
+	}
 }
