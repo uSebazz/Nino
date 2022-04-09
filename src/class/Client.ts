@@ -1,5 +1,4 @@
 import '@sapphire/plugin-i18next/register'
-import '@sapphire/plugin-logger/register'
 import {
 	ApplicationCommandRegistries,
 	container,
@@ -9,11 +8,12 @@ import {
 } from '@sapphire/framework'
 import { Model, defaultData } from '../lib/database/guildConfig'
 import { connect, connection } from 'mongoose'
-import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
-import { env } from '../lib/function/env'
-import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 import { load } from '@lavaclient/queue'
 import { NinoMusic } from './music'
+import { Logger } from '../lib/logger/logger'
+import { env } from '../lib/function/env'
+import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
+import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 ;(async () => {
 	await connect(env.MONGO_URL).then(() => {
 		container.logger.info(
@@ -40,7 +40,9 @@ export class Nino extends SapphireClient {
 			},
 			intents: 16071,
 			logger: {
-				level: LogLevel.Debug,
+				instance: new Logger({
+					level: LogLevel.Debug,
+				}),
 			},
 			partials: [
 				'MESSAGE',
