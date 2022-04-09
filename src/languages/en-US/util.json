@@ -6,6 +6,6 @@
 			"uptime": "Uptime",
 			"usage": "Usage"
 		},
-		"stats": "Channels: {{channels}}\nUsers: {{users}}\nGuilds: {{guilds}}\nCommands: {{commands}}\nDiscord.js Version: {{version}}\nSapphire Version: {{sapphireVersion}}"
+		"stats": "**Channels:** {{channels}}\n**Users:** {{users}}\n**Guilds:** {{guilds}}\n**Commands:** {{commands}}\n**Discord.js Version:** {{version}}\n**Sapphire Version:** {{sapphireVersion}}"
 	}
 }

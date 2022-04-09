@@ -5,6 +5,7 @@
 			"stats": "Estadísticas",
 			"uptime": " tiempo de actividad",
 			"usage": "uso del sistema"
-		}
+		},
+		"stats": "**Canales:** {{channels}}\n**Usuarios:** {{users}}\n**Servidores:** {{guilds}}\n**Comandos:** {{commands}}\n**Discord.js Version:** {{version}}\n**Sapphire Version:** {{sapphireVersion}}"
 	}
 }
