@@ -59,7 +59,6 @@
 		"max-classes-per-file": ["error", 1],
 		"new-parens": ["error", "always"],
 		"newline-per-chained-call": "error",
-		"no-console": "error",
 		"no-constructor-return": "error",
 		"no-multiple-empty-lines": "error",
 		"no-nested-ternary": "error",
