@@ -3,9 +3,10 @@
 	"stats": {
 		"titles": {
 			"stats": "Estadísticas",
-			"uptime": " tiempo de actividad",
-			"usage": "uso del sistema"
+			"uptime": "Tiempo de actividad",
+			"usage": "Uso del sistema"
 		},
-		"stats": "**Canales:** {{channels}}\n**Usuarios:** {{users}}\n**Servidores:** {{guilds}}\n**Comandos:** {{commands}}\n**Discord.js Version:** {{version}}\n**Sapphire Version:** {{sapphireVersion}}"
+		"stats": "**Canales:** {{channels}}\n**Usuarios:** {{users}}\n**Servidores:** {{guilds}}\n**Comandos:** {{commands}}\n**Discord.js Version:** {{version}}\n**Sapphire Version:** {{sapphireVersion}}",
+		"uptime": "**Client:** {{client}}\n**Host:** {{host}}\n**Total:** {{total}}"
 	}
 }

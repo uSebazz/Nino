@@ -30,7 +30,6 @@ export class botStats extends NinoCommand {
 		}
 
 		const stats = this.botStatics
-		// @ts-expect-error value is never read, this is so `msg` is possible as an alias when sending the eval.
 		const uptime = this.uptimeStatics
 		// @ts-expect-error value is never read, this is so `msg` is possible as an alias when sending the eval.
 		const usage = this.usageStatics
@@ -45,6 +44,14 @@ export class botStats extends NinoCommand {
 					commands: stats.commands,
 					version: stats.version,
 					sapphireVersion: stats.sapphireVersion,
+				})
+			)
+			.addField(
+				title.uptime,
+				await resolveKey(key, 'util:stats.uptime', {
+					client: uptime.client,
+					host: uptime.host,
+					total: uptime.total,
 				})
 			)
 
