@@ -1,10 +1,9 @@
 import { Nino } from './class/client'
-import { env } from './lib/function/env'
 import { container } from '@sapphire/framework'
 ;(async () => {
 	const client = new Nino()
 	try {
-		await client.start(env.DISCORD_TOKEN)
+		await client.start()
 	} catch (e) {
 		container.logger.error(e)
 		client.destroy()

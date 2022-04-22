@@ -12,6 +12,7 @@ import { load } from '@lavaclient/queue'
 import { NinoMusic } from './music'
 import { Logger } from '../lib/logger/logger'
 import { env } from '../lib/function/env'
+import { NinoUtils } from '../lib/utils'
 import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
 import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 ;(async () => {
@@ -24,6 +25,7 @@ import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 
 export class Nino extends SapphireClient {
 	public override music: NinoMusic
+	public override utils: NinoUtils
 	public constructor() {
 		super({
 			defaultPrefix: 'n!',
@@ -64,14 +66,15 @@ export class Nino extends SapphireClient {
 			retryLimit: 2,
 		})
 		this.music = new NinoMusic()
+		this.utils = new NinoUtils()
 	}
 
-	public async start(token?: string): Promise<void> {
+	public async start(): Promise<void> {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(
 			RegisterBehavior.Overwrite
 		)
 		load()
-		await super.login(token)
+		await super.login(env.DISCORD_TOKEN)
 	}
 }
 
@@ -79,7 +82,8 @@ export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null
 
 declare module '@sapphire/framework' {
 	export interface SapphireClient {
-		readonly music: NinoMusic
+		music: NinoMusic
+		utils: NinoUtils
 	}
 	export interface Preconditions {
 		inVoiceChannel: never

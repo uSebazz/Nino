@@ -1,37 +1,26 @@
 import { container, Listener } from '@sapphire/framework'
 import { ApplyOptions } from '@sapphire/decorators'
-import { generate } from 'spotify-card'
 import type { Queue } from '@lavaclient/queue'
-import type { CustomSongData } from 'spotify-card/dist/types'
-import { MessageAttachment } from 'discord.js'
+//import { MessageAttachment } from 'discord.js'
 
 @ApplyOptions<Listener.Options>({ event: 'trackStart', emitter: container.client.music })
 export class trackStartListener extends Listener {
 	public async run(queue: Queue): Promise<void> {
 		//const player = this.container.client.music.players.get(queue.channel!.guildId)
 
-		const img = await generate({
-			url: queue.current!.uri,
-			songData: {
-				title: queue.current!.title,
-				cover: `https://img.youtube.com/vi/${
-					queue.current!.identifier
-				}/maxresdefault.jpg`,
-				artist: queue.current!.author,
-			} as CustomSongData,
-			fontSizes: {
-				title: 55,
-			},
-			blur: {
-				image: true,
-			},
-		})
-
-		const attachement = new MessageAttachment(img, 'spotify-card.png')
-
+		//const canvas = Canvas.createCanvas(500, 500)
+		//const ctx = canvas.getContext('2d')
+		//ctx.fillStyle = '#ff0000'
+		//ctx.fillRect(0, 0, 500, 500)
+		//const attachment = new MessageAttachment(canvas.toBuffer(), 'spotify-card.png')
+		//const embed = new MessageEmbed()
+		//	.setTitle('Spotify Card')
+		//	.setDescription('A spotify card')
+		//	.attachFiles(attachment)
+		//	.setImage('attachment://spotify-card.png')
 		await queue.channel!.send({
 			content: `Now playing: **${queue.current!.title}**`,
-			files: [attachement],
+			//files: [attachement],
 		})
 	}
 }

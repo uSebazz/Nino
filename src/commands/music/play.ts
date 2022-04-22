@@ -4,6 +4,7 @@ import { SpotifyItemType } from '@lavaclient/spotify'
 import type { MessageChannel } from '../../class/client'
 import type { Addable } from '@lavaclient/queue'
 import type { GuildMember, VoiceBasedChannel } from 'discord.js'
+import { resolveKey } from '@sapphire/plugin-i18next'
 
 @ApplyOptions<NinoCommand.Options>({
 	description: 'play music from spotify or youtube',
@@ -56,7 +57,7 @@ export class PlayMusicCommand extends NinoCommand {
 		options: PlayMusicCommandOptions
 	): Promise<void> {
 		const query = options.song
-		let tracks: unknown = []
+		let tracks: Addable[] = []
 		let player = this.container.client.music.players.get(interaction.guild?.id as string)
 
 		if (this.container.client.music.spotify.isSpotifyUrl(query)) {
@@ -66,136 +67,73 @@ export class PlayMusicCommand extends NinoCommand {
 				case SpotifyItemType.Artist: {
 					tracks = await item.resolveYoutubeTracks()
 
-					await interaction.reply('Searching for artist...')
+					await interaction.reply(
+						await resolveKey(interaction, 'music:play.spotify.artist', {
+							emote: this.container.client.utils.emojis.spotify,
+							tracks: tracks.length,
+							art: item.name,
+						})
+					)
 					break
 				}
-				case SpotifyItemType.Album: {
+
+				case SpotifyItemType.Playlist: {
 					tracks = await item.resolveYoutubeTracks()
 
-					await interaction.reply('Searching for album...')
+					await interaction.reply(
+						await resolveKey(interaction, 'music:play.spotify.playlist', {
+							emote: this.container.client.utils.emojis.spotify,
+							name: item.name,
+						})
+					)
 					break
 				}
+
 				case SpotifyItemType.Track: {
 					const track = await item.resolveYoutubeTrack()
 					tracks = [track]
 
-					await interaction.reply('Searching for track...')
+					await interaction.reply(
+						await resolveKey(interaction, 'music:play.spotify.track', {
+							emote: this.container.client.utils.emojis.spotify,
+							track: item.name,
+						})
+					)
 					break
 				}
-				case SpotifyItemType.Playlist: {
+
+				case SpotifyItemType.Album: {
 					tracks = await item.resolveYoutubeTracks()
 
-					await interaction.reply('Searching for playlist...')
-					break
+					await interaction.reply(
+						await resolveKey(interaction, 'music:play.spotify.album', {
+							emote: this.container.client.utils.emojis.spotify,
+							album: item.name,
+						})
+					)
 				}
 			}
 		} else {
-			switch (options.output) {
-				case 'youtube': {
-					const result = await this.container.client.music.rest.loadTracks(
-						/^https?:\/\//.test(query) ? query : `ytsearch:${query}`
-					)
+			const searchs = {
+				youtube: 'ytsearch',
+				youtubemusic: 'ytmsearch',
+				soundcloud: 'scsearch',
+			}
+			// eslint-disable-next-line computed-property-spacing
+			const search = searchs[options.output]
 
-					switch (result.loadType) {
-						case 'LOAD_FAILED': {
-							this.container.logger.error(result.exception)
-							this.container.logger.error('Failed to load tracks')
-							break
-						}
-						case 'NO_MATCHES': {
-							await interaction.reply('No matches found')
-							break
-						}
-						case 'PLAYLIST_LOADED': {
-							// eslint-disable-next-line prefer-destructuring
-							tracks = result.tracks
+			const rest = await this.container.client.music.rest.loadTracks(
+				/^https?:\/\//.test(query) ? query : `${search}:${query}`
+			)
 
-							await interaction.reply(
-								`Loaded playlist ${result.playlistInfo.name}`
-							)
-							break
-						}
-						case 'SEARCH_RESULT': {
-							const [track] = result.tracks
-							tracks = [track]
-
-							await interaction.reply(
-								`Search result of ${track?.info.title as string}`
-							)
-							break
-						}
-					}
+			switch (rest.loadType) {
+				case 'LOAD_FAILED': {
+					this.container.logger.error(rest.exception)
 					break
 				}
-				case 'youtubemusic': {
-					const result = await this.container.client.music.rest.loadTracks(
-						/^https?:\/\//.test(query) ? query : `ytmsearch:${query}`
-					)
 
-					switch (result.loadType) {
-						case 'LOAD_FAILED': {
-							this.container.logger.error('Failed to load tracks')
-							break
-						}
-						case 'NO_MATCHES': {
-							await interaction.reply('No matches found')
-							break
-						}
-						case 'PLAYLIST_LOADED': {
-							// eslint-disable-next-line prefer-destructuring
-							tracks = result.tracks
-
-							await interaction.reply(
-								`Loaded playlist ${result.playlistInfo.name}`
-							)
-							break
-						}
-						case 'SEARCH_RESULT': {
-							const [track] = result.tracks
-							tracks = [track]
-
-							await interaction.reply(
-								`Search result of ${track?.info.title as string}`
-							)
-							break
-						}
-					}
-
-					break
-				}
-				case 'soundcloud': {
-					const result = await this.container.client.music.rest.loadTracks(
-						/^https?:\/\//.test(query) ? query : `scsearch:${query}`
-					)
-
-					switch (result.loadType) {
-						case 'LOAD_FAILED': {
-							this.container.logger.error('Failed to load tracks')
-							break
-						}
-						case 'NO_MATCHES': {
-							await interaction.reply('No matches found')
-							break
-						}
-						case 'PLAYLIST_LOADED': {
-							// eslint-disable-next-line prefer-destructuring
-							tracks = result.tracks
-
-							await interaction.reply(
-								`Loaded playlist ${result.playlistInfo.name}`
-							)
-							break
-						}
-						case 'SEARCH_RESULT': {
-							const [track] = result.tracks
-							tracks = [track]
-
-							await interaction.reply(
-								`Search result of ${track?.info.title as string}`
-							)
-							break
-						}
-					}
+				case 'NO_MATCHES': {
+					await interaction.reply(await resolveKey(interaction, 'music:play.'))
 					break
 				}
 			}
@@ -211,10 +149,9 @@ export class PlayMusicCommand extends NinoCommand {
 		}
 		const started = player.playing || player.paused
 
-		player.queue.add(tracks as Addable, {
+		player.queue.add(tracks, {
 			requester: interaction.user.id,
 		})
-		this.container.logger.info(tracks)
 
 		if (!started) {
 			await player.setVolume(50)
