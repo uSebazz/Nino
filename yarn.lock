@@ -155,10 +155,10 @@
     "@sapphire/utilities" "^3.5.0"
     tslib "^2.3.1"
 
-"@sapphire/discord.js-utilities@^4.9.4":
-  version "4.9.4"
-  resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.9.4.tgz#3501f0d72b2b0876eca8b3ee10cedf8424199ba3"
-  integrity sha512-xOXnagNkmoxu226MAKdFXvEZud0sAc/1U4Rk70Va/cY4NMWM2Zo4G7YDzrTJT9uSIK1WB7oU75wiXm+9IRCwMQ==
+"@sapphire/discord.js-utilities@^4.9.5":
+  version "4.9.5"
+  resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.9.5.tgz#a555ec70edaa679b8ab8527878fed39365814e51"
+  integrity sha512-hrAr3MlVyf3opp85CdzIUY68BPq07VFi69t2/YDGFLjtcmFcnXcAf0Ilgq0NHPaDpMgDAo1LYwEFQJ5NjT0vcA==
   dependencies:
     "@sapphire/discord-utilities" "^2.10.3"
     "@sapphire/time-utilities" "^1.7.4"
@@ -195,10 +195,10 @@
     "@sapphire/utilities" "^3.4.0"
     tslib "^2.3.1"
 
-"@sapphire/plugin-i18next@^2.3.1":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@sapphire/plugin-i18next/-/plugin-i18next-2.4.2.tgz#c9fda8b6d4d1a0e0efea0d7029263743505caf07"
-  integrity sha512-E38iOQ75az2Pos5PtsR8A0b6fg1vSFuNiEiICa1jcRmkQONhGGfKCzWN2xqkSOVc1PbInRxbSvRrGzbFikEWgg==
+"@sapphire/plugin-i18next@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@sapphire/plugin-i18next/-/plugin-i18next-2.5.0.tgz#c7e0e2005e612493c15fb9c7625114ac3369c517"
+  integrity sha512-eKbK5gz9J3PXDpS+2NJKdWULj7A3vhxyeJoS+LiwyjZa0wSOohYfeeR+M6QKDRQNIwIkaB2+WPq7/6ZvkjgisA==
   dependencies:
     "@sapphire/utilities" "^3.6.2"
     "@types/i18next-fs-backend" "^1.1.2"
@@ -207,12 +207,12 @@
     i18next-fs-backend "^1.1.4"
     tslib "^2.3.1"
 
-"@sapphire/prettier-config@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@sapphire/prettier-config/-/prettier-config-1.4.2.tgz#3cbc29d99cb0eac5236701a3c8acf69c33ffee82"
-  integrity sha512-udZo9kW4/94Wst/Ha50qOHmgcLlpjwilPw1QLHqB0CBDqnnUOKufOKuY1/UZ71THTf7lKxrLdNZh2D4CRLtrMA==
+"@sapphire/prettier-config@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@sapphire/prettier-config/-/prettier-config-1.4.3.tgz#a623e186048f6e080afd8db448c4318c1740084c"
+  integrity sha512-B0/SBL2x/R/DqF3cIY+f+1DzGI20SLyFBhvKnN9EndCow2feB5TWHvVArJKTDN7PMVgU1Gia2aCLyXO+/OM32w==
   dependencies:
-    prettier "^2.6.1"
+    prettier "^2.6.2"
 
 "@sapphire/ratelimits@^2.3.0":
   version "2.4.1"
@@ -1748,7 +1748,7 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@^2.6.1:
+prettier@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
   integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
