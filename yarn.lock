@@ -114,7 +114,17 @@
   dependencies:
     twemoji-parser "^14.0.0"
 
-"@sapphire/discord.js-utilities@^4.6.0", "@sapphire/discord.js-utilities@^4.9.4":
+"@sapphire/discord.js-utilities@^4.6.0":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.9.1.tgz#10ef3942ebaef5ae1a3832b933c6e8f584886bec"
+  integrity sha512-rlx/drbtehIx/yVnqTNRskeYEg/gAhrUqrN2+qs5wWwwNR0N9vERetQOVSzgZvszcuhlQlyIEH+sEYICkgi2fA==
+  dependencies:
+    "@sapphire/discord-utilities" "^2.10.1"
+    "@sapphire/time-utilities" "^1.7.1"
+    "@sapphire/utilities" "^3.5.0"
+    tslib "^2.3.1"
+
+"@sapphire/discord.js-utilities@^4.9.5":
   version "4.9.5"
   resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.9.5.tgz#a555ec70edaa679b8ab8527878fed39365814e51"
   integrity sha512-hrAr3MlVyf3opp85CdzIUY68BPq07VFi69t2/YDGFLjtcmFcnXcAf0Ilgq0NHPaDpMgDAo1LYwEFQJ5NjT0vcA==
@@ -154,7 +164,7 @@
     "@sapphire/utilities" "^3.6.2"
     tslib "^2.3.1"
 
-"@sapphire/plugin-i18next@^2.3.1":
+"@sapphire/plugin-i18next@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@sapphire/plugin-i18next/-/plugin-i18next-2.5.0.tgz#c7e0e2005e612493c15fb9c7625114ac3369c517"
   integrity sha512-eKbK5gz9J3PXDpS+2NJKdWULj7A3vhxyeJoS+LiwyjZa0wSOohYfeeR+M6QKDRQNIwIkaB2+WPq7/6ZvkjgisA==
@@ -281,7 +291,7 @@
   resolved "https://registry.yarnpkg.com/@swc/core-win32-x64-msvc/-/core-win32-x64-msvc-1.2.171.tgz#bc229b3a324f33efc2898cf4b9cf4a0b0768d345"
   integrity sha512-DrOqi27Lagn/wy2QYDOiNr0KAJX4yR0areDcli2NQ875tva5uVFgvZo5sJFsHiLU/x6yBcxVpVAbzg8a1jRUAA==
 
-"@swc/core@^1.2.165":
+"@swc/core@^1.2.171":
   version "1.2.171"
   resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.2.171.tgz#c7e6bf1316bcc45fd914dd032bae014ee1fed7da"
   integrity sha512-WE1Nn+LQOqMb41jDTt78REE29elW4QvbAIECpAI9wUP4SJpt9uo9ItJQ3UbXE4BECQ0JgkLz5x7l9uWUAt4YUw==
@@ -1277,7 +1287,7 @@ mongodb@4.5.0:
   optionalDependencies:
     saslprep "^1.0.3"
 
-mongoose@^6.2.10:
+mongoose@^6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.3.1.tgz#3dbf85209a39355542bb47fba95f07bda1684987"
   integrity sha512-bknh/VzU/7mBudfE4/5N7NR2Bpjvuxl93iePvyCGLhjeHF6w+mCRmucYGQkG6wEbCmEUVmBQrcgr2b40krMo/Q==
@@ -1425,6 +1435,11 @@ prettier-linter-helpers@^1.0.0:
   integrity sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
   dependencies:
     fast-diff "^1.1.2"
+
+prettier@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
+  integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
 
 ps-tree@^1.2.0:
   version "1.2.0"
