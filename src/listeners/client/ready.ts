@@ -6,6 +6,5 @@ import type { Client } from 'discord.js'
 export class readyListener extends Listener<typeof Events.ClientReady> {
 	public run(client: Client): void {
 		this.container.logger.info(`Logged in as ${client.user?.tag as string}`)
-		this.container.client.music.connect(client.user?.id)
 	}
 }

@@ -8,8 +8,6 @@ import {
 } from '@sapphire/framework'
 import { Model, defaultData } from '../lib/database/guildConfig'
 import { connect, connection } from 'mongoose'
-import { load } from '@lavaclient/queue'
-import { NinoMusic } from './music'
 import { Logger } from '../lib/logger/logger'
 import { env } from '../lib/function/env'
 import { NinoUtils } from '../lib/utils'
@@ -24,7 +22,6 @@ import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 })().catch((e) => container.logger.error(e))
 
 export class Nino extends SapphireClient {
-	public override music: NinoMusic
 	public override utils: NinoUtils
 	public constructor() {
 		super({
@@ -65,7 +62,6 @@ export class Nino extends SapphireClient {
 			},
 			retryLimit: 2,
 		})
-		this.music = new NinoMusic()
 		this.utils = new NinoUtils()
 	}
 
@@ -73,7 +69,7 @@ export class Nino extends SapphireClient {
 		ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(
 			RegisterBehavior.Overwrite
 		)
-		load()
+
 		await super.login(env.DISCORD_TOKEN)
 	}
 }
@@ -82,7 +78,6 @@ export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null
 
 declare module '@sapphire/framework' {
 	export interface SapphireClient {
-		music: NinoMusic
 		utils: NinoUtils
 	}
 	export interface Preconditions {
@@ -92,11 +87,5 @@ declare module '@sapphire/framework' {
 		channelJoin: never
 		channelView: never
 		channelFull: never
-	}
-}
-
-declare module '@lavaclient/queue' {
-	interface Queue {
-		channel: MessageChannel
 	}
 }
