@@ -13,6 +13,11 @@ export abstract class NinoCommand extends Command {
 	): void
 }
 
+/**
+ * @description This is a extends custom command class
+ * @example ```
+ * Hola```
+ */
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace NinoCommand {
 	export type Options = ChatInputCommand.Options

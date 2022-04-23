@@ -32,12 +32,11 @@ export class PingCommand extends NinoCommand {
 
 	public override async chatInputRun(interaction: NinoCommand.Int): Promise<void> {
 		const msg = await interaction.reply({ content: 'Pinging...', fetchReply: true })
-		const lang = interaction.channel as Target
 
 		if (msg instanceof Message) {
 			const { diff, ping } = this.getPing(msg, interaction)
 
-			await msg.edit(await resolveKey(lang, 'util:ping', { diff, ping }))
+			await msg.edit(await resolveKey(interaction, 'util:ping', { diff, ping }))
 		}
 	}
 

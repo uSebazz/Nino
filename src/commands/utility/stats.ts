@@ -21,12 +21,10 @@ export class botStats extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
 	public override async chatInputRun(interaction: NinoCommand.Int) {
-		const key = interaction.channel as Target
-
 		const title = {
-			stats: await resolveKey(key, 'util:stats.titles.stats'),
-			uptime: await resolveKey(key, 'util:stats.titles.uptime'),
-			usage: await resolveKey(key, 'util:stats.titles.usage'),
+			stats: await resolveKey(interaction, 'util:stats.titles.stats'),
+			uptime: await resolveKey(interaction, 'util:stats.titles.uptime'),
+			usage: await resolveKey(interaction, 'util:stats.titles.usage'),
 		}
 
 		const stats = this.botStatics
@@ -37,7 +35,7 @@ export class botStats extends NinoCommand {
 		const embed = new MessageEmbed() //
 			.addField(
 				title.stats,
-				await resolveKey(key, 'util:stats.stats', {
+				await resolveKey(interaction, 'util:stats.stats', {
 					channels: stats.channels,
 					guilds: stats.guilds,
 					users: stats.users,
@@ -48,7 +46,7 @@ export class botStats extends NinoCommand {
 			)
 			.addField(
 				title.uptime,
-				await resolveKey(key, 'util:stats.uptime', {
+				await resolveKey(interaction, 'util:stats.uptime', {
 					client: uptime.client,
 					host: uptime.host,
 					total: uptime.total,
@@ -61,7 +59,7 @@ export class botStats extends NinoCommand {
 	}
 
 	public override async messageRun(message: Message) {
-		await message.channel.send('wait..')
+		await message.channel.send('wait update..')
 	}
 
 	private get botStatics(): StatsNino {

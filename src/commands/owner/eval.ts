@@ -313,7 +313,7 @@ export class EvalCommand extends NinoCommand {
 					}
 
 					if (options.url) {
-						const hastebinUrl = `Enviado el resultado a hastebin: ${hideLinkEmbed(
+						const hastebinUrl = `Sent the result to hastebin: ${hideLinkEmbed(
 							options.url
 						)}`
 
