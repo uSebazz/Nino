@@ -20,7 +20,7 @@
 		"colorette": "^2.0.16",
 		"delay": "^5.0.0",
 		"discord.js": "latest",
-		"mongoose": "^6.2.10",
+		"mongoose": "^6.3.1",
 		"ts-dotenv": "^0.8.3"
 	},
 	"devDependencies": {
