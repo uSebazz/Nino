@@ -124,15 +124,15 @@
     "@sapphire/utilities" "^3.5.0"
     tslib "^2.3.1"
 
-"@sapphire/discord.js-utilities@^4.9.5":
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.9.5.tgz#a555ec70edaa679b8ab8527878fed39365814e51"
-  integrity sha512-hrAr3MlVyf3opp85CdzIUY68BPq07VFi69t2/YDGFLjtcmFcnXcAf0Ilgq0NHPaDpMgDAo1LYwEFQJ5NjT0vcA==
+"@sapphire/discord.js-utilities@^4.9.7":
+  version "4.9.7"
+  resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.9.7.tgz#e06470a3281787e37d66cf55647873eb12e6b100"
+  integrity sha512-kEq3mtXdNxA8Ggfj94GzLDDGuFXX9hxav5Jqv9otu2l75qGZ6SmXOtJjpdccRrNkzc9G9ZjdqVmC6LzeHG6sww==
   dependencies:
     "@sapphire/discord-utilities" "^2.10.3"
     "@sapphire/time-utilities" "^1.7.4"
     "@sapphire/utilities" "^3.6.2"
-    tslib "^2.3.1"
+    tslib "^2.4.0"
 
 "@sapphire/fetch@^2.3.1":
   version "2.3.1"
@@ -1717,7 +1717,7 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.3.1:
+tslib@^2.3.1, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
