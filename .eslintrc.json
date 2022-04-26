@@ -55,7 +55,6 @@
 		"eqeqeq": ["error", "always"],
 		"key-spacing": "error",
 		"keyword-spacing": "error",
-		"linebreak-style": ["error", "windows"],
 		"max-classes-per-file": ["error", 1],
 		"new-parens": ["error", "always"],
 		"newline-per-chained-call": "error",
@@ -80,4 +79,3 @@
 		"semi": ["error", "never"]
 	}
 }
-

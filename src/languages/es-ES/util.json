@@ -7,6 +7,11 @@
 			"usage": "Uso del sistema"
 		},
 		"stats": "**Canales:** {{channels}}\n**Usuarios:** {{users}}\n**Servidores:** {{guilds}}\n**Comandos:** {{commands}}\n**Discord.js Version:** {{version}}\n**Sapphire Version:** {{sapphireVersion}}",
-		"uptime": "**Client:** {{client}}\n**Host:** {{host}}\n**Total:** {{total}}"
+		"uptime": "**Client:** {{client}}\n**Host:** {{host}}\n**Total:** {{total}}",
+		"usage": "**Cpu:** {{cpuload}}\n**Ram:** {{ramused}}\n**Ram Total:** {{ramtotal}}"
+	},
+	"buttons": {
+		"invite": "Invítame"
 	}
 }
+

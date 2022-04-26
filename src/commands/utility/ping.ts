@@ -1,7 +1,8 @@
 import { NinoCommand } from '../../class/command'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Message, type CommandInteraction } from 'discord.js'
-import { resolveKey, type Target } from '@sapphire/plugin-i18next'
+import { resolveKey } from '@sapphire/plugin-i18next'
+import { send } from '@sapphire/plugin-editable-commands'
 
 @ApplyOptions<NinoCommand.Options>({
 	description: 'Ping of the bot',
@@ -21,13 +22,11 @@ export class PingCommand extends NinoCommand {
 	}
 
 	public override async messageRun(message: Message): Promise<void> {
-		const msg = await message.channel.send({
-			content: 'Pinging...',
-		})
+		const msg = await send(message, 'pinging...')
 		const diff = msg.createdTimestamp - message.createdTimestamp
 		const ping = Math.round(this.container.client.ws.ping)
 
-		await msg.edit(await resolveKey(message, 'util:ping', { diff, ping }))
+		await send(message, await resolveKey(message, 'util:ping', { diff, ping }))
 	}
 
 	public override async chatInputRun(interaction: NinoCommand.Int): Promise<void> {

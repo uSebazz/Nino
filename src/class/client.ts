@@ -1,4 +1,5 @@
 import '@sapphire/plugin-i18next/register'
+import '@sapphire/plugin-editable-commands/register'
 import {
 	ApplicationCommandRegistries,
 	container,
@@ -26,6 +27,7 @@ export class Nino extends SapphireClient {
 	public constructor() {
 		super({
 			defaultPrefix: 'n!',
+			loadDefaultErrorListeners: false,
 			loadMessageCommandListeners: true,
 			allowedMentions: { repliedUser: false },
 			i18n: {

@@ -10,12 +10,17 @@ import { Stopwatch } from '@sapphire/stopwatch'
 import { canSendMessages } from '@sapphire/discord.js-utilities'
 import { inspect, promisify } from 'node:util'
 import { exec } from 'child_process'
+import { send } from '@sapphire/plugin-editable-commands'
 import Type from '@sapphire/type'
 import type { APIMessage } from 'discord-api-types/v9'
 import type { CommandInteraction, Message } from 'discord.js'
+import type { Args } from '@sapphire/framework'
 
 @ApplyOptions<NinoCommand.Options>({
 	description: 'Evalúa cualquier código JavaScript (Comando restringido para las personas)',
+	aliases: ['e', 'evaluate', 'code'],
+	flags: ['async', 'no-timeout', 'json', 'silent', 'log', 'showHidden', 'hidden'],
+	options: ['wait', 'lang', 'language', 'output', 'output-to', 'depth'],
 	preconditions: ['ownerOnly'],
 })
 export class EvalCommand extends NinoCommand {
@@ -102,8 +107,49 @@ export class EvalCommand extends NinoCommand {
 		)
 	}
 
-	public override async messageRun(message: Message) {
-		await message.reply('come pene')
+	public override async messageRun(message: Message, args: Args) {
+		const code = await args.rest('string')
+
+		const wait = args.getOption('wait')
+		// eslint-disable-next-line no-nested-ternary
+		const flagTime = args.getFlags('no-timeout')
+			? wait === null
+				? this.#timeout
+				: Number(wait)
+			: Infinity
+		const language =
+			args.getOption('lang', 'language') ?? (args.getFlags('json') ? 'json' : 'js')
+
+		const { success, result, time, type } = await this.evalTimed(
+			message,
+			args,
+			code,
+			flagTime
+		)
+
+		if (args.getFlags('silent')) {
+			if (!success && result && (result as unknown as Error['stack'])) {
+				this.container.logger.fatal(result as unknown as Error['stack'])
+			}
+		}
+
+		const footer = codeBlock('ts', type)
+		const sendAs =
+			args.getOption('output', 'output-to') ?? (args.getFlags('log') ? 'log' : null)
+
+		return this.handleMessage(message, {
+			footer,
+			time,
+			language,
+			hastebinUnavailable: false,
+			url: null,
+			canLogToConsole: true,
+			success,
+			result,
+			sendAs: sendAs as 'file' | 'hastebin' | 'console' | 'none' | 'haste' | 'log',
+			content: code,
+			targetId: '',
+		})
 	}
 
 	public override async chatInputRun(interaction: NinoCommand.Int) {
@@ -174,6 +220,185 @@ export class EvalCommand extends NinoCommand {
 			})),
 			this.eval(interaction, { timeout, ...evalParameters }),
 		])
+	}
+
+	private evalTimed(message: Message, args: Args, code: string, flagTime: number) {
+		if (flagTime === Infinity || flagTime === 0) return this.evaluate(message, args, code)
+
+		return Promise.race([
+			sleep(flagTime).then(() => ({
+				result: `Tardo más de ${seconds.fromMilliseconds(flagTime)} segundos.`,
+				success: false,
+				time: '⏱ ...',
+				type: 'EvalTimeoutError',
+			})),
+			this.evaluate(message, args, code),
+		])
+	}
+
+	private async evaluate(message: Message, args: Args, code: string) {
+		const stopwatch = new Stopwatch()
+		let success: boolean
+		let syncTime = ''
+		let asyncTime = ''
+		let result: unknown
+		let thenable = false
+		let type: Type | null = null
+
+		try {
+			if (args.getFlags('async')) code = `(async () => {\n${code}\n})();`
+
+			// @ts-expect-error value is never read, this is so `msg` is possible as an alias when sending the eval.
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const msg = message
+
+			// eslint-disable-next-line no-eval
+			result = eval(code)
+			syncTime = stopwatch.toString()
+			type = new Type(result)
+
+			if (isThenable(result)) {
+				thenable = true
+				stopwatch.restart()
+				// eslint-disable-next-line @typescript-eslint/await-thenable
+				result = await result
+				asyncTime = stopwatch.toString()
+			}
+			success = true
+		} catch (error) {
+			if (!syncTime.length) syncTime = stopwatch.toString()
+			if (thenable && !asyncTime.length) asyncTime = stopwatch.toString()
+			if (!type) type = new Type(error)
+			result = error
+			success = false
+		}
+
+		stopwatch.stop()
+		if (typeof result !== 'string') {
+			result =
+				result instanceof Error
+					? result.stack
+					: inspect(result, {
+							depth: Number(args.getOption('depth') ?? 0) || 0,
+							showHidden: args.getFlags('showHidden', 'hidden'),
+					  })
+		}
+		return {
+			success,
+			type: type,
+			time: this.formatTime(syncTime, asyncTime),
+			result: clean(result as string),
+		}
+	}
+
+	private async handleMessage(
+		message: Message,
+		options: HandleMessageParams
+	): Promise<Message | Message[] | undefined> {
+		const typeFooter = ` ${bold('Type')}:${options.footer}`
+		const timeTaken = options.time
+
+		switch (options.sendAs) {
+			case 'file': {
+				if (canSendMessages(message.channel)) {
+					const output = 'Sent the result as a file.'
+					const content = [output, typeFooter, timeTaken] //
+						.filter(filterNullAndUndefinedAndEmpty)
+						.join('\n')
+					const fileExtension = options.language
+					const attachment = Buffer.from(
+						options.content ? options.content : options.result
+					)
+					const name = options.targetId
+						? `${options.targetId}.${fileExtension}`
+						: `output.${fileExtension}`
+					await send(message, { content, files: [{ attachment, name }] })
+				}
+				return this.handleMessage(message, options)
+			}
+
+			case 'haste':
+			case 'hastebin': {
+				if (!options.url) {
+					options.url = await this.getHaste(options.result, options.language).catch(
+						() => null
+					)
+				}
+
+				if (options.url) {
+					const hastebinUrl = `Sent the result to hastebin: ${hideLinkEmbed(
+						options.url
+					)}`
+
+					const content = [hastebinUrl, typeFooter, timeTaken] //
+						.filter(filterNullAndUndefinedAndEmpty)
+						.join('\n')
+
+					await send(message, content)
+				}
+
+				options.hastebinUnavailable = true
+
+				// eslint-disable-next-line @typescript-eslint/await-thenable
+				this.otherTypeOutput(options)
+				return this.handleMessage(message, options)
+			}
+
+			case 'log':
+			case 'console': {
+				if (options.canLogToConsole) {
+					this.container.logger.info(options.result)
+					const output = 'Sent the result to console.'
+
+					const content = [output, typeFooter, timeTaken] //
+						.filter(filterNullAndUndefinedAndEmpty)
+						.join('\n')
+
+					await send(message, content)
+				}
+
+				options.canLogToConsole = true
+				// eslint-disable-next-line @typescript-eslint/await-thenable
+				this.otherTypeOutput(options)
+				return this.handleMessage(message, options)
+			}
+			case 'none':
+				return send(message, 'Aborted!')
+
+			default: {
+				if (
+					options.content
+						? options.content.length > 1950
+						: options.result.length > 1950
+				) {
+					// eslint-disable-next-line @typescript-eslint/await-thenable
+					this.otherTypeOutput(options)
+					return this.handleMessage(message, options)
+				}
+
+				if (options.success) {
+					const parsedInput = `${bold('Input')}:${codeBlock(
+						options.language,
+						options.content
+					)}`
+					const parsedOutput = `${bold('Output')}:${codeBlock(
+						options.language,
+						options.result
+					)}`
+
+					const content = [parsedInput, parsedOutput, typeFooter, timeTaken]
+						.filter(Boolean)
+						.join('\n')
+					return send(message, content)
+				}
+
+				const output = codeBlock(options.language, options.result)
+				const content = `${bold('Error')}:${output}\n${bold('Type')}:${
+					options.footer
+				}\n${options.time}`
+				return send(message, content)
+			}
+		}
 	}
 
 	private async eval(
@@ -401,6 +626,16 @@ export class EvalCommand extends NinoCommand {
 		options.outputTo = 'none'
 	}
 
+	private otherTypeOutput(options: HandleMessageParams) {
+		if (!options.canLogToConsole) {
+			options.sendAs = 'log'
+		}
+
+		if (!options.hastebinUnavailable) {
+			options.sendAs = 'haste'
+		}
+	}
+
 	private formatTime(syncTime: string, asyncTime?: string) {
 		return asyncTime ? `⏱ ${asyncTime}<${syncTime}>` : `⏱ ${syncTime}`
 	}
@@ -446,3 +681,21 @@ interface EvalParameters {
 	depth: number
 	timeout: number
 }
+
+export interface HandleMessageParams {
+	sendAs: 'file' | 'hastebin' | 'console' | 'none' | 'haste' | 'log'
+	hastebinUnavailable: boolean
+	url: string | null
+	canLogToConsole: boolean
+	footer: string
+	content: string
+	targetId: string
+	success: boolean
+	result: string
+	time: string
+	language: string
+}
+
+/**
+ * @based in favna/dragonite eval and skyra/skyra eval<3
+ */

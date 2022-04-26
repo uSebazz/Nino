@@ -1,7 +1,18 @@
 /* eslint-disable computed-property-spacing */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { Logger as BuiltinLogger, LogLevel, LogMethods } from '@sapphire/framework'
-import { blue, gray, green, magenta, isColorSupported, red, white, yellow, Color } from 'colorette'
+import {
+	gray,
+	green,
+	magenta,
+	isColorSupported,
+	red,
+	white,
+	yellow,
+	Color,
+	cyan,
+	bgRed,
+} from 'colorette'
 import { Console } from 'console'
 import { inspect, InspectOptions } from 'util'
 import { LoggerLevel, LoggerLevelOptions } from './loggerLevel'
@@ -58,14 +69,26 @@ export class Logger extends BuiltinLogger {
 		defaults: LoggerLevelOptions = options.none ?? {}
 	) {
 		return new Map<LogLevel, LoggerLevel>([
-			[LogLevel.Trace, Logger.ensureDefaultLevel(options.trace, defaults, gray, 'TRACE')],
-			[LogLevel.Debug, Logger.ensureDefaultLevel(options.debug, defaults, green, 'DEBUG')],
-			[LogLevel.Info, Logger.ensureDefaultLevel(options.info, defaults, blue, 'INFO')],
-			[LogLevel.Warn, Logger.ensureDefaultLevel(options.warn, defaults, yellow, 'WARN')],
-			[LogLevel.Error, Logger.ensureDefaultLevel(options.error, defaults, red, 'ERROR')],
+			[
+				LogLevel.Trace,
+				Logger.ensureDefaultLevel(options.trace, defaults, green, '✔ success:'),
+			],
+			[
+				LogLevel.Debug,
+				Logger.ensureDefaultLevel(options.trace, defaults, magenta, '◉ debug:'),
+			],
+			[LogLevel.Info, Logger.ensureDefaultLevel(options.info, defaults, cyan, 'ℹ info:')],
+			[
+				LogLevel.Warn,
+				Logger.ensureDefaultLevel(options.warn, defaults, yellow, '⚠ warn:'),
+			],
+			[
+				LogLevel.Error,
+				Logger.ensureDefaultLevel(options.error, defaults, red, '✖ error:'),
+			],
 			[
 				LogLevel.Fatal,
-				Logger.ensureDefaultLevel(options.fatal, defaults, magenta, 'FATAL'),
+				Logger.ensureDefaultLevel(options.fatal, defaults, bgRed, '✖ fatal:'),
 			],
 			[LogLevel.None, Logger.ensureDefaultLevel(options.none, defaults, white, '')],
 		])

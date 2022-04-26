@@ -1,0 +1,4 @@
+{
+	"string": "{{user}}, ha ocurrido algo: {{error}}",
+	"missing": "Parece que te falta un argumento, puedes intentar hacer `n!help <comando>` para ver los argumentos."
+}

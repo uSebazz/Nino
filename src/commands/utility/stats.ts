@@ -1,13 +1,19 @@
 import { NinoCommand } from '../../class/command'
 import { version as sapphireVersion } from '@sapphire/framework'
-import { version as discordVersion, MessageEmbed } from 'discord.js'
+import {
+	version as discordVersion,
+	MessageEmbed,
+	MessageActionRow,
+	MessageButton,
+} from 'discord.js'
 import { seconds } from '../../lib/function/times'
 import { time, TimestampStyles } from '@discordjs/builders'
 import { ApplyOptions } from '@sapphire/decorators'
 import { roundNumber } from '@sapphire/utilities'
+import { resolveKey } from '@sapphire/plugin-i18next'
 import { cpus, uptime, type CpuInfo } from 'node:os'
+import { send } from '@sapphire/plugin-editable-commands'
 import type { Message } from 'discord.js'
-import { resolveKey, type Target } from '@sapphire/plugin-i18next'
 
 @ApplyOptions<NinoCommand.Options>({
 	description: 'shows nino statics',
@@ -26,10 +32,12 @@ export class botStats extends NinoCommand {
 			uptime: await resolveKey(interaction, 'util:stats.titles.uptime'),
 			usage: await resolveKey(interaction, 'util:stats.titles.usage'),
 		}
+		const buttons = {
+			invite: await resolveKey(interaction, 'util:buttons.invite'),
+		}
 
 		const stats = this.botStatics
 		const uptime = this.uptimeStatics
-		// @ts-expect-error value is never read, this is so `msg` is possible as an alias when sending the eval.
 		const usage = this.usageStatics
 
 		const embed = new MessageEmbed() //
@@ -52,14 +60,68 @@ export class botStats extends NinoCommand {
 					total: uptime.total,
 				})
 			)
-
+			.addField(
+				title.usage,
+				await resolveKey(interaction, 'util:stats.usage', {
+					cpuload: usage.cpuLoad,
+					ramused: usage.ramUsed,
+					ramtotal: usage.ramTotal,
+				})
+			)
 			.setColor('WHITE')
 
-		await interaction.reply({ embeds: [embed] })
+		const row = new MessageActionRow().addComponents([
+			new MessageButton()
+				.setLabel(buttons.invite)
+				.setStyle('LINK')
+				.setURL('https://inv.nino.fun'),
+		])
+		await interaction.reply({ embeds: [embed], components: [row] })
 	}
 
 	public override async messageRun(message: Message) {
-		await message.channel.send('wait update..')
+		const title = {
+			stats: await resolveKey(message, 'util:stats.titles.stats'),
+			uptime: await resolveKey(message, 'util:stats.titles.uptime'),
+			usage: await resolveKey(message, 'util:stats.titles.usage'),
+		}
+
+		const stats = this.botStatics
+		const uptime = this.uptimeStatics
+		const usage = this.usageStatics
+
+		const embed = new MessageEmbed() //
+			.addField(
+				title.stats,
+				await resolveKey(message, 'util:stats.stats', {
+					channels: stats.channels,
+					guilds: stats.guilds,
+					users: stats.users,
+					commands: stats.commands,
+					version: stats.version,
+					sapphireVersion: stats.sapphireVersion,
+				})
+			)
+			.addField(
+				title.uptime,
+				await resolveKey(message, 'util:stats.uptime', {
+					client: uptime.client,
+					host: uptime.host,
+					total: uptime.total,
+				})
+			)
+			.addField(
+				title.usage,
+				await resolveKey(message, 'util:stats.usage', {
+					cpuload: usage.cpuLoad,
+					ramused: usage.ramUsed,
+					ramtotal: usage.ramTotal,
+				})
+			)
+
+			.setColor('WHITE')
+
+		await send(message, { embeds: [embed] })
 	}
 
 	private get botStatics(): StatsNino {

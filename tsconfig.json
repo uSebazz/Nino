@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"module": "CommonJS",
-		"target": "ES6",
+		"target": "es2021",
 		"skipLibCheck": true,
 		"strict": true,
 		"sourceMap": true,
@@ -42,3 +42,4 @@
 	"include": ["./src", "./src/languages/**/*.json"],
 	"exclude": ["node_modules"]
 }
+
