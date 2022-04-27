@@ -1,11 +1,6 @@
 import { NinoCommand } from '../../class/command'
 import { version as sapphireVersion } from '@sapphire/framework'
-import {
-	version as discordVersion,
-	MessageEmbed,
-	MessageActionRow,
-	MessageButton,
-} from 'discord.js'
+import { version as discordVersion, MessageEmbed } from 'discord.js'
 import { seconds } from '../../lib/function/times'
 import { time, TimestampStyles } from '@discordjs/builders'
 import { ApplyOptions } from '@sapphire/decorators'
@@ -13,7 +8,7 @@ import { roundNumber } from '@sapphire/utilities'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { cpus, uptime, type CpuInfo } from 'node:os'
 import { send } from '@sapphire/plugin-editable-commands'
-import type { Message } from 'discord.js'
+import type { Message, ColorResolvable } from 'discord.js'
 
 @ApplyOptions<NinoCommand.Options>({
 	description: 'shows nino statics',
@@ -27,99 +22,95 @@ export class botStats extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
 	public override async chatInputRun(interaction: NinoCommand.Int) {
-		const title = {
-			stats: await resolveKey(interaction, 'util:stats.titles.stats'),
-			uptime: await resolveKey(interaction, 'util:stats.titles.uptime'),
-			usage: await resolveKey(interaction, 'util:stats.titles.usage'),
-		}
-		const buttons = {
-			invite: await resolveKey(interaction, 'util:buttons.invite'),
-		}
+		const { colors } = this.container.client.utils
+		const dev = await this.container.client.users.fetch('899339781132124220')
 
-		const stats = this.botStatics
-		const uptime = this.uptimeStatics
-		const usage = this.usageStatics
-
-		const embed = new MessageEmbed() //
+		const embed = new MessageEmbed()
+			.setAuthor({
+				name: 'Nino Stats',
+				iconURL: this.container.client.user!.displayAvatarURL(),
+				url: 'https://github.com/uSebazz/Nino',
+			})
+			.setDescription(await resolveKey(interaction, 'commands/util:stats.description'))
 			.addField(
-				title.stats,
-				await resolveKey(interaction, 'util:stats.stats', {
-					channels: stats.channels,
-					guilds: stats.guilds,
-					users: stats.users,
-					commands: stats.commands,
-					version: stats.version,
-					sapphireVersion: stats.sapphireVersion,
+				await resolveKey(interaction, 'commands/util:stats.bot'),
+				await resolveKey(interaction, 'commands/util:stats.first_field', {
+					id: this.container.client.id,
+					dev: `[${dev.tag}](https://discord.com/users/${dev.id})`,
+					unix: (this.container.client.user!.createdTimestamp / 1000) | 0,
 				})
 			)
 			.addField(
-				title.uptime,
-				await resolveKey(interaction, 'util:stats.uptime', {
-					client: uptime.client,
-					host: uptime.host,
-					total: uptime.total,
-				})
+				await resolveKey(interaction, 'commands/util:stats.system'),
+				await resolveKey(interaction, 'commands/util:stats.second_field', {
+					cpuload: this.usageStatics.cpuLoad,
+					ramtotal: this.usageStatics.ramTotal,
+					ramused: this.usageStatics.ramUsed,
+					client: this.uptimeStatics.client,
+					host: this.uptimeStatics.host,
+					total: this.uptimeStatics.total,
+				}),
+				true
 			)
 			.addField(
-				title.usage,
-				await resolveKey(interaction, 'util:stats.usage', {
-					cpuload: usage.cpuLoad,
-					ramused: usage.ramUsed,
-					ramtotal: usage.ramTotal,
+				await resolveKey(interaction, 'commands/util:stats.stats'),
+				await resolveKey(interaction, 'commands/util:stats.third_field', {
+					channels: this.botStatics.channels,
+					guilds: this.botStatics.guilds,
+					users: this.botStatics.users,
+					commands: this.botStatics.commands,
+					version: this.botStatics.version,
+					sapphire: this.botStatics.sapphireVersion,
 				})
 			)
-			.setColor('WHITE')
+			.setColor(colors.green.pastel as ColorResolvable)
 
-		const row = new MessageActionRow().addComponents([
-			new MessageButton()
-				.setLabel(buttons.invite)
-				.setStyle('LINK')
-				.setURL('https://inv.nino.fun'),
-		])
-		await interaction.reply({ embeds: [embed], components: [row] })
+		await interaction.reply({ embeds: [embed] })
 	}
 
 	public override async messageRun(message: Message) {
-		const title = {
-			stats: await resolveKey(message, 'util:stats.titles.stats'),
-			uptime: await resolveKey(message, 'util:stats.titles.uptime'),
-			usage: await resolveKey(message, 'util:stats.titles.usage'),
-		}
+		const { colors } = this.container.client.utils
+		const dev = await this.container.client.users.fetch('899339781132124220')
 
-		const stats = this.botStatics
-		const uptime = this.uptimeStatics
-		const usage = this.usageStatics
-
-		const embed = new MessageEmbed() //
+		const embed = new MessageEmbed()
+			.setAuthor({
+				name: 'Nino Stats',
+				iconURL: this.container.client.user!.displayAvatarURL(),
+				url: 'https://github.com/uSebazz/Nino',
+			})
+			.setDescription(await resolveKey(message, 'commands/util:stats.description'))
 			.addField(
-				title.stats,
-				await resolveKey(message, 'util:stats.stats', {
-					channels: stats.channels,
-					guilds: stats.guilds,
-					users: stats.users,
-					commands: stats.commands,
-					version: stats.version,
-					sapphireVersion: stats.sapphireVersion,
+				await resolveKey(message, 'commands/util:stats.bot'),
+				await resolveKey(message, 'commands/util:stats.first_field', {
+					id: this.container.client.id,
+					dev: `[${dev.tag}](https://discord.com/users/${dev.id})`,
+					unix: (this.container.client.user!.createdTimestamp / 1000) | 0,
 				})
 			)
 			.addField(
-				title.uptime,
-				await resolveKey(message, 'util:stats.uptime', {
-					client: uptime.client,
-					host: uptime.host,
-					total: uptime.total,
-				})
+				await resolveKey(message, 'commands/util:stats.system'),
+				await resolveKey(message, 'commands/util:stats.second_field', {
+					cpuload: this.usageStatics.cpuLoad,
+					ramtotal: this.usageStatics.ramTotal,
+					ramused: this.usageStatics.ramUsed,
+					client: this.uptimeStatics.client,
+					host: this.uptimeStatics.host,
+					total: this.uptimeStatics.total,
+				}),
+				true
 			)
 			.addField(
-				title.usage,
-				await resolveKey(message, 'util:stats.usage', {
-					cpuload: usage.cpuLoad,
-					ramused: usage.ramUsed,
-					ramtotal: usage.ramTotal,
+				await resolveKey(message, 'commands/util:stats.stats'),
+				await resolveKey(message, 'commands/util:stats.third_field', {
+					channels: this.botStatics.channels,
+					guilds: this.botStatics.guilds,
+					users: this.botStatics.users,
+					commands: this.botStatics.commands,
+					version: this.botStatics.version,
+					sapphire: this.botStatics.sapphireVersion,
 				})
 			)
-
-			.setColor('WHITE')
+			.setColor(colors.green.pastel as ColorResolvable)
 
 		await send(message, { embeds: [embed] })
 	}

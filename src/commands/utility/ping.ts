@@ -22,20 +22,25 @@ export class PingCommand extends NinoCommand {
 	}
 
 	public override async messageRun(message: Message): Promise<void> {
-		const msg = await send(message, 'pinging...')
+		const { emojis } = this.container.client.utils
+		const msg = await send(message, `${emojis.ninozzz} ping?`)
 		const diff = msg.createdTimestamp - message.createdTimestamp
 		const ping = Math.round(this.container.client.ws.ping)
 
-		await send(message, await resolveKey(message, 'util:ping', { diff, ping }))
+		await send(message, await resolveKey(message, 'commands/util:ping', { diff, ping }))
 	}
 
 	public override async chatInputRun(interaction: NinoCommand.Int): Promise<void> {
-		const msg = await interaction.reply({ content: 'Pinging...', fetchReply: true })
+		const { emojis } = this.container.client.utils
+		const msg = await interaction.reply({
+			content: `${emojis.ninozzz} ping?`,
+			fetchReply: true,
+		})
 
 		if (msg instanceof Message) {
 			const { diff, ping } = this.getPing(msg, interaction)
 
-			await msg.edit(await resolveKey(interaction, 'util:ping', { diff, ping }))
+			await msg.edit(await resolveKey(interaction, 'commands/util:ping', { diff, ping }))
 		}
 	}
 

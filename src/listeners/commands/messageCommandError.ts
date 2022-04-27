@@ -18,15 +18,14 @@ export class messageCommandError extends Listener<typeof Events.MessageCommandEr
 	private async stringError(message: Message, error: string) {
 		return send(
 			message,
-			await resolveKey(message, '', {
-				user: message.author.toString(),
+			await resolveKey(message, 'arguments:string', {
 				error,
 			})
 		)
 	}
 
 	private argumentError(message: Message, error: ArgumentError) {
-		const { identifier } = error
+		const identifier = translate(error.identifier)
 		const argument = error.argument.name
 
 		return send(message, `${identifier} - ${argument}`)

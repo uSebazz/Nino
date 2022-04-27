@@ -5,5 +5,9 @@ export class NinoUtils {
 		ninozzz: '<a:NinoBuritoa:951482070583091240>',
 	}
 
-	public colors = {}
+	public colors = {
+		green: {
+			pastel: '#c7e9a8',
+		},
+	}
 }

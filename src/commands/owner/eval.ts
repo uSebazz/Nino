@@ -372,8 +372,11 @@ export class EvalCommand extends NinoCommand {
 						: options.result.length > 1950
 				) {
 					// eslint-disable-next-line @typescript-eslint/await-thenable
-					this.otherTypeOutput(options)
-					return this.handleMessage(message, options)
+					const haste = await this.getHaste(options.result, options.language).catch(
+						() => null
+					)
+
+					return send(message, `Send the results to hastebin: ${haste as string}`)
 				}
 
 				if (options.success) {
