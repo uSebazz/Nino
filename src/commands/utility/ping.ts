@@ -1,4 +1,5 @@
 import { NinoCommand } from '../../class/command'
+import { testServer } from '../../config'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Message, type CommandInteraction } from 'discord.js'
 import { resolveKey } from '@sapphire/plugin-i18next'
@@ -16,7 +17,7 @@ export class PingCommand extends NinoCommand {
 				.setDescription(this.description)
 		),
 			{
-				guildIds: ['951101886684082176'],
+				guildIds: testServer,
 				idHints: ['959115551974756402'],
 			}
 	}

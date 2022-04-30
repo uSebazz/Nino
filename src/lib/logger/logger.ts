@@ -71,24 +71,24 @@ export class Logger extends BuiltinLogger {
 		return new Map<LogLevel, LoggerLevel>([
 			[
 				LogLevel.Trace,
-				Logger.ensureDefaultLevel(options.trace, defaults, green, '✔ success:'),
+				Logger.ensureDefaultLevel(options.trace, defaults, green, '✅ SUCESS:'),
 			],
 			[
 				LogLevel.Debug,
-				Logger.ensureDefaultLevel(options.trace, defaults, magenta, '◉ debug:'),
+				Logger.ensureDefaultLevel(options.trace, defaults, magenta, '🫐  DEBUG:'),
 			],
-			[LogLevel.Info, Logger.ensureDefaultLevel(options.info, defaults, cyan, 'ℹ info:')],
+			[LogLevel.Info, Logger.ensureDefaultLevel(options.info, defaults, cyan, '🐬 INFO:')],
 			[
 				LogLevel.Warn,
-				Logger.ensureDefaultLevel(options.warn, defaults, yellow, '⚠ warn:'),
+				Logger.ensureDefaultLevel(options.warn, defaults, yellow, '⚠️  WARN:'),
 			],
 			[
 				LogLevel.Error,
-				Logger.ensureDefaultLevel(options.error, defaults, red, '✖ error:'),
+				Logger.ensureDefaultLevel(options.error, defaults, red, '❌  ERROR:'),
 			],
 			[
 				LogLevel.Fatal,
-				Logger.ensureDefaultLevel(options.fatal, defaults, bgRed, '✖ fatal:'),
+				Logger.ensureDefaultLevel(options.fatal, defaults, bgRed, '❌ FATAL:'),
 			],
 			[LogLevel.None, Logger.ensureDefaultLevel(options.none, defaults, white, '')],
 		])

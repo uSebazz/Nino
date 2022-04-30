@@ -1,4 +1,5 @@
 import { NinoCommand } from '../../class/command'
+import { testServer } from '../../config'
 import { version as sapphireVersion } from '@sapphire/framework'
 import { version as discordVersion, MessageEmbed } from 'discord.js'
 import { seconds } from '../../lib/function/times'
@@ -14,7 +15,7 @@ import type { Message, ColorResolvable } from 'discord.js'
 	description: 'shows nino statics',
 	chatInputCommand: {
 		register: true,
-		guildIds: ['951101886684082176'],
+		guildIds: testServer,
 	},
 	aliases: ['botstatus', 'status'],
 })

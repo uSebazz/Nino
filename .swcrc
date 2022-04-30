@@ -1,8 +1,12 @@
 {
+	"sourceMaps": true,
+	"inlineSourcesContent": true,
 	"jsc": {
 		"parser": {
 			"syntax": "typescript",
-			"decorators": true
+			"tsx": false,
+			"decorators": true,
+			"dynamicImport": true
 		},
 		"transform": {
 			"legacyDecorator": true,

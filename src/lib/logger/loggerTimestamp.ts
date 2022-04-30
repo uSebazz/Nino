@@ -9,10 +9,10 @@ export class LoggerTimestamp {
 	public formatter: LoggerTimestampFormatter
 
 	public constructor(options: LoggerTimestampOptions = {}) {
-		this.timestamp = new Timestamp(options.pattern ?? 'YYYY-MM-DD HH:mm:ss')
+		this.timestamp = new Timestamp(options.pattern ?? 'hh:mm:ss A')
 		this.utc = options.utc ?? false
 		this.color = options.color === null ? null : new LoggerStyle(options.color)
-		this.formatter = options.formatter ?? ((timestamp) => `${timestamp} `)
+		this.formatter = options.formatter ?? ((timestamp) => `${timestamp} - `)
 	}
 
 	public run() {

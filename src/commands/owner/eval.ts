@@ -1,6 +1,7 @@
 import { NinoCommand } from '../../class/command'
 import { seconds } from '../../lib/function/times'
 import { clean } from '../../lib/function/clean'
+import { testServer } from '../../config'
 import { ApplyOptions } from '@sapphire/decorators'
 import { codeBlock, filterNullAndUndefinedAndEmpty, isThenable } from '@sapphire/utilities'
 import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch'
@@ -101,7 +102,7 @@ export class EvalCommand extends NinoCommand {
 							)
 					),
 			{
-				guildIds: ['951101886684082176'],
+				guildIds: testServer,
 				idHints: ['954750745079586856'],
 			}
 		)

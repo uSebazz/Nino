@@ -1,4 +1,4 @@
 {
 	"string": "Uh, parece que sucedio un error. {{error}}",
-	"missing": "Parece que a este comando le falta un argumento, proporcione este."
+	"missing": "¡Un parámetro hace falta!"
 }
