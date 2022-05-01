@@ -202,10 +202,10 @@
   dependencies:
     "@sapphire/utilities" "^3.6.2"
 
-"@sapphire/type@^2.2.0":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@sapphire/type/-/type-2.2.3.tgz#7a66d3c3ddaa49a2b5ef911ada4fcf4dedbcbb54"
-  integrity sha512-zTs/2WS+5mrmJLxjZSJ8zdgfUF3dC3l2IIcaAVeV9EsEx2vCJGMirq0atlMI/7VK8oCALDfaUz2OmaZdltZytg==
+"@sapphire/type@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@sapphire/type/-/type-2.2.4.tgz#48008f37bcae403a77f6d22e5992b357f583bcbf"
+  integrity sha512-H3kRw22kscxtwUsb6oN6iXZj9JOUDXyO0qVid4voLVKHlysmK7RIwflt5G+Jc4EQ+JuVGriKNgi7NRcLDPoTRA==
   dependencies:
     "@discordjs/node-pre-gyp" "^0.4.2"
     nan "^2.15.0"
