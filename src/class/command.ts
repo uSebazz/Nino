@@ -8,7 +8,6 @@ export abstract class NinoCommand extends Command {
 	}
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace NinoCommand {
 	export type Options = ChatInputCommand.Options
 	export type Interaction<Cache extends CacheType = CacheType> = CommandInteraction<Cache>
