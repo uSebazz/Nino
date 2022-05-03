@@ -1,10 +1,11 @@
 import { Model, defaultData } from './lib/database/guildConfig'
-import { minutes } from './lib/function/times'
-import { Logger } from './lib/logger/logger'
+import { minutes } from './lib/utils/function/times'
+import { Logger } from './lib/utils/logger/logger'
 import { LogLevel } from '@sapphire/framework'
 import { Options, type ClientOptions } from 'discord.js'
 import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
+import { env } from '#utils/function/env'
 
 export const testServer: string[] = ['951101886684082176']
 
@@ -47,7 +48,7 @@ export const clientOptions: ClientOptions = {
 	],
 	logger: {
 		instance: new Logger({
-			level: LogLevel.Info,
+			level: env.NODE_PROCESS === 'production' ? LogLevel.Info : LogLevel.Debug,
 		}),
 	},
 	presence: {

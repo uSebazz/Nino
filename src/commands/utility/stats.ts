@@ -2,7 +2,7 @@ import { NinoCommand } from '../../class/command'
 import { testServer } from '../../config'
 import { version as sapphireVersion } from '@sapphire/framework'
 import { version as discordVersion, MessageEmbed } from 'discord.js'
-import { seconds } from '../../lib/function/times'
+import { seconds } from '../../lib/utils/function/times'
 import { time, TimestampStyles } from '@discordjs/builders'
 import { ApplyOptions } from '@sapphire/decorators'
 import { roundNumber } from '@sapphire/utilities'
@@ -22,7 +22,7 @@ import type { Message, ColorResolvable } from 'discord.js'
 export class botStats extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
-	public override async chatInputRun(interaction: NinoCommand.Int) {
+	public override async chatInputRun(interaction: NinoCommand.Interaction) {
 		const { colors } = this.container.client.utils
 		const dev = await this.container.client.users.fetch('899339781132124220')
 

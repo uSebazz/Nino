@@ -6,7 +6,8 @@
 	"license": "Apache-2.0",
 	"main": "dist/Nino.js",
 	"imports": {
-		"@/*": "./dist/*.js"
+		"#class/*": "./dist/class/*.js",
+		"#utils/*": "./dist/lib/utils/*.js"
 	},
 	"dependencies": {
 		"@sapphire/decorators": "^4.3.4",
@@ -18,10 +19,13 @@
 		"@sapphire/prettier-config": "^1.4.3",
 		"@sapphire/type": "^2.2.0",
 		"@sapphire/utilities": "^3.6.2",
+		"asure": "^0.1.0",
+		"axios": "^0.27.2",
 		"child-process": "^1.0.2",
 		"colorette": "^2.0.16",
 		"delay": "^5.0.0",
 		"discord.js": "latest",
+		"dotenv": "^16.0.0",
 		"mongoose": "^6.3.1",
 		"ts-dotenv": "^0.8.3"
 	},

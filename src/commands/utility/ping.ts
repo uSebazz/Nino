@@ -31,7 +31,7 @@ export class PingCommand extends NinoCommand {
 		await send(message, await resolveKey(message, 'commands/util:ping', { diff, ping }))
 	}
 
-	public override async chatInputRun(interaction: NinoCommand.Int): Promise<void> {
+	public override async chatInputRun(interaction: NinoCommand.Interaction): Promise<void> {
 		const { emojis } = this.container.client.utils
 		const msg = await interaction.reply({
 			content: `${emojis.ninozzz} ping?`,

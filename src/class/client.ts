@@ -7,9 +7,9 @@ import {
 	SapphireClient,
 } from '@sapphire/framework'
 import { connect, connection } from 'mongoose'
-import { env } from '../lib/function/env'
+import { env } from '../lib/utils/function/env'
 import { clientOptions } from '../config'
-import { NinoUtils } from '../lib/utils'
+import { NinoUtils } from '../lib/utils/utils'
 ;(async () => {
 	await connect(env.MONGO_URL).then(() => {
 		container.logger.info(

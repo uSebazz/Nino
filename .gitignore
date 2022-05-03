@@ -5,5 +5,9 @@
 /node_modules
 /dist
 
+
+# Yarn files
+.yarn/install-state.gz
+
 # Ignoring lint cache
 /.eslintcache

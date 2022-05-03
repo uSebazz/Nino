@@ -12,7 +12,8 @@
 		"rootDir": "./src",
 		"baseUrl": "./src",
 		"paths": {
-			"@/*": ["./src/*"]
+			"#class/*": ["class/*.ts"],
+			"#utils/*": ["lib/utils/*"]
 		},
 
 		/* The "No" Corner */

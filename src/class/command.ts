@@ -6,21 +6,11 @@ export abstract class NinoCommand extends Command {
 	public constructor(context: Piece.Context, options: ChatInputCommand.Options) {
 		super(context, options)
 	}
-
-	public abstract override chatInputRun(
-		interaction: CommandInteraction,
-		context: ChatInputCommand.RunContext
-	): void
 }
 
-/**
- * @description This is a extends custom command class
- * @example ```
- * Hola```
- */
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace NinoCommand {
 	export type Options = ChatInputCommand.Options
-	export type Int<Cache extends CacheType = CacheType> = CommandInteraction<Cache>
+	export type Interaction<Cache extends CacheType = CacheType> = CommandInteraction<Cache>
 	export type Registry = ApplicationCommandRegistry
 }
