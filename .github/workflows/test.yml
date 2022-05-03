@@ -27,6 +27,6 @@ jobs:
         run: yarn --immutable
 
       - name: ESLint
-        run: yarn eslint-fix --cache-dir=".turbo"
+        run: yarn eslint-fix --cache-file=".turbo"
         
       - run: echo "🐬 Good job"
