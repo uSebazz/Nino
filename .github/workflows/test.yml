@@ -1,8 +1,32 @@
-name: GitHub Actions Demo
-on: [push]
+name: Tests
+on: [push, pull_request]
 jobs:
-  Explore-GitHub-Actions:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
-      - run: eslint-fix
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install node.js v16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Turbo cache
+        id: turbo-cache
+        uses: actions/cache@v2
+        with:
+          path: .turbo
+          key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ github.job }}-${{ github.ref_name }}-
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: ESLint
+        run: yarn eslint-fix --cache-dir=".turbo"
+        
+      - run: echo "🐬 Good job"
