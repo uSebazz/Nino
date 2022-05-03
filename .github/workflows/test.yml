@@ -4,5 +4,5 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: yarn eslint-fix
+      - run: eslint-fix
       - run: echo "🍏 This job's status is ${{ job.status }}."
