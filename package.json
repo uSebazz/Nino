@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@sapphire/decorators": "^4.3.4",
-		"@sapphire/discord.js-utilities": "^4.9.7",
+		"@sapphire/discord.js-utilities": "^4.10.0",
 		"@sapphire/fetch": "^2.3.1",
 		"@sapphire/framework": "^3.0.0-next.fd7be0b.0",
 		"@sapphire/plugin-editable-commands": "^1.2.0",
