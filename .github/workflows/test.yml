@@ -9,7 +9,7 @@ jobs:
                  uses: actions/checkout@7884fcad6b5d53d10323aee724dc68d8b9096a2e # tag=v2
 
                - name: Install node.js v16
-                 uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # tag=v2
+                 uses: actions/setup-node@56337c425554a6be30cdef71bf441f15be286854 # tag=v3
                  with:
                       node-version: 16
                       cache: 'yarn'
