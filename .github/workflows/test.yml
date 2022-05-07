@@ -16,7 +16,7 @@ jobs:
                       cache-dependency-path: yarn.lock
                - name: Turbo cache
                  id: turbo-cache
-                 uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # tag=v2
+                 uses: actions/cache@48af2dc4a9e8278b89d7fa154b955c30c6aaab09 # tag=v3
                  with:
                       path: .turbo
                       key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
