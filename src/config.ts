@@ -7,7 +7,7 @@ import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
 import { env } from '#utils/function/env'
 
-export const testServer: string[] = ['951101886684082176']
+export const testServer = ['951101886684082176']
 
 export const clientOptions: ClientOptions = {
 	allowedMentions: { users: [], roles: [] },

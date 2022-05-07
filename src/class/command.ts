@@ -1,4 +1,3 @@
-import type { CacheType, CommandInteraction } from 'discord.js'
 import type { ApplicationCommandRegistry } from '@sapphire/framework'
 import { type ChatInputCommand, Command, type Piece } from '@sapphire/framework'
 
@@ -8,8 +7,5 @@ export abstract class NinoCommand extends Command {
 	}
 }
 
-export namespace NinoCommand {
-	export type Options = ChatInputCommand.Options
-	export type Interaction<Cache extends CacheType = CacheType> = CommandInteraction<Cache>
-	export type Registry = ApplicationCommandRegistry
-}
+export type NinoCommandOptions = ChatInputCommand.Options
+export type NinoCommandRegistery = ApplicationCommandRegistry

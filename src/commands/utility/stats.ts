@@ -1,7 +1,7 @@
-import { NinoCommand } from '../../class/command'
+import { NinoCommand, type NinoCommandOptions } from '../../class/command'
 import { testServer } from '../../config'
 import { version as sapphireVersion } from '@sapphire/framework'
-import { version as discordVersion, MessageEmbed } from 'discord.js'
+import { version as discordVersion, MessageEmbed, type CommandInteraction } from 'discord.js'
 import { seconds } from '../../lib/utils/function/times'
 import { time, TimestampStyles } from '@discordjs/builders'
 import { ApplyOptions } from '@sapphire/decorators'
@@ -11,7 +11,7 @@ import { cpus, uptime, type CpuInfo } from 'node:os'
 import { send } from '@sapphire/plugin-editable-commands'
 import type { Message, ColorResolvable } from 'discord.js'
 
-@ApplyOptions<NinoCommand.Options>({
+@ApplyOptions<NinoCommandOptions>({
 	description: 'shows nino statics',
 	chatInputCommand: {
 		register: true,
@@ -22,7 +22,7 @@ import type { Message, ColorResolvable } from 'discord.js'
 export class botStats extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
-	public override async chatInputRun(interaction: NinoCommand.Interaction) {
+	public override async chatInputRun(interaction: CommandInteraction) {
 		const { colors } = this.container.client.utils
 		const dev = await this.container.client.users.fetch('899339781132124220')
 

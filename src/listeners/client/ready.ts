@@ -31,7 +31,7 @@ ${line01} ${pad}${blc('2.0.2')}
 ${line02} ${pad}[${success}] Gateway
 ${line03}${
 				dev
-					? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MODE')}`
+					? `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MODE')}`
 					: `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('PRODUCTION MODE')}`
 			}
 		`.trim()

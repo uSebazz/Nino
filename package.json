@@ -7,25 +7,21 @@
 	"main": "dist/Nino.js",
 	"imports": {
 		"#class/*": "./dist/class/*.js",
-		"#utils/*": "./dist/lib/utils/*.js"
+		"#utils/*": "./dist/lib/utils/*.js",
+		"#root/*": "./dist/*.js"
 	},
 	"dependencies": {
 		"@sapphire/decorators": "^4.3.4",
 		"@sapphire/discord.js-utilities": "^4.10.0",
 		"@sapphire/fetch": "^2.3.1",
-		"@sapphire/framework": "^3.0.0-next.fd7be0b.0",
+		"@sapphire/framework": "next",
 		"@sapphire/plugin-editable-commands": "^1.2.0",
 		"@sapphire/plugin-i18next": "^2.5.0",
-		"@sapphire/prettier-config": "^1.4.3",
 		"@sapphire/type": "^2.2.4",
 		"@sapphire/utilities": "^3.6.2",
-		"asure": "^0.1.7",
 		"axios": "^0.27.2",
-		"child-process": "^1.0.2",
 		"colorette": "^2.0.16",
-		"delay": "^5.0.0",
-		"discord.js": "latest",
-		"dotenv": "^16.0.0",
+		"discord.js": "^13.6.0",
 		"mongoose": "^6.3.2",
 		"ts-dotenv": "^0.8.3"
 	},

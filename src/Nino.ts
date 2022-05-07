@@ -1,4 +1,4 @@
-import { Nino } from './class/client'
+import { Nino } from '#root/class/client'
 import { container } from '@sapphire/framework'
 ;(async () => {
 	const client = new Nino()

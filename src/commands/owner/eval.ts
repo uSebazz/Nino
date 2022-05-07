@@ -1,4 +1,4 @@
-import { NinoCommand } from '#class/command'
+import { NinoCommand, type NinoCommandOptions } from '#class/command'
 import { clean } from '#utils/sanitizer/clean'
 import { seconds } from '#utils/function/times'
 import { send } from '@sapphire/plugin-editable-commands'
@@ -15,7 +15,7 @@ import { exec } from 'node:child_process'
 import type { Args } from '@sapphire/framework'
 import type { Message } from 'discord.js'
 
-@ApplyOptions<NinoCommand.Options>({
+@ApplyOptions<NinoCommandOptions>({
 	aliases: ['e', 'ev'],
 	description: 'Evaluates JavaScript code',
 	flags: ['async', 'no-timeout', 'json', 'silent', 'log', 'showHidden', 'hidden'],
