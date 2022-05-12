@@ -201,14 +201,14 @@
   dependencies:
     "@sapphire/utilities" "^3.6.2"
 
-"@sapphire/type@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@sapphire/type/-/type-2.2.0.tgz#bfd6c96700e8f4f97b98b33cbbb113b6b0a2ced0"
-  integrity sha512-BEm/UStGHPs1UOgFeYct3UzniFOJtdhoRn0pKLI1TioEJfGjbQjoKCcxIEyXwipFavM8WiBTAI/ic+ksG21GEg==
+"@sapphire/type@2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@sapphire/type/-/type-2.2.4.tgz#48008f37bcae403a77f6d22e5992b357f583bcbf"
+  integrity sha512-H3kRw22kscxtwUsb6oN6iXZj9JOUDXyO0qVid4voLVKHlysmK7RIwflt5G+Jc4EQ+JuVGriKNgi7NRcLDPoTRA==
   dependencies:
     "@discordjs/node-pre-gyp" "^0.4.2"
     nan "^2.15.0"
-    tslib "^2.3.1"
+    tslib "^2.4.0"
 
 "@sapphire/utilities@^3.6.2":
   version "3.6.2"

@@ -17,7 +17,7 @@
 		"@sapphire/framework": "next",
 		"@sapphire/plugin-editable-commands": "^1.2.0",
 		"@sapphire/plugin-i18next": "^2.5.0",
-		"@sapphire/type": "2.2.0",
+		"@sapphire/type": "2.2.4",
 		"@sapphire/utilities": "^3.6.2",
 		"axios": "^0.27.2",
 		"colorette": "^2.0.16",
