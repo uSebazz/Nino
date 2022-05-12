@@ -1,3 +1,0 @@
-# On progress...
-
-Please be patient

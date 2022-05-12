@@ -17,7 +17,7 @@
 		"@sapphire/framework": "next",
 		"@sapphire/plugin-editable-commands": "^1.2.0",
 		"@sapphire/plugin-i18next": "^2.5.0",
-		"@sapphire/type": "^2.2.4",
+		"@sapphire/type": "2.2.0",
 		"@sapphire/utilities": "^3.6.2",
 		"axios": "^0.27.2",
 		"colorette": "^2.0.16",
@@ -45,5 +45,5 @@
 		"eslint-err": "eslint src/ --ext .ts --cache",
 		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
 	},
-	"packageManager": "yarn@3.2.0"
+	"packageManager": "yarn@1.22.18"
 }

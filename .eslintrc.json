@@ -47,7 +47,6 @@
 		"block-spacing": "error",
 		"brace-style": ["error", "1tbs", { "allowSingleLine": true }],
 		"comma-spacing": "error",
-		"computed-property-spacing": ["error", "always"],
 		"consistent-return": "error",
 		"curly": ["error", "multi-line"],
 		"dot-location": ["error", "property"],

@@ -45,5 +45,6 @@ declare module '@sapphire/framework' {
 		channelJoin: never
 		channelView: never
 		channelFull: never
+		Administrator: never
 	}
 }
