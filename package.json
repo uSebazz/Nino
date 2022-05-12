@@ -22,14 +22,14 @@
 		"axios": "^0.27.2",
 		"colorette": "^2.0.16",
 		"discord.js": "^13.6.0",
-		"mongoose": "^6.3.2",
+		"mongoose": "^6.3.3",
 		"ts-dotenv": "^0.8.3"
 	},
 	"devDependencies": {
 		"@swc/cli": "^0.1.57",
-		"@swc/core": "^1.2.179",
-		"@typescript-eslint/eslint-plugin": "5.22.0",
-		"@typescript-eslint/parser": "5.22.0",
+		"@swc/core": "^1.2.182",
+		"@typescript-eslint/eslint-plugin": "5.23.0",
+		"@typescript-eslint/parser": "5.23.0",
 		"eslint": "8.15.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-prettier": "4.0.0",
