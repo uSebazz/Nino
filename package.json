@@ -21,13 +21,13 @@
 		"@sapphire/utilities": "^3.6.2",
 		"axios": "^0.27.2",
 		"colorette": "^2.0.16",
-		"discord.js": "^13.6.0",
+		"discord.js": "^13.7.0",
 		"mongoose": "^6.3.3",
 		"ts-dotenv": "^0.8.3"
 	},
 	"devDependencies": {
 		"@swc/cli": "^0.1.57",
-		"@swc/core": "^1.2.182",
+		"@swc/core": "^1.2.183",
 		"@typescript-eslint/eslint-plugin": "5.23.0",
 		"@typescript-eslint/parser": "5.23.0",
 		"eslint": "8.15.0",
