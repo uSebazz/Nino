@@ -21,11 +21,6 @@
     ts-mixer "^6.0.1"
     tslib "^2.3.1"
 
-"@discordjs/collection@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.5.0.tgz#e1717661600891c9ca0735e76ec5bb64fe880f9c"
-  integrity sha512-3Vr3y4/Kl6ThOsD/cbXkK4JmjawQahbM3ojHpD6XyTEOG4fwZFMYH/NTWKFd5WZUw38iQsvGC4Kt4VkL++1hFQ==
-
 "@discordjs/collection@^0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.6.0.tgz#ee9c7b349a61d081fcdbda36df4187e575510952"
@@ -125,6 +120,16 @@
     "@sapphire/utilities" "^3.6.2"
     tslib "^2.4.0"
 
+"@sapphire/discord.js-utilities@^4.11.0":
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.11.0.tgz#6957b72a972291be44700b8fac78827c61f2a161"
+  integrity sha512-fJtSxOIePHA7smNe+9nO9qDZViubnT0lvnLlzBdm9G15He+jxPEgRV6BZBjwVeqFDzI9NY6wzmHa52EGhyfjbQ==
+  dependencies:
+    "@sapphire/discord-utilities" "^2.10.3"
+    "@sapphire/time-utilities" "^1.7.4"
+    "@sapphire/utilities" "^3.6.2"
+    tslib "^2.4.0"
+
 "@sapphire/fetch@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@sapphire/fetch/-/fetch-2.3.1.tgz#e38a506705c490354db5c53b12f09450e3de8a5d"
@@ -132,14 +137,14 @@
   dependencies:
     cross-fetch "^3.1.5"
 
-"@sapphire/framework@next":
-  version "3.0.0-next.e808838.0"
-  resolved "https://registry.yarnpkg.com/@sapphire/framework/-/framework-3.0.0-next.e808838.0.tgz#4a57013a2063bd90a9221be38f50115afe6c607a"
-  integrity sha512-9mdYQl3jGgNS9gxu991uWsYKjaUPUKJXi4P9HtfUPMRqNnS/xGYgzgvmuiEX+WAdUhTxD3fWe17qP4vwnaBA8g==
+"@sapphire/framework@^3.0.0-next.6f19dda.0":
+  version "3.0.0-next.6f19dda.0"
+  resolved "https://registry.yarnpkg.com/@sapphire/framework/-/framework-3.0.0-next.6f19dda.0.tgz#e7e26676a70d6c528021edecba38784036014d6c"
+  integrity sha512-yWo+L8EZjwh8Ht5jO0T4IE3VG6qWNZ3QayrcFb4KaZPKyPupECyF0zGuFDrAIeu69qKKD6Jk5JFDehITgi4rzA==
   dependencies:
     "@sapphire/discord-utilities" "^2.10.3"
-    "@sapphire/discord.js-utilities" "^4.10.0"
-    "@sapphire/pieces" "^3.3.1"
+    "@sapphire/discord.js-utilities" "^4.11.0"
+    "@sapphire/pieces" "^3.3.3"
     "@sapphire/ratelimits" "^2.4.4"
     "@sapphire/result" "^1.1.1"
     "@sapphire/stopwatch" "^1.4.1"
@@ -147,14 +152,14 @@
     lexure "^0.17.0"
     tslib "^2.4.0"
 
-"@sapphire/pieces@^3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@sapphire/pieces/-/pieces-3.3.1.tgz#216bcd30e6feb336ccc712eedf19d5c891d552f6"
-  integrity sha512-A6vkacPHuZDMkahxPE8bwpIzNNlDx4+w3nY4i8y2sIKwLXgPqodO7vdfoIXpl3psMS9ZQ5iLMED8pnQt7Nbxnw==
+"@sapphire/pieces@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@sapphire/pieces/-/pieces-3.3.3.tgz#e4aebeaf62c3c0629fe36e068d74e12d4c9ced62"
+  integrity sha512-/+hTFAhunP/nduTqiEHoq0wct9lR1LTqiy1AfMkYfXd2BmieM3R99F7kBPrtsGjbIr6Qedl5Bruc2WCiQr9kzg==
   dependencies:
-    "@discordjs/collection" "^0.5.0"
+    "@discordjs/collection" "^0.6.0"
     "@sapphire/utilities" "^3.6.2"
-    tslib "^2.3.1"
+    tslib "^2.4.0"
 
 "@sapphire/plugin-editable-commands@^1.2.0":
   version "1.2.0"
@@ -174,6 +179,15 @@
     chokidar "^3.5.3"
     i18next "^21.6.16"
     i18next-fs-backend "^1.1.4"
+    tslib "^2.3.1"
+
+"@sapphire/plugin-logger@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@sapphire/plugin-logger/-/plugin-logger-2.2.1.tgz#95f30dea6f17d519ac65fea1db01d4bcace4bc19"
+  integrity sha512-jaj7RPZ4cm5a4BbapdG20FBDlwRuNHwr/9R97xdML5h1yb4m65WPVZdWHrrjAD79sFwAtFMUfAhHtZMinziWgQ==
+  dependencies:
+    "@sapphire/time-utilities" "^1.7.3"
+    colorette "^2.0.16"
     tslib "^2.3.1"
 
 "@sapphire/ratelimits@^2.4.4":
@@ -200,7 +214,7 @@
   dependencies:
     tslib "^2.3.1"
 
-"@sapphire/time-utilities@^1.7.4":
+"@sapphire/time-utilities@^1.7.3", "@sapphire/time-utilities@^1.7.4":
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/@sapphire/time-utilities/-/time-utilities-1.7.4.tgz#5f47de3741b77ae9752e8e45958461d92bc4420a"
   integrity sha512-/MKy56iGYuOfZfXGxZ2RG0otk9j3P0VRC6ACSnizalEXbe0YFXX7JcxPPBF1yp2j1p5Y7eUW+FTExfvEgnWnzg==
@@ -346,9 +360,9 @@
     form-data "^3.0.0"
 
 "@types/node@*":
-  version "17.0.31"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.31.tgz#a5bb84ecfa27eec5e1c802c6bbf8139bdb163a5d"
-  integrity sha512-AR0x5HbXGqkEx9CadRH3EBYx/VkiUgZIhP4wvPn/+5KIsgpNoyFaRlVe0Zlx9gRtg8fA06a9tskE2MSN7TcG4Q==
+  version "17.0.33"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.33.tgz#3c1879b276dc63e73030bb91165e62a4509cd506"
+  integrity sha512-miWq2m2FiQZmaHfdZNcbpp9PuXg34W5JZ5CrJ/BaS70VuhoJENBEQybeiYSaPBRNq6KQGnjfEnc/F3PN++D+XQ==
 
 "@types/webidl-conversions@*":
   version "6.1.1"
@@ -530,14 +544,6 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-axios@^0.27.2:
-  version "0.27.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
-  integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
-  dependencies:
-    follow-redirects "^1.14.9"
-    form-data "^4.0.0"
-
 balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
@@ -588,7 +594,7 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
-chalk@^4.0.0:
+chalk@4.1.2, chalk@^4.0.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -963,11 +969,6 @@ flatted@^3.1.0:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.5.tgz#76c8584f4fc843db64702a6bd04ab7a8bd666da3"
   integrity sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==
-
-follow-redirects@^1.14.9:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.0.tgz#06441868281c86d0dda4ad8bdaead2d02dca89d4"
-  integrity sha512-aExlJShTV4qOUOL7yF1U5tvLCB0xQuudbf6toyYA0E/acBNw71mvjFTnLaRp50aQaYocMR0a/RMMBIHeZnGyjQ==
 
 form-data@^3.0.0:
   version "3.0.1"

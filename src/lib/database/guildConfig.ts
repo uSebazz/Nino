@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import type { serverConfig } from '../utils/function/types'
+import type { serverConfig } from '#utils/function/types'
 
 /**
  *

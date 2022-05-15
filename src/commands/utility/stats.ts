@@ -1,8 +1,8 @@
-import { NinoCommand, type NinoCommandOptions } from '../../class/command'
-import { testServer } from '../../config'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
+import { testServer } from '#root/config'
 import { version as sapphireVersion } from '@sapphire/framework'
 import { version as discordVersion, MessageEmbed, type CommandInteraction } from 'discord.js'
-import { seconds } from '../../lib/utils/function/times'
+import { seconds } from '#utils/function/times'
 import { time, TimestampStyles } from '@discordjs/builders'
 import { ApplyOptions } from '@sapphire/decorators'
 import { roundNumber } from '@sapphire/utilities'
@@ -16,10 +16,11 @@ import type { Message, ColorResolvable } from 'discord.js'
 	chatInputCommand: {
 		register: true,
 		guildIds: testServer,
+		idHints: ['974699589993111612'],
 	},
 	aliases: ['botstatus', 'status'],
 })
-export class botStats extends NinoCommand {
+export class UserCommand extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
 	public override async chatInputRun(interaction: CommandInteraction) {
@@ -150,7 +151,7 @@ export class botStats extends NinoCommand {
 		const usage = process.memoryUsage()
 		return {
 			// eslint-disable-next-line newline-per-chained-call
-			cpuLoad: cpus().slice(0, 2).map(botStats.formatCpuInfo.bind(null)).join(' | '),
+			cpuLoad: cpus().slice(0, 2).map(UserCommand.formatCpuInfo.bind(null)).join(' | '),
 			ramTotal: `${Math.round(usage.heapTotal / 1024 / 1024)}MB`,
 			ramUsed: `${Math.round(usage.heapUsed / 1024 / 1024)}MB`,
 		}

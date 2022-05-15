@@ -6,21 +6,21 @@
 	"license": "Apache-2.0",
 	"main": "dist/Nino.js",
 	"imports": {
-		"#class/*": "./dist/class/*.js",
 		"#utils/*": "./dist/lib/utils/*.js",
+		"#lib/*": "./dist/lib/*.js",
 		"#root/*": "./dist/*.js"
 	},
 	"dependencies": {
 		"@sapphire/decorators": "^4.3.4",
 		"@sapphire/discord.js-utilities": "^4.10.0",
 		"@sapphire/fetch": "^2.3.1",
-		"@sapphire/framework": "next",
+		"@sapphire/framework": "^3.0.0-next.6f19dda.0",
 		"@sapphire/plugin-editable-commands": "^1.2.0",
 		"@sapphire/plugin-i18next": "^2.5.0",
+		"@sapphire/plugin-logger": "^2.2.1",
 		"@sapphire/type": "2.2.4",
 		"@sapphire/utilities": "^3.6.2",
-		"axios": "^0.27.2",
-		"colorette": "^2.0.16",
+		"chalk": "4.1.2",
 		"discord.js": "^13.7.0",
 		"mongoose": "^6.3.3",
 		"ts-dotenv": "^0.8.3"
@@ -38,12 +38,14 @@
 		"typescript": "4.6.4"
 	},
 	"scripts": {
-		"start": "node ./dist/Nino.js",
-		"build": "swc src --copy-files  -d dist",
+		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
+		"build": "swc src -d dist -D",
 		"dev": "tsc-watch --onSuccess \"node dist/Nino.js\"",
 		"clean": "node scripts/clean.mjs",
-		"eslint-err": "eslint src/ --ext .ts --cache",
-		"eslint-fix": "eslint src/ --fix --ext .ts --cache"
+		"style": "prettier --write --loglevel=warn \"src/**/*.ts\"",
+		"lint:err": "eslint src/ --ext .ts --cache",
+		"lint:fix": "eslint src/ --fix --ext .ts --cache",
+		"build:run": "swc src -d dist -D && node --preserve-symlinks --enable-source-maps ./dist/Nino.js"
 	},
 	"packageManager": "yarn@1.22.18"
 }

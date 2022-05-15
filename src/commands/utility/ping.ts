@@ -1,9 +1,4 @@
-import {
-	NinoCommand,
-	type NinoCommandRegistery,
-	type NinoCommandOptions,
-} from '../../class/command'
-import { testServer } from '../../config'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Message, type CommandInteraction } from 'discord.js'
 import { resolveKey } from '@sapphire/plugin-i18next'
@@ -12,20 +7,12 @@ import { send } from '@sapphire/plugin-editable-commands'
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Ping of the bot',
 	aliases: ['pong', 'latency'],
+	chatInputCommand: {
+		register: true,
+		idHints: ['974700576971587584'],
+	},
 })
-export class PingCommand extends NinoCommand {
-	public override registerApplicationCommands(registry: NinoCommandRegistery): void {
-		registry.registerChatInputCommand((builder) =>
-			builder //
-				.setName(this.name)
-				.setDescription(this.description)
-		),
-			{
-				guildIds: testServer,
-				idHints: ['959115551974756402'],
-			}
-	}
-
+export class UserCommand extends NinoCommand {
 	public override async messageRun(message: Message): Promise<void> {
 		const { emojis } = this.container.client.utils
 		const msg = await send(message, `${emojis.ninozzz} ping?`)

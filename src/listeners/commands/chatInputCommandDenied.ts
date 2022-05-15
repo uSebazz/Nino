@@ -1,15 +1,10 @@
-import { Listener } from '@sapphire/framework'
+import { Listener, type ListenerOptions, type Events } from '@sapphire/framework'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { UserError, ChatInputCommandDeniedPayload } from '@sapphire/framework'
+import type { UserError } from '@sapphire/framework'
 
-@ApplyOptions<Listener.Options>({ event: 'chatInputCommandDenied' })
-export class chatInputCommandDeniedListener extends Listener {
-	public override async run(
-		error: UserError,
-		{ interaction }: ChatInputCommandDeniedPayload
-	): Promise<void> {
-		await interaction.reply({
-			content: error.message,
-		})
+@ApplyOptions<ListenerOptions>({ event: 'chatInputCommandDenied' })
+export class chatInputCommandDeniedListener extends Listener<typeof Events.ChatInputCommandDenied> {
+	public override run(error: UserError) {
+		console.log(error)
 	}
 }

@@ -12,8 +12,8 @@
 		"rootDir": "./src",
 		"baseUrl": "./src",
 		"paths": {
-			"#class/*": ["class/*.ts"],
 			"#utils/*": ["lib/utils/*"],
+			"#lib/*": ["lib/*"],
 			"#root/*": ["*"]
 		},
 

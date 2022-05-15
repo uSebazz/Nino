@@ -1,7 +1,10 @@
-import { Nino } from '#root/class/client'
+import '#lib/setup'
+import { Nino } from '#lib/structures'
 import { container } from '@sapphire/framework'
-;(async () => {
-	const client = new Nino()
+
+const client = new Nino()
+
+const main = async () => {
 	try {
 		container.logger.info('Connecting to Discord...')
 		await client.start()
@@ -11,4 +14,6 @@ import { container } from '@sapphire/framework'
 		client.destroy()
 		process.exit(1)
 	}
-})().catch((e) => container.logger.error(e))
+}
+
+void main()

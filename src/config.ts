@@ -1,19 +1,47 @@
-import { Model, defaultData } from './lib/database/guildConfig'
-import { minutes } from './lib/utils/function/times'
-import { Logger } from './lib/utils/logger/logger'
-import { LogLevel } from '@sapphire/framework'
-import { Options, type ClientOptions } from 'discord.js'
-import type { InternationalizationContext } from '@sapphire/plugin-i18next'
-import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
+import chalk from 'chalk'
 import { env } from '#utils/function/env'
+import { Model, defaultData } from '#root/lib/database/guildConfig'
+import { minutes } from '#utils/function/times'
+import { LogLevel } from '@sapphire/framework'
+import { Options } from 'discord.js'
+import type { InternationalizationContext } from '@sapphire/plugin-i18next'
+import type { LoggerFormatOptions } from '@sapphire/plugin-logger'
+import type { NewsChannel, TextChannel, ThreadChannel, ClientOptions } from 'discord.js'
 
 export const testServer = ['951101886684082176']
 
-export const clientOptions: ClientOptions = {
+export const loggerOptions: LoggerFormatOptions = {
+	trace: {
+		timestamp: null,
+		infix: chalk.gray('[Trace]: '),
+	},
+	info: {
+		timestamp: null,
+		infix: chalk.blue('[Info]: '),
+	},
+	debug: {
+		timestamp: null,
+		infix: chalk.green('[Debug]: '),
+	},
+	warn: {
+		timestamp: null,
+		infix: chalk.yellow('[Warn]: '),
+	},
+	error: {
+		timestamp: null,
+		infix: chalk.red('[Error]: '),
+	},
+	fatal: {
+		timestamp: null,
+		infix: chalk.bgRed('[Fatal]: '),
+	},
+}
+
+export const CLIENT_OPTIONS: ClientOptions = {
 	allowedMentions: { users: [], roles: [] },
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,
-	defaultPrefix: 'n!',
+	defaultPrefix: ['n!', 'n?', 'n/', 'Nino'],
 	loadDefaultErrorListeners: false,
 	loadMessageCommandListeners: true,
 	preventFailedToFetchLogForGuildIds: [
@@ -47,9 +75,8 @@ export const clientOptions: ClientOptions = {
 		'DIRECT_MESSAGE_REACTIONS',
 	],
 	logger: {
-		instance: new Logger({
-			level: env.NODE_PROCESS === 'production' ? LogLevel.Info : LogLevel.Debug,
-		}),
+		level: env.NODE_PROCESS === 'production' ? LogLevel.Info : LogLevel.Debug,
+		format: loggerOptions,
 	},
 	presence: {
 		activities: [

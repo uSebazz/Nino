@@ -1,4 +1,4 @@
-import { NinoCommand, type NinoCommandOptions } from '#class/command'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
 import { clean } from '#utils/sanitizer/clean'
 import { seconds } from '#utils/function/times'
 import { send } from '@sapphire/plugin-editable-commands'
@@ -23,7 +23,7 @@ import type { Message } from 'discord.js'
 	preconditions: ['ownerOnly'],
 	quotes: [],
 })
-export class EvalCommand extends NinoCommand {
+export class UserCommand extends NinoCommand {
 	public readonly timeout = 60000
 	public override async messageRun(message: Message, args: Args) {
 		const code = await args.rest('string')

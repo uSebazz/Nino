@@ -1,41 +1,61 @@
-import { NinoCommand, type NinoCommandRegistery, type NinoCommandOptions } from '#class/command'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
 import { testServer } from '#root/config'
 import { Model } from '#root/lib/database/guildConfig'
 import { ApplyOptions } from '@sapphire/decorators'
 import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
 import { MessageActionRow, MessageSelectMenu } from 'discord.js'
-import type { Message, SelectMenuInteraction } from 'discord.js'
+import type { Message, SelectMenuInteraction, CommandInteraction } from 'discord.js'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Configure the bot language',
 	aliases: ['config-lang', 'configure-language', 'setting-language', 'lang'],
-	preconditions: ['Administrator']
+	preconditions: ['Administrator'],
+	chatInputCommand: {
+		register: true,
+		guildIds: testServer,
+		idHints: ['974699587501715566'],
+	},
 })
-export class configCommand extends NinoCommand {
-	public override registerApplicationCommands(registry: NinoCommandRegistery): void {
-		registry.registerChatInputCommand((builder) =>
-			builder //
-				.setName(this.name)
-				.setDescription(this.description)
-		),
-			{
-				guildIds: testServer,
-				idHints: ['959115551974756402'],
-			}
+export class UserCommand extends NinoCommand {
+	public override async chatInputRun(interaction: CommandInteraction) {
+		const content = await resolveKey(interaction, 'commands/config:language.select', {
+			emoji: this.container.client.utils.emojis.emergency,
+		})
+
+		await interaction.reply({ content: 'Enviado!', ephemeral: true })
+
+		const msg = await interaction.channel!.send({
+			content,
+			components: this.components,
+		})
+
+		return this.collector(msg, {
+			int: interaction,
+		})
 	}
 
 	public override async messageRun(message: Message) {
 		const content = await resolveKey(message, 'commands/config:language.select', {
 			emoji: this.container.client.utils.emojis.emergency,
 		})
-		const timefinish = await resolveKey(message, 'commands/config:language.timefinish', {
-			emoji: this.container.client.utils.emojis.pending,
-		})
 
 		const msg = await send(message, {
 			content,
 			components: this.components,
+		})
+
+		return this.collector(msg, {
+			message,
+		})
+	}
+
+	private async collector(
+		msg: Message<boolean>,
+		{ message, int }: { message?: Message; int?: CommandInteraction }
+	) {
+		const timefinish = await resolveKey(msg, 'commands/config:language.timefinish', {
+			emoji: this.container.client.utils.emojis.pending,
 		})
 
 		const collector = msg.createMessageComponentCollector({
@@ -48,7 +68,7 @@ export class configCommand extends NinoCommand {
 					}
 				)
 
-				if (interaction.user.id === message.author.id) {
+				if (interaction.user.id === message?.author.id || int?.user.id) {
 					return true
 				} else {
 					await interaction.reply({ content, ephemeral: true })
