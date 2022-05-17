@@ -1,12 +1,9 @@
+import '#utils/sanitizer/initClean'
+
 // import/register sapphire plugins
-import '@sapphire/plugin-logger/register'
-import '@sapphire/plugin-i18next/register'
-import '@sapphire/plugin-editable-commands/register'
-
-// Behavior
-import { ApplicationCommandRegistries, RegisterBehavior } from '@sapphire/framework'
-
-ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite)
+//import '@sapphire/plugin-logger/register'
+//import '@sapphire/plugin-i18next/register'
+//import '@sapphire/plugin-editable-commands/register'
 
 // declare things
 import type { NinoUtils } from '#utils/utils'

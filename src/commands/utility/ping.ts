@@ -1,4 +1,4 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Message, type CommandInteraction } from 'discord.js'
 import { resolveKey } from '@sapphire/plugin-i18next'

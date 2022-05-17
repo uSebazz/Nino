@@ -26,8 +26,6 @@
 		"ts-dotenv": "^0.8.3"
 	},
 	"devDependencies": {
-		"@swc/cli": "^0.1.57",
-		"@swc/core": "^1.2.183",
 		"@typescript-eslint/eslint-plugin": "5.23.0",
 		"@typescript-eslint/parser": "5.23.0",
 		"eslint": "8.15.0",
@@ -35,16 +33,18 @@
 		"eslint-plugin-prettier": "4.0.0",
 		"prettier": "2.6.2",
 		"tsc-watch": "^5.0.3",
+		"tsup": "^5.12.8",
 		"typescript": "4.6.4"
 	},
 	"scripts": {
-		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
-		"build": "swc src -d dist -D",
-		"dev": "tsc-watch --onSuccess \"node dist/Nino.js\"",
+		"build": "tsup src && node scripts/i18n.mjs",
 		"clean": "node scripts/clean.mjs",
-		"style": "prettier --write --loglevel=warn \"src/**/*.ts\"",
+		"language": "node scripts/i18n.mjs",
 		"lint:err": "eslint src/ --ext .ts --cache",
 		"lint:fix": "eslint src/ --fix --ext .ts --cache",
+		"style": "prettier --write --loglevel=warn \"src/**/*.ts\"",
+		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
+		"dev": "tsc-watch --onSuccess \"node --preserve-symlinks --enable-source-maps dist/Nino.js\"",
 		"build:run": "swc src -d dist -D && node --preserve-symlinks --enable-source-maps ./dist/Nino.js"
 	},
 	"packageManager": "yarn@1.22.18"

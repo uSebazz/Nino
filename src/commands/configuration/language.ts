@@ -1,4 +1,4 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
 import { Model } from '#root/lib/database/guildConfig'
 import { ApplyOptions } from '@sapphire/decorators'

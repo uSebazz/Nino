@@ -1,4 +1,4 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { clean } from '#utils/sanitizer/clean'
 import { seconds } from '#utils/function/times'
 import { send } from '@sapphire/plugin-editable-commands'

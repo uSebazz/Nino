@@ -1,4 +1,4 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
 import { version as sapphireVersion } from '@sapphire/framework'
 import { version as discordVersion, MessageEmbed, type CommandInteraction } from 'discord.js'

@@ -1,4 +1,4 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
+import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
 import { ApplyOptions } from '@sapphire/decorators'
 import { MessageActionRow, Modal, TextInputComponent } from 'discord.js'
