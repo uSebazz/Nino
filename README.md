@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://cdn.discordapp.com/avatars/887306474097881100/c44a6b17c041c81825dc8ebceae0e59f.png?size=4096" width="15%" alt="Nino Logo">
+<img src="https://cdn.discordapp.com/attachments/956530001761673246/976512294278299680/image.png?size=4096" width="20%" alt="Nino Logo">
 
 ### Nino 
 
