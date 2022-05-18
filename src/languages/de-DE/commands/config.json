@@ -1,0 +1,9 @@
+{
+	"language": {
+		"select": "{{emoji}} - Wählen Sie die Sprache für diesen Server",
+		"already": "{{emoji}} - Oh, diese Sprache ist bereits für diesen Server ausgewählt, vielleicht möchten Sie es mit `español` versuchen?",
+		"filter": "{{emoji}} - Dieses Menü gehört nicht zu Ihnen...",
+		"done": "{{emoji}} - El idioma del servidor ahora sera `{{lang}}` :D",
+		"timefinish": "{{emoji}} - Die Interaktionszeit ist abgelaufen"
+	}
+}
