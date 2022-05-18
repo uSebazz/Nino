@@ -1,0 +1,14 @@
+root=true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+[*.{js,ts,mjs}]
+indent_size = 5
+indent_style = tab
+
+[*.{md,markdown}]
+tab_width = 4
+trim_trailing_whitespace = false
