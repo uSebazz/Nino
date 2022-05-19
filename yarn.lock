@@ -103,14 +103,14 @@
   dependencies:
     tslib "^2.3.1"
 
-"@sapphire/discord-utilities@^2.10.3":
+"@sapphire/discord-utilities@^2.10.3", "@sapphire/discord-utilities@^2.7.0":
   version "2.10.3"
   resolved "https://registry.yarnpkg.com/@sapphire/discord-utilities/-/discord-utilities-2.10.3.tgz#1005c816bbf66e6ad99a0a882e95a8f622c79854"
   integrity sha512-75IqUu/CqyL1wxhkYyeDRWrtqHY2D+ZOJ/KDu8S96KYzHVQNKCbOAXvBzLs3yn/sgy0dmBtKuvt3/xxo8FLV+g==
   dependencies:
     twemoji-parser "^14.0.0"
 
-"@sapphire/discord.js-utilities@^4.11.0":
+"@sapphire/discord.js-utilities@^4.11.0", "@sapphire/discord.js-utilities@^4.6.0":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@sapphire/discord.js-utilities/-/discord.js-utilities-4.11.0.tgz#6957b72a972291be44700b8fac78827c61f2a161"
   integrity sha512-fJtSxOIePHA7smNe+9nO9qDZViubnT0lvnLlzBdm9G15He+jxPEgRV6BZBjwVeqFDzI9NY6wzmHa52EGhyfjbQ==
@@ -127,22 +127,21 @@
   dependencies:
     cross-fetch "^3.1.5"
 
-"@sapphire/framework@^3.0.0-next.6f19dda.0":
-  version "3.0.0-next.6f19dda.0"
-  resolved "https://registry.yarnpkg.com/@sapphire/framework/-/framework-3.0.0-next.6f19dda.0.tgz#e7e26676a70d6c528021edecba38784036014d6c"
-  integrity sha512-yWo+L8EZjwh8Ht5jO0T4IE3VG6qWNZ3QayrcFb4KaZPKyPupECyF0zGuFDrAIeu69qKKD6Jk5JFDehITgi4rzA==
+"@sapphire/framework@^3.0.0-next.fd7be0b.0":
+  version "3.0.0-next.fd7be0b.0"
+  resolved "https://registry.yarnpkg.com/@sapphire/framework/-/framework-3.0.0-next.fd7be0b.0.tgz#b58862ca36540ad9b6874e82c124035b7db27b1e"
+  integrity sha512-8L7m5hO1h/cgawNXzZFmNqcaye0WrgDw+vz/WcVcf/G+BSl3wN/YkGnaSDsKLvp62i9vHzZwEFNW9VFQwPDS6A==
   dependencies:
-    "@sapphire/discord-utilities" "^2.10.3"
-    "@sapphire/discord.js-utilities" "^4.11.0"
-    "@sapphire/pieces" "^3.3.3"
-    "@sapphire/ratelimits" "^2.4.4"
-    "@sapphire/result" "^1.1.1"
-    "@sapphire/stopwatch" "^1.4.1"
-    "@sapphire/utilities" "^3.6.2"
+    "@sapphire/discord-utilities" "^2.7.0"
+    "@sapphire/discord.js-utilities" "^4.6.0"
+    "@sapphire/pieces" "^3.2.0"
+    "@sapphire/ratelimits" "^2.3.0"
+    "@sapphire/stopwatch" "^1.3.0"
+    "@sapphire/utilities" "^3.3.0"
     lexure "^0.17.0"
-    tslib "^2.4.0"
+    tslib "^2.3.1"
 
-"@sapphire/pieces@^3.3.3":
+"@sapphire/pieces@^3.2.0":
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/@sapphire/pieces/-/pieces-3.3.3.tgz#e4aebeaf62c3c0629fe36e068d74e12d4c9ced62"
   integrity sha512-/+hTFAhunP/nduTqiEHoq0wct9lR1LTqiy1AfMkYfXd2BmieM3R99F7kBPrtsGjbIr6Qedl5Bruc2WCiQr9kzg==
@@ -159,17 +158,16 @@
     "@skyra/editable-commands" "^2.1.2"
     tslib "^2.3.1"
 
-"@sapphire/plugin-i18next@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@sapphire/plugin-i18next/-/plugin-i18next-2.5.0.tgz#c7e0e2005e612493c15fb9c7625114ac3369c517"
-  integrity sha512-eKbK5gz9J3PXDpS+2NJKdWULj7A3vhxyeJoS+LiwyjZa0wSOohYfeeR+M6QKDRQNIwIkaB2+WPq7/6ZvkjgisA==
+"@sapphire/plugin-i18next@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@sapphire/plugin-i18next/-/plugin-i18next-2.5.2.tgz#e3523210b4f16373eb6b02c08a319d8944b7e59e"
+  integrity sha512-JryTQlwkeiKgWkZx4+eLupeU9PVz9FcSVpvD1++uQ6Q7OtorNxDmELnshqc0PXLRYQOqJP8u6OLmNEeE4GNEZw==
   dependencies:
     "@sapphire/utilities" "^3.6.2"
-    "@types/i18next-fs-backend" "^1.1.2"
+    "@skyra/i18next-backend" "^1.0.0"
     chokidar "^3.5.3"
-    i18next "^21.6.16"
-    i18next-fs-backend "^1.1.4"
-    tslib "^2.3.1"
+    i18next "^21.8.2"
+    tslib "^2.4.0"
 
 "@sapphire/plugin-logger@^2.2.1":
   version "2.2.1"
@@ -180,24 +178,19 @@
     colorette "^2.0.16"
     tslib "^2.3.1"
 
-"@sapphire/ratelimits@^2.4.4":
+"@sapphire/ratelimits@^2.3.0":
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/@sapphire/ratelimits/-/ratelimits-2.4.4.tgz#5472f0c629779b6831d8fdde86e2c8b4666e92f6"
   integrity sha512-9gZ1BaY99HLWOcfuhlu0WklirHhVc6QD1pm5/v2W0O9pBpMHrd1GImVMXjYZRoy1qpmE2ZggSmN1665lktTCMw==
   dependencies:
     "@sapphire/time-utilities" "^1.7.4"
 
-"@sapphire/result@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@sapphire/result/-/result-1.1.1.tgz#c268decd12f66e7adf00a3d6d24987640bf548b7"
-  integrity sha512-mKWq+HCu9t+gqVcXMhfH72Trj6cO0LZilpdVYndqRb3+30mrRqs+NtdSf1wAERYEtBmOf3ZWvROe4RPSx7aKvw==
-
 "@sapphire/shapeshift@^2.0.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@sapphire/shapeshift/-/shapeshift-2.2.0.tgz#9c1221b538fd0f966766158176c686a3a5c98490"
   integrity sha512-UEnKgMlQyI0yY/q+lCMX0VJft9y86IsesgbIQj6e62FBYSaMVr+IaMNpi4z45Q14VnuMACbK0yrbHISNqgUYcQ==
 
-"@sapphire/stopwatch@^1.4.1":
+"@sapphire/stopwatch@^1.3.0":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@sapphire/stopwatch/-/stopwatch-1.4.1.tgz#3be0d047b0313864dfb169ff6868f5cc3f203ff0"
   integrity sha512-FoZIM7oQ1kwkjWpl/rKReuDFSlkCDjDp//1Np2mmQD+xQ2Zyo/J2MaYAITprwQr3AUBu/OOUJvqm7f8lA9R7gA==
@@ -220,7 +213,7 @@
     nan "^2.15.0"
     tslib "^2.4.0"
 
-"@sapphire/utilities@^3.6.2":
+"@sapphire/utilities@^3.3.0", "@sapphire/utilities@^3.6.2":
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-3.6.2.tgz#ec238e3e789dd5b04009a5cefecd3a64a4bb985d"
   integrity sha512-Rmwq5QxWxuAYCrtIXo2a9UW1Fa5Pmmfc20QSRRp+rz/CXzel1R3171DjvT7iZTAfuxwUFp2FYG6IaywoSIyjFA==
@@ -235,12 +228,12 @@
   resolved "https://registry.yarnpkg.com/@skyra/editable-commands/-/editable-commands-2.1.2.tgz#93ea2502d00d715d4b6095f7b136f3eb97efb1d1"
   integrity sha512-oS1fwZ/lIreqjw3V2fZthxxBWijAl+wZInExWjw1kC3eeF1ZKr/Sz9kqt554Aop9f7DjDtdV8vVqKbGl5iOx6A==
 
-"@types/i18next-fs-backend@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@types/i18next-fs-backend/-/i18next-fs-backend-1.1.2.tgz#4f3116769229371fcdf64bbdb6841ea745e392f9"
-  integrity sha512-ZzTRXA5B0x0oGhzKNp08IsYjZpli4LjRZpg3q4j0XFxN5lKG2MVLnR4yHX8PPExBk4sj9Yfk1z9O6CjPrAlmIQ==
+"@skyra/i18next-backend@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@skyra/i18next-backend/-/i18next-backend-1.0.0.tgz#6a9708254b19cbcc5859fa690673120b808e229d"
+  integrity sha512-25D1SJnJaBXJbHn6YjXGdi8sZ2w3Kpc8DfzkZd1rBw1oVUYnKCKTzrW2pCSIkX1Vqx14+ebu4ndFl4vCRGyalg==
   dependencies:
-    i18next "^21.0.1"
+    tslib "^2.4.0"
 
 "@types/json-schema@^7.0.9":
   version "7.0.11"
@@ -1169,15 +1162,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-i18next-fs-backend@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/i18next-fs-backend/-/i18next-fs-backend-1.1.4.tgz#d0e9b9ed2fa7a0f11002d82b9fa69c3c3d6482da"
-  integrity sha512-/MfAGMP0jHonV966uFf9PkWWuDjPYLIcsipnSO3NxpNtAgRUKLTwvm85fEmsF6hGeu0zbZiCQ3W74jwO6K9uXA==
-
-i18next@^21.0.1, i18next@^21.6.16:
-  version "21.8.0"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-21.8.0.tgz#2ad46a882fe1b793e499c47a934bb115b7c618b3"
-  integrity sha512-opNd7cQj0PDlUX15hPjtzReRxy5/Rn405YvHTBEm1nf1YJhsqYFFFhHMwuU4NEHZNlrepHk5uK+CJbFtB+KO3w==
+i18next@^21.8.2:
+  version "21.8.3"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-21.8.3.tgz#1d90fbb8907ba94c2320111ec2c43cdffe4f3fc2"
+  integrity sha512-I6QEXu096oaNH8h+hs2eHu6hxtWPdb/rsoRFHmFep01uuwB0h86ckXaT14ladhstWenEScsxiAQ2TW9fmDG57Q==
   dependencies:
     "@babel/runtime" "^7.17.2"
 
