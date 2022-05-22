@@ -133,8 +133,6 @@ export class UserCommand extends NinoCommand {
 
 						await msg.edit({ content: done, components: [] })
 					}
-					break
-				}
 			}
 		})
 
@@ -163,6 +161,11 @@ export class UserCommand extends NinoCommand {
 							emoji: '🇲🇽',
 							value: 'spanish',
 						},
+						{
+							label: 'German - (Deutchland)',
+							emoji: '🇩🇪',
+							value: 'german',
+						}
 					]),
 			]),
 		]
