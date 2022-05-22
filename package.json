@@ -20,7 +20,7 @@
 		"@sapphire/plugin-logger": "^2.2.1",
 		"@sapphire/type": "2.2.4",
 		"@sapphire/utilities": "^3.6.2",
-		"chalk": "4.1.2",
+		"chalk": "5.0.1",
 		"discord.js": "^13.7.0",
 		"mongoose": "^6.3.3",
 		"ts-dotenv": "^0.8.3"
