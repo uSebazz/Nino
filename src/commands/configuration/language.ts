@@ -124,6 +124,23 @@ export class UserCommand extends NinoCommand {
 
 						await msg.edit({ content: done, components: [] })
 					}
+					
+				case 'german': {
+					if (guildLocale === 'de-DE') {
+						await interaction.reply({
+							content,
+							ephemeral: true,
+						})
+					} else {
+						await Model.updateOne(
+							{ guild: interaction.guildId },
+							{
+								$set: { 'config.language': 'de-DE' },
+							}
+						)
+
+						await msg.edit({ content: done, components: [] })
+					}
 					break
 				}
 			}
@@ -154,6 +171,11 @@ export class UserCommand extends NinoCommand {
 							emoji: '🇲🇽',
 							value: 'spanish',
 						},
+						{
+							label: 'German - (Deutchland)',
+							emoji: '🇩🇪',
+							value: 'german',
+						}
 					]),
 			]),
 		]
