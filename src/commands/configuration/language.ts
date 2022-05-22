@@ -187,11 +187,6 @@ export class UserCommand extends NinoCommand {
 							emoji: '🇲🇽',
 							value: 'spanish',
 						},
-						{
-							label: 'German - (Germany)',
-							emoji: '🇩🇪',
-							value: 'german',
-						},
 					]),
 			]),
 		]
