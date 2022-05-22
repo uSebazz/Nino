@@ -104,12 +104,10 @@ export class UserCommand extends NinoCommand {
 		return [
 			new MessageActionRow().addComponents(
 				new MessageButton()
-					.setCustomId('emojis')
 					.setStyle('LINK')
 					.setLabel('Emojis')
 					.setURL('https://discord.gg/6YEypJXq'),
 				new MessageButton()
-					.setCustomId('support')
 					.setStyle('LINK')
 					.setLabel('Support')
 					.setURL('https://dc.nino.fun')

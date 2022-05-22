@@ -1,13 +1,11 @@
 # Ignoring environment
 /src/.env
+/src/.env.development
+
 
 # Ignoring node modules and other modules
 /node_modules
 /dist
-
-
-# Yarn files
-.yarn/install-state.gz
 
 # Ignoring lint cache
 /.eslintcache
