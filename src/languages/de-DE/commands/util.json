@@ -1,0 +1,12 @@
+{
+	"ping": "Pong! (roundtrip took: {{diff}}ms. Hearbeat: {{ping}}ms.)",
+	"stats": {
+		"bot": "🐬 bot",
+		"system": "📡 system",
+		"stats": "✨ statistiken",
+		"description": "Hallo, Ich bin **Nino** ein Bot mit ein bisschen von allem.\nZurzeit mit dem Ziel, die Aktivität auf Ihrem Server zu verbessern und machen es die beste<3.",
+		"first_field": "> • **id**: {{id}}\n> • **developer**: {{dev}}\n> • **createdAt**: <t:{{unix}}:R>\n> • **version**: 2.0.1-dev",
+		"second_field": "> • **cpuLoad**: {{cpuload}}\n> • **ramTotal**: {{ramtotal}}\n> • **ramUsed**: {{ramused}}\n> • **client**: {{client}}\n> • **host**: {{host}}\n> • **total**: {{total}}",
+		"third_field": "> • **channels**: {{channels}}\n> • **guilds**: {{guilds}}\n> • **users**: {{users}}\n> • **commands**: {{commands}}\n> • **discord.js**: {{version}}\n> • **sapphire**: {{sapphire}}"
+	}
+}
