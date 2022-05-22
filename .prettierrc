@@ -1,10 +1,9 @@
 {
 	"printWidth": 100,
 	"useTabs": true,
-	"tabWidth": 5,
+	"tabWidth": 4,
 	"semi": false,
 	"singleQuote": true,
 	"quoteProps": "as-needed",
 	"endOfLine": "lf"
 }
-

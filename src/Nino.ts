@@ -6,7 +6,8 @@ import { container } from '@sapphire/framework'
 	try {
 		container.logger.info('Connecting to Discord...')
 		await client.start()
-		container.logger.info('Connected to Discord!')
+		await client.database()
+		container.logger.info(`Connected in Discord as ${client.user!.tag}`)
 	} catch (e) {
 		container.logger.error(e)
 		client.destroy()

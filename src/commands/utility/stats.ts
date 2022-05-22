@@ -1,15 +1,20 @@
 import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
+import { Colors, Emojis } from '#utils/constans'
 import { version as sapphireVersion } from '@sapphire/framework'
-import { version as discordVersion, MessageEmbed, type CommandInteraction } from 'discord.js'
-import { seconds } from '#utils/function/times'
-import { time, TimestampStyles } from '@discordjs/builders'
+import {
+	version as discordVersion,
+	MessageEmbed,
+	MessageActionRow,
+	MessageButton,
+	type CommandInteraction,
+	type Message,
+} from 'discord.js'
 import { ApplyOptions } from '@sapphire/decorators'
 import { roundNumber } from '@sapphire/utilities'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import { cpus, uptime, type CpuInfo } from 'node:os'
-import { send } from '@sapphire/plugin-editable-commands'
-import type { Message, ColorResolvable } from 'discord.js'
+import { cpus, type CpuInfo } from 'node:os'
+import { reply } from '@sapphire/plugin-editable-commands'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'shows nino statics',
@@ -24,126 +29,104 @@ export class UserCommand extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
 	public override async chatInputRun(interaction: CommandInteraction) {
-		const { colors } = this.container.client.utils
-		const dev = await this.container.client.users.fetch('899339781132124220')
-
 		const embed = new MessageEmbed()
-			.setAuthor({
-				name: 'Nino Stats',
-				iconURL: this.container.client.user!.displayAvatarURL(),
-				url: 'https://github.com/uSebazz/Nino',
-			})
+			.setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
 			.setDescription(await resolveKey(interaction, 'commands/util:stats.description'))
 			.addField(
-				await resolveKey(interaction, 'commands/util:stats.bot'),
-				await resolveKey(interaction, 'commands/util:stats.first_field', {
-					id: this.container.client.id,
-					dev: `[${dev.tag}](https://discord.com/users/${dev.id})`,
-					unix: (this.container.client.user!.createdTimestamp / 1000) | 0,
+				await resolveKey(interaction, 'commands/util:stats.field_devs'),
+				await resolveKey(interaction, 'commands/util:stats.field_devs_content', {
+					twitter: Emojis.twitter,
+					github: Emojis.github,
 				})
 			)
 			.addField(
-				await resolveKey(interaction, 'commands/util:stats.system'),
-				await resolveKey(interaction, 'commands/util:stats.second_field', {
-					cpuload: this.usageStatics.cpuLoad,
-					ramtotal: this.usageStatics.ramTotal,
-					ramused: this.usageStatics.ramUsed,
-					client: this.uptimeStatics.client,
-					host: this.uptimeStatics.host,
-					total: this.uptimeStatics.total,
-				}),
-				true
-			)
-			.addField(
-				await resolveKey(interaction, 'commands/util:stats.stats'),
-				await resolveKey(interaction, 'commands/util:stats.third_field', {
+				await resolveKey(interaction, 'commands/util:stats.field_statics'),
+				await resolveKey(interaction, 'commands/util:stats.field_statics_content', {
 					channels: this.botStatics.channels,
 					guilds: this.botStatics.guilds,
 					users: this.botStatics.users,
 					commands: this.botStatics.commands,
 					version: this.botStatics.version,
-					sapphire: this.botStatics.sapphireVersion,
+					sapphireVersion: this.botStatics.sapphireVersion,
 				})
 			)
-			.setColor(colors.green.pastel as ColorResolvable)
+			.addField(
+				await resolveKey(interaction, 'commands/util:stats.field_system'),
+				await resolveKey(interaction, 'commands/util:stats.field_system_content', {
+					ramUsed: this.usageStatics.ramUsed,
+					ramTotal: this.usageStatics.ramTotal,
+					cpuLoad: this.usageStatics.cpuLoad,
+					cpuModel: this.usageStatics.cpuModel,
+				})
+			)
+			.setColor(Colors.prettyPutunia)
 
-		await interaction.reply({ embeds: [embed] })
+		await interaction.reply({ embeds: [embed], components: this.components })
 	}
 
 	public override async messageRun(message: Message) {
-		const { colors } = this.container.client.utils
-		const dev = await this.container.client.users.fetch('899339781132124220')
-
 		const embed = new MessageEmbed()
-			.setAuthor({
-				name: 'Nino Stats',
-				iconURL: this.container.client.user!.displayAvatarURL(),
-				url: 'https://github.com/uSebazz/Nino',
-			})
+			.setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
 			.setDescription(await resolveKey(message, 'commands/util:stats.description'))
 			.addField(
-				await resolveKey(message, 'commands/util:stats.bot'),
-				await resolveKey(message, 'commands/util:stats.first_field', {
-					id: this.container.client.id,
-					dev: `[${dev.tag}](https://discord.com/users/${dev.id})`,
-					unix: (this.container.client.user!.createdTimestamp / 1000) | 0,
+				await resolveKey(message, 'commands/util:stats.field_devs'),
+				await resolveKey(message, 'commands/util:stats.field_devs_content', {
+					twitter: Emojis.twitter,
+					github: Emojis.github,
 				})
 			)
 			.addField(
-				await resolveKey(message, 'commands/util:stats.system'),
-				await resolveKey(message, 'commands/util:stats.second_field', {
-					cpuload: this.usageStatics.cpuLoad,
-					ramtotal: this.usageStatics.ramTotal,
-					ramused: this.usageStatics.ramUsed,
-					client: this.uptimeStatics.client,
-					host: this.uptimeStatics.host,
-					total: this.uptimeStatics.total,
-				}),
-				true
-			)
-			.addField(
-				await resolveKey(message, 'commands/util:stats.stats'),
-				await resolveKey(message, 'commands/util:stats.third_field', {
+				await resolveKey(message, 'commands/util:stats.field_statics'),
+				await resolveKey(message, 'commands/util:stats.field_statics_content', {
 					channels: this.botStatics.channels,
 					guilds: this.botStatics.guilds,
 					users: this.botStatics.users,
 					commands: this.botStatics.commands,
 					version: this.botStatics.version,
-					sapphire: this.botStatics.sapphireVersion,
+					sapphireVersion: this.botStatics.sapphireVersion,
 				})
 			)
-			.setColor(colors.green.pastel as ColorResolvable)
+			.addField(
+				await resolveKey(message, 'commands/util:stats.field_system'),
+				await resolveKey(message, 'commands/util:stats.field_system_content', {
+					ramUsed: this.usageStatics.ramUsed,
+					ramTotal: this.usageStatics.ramTotal,
+					cpuLoad: this.usageStatics.cpuLoad,
+					cpuModel: this.usageStatics.cpuModel,
+				})
+			)
+			.setColor(Colors.prettyPutunia)
 
-		await send(message, { embeds: [embed] })
+		await reply(message, { embeds: [embed], components: this.components })
 	}
 
+	private get components(): MessageActionRow[] {
+		return [
+			new MessageActionRow().addComponents(
+				new MessageButton()
+					.setCustomId('emojis')
+					.setStyle('LINK')
+					.setLabel('Emojis')
+					.setURL('https://discord.gg/6YEypJXq'),
+				new MessageButton()
+					.setCustomId('support')
+					.setStyle('LINK')
+					.setLabel('Support')
+					.setURL('https://dc.nino.fun')
+			),
+		]
+	}
 	private get botStatics(): StatsNino {
 		return {
-			channels: this.container.client.channels.cache.size,
-			guilds: this.container.client.guilds.cache.size,
 			users: this.container.client.guilds.cache.reduce(
 				(acc, val) => acc + val.memberCount,
 				0
 			),
+			guilds: this.container.client.guilds.cache.size,
+			channels: this.container.client.channels.cache.size,
 			commands: this.container.stores.get('commands').size,
 			version: `v${discordVersion}`,
 			sapphireVersion: `v${sapphireVersion.replace(this.#sapphireVersion, '')}`,
-		}
-	}
-
-	private get uptimeStatics(): StatsUptime {
-		const now = Date.now()
-		const nowSeconds = roundNumber(now / 1000)
-		return {
-			client: time(
-				seconds.fromMilliseconds(now - this.container.client.uptime!),
-				TimestampStyles.RelativeTime
-			),
-			host: time(roundNumber(nowSeconds - uptime()), TimestampStyles.RelativeTime),
-			total: time(
-				roundNumber(nowSeconds - process.uptime()),
-				TimestampStyles.RelativeTime
-			),
 		}
 	}
 
@@ -152,6 +135,7 @@ export class UserCommand extends NinoCommand {
 		return {
 			// eslint-disable-next-line newline-per-chained-call
 			cpuLoad: cpus().slice(0, 2).map(UserCommand.formatCpuInfo.bind(null)).join(' | '),
+			cpuModel: cpus()[0]!.model,
 			ramTotal: `${Math.round(usage.heapTotal / 1024 / 1024)}MB`,
 			ramUsed: `${Math.round(usage.heapUsed / 1024 / 1024)}MB`,
 		}
@@ -159,9 +143,8 @@ export class UserCommand extends NinoCommand {
 
 	private static formatCpuInfo({ times }: CpuInfo) {
 		return `${
-			roundNumber(
-				((times.user + times.nice + times.sys + times.irq) / times.idle) * 10000
-			) / 100
+			roundNumber(((times.user + times.nice + times.sys + times.irq) / times.idle) * 10000) /
+			100
 		}%`
 	}
 }
@@ -174,14 +157,9 @@ export interface StatsNino {
 	version: string
 	sapphireVersion: string
 }
-
-export interface StatsUptime {
-	client: string
-	host: string
-	total: string
-}
 export interface StatsUsage {
 	cpuLoad: string
+	cpuModel: string
 	ramTotal: string
 	ramUsed: string
 }

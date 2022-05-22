@@ -1,21 +1,23 @@
-import '@sapphire/plugin-logger/register'
-import '@sapphire/plugin-i18next/register'
-import '@sapphire/plugin-editable-commands/register'
-import { SapphireClient } from '@sapphire/framework'
+import { SapphireClient, container } from '@sapphire/framework'
+import { envParseString } from '@skyra/env-utilities'
 import { CLIENT_OPTIONS } from '#root/config'
-import { NinoUtils } from '#utils/utils'
-import { env } from '#utils/function/env'
+import { connect, connection } from 'mongoose'
 
 export class Nino extends SapphireClient {
-	public override utils: NinoUtils
-
 	public constructor() {
 		super(CLIENT_OPTIONS)
-
-		this.utils = new NinoUtils()
 	}
 
 	public async start() {
-		await super.login(env.DISCORD_TOKEN)
+		await super.login(envParseString('DISCORD_TOKEN'))
+	}
+
+	public async database() {
+		const url = envParseString('MONGO_URL')
+		await connect(url).then(() => {
+			container.logger.info(
+				`Mongoose connection established successfully at ${connection.readyState}ms`
+			)
+		})
 	}
 }

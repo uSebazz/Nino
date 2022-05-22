@@ -1,14 +1,19 @@
 import chalk from 'chalk'
-import { env } from '#utils/function/env'
-import { Model, defaultData } from '#root/lib/database/guildConfig'
+import { rootFolder } from '#utils/constans'
 import { minutes } from '#utils/function/times'
+import { Model, defaultData } from '#root/lib/database/guildConfig'
 import { LogLevel } from '@sapphire/framework'
 import { Options } from 'discord.js'
+import { join } from 'node:path'
+import { envParseArray, envParseString, setup } from '@skyra/env-utilities'
 import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 import type { LoggerFormatOptions } from '@sapphire/plugin-logger'
 import type { NewsChannel, TextChannel, ThreadChannel, ClientOptions } from 'discord.js'
 
+setup(join(rootFolder, 'src', '.env'))
+
 export const testServer = ['951101886684082176']
+export const OWNERS = envParseArray('CLIENT_OWNERS')
 
 export const loggerOptions: LoggerFormatOptions = {
 	trace: {
@@ -41,7 +46,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	allowedMentions: { users: [], roles: [] },
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,
-	defaultPrefix: ['n!', 'n?', 'n/', 'Nino'],
+	defaultPrefix: ['n!', 'n?', 'n/', 'Nino', 'puta'],
 	loadDefaultErrorListeners: false,
 	loadMessageCommandListeners: true,
 	preventFailedToFetchLogForGuildIds: [
@@ -75,7 +80,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		'DIRECT_MESSAGE_REACTIONS',
 	],
 	logger: {
-		level: env.NODE_PROCESS === 'production' ? LogLevel.Info : LogLevel.Debug,
+		level: envParseString('NODE_ENV') === 'production' ? LogLevel.Info : LogLevel.Debug,
 		format: loggerOptions,
 	},
 	presence: {

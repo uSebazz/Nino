@@ -41,6 +41,6 @@
 		"resolveJsonModule": true,
 		"allowJs": true
 	},
-	"include": ["src", "./src/languages/**/*.json"],
+	"include": ["src", "./src/languages/**/*.json", "src/lib/utils/.ts"],
 	"exclude": ["node_modules"]
 }

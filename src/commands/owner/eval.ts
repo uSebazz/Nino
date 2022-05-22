@@ -20,7 +20,7 @@ import type { Message } from 'discord.js'
 	description: 'Evaluates JavaScript code',
 	flags: ['async', 'no-timeout', 'json', 'silent', 'log', 'showHidden', 'hidden'],
 	options: ['lang', 'output', 'depth'],
-	preconditions: ['ownerOnly'],
+	preconditions: ['devOnly'],
 	quotes: [],
 })
 export class UserCommand extends NinoCommand {

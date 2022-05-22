@@ -4,6 +4,7 @@ import { resolveKey } from '@sapphire/plugin-i18next'
 import { translate } from '../../lib/i18n/translate'
 import type { Events, MessageCommandErrorPayload } from '@sapphire/framework'
 import type { Message } from 'discord.js'
+import { Emojis } from '#utils/constans'
 
 export class messageCommandError extends Listener<typeof Events.MessageCommandError> {
 	// eslint-disable-next-line consistent-return
@@ -34,6 +35,8 @@ export class messageCommandError extends Listener<typeof Events.MessageCommandEr
 	private async userError(message: Message, error: UserError) {
 		const identifier = translate(error.identifier)
 
-		return send(message, await resolveKey(message, identifier))
+		return send(message, await resolveKey(message, identifier, {
+			emoji: Emojis.fail
+		}))
 	}
 }

@@ -3,6 +3,7 @@ import { ApplyOptions } from '@sapphire/decorators'
 import { Message, type CommandInteraction } from 'discord.js'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
+import { Emojis } from '#utils/constans'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Ping of the bot',
@@ -14,8 +15,7 @@ import { send } from '@sapphire/plugin-editable-commands'
 })
 export class UserCommand extends NinoCommand {
 	public override async messageRun(message: Message): Promise<void> {
-		const { emojis } = this.container.client.utils
-		const msg = await send(message, `${emojis.ninozzz} ping?`)
+		const msg = await send(message, `${Emojis.ninozzz} ping?`)
 		const diff = msg.createdTimestamp - message.createdTimestamp
 		const ping = Math.round(this.container.client.ws.ping)
 
@@ -23,9 +23,8 @@ export class UserCommand extends NinoCommand {
 	}
 
 	public override async chatInputRun(interaction: CommandInteraction): Promise<void> {
-		const { emojis } = this.container.client.utils
 		const msg = await interaction.reply({
-			content: `${emojis.ninozzz} ping?`,
+			content: `${Emojis.ninozzz} ping?`,
 			fetchReply: true,
 		})
 

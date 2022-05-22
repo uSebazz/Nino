@@ -1,27 +1,17 @@
-import { env } from '#utils/function/env'
 import { Listener, type Store, type Events } from '@sapphire/framework'
 import { ApplyOptions } from '@sapphire/decorators'
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette'
-import { connect, connection } from 'mongoose'
 
-const dev = env.NODE_PROCESS === 'development'
+const dev = process.env.NODE_ENV === 'development'
 @ApplyOptions<Listener.Options>({ event: 'ready', once: true })
 export class readyListener extends Listener<typeof Events.ClientReady> {
 	public readonly style = dev ? yellow : blue
 
-	public async run() {
-		await this.mongoConnect()
+	public run() {
 		this.printBanner()
 		this.printStoreDebugInformation()
 	}
 
-	private async mongoConnect() {
-		await connect(env.MONGO_URL).then(() => {
-			this.container.logger.info(
-				`Mongoose connection established successfully at ${connection.readyState}ms`
-			)
-		})
-	}
 	private printBanner() {
 		const success = green('+')
 

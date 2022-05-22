@@ -1,5 +1,5 @@
 # Ignoring environment
-/.env
+/src/.env
 
 # Ignoring node modules and other modules
 /node_modules
