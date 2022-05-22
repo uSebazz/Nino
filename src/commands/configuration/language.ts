@@ -1,6 +1,7 @@
 import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
-import { Model } from '#root/lib/database/guildConfig'
+import { Emojis } from '#utils/constans'
+import { Model } from '#lib/database/guildConfig'
 import { ApplyOptions } from '@sapphire/decorators'
 import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
@@ -20,7 +21,7 @@ import type { Message, SelectMenuInteraction, CommandInteraction } from 'discord
 export class UserCommand extends NinoCommand {
 	public override async chatInputRun(interaction: CommandInteraction) {
 		const content = await resolveKey(interaction, 'commands/config:language.select', {
-			emoji: this.container.client.utils.emojis.emergency,
+			emoji: Emojis.emergency,
 		})
 
 		await interaction.reply({ content: 'Enviado!', ephemeral: true })
@@ -37,7 +38,7 @@ export class UserCommand extends NinoCommand {
 
 	public override async messageRun(message: Message) {
 		const content = await resolveKey(message, 'commands/config:language.select', {
-			emoji: this.container.client.utils.emojis.emergency,
+			emoji: Emojis.emergency,
 		})
 
 		const msg = await send(message, {
@@ -55,18 +56,14 @@ export class UserCommand extends NinoCommand {
 		{ message, int }: { message?: Message; int?: CommandInteraction }
 	) {
 		const timefinish = await resolveKey(msg, 'commands/config:language.timefinish', {
-			emoji: this.container.client.utils.emojis.pending,
+			emoji: Emojis.pending,
 		})
 
 		const collector = msg.createMessageComponentCollector({
 			filter: async (interaction) => {
-				const content = await resolveKey(
-					interaction,
-					'commands/config:language.filter',
-					{
-						emoji: this.container.client.utils.emojis.fail,
-					}
-				)
+				const content = await resolveKey(interaction, 'commands/config:language.filter', {
+					emoji: Emojis.fail,
+				})
 
 				if (interaction.user.id === message?.author.id || int?.user.id) {
 					return true
@@ -79,13 +76,13 @@ export class UserCommand extends NinoCommand {
 		})
 
 		collector.on('collect', async (interaction: SelectMenuInteraction) => {
-			const { emojis } = this.container.client.utils
+			let lang = '' // language selected
+			let done = '' // done message
+
 			const guildLocale = await fetchLanguage(interaction)
+
 			const content = await resolveKey(interaction, 'commands/config:language.already', {
-				emoji: emojis.fail,
-			})
-			const done = await resolveKey(interaction, 'commands/config:language.done', {
-				emoji: emojis.check,
+				emoji: Emojis.fail,
 			})
 
 			switch (interaction.values[0]) {
@@ -102,6 +99,12 @@ export class UserCommand extends NinoCommand {
 								$set: { 'config.language': 'en-US' },
 							}
 						)
+
+						lang = 'en-US'
+						done = await resolveKey(interaction, 'commands/config:language.done', {
+							emoji: Emojis.check,
+							lang,
+						})
 
 						await msg.edit({ content: done, components: [] })
 					}
@@ -122,9 +125,39 @@ export class UserCommand extends NinoCommand {
 							}
 						)
 
+						lang = 'es-ES'
+						done = await resolveKey(interaction, 'commands/config:language.done', {
+							emoji: Emojis.check,
+							lang,
+						})
+
 						await msg.edit({ content: done, components: [] })
 					}
 					break
+				}
+
+				case 'german': {
+					if (guildLocale === 'de-DE') {
+						await interaction.reply({
+							content,
+							ephemeral: true,
+						})
+					} else {
+						await Model.updateOne(
+							{ guild: interaction.guildId },
+							{
+								$set: { 'config.language': 'de-DE' },
+							}
+						)
+
+						lang = 'de-DE'
+						done = await resolveKey(interaction, 'commands/config:language.done', {
+							emoji: Emojis.check,
+							lang,
+						})
+
+						await msg.edit({ content: done, components: [] })
+					}
 				}
 			}
 		})
@@ -153,6 +186,11 @@ export class UserCommand extends NinoCommand {
 							label: 'Español - (México)',
 							emoji: '🇲🇽',
 							value: 'spanish',
+						},
+						{
+							label: 'German - (Germany)',
+							emoji: '🇩🇪',
+							value: 'german',
 						},
 					]),
 			]),

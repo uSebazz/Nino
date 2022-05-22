@@ -1,12 +1,12 @@
 {
-	"ping": "Pong! (Respondí en: {{diff}}ms. Latido: {{ping}}ms)",
+	"ping": "Pong! (Respondí en: {{diff}}ms. Total: {{ping}}ms)",
 	"stats": {
-		"bot": "🐬 bot",
-		"system": "📡 sistema",
-		"stats": "✨ estadisticas",
-		"description": "Hola, soy **Nino** un bot con un poco de todo.\nActualmente con el propósito de mejorar la actividad en su servidor y hacerla la mejor<3.",
-		"first_field": "> • **id**: {{id}}\n> • **desarollador**: {{dev}}\n> • **creada**: <t:{{unix}}:R>\n> • **version**: 2.0.1-dev",
-		"second_field": "> • **cpuLoad**: {{cpuload}}\n> • **ramTotal**: {{ramtotal}}\n> • **ramUsed**: {{ramused}}\n> • **client**: {{client}}\n> • **host**: {{host}}\n> • **total**: {{total}}",
-		"third_field": "> • **canales**: {{channels}}\n> • **servidores**: {{guilds}}\n> • **usuarios**: {{users}}\n> • **comandos**: {{commands}}\n> • **discord.js**: {{version}}\n> • **sapphire**: {{sapphire}}"
+		"description": "> Hola, soy **Nino** un bot con un poco de todo. Con el propósito de mejorar la actividad en su servidor y hacerla la mejor `💜`",
+		"field_devs": "Desarrolladores",
+		"field_devs_content": "> - **Sebazz**: {{github}} [Github](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)",
+		"field_statics": "Estadisticas",
+		"field_statics_content": "> - **Usuarios**: {{users}}\n> - **Servidores**: {{guilds}}\n> - **Canales**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Libreria**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
+		"field_system": "Sistema",
+		"field_system_content": "> - **Ram Usada**: {{ramUsed}}\n> - **Ram Total**: {{ramTotal}}\n> - **Cpu usado**: {{cpuTotal}}\n> - **Modelo**: {{cpuModel}}"
 	}
 }

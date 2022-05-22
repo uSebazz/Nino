@@ -1,9 +1,9 @@
 {
 	"language": {
 		"select": "{{emoji}} - Select a language for this server",
-		"already": "{{emoji}} - Uh. It seems that language is already set. Maybe do you want to set the `Spanish` language?",
+		"already": "{{emoji}} - Uh. It seems that language is already set",
 		"filter": "{{emoji}} - This menu is not for you :)",
-		"done": "{{emoji}} - `Spanish` is now language for this server :D",
+		"done": "{{emoji}} - `{{lang}}` is now language for this server :D",
 		"timefinish": "{{emoji}} - Interaction time finished"
 	}
 }

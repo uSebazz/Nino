@@ -1,4 +1,4 @@
 {
 	"string": "Uh, looks like there was an error. {{error}}",
-	"missing": "Looks like this command is missing one argument, please provide that."
+	"missing": "{{emoji}} - A parameter is needed!\n> Use n!help [command] to see that parameter."
 }

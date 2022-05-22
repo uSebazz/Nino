@@ -1,12 +1,12 @@
 {
 	"ping": "Pong! (roundtrip took: {{diff}}ms. Hearbeat: {{ping}}ms.)",
 	"stats": {
-		"bot": "🐬 bot",
-		"system": "📡 system",
-		"stats": "✨ stats",
-		"description": "Hi, Im **Nino** a bot with a little bit of everything.\nCurrently with the purpose of improving the activity on your server and make it the best<3.",
-		"first_field": "> • **id**: {{id}}\n> • **developer**: {{dev}}\n> • **createdAt**: <t:{{unix}}:R>\n> • **version**: 2.0.1-dev",
-		"second_field": "> • **cpuLoad**: {{cpuload}}\n> • **ramTotal**: {{ramtotal}}\n> • **ramUsed**: {{ramused}}\n> • **client**: {{client}}\n> • **host**: {{host}}\n> • **total**: {{total}}",
-		"third_field": "> • **channels**: {{channels}}\n> • **guilds**: {{guilds}}\n> • **users**: {{users}}\n> • **commands**: {{commands}}\n> • **discord.js**: {{version}}\n> • **sapphire**: {{sapphire}}"
+		"description": "> Hi, I'm **Nino** a bot with a little bit of everything. With the purpose of improving the activity on your server and make it the best `💜`",
+		"field_devs": "Developers",
+		"field_devs_content": "> - **Sebazz**: {{github}} [Github](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)",
+		"field_statics": "Statics",
+		"field_statics_content": "> - **Users**: {{users}}\n> - **Guilds**: {{guilds}}\n> - **Channels**: {{channels}}\n> - **Commands**: {{commands}}\n> - **Library**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
+		"field_system": "System",
+		"field_system_content": "> - **Ram Used**: {{ramUsed}}\n> - **Ram Total**: {{ramTotal}}\n> - **Cpu usage**: {{cpuTotal}}\n> - **Model**: {{cpuModel}}"
 	}
 }
