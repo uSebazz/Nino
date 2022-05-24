@@ -20,7 +20,7 @@ import type { Message } from 'discord.js'
 	description: 'Evaluates JavaScript code',
 	flags: ['async', 'no-timeout', 'json', 'silent', 'log', 'showHidden', 'hidden'],
 	options: ['lang', 'output', 'depth'],
-	preconditions: ['devOnly'],
+	preconditions: ['DevOnly'],
 	quotes: [],
 })
 export class UserCommand extends NinoCommand {
@@ -207,9 +207,7 @@ export class UserCommand extends NinoCommand {
 					return send(message, { content: 'Invalid Command' })
 				}
 				if (stdout.length > 1950) {
-					options.url = await this.getHaste(stdout, options.language).catch(
-						() => null
-					)
+					options.url = await this.getHaste(stdout, options.language).catch(() => null)
 				}
 
 				if (options.url) {
@@ -260,9 +258,9 @@ export class UserCommand extends NinoCommand {
 				}
 
 				const output = codeBlock(options.language, options.result)
-				const content = `${bold('Error')}:${output}\n${bold('Type')}:${
-					options.footer
-				}\n${options.time}`
+				const content = `${bold('Error')}:${output}\n${bold('Type')}:${options.footer}\n${
+					options.time
+				}`
 				return send(message, { content })
 			}
 		}

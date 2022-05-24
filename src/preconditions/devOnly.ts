@@ -2,7 +2,7 @@ import { OWNERS } from '#root/config'
 import { Precondition, type PreconditionResult } from '@sapphire/framework'
 import type { CommandInteraction, Message } from 'discord.js'
 
-export class devOnly extends Precondition {
+export class DevOnly extends Precondition {
 	public override chatInputRun(interaction: CommandInteraction): PreconditionResult {
 		return OWNERS.includes(interaction.user.id)
 			? this.ok()

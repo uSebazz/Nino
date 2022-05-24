@@ -2,7 +2,8 @@ import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoComman
 import { testServer } from '#root/config'
 import { ApplyOptions } from '@sapphire/decorators'
 import { MessageActionRow, Modal, TextInputComponent } from 'discord.js'
-import type { CommandInteraction } from 'discord.js'
+import type { CommandInteraction, Message } from 'discord.js'
+import type { Args } from '@sapphire/framework'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'peo',

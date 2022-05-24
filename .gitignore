@@ -1,11 +1,10 @@
 # Ignoring environment
-/src/.env
-/src/.env.development
-
+src/.env
+.env
 
 # Ignoring node modules and other modules
-/node_modules
-/dist
+node_modules
+dist
 
 # Ignoring lint cache
-/.eslintcache
+.eslintcache

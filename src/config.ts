@@ -1,14 +1,15 @@
 import chalk from 'chalk'
 import { rootFolder } from '#utils/constans'
 import { minutes } from '#utils/function/times'
-import { Model, defaultData } from '#root/lib/database/guildConfig'
-import { LogLevel } from '@sapphire/framework'
+//import { Model, defaultData } from '#root/lib/database/guildConfig'
+import { BucketScope, container, LogLevel } from '@sapphire/framework'
 import { Options } from 'discord.js'
 import { join } from 'node:path'
 import { envParseArray, envParseString, setup } from '@skyra/env-utilities'
 import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 import type { LoggerFormatOptions } from '@sapphire/plugin-logger'
 import type { NewsChannel, TextChannel, ThreadChannel, ClientOptions } from 'discord.js'
+import type { Prisma } from '@prisma/client'
 
 setup(join(rootFolder, 'src', '.env'))
 
@@ -46,7 +47,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	allowedMentions: { users: [], roles: [] },
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,
-	defaultPrefix: ['n!', 'n?', 'n/', 'Nino', 'puta'],
+	defaultPrefix: ['.', 'n!', 'n?', 'n/', 'Nino', 'puta'],
 	loadDefaultErrorListeners: false,
 	loadMessageCommandListeners: true,
 	preventFailedToFetchLogForGuildIds: [
@@ -96,10 +97,29 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		fetchLanguage: async (context: InternationalizationContext) => {
 			if (!context.guild) return 'en-US'
 
-			let guild = await Model.findOne({ guild: context.guild.id }).lean()
-			if (!guild) guild = await Model.create(defaultData(context.guild.id))
-			return guild.config.language
+			let data = await container.prisma.config.findUnique({
+				where: {
+					guildId: context.guild.id,
+				},
+			})
+			let config: Prisma.ConfigCreateInput
+
+			if (!data) {
+				;(config = {
+					guildId: context.guild.id,
+					lang: 'es-ES',
+				}),
+					(data = await container.prisma.config.create({ data: config }))
+			}
+
+			return data.lang
 		},
+	},
+	defaultCooldown: {
+		delay: 10_000,
+		filteredUsers: OWNERS,
+		limit: 2,
+		scope: BucketScope.Channel,
 	},
 }
 
