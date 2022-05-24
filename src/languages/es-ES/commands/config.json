@@ -4,6 +4,6 @@
 		"already": "{{emoji}} - Uh. Parece que este idioma ya está establecido",
 		"filter": "{{emoji}} - Este menú no es para tí :)",
 		"done": "{{emoji}} - El idioma del servidor ahora sera `{{lang}}` :D",
-		"timefinish": "{{emoji}} - El tiempo de la interacción acabo"
+		"timefinish": "{{emoji}} - Interacción terminada. ¡Gracias por usar el menú! :D"
 	}
 }

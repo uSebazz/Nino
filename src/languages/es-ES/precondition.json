@@ -1,0 +1,15 @@
+{
+	"disabled": "{{emoji}} - Este comando está desactivado en este servidor",
+	"cooldown": "{{emoji}} - Acabas de usar el comando, espera {{remaining, duration}} segundos para usarlo de nuevo",
+	"dmOnly": "{{emoji}} - Este comando solo funciona en mensajes privados",
+	"guildNewsOnly": "{{emoji}} - Este comando solo funciona en canales de noticias",
+	"guildNewsThread": "{{emoji}} - Este comando solo funciona en hilos de canales de noticias",
+	"guildOnly": "{{emoji}} - Este comando solo funciona en servidores",
+	"guildPrivateThreadOnly": "{{emoji}} - Este comando solo funciona en hilos privados",
+	"guildPublicThreadOnly": "{{emoji}} - Este comando solo funciona en hilos públicos",
+	"guildTextOnly": "{{emoji}} - Este comando solo funciona en canales de texto",
+	"nsfw": "{{emoji}} - Este comando solo funciona en canales NSFW",
+	"clientPermissions": "{{emoji}} - Uhh, no tengo los **permisos necesarios** para ejecutar este comando. :(\n> **Permisos**: {{missing}}",
+	"userPermissions": "{{emoji}} - Uhh, no tienes los **permisos necesarios** para ejecutar este comando. :(\n> **Permisos**: {{missing}}",
+	"threadOnly": "{{emoji}} - Este comando solo funciona en hilos"
+}

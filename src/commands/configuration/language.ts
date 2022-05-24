@@ -1,11 +1,11 @@
 import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
 import { Emojis } from '#utils/constans'
-import { Model } from '#lib/database/guildConfig'
 import { ApplyOptions } from '@sapphire/decorators'
 import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
 import { MessageActionRow, MessageSelectMenu } from 'discord.js'
+import { setTimeout as wait } from 'node:timers/promises'
 import type { Message, SelectMenuInteraction, CommandInteraction } from 'discord.js'
 
 @ApplyOptions<NinoCommandOptions>({
@@ -55,6 +55,11 @@ export class UserCommand extends NinoCommand {
 		msg: Message<boolean>,
 		{ message, int }: { message?: Message; int?: CommandInteraction }
 	) {
+		const languages = {
+			spanish: 'es-ES',
+			english: 'en-US',
+			german: 'de-DE',
+		}
 		const timefinish = await resolveKey(msg, 'commands/config:language.timefinish', {
 			emoji: Emojis.pending,
 		})
@@ -76,89 +81,40 @@ export class UserCommand extends NinoCommand {
 		})
 
 		collector.on('collect', async (interaction: SelectMenuInteraction) => {
-			let lang = '' // language selected
-			let done = '' // done message
-
 			const guildLocale = await fetchLanguage(interaction)
+			const values = interaction.values[0] as 'spanish' | 'english' | 'german'
 
+			// Keys of the language
 			const content = await resolveKey(interaction, 'commands/config:language.already', {
 				emoji: Emojis.fail,
 			})
+			const done = await resolveKey(interaction, 'commands/config:language.done', {
+				emoji: Emojis.check,
+				lang: languages[values],
+			})
 
-			switch (interaction.values[0]) {
-				case 'english': {
-					if (guildLocale === 'en-US') {
-						await interaction.reply({
-							content,
-							ephemeral: true,
-						})
-					} else {
-						await Model.updateOne(
-							{ guild: interaction.guildId },
-							{
-								$set: { 'config.language': 'en-US' },
-							}
-						)
+			// If the language is already set
+			if (guildLocale === languages[values]) {
+				await interaction.reply({ content, ephemeral: true })
+			} else {
+				// Update the language of the guild
+				await this.container.prisma.config.update({
+					where: {
+						guildId: interaction.guildId as string,
+					},
+					data: {
+						lang: languages[values],
+					},
+				})
 
-						lang = 'en-US'
-						done = await resolveKey(interaction, 'commands/config:language.done', {
-							emoji: Emojis.check,
-							lang,
-						})
+				// Send the message
+				await interaction.reply({
+					content: done,
+					ephemeral: true,
+				})
 
-						await msg.edit({ content: done, components: [] })
-					}
-					break
-				}
-
-				case 'spanish': {
-					if (guildLocale === 'es-ES') {
-						await interaction.reply({
-							content,
-							ephemeral: true,
-						})
-					} else {
-						await Model.updateOne(
-							{ guild: interaction.guildId },
-							{
-								$set: { 'config.language': 'es-ES' },
-							}
-						)
-
-						lang = 'es-ES'
-						done = await resolveKey(interaction, 'commands/config:language.done', {
-							emoji: Emojis.check,
-							lang,
-						})
-
-						await msg.edit({ content: done, components: [] })
-					}
-					break
-				}
-
-				case 'german': {
-					if (guildLocale === 'de-DE') {
-						await interaction.reply({
-							content,
-							ephemeral: true,
-						})
-					} else {
-						await Model.updateOne(
-							{ guild: interaction.guildId },
-							{
-								$set: { 'config.language': 'de-DE' },
-							}
-						)
-
-						lang = 'de-DE'
-						done = await resolveKey(interaction, 'commands/config:language.done', {
-							emoji: Emojis.check,
-							lang,
-						})
-
-						await msg.edit({ content: done, components: [] })
-					}
-				}
+				// Stop the collector
+				await wait(5000).then(() => collector.stop())
 			}
 		})
 
