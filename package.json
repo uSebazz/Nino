@@ -29,16 +29,16 @@
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.35",
-		"@typescript-eslint/eslint-plugin": "5.25.0",
-		"@typescript-eslint/parser": "5.25.0",
+		"@typescript-eslint/eslint-plugin": "5.26.0",
+		"@typescript-eslint/parser": "5.26.0",
 		"eslint": "8.16.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-prettier": "4.0.0",
 		"prettier": "2.6.2",
 		"prisma": "^3.14.0",
 		"tsc-watch": "^5.0.3",
-		"tsup": "^5.12.8",
-		"typescript": "4.6.4"
+		"tsup": "^5.12.9",
+		"typescript": "4.7.2"
 	},
 	"scripts": {
 		"build": "tsup src && node scripts/i18n.mjs",
