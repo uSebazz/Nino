@@ -3,10 +3,10 @@
 	"stats": {
 		"description": "> Hallo, ich bin **Nino** ein Bot mit ein bisschen von allem. Um die Aktivität auf Ihrem Server zu verbessern und ihn so gut wie möglich zu machen. `💜`",
 		"field_devs": "Entwickler",
-		"field_devs_content": "> - **Sebazz**: {{github}} [Github](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: {{github}} [Github](https://github.com/ddiablou) | {{twitter}} [Twitter](https://twitter.com/EnBraix)",
+		"field_devs_content": "> - **Sebazz**: {{github}} [GitHub](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: {{github}} [GitHub](https://github.com/ddiablou) | {{twitter}} [Twitter](https://twitter.com/EnBraix)",
 		"field_statics": "Statistik",
 		"field_statics_content": "> - **Benutzer**: {{users}}\n> - **Server**: {{guilds}}\n> - **Kanäle**: {{channels}}\n> - **Befehle**: {{commands}}\n> - **Buchhandlung**: {{version}}\n> - **Rahmenwerk**: {{sapphireVersion}}",
 		"field_system": "System",
-		"field_system_content": "> - **Gebrauchter Ram**: {{ramUsed}}\n> - **Widder Gesamt**: {{ramTotal}}\n> - **Gebrauchte Cpu**: {{cpuLoad}}\n> - **Modell**: {{cpuModel}}"
+		"field_system_content": "> - **Gebrauchter RAM**: {{ramUsed}}\n> - **Widder Gesamt**: {{ramTotal}}\n> - **Gebrauchte CPU**: {{cpuLoad}}\n> - **Modell**: {{cpuModel}}"
 	}
 }
