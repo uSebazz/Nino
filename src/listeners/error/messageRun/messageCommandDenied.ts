@@ -1,13 +1,11 @@
-//import { translate } from '#lib/i18n'
 import {
-	Listener,
-	type Events,
-	type UserError,
-	//type MessageCommandDeniedPayload,
+  Listener,
+  type Events,
+  type UserError
 } from '@sapphire/framework'
 
 export class UserListener extends Listener<typeof Events.MessageCommandDenied> {
-	public override run(error: UserError) {
-		console.log(error.identifier)
-	}
+  public override run(error: UserError) {
+    console.log(error.identifier)
+  }
 }
