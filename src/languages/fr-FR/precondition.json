@@ -1,0 +1,15 @@
+{
+  disabled: "{{Emoji}} - Cette commande est désactivée sur ce serveur",
+  cooldown: "arche",
+  dmOnly: "{{emoji}} - Cette commande ne fonctionne que dans des messages privés",
+  guildNewsOnly: "{{Emoji}} - Cette commande ne fonctionne que sur les canaux d'information",
+  guildNewsThread: "{{Emoji}} - Cette commande ne fonctionne que dans les threads de la chaîne d'information",
+  guildOnly: "{{emoji}} - Cette commande ne fonctionne que sur les serveurs",
+  guildPrivateThreadOnly: "{{emoji}} - Cette commande ne fonctionne que dans les threads privés",
+  guildPublicThreadOnly: "{{emoji}} - Cette commande ne fonctionne que dans les threads publics",
+  guildTextOnly: "{{emoji}} - Cette commande ne fonctionne que dans les canaux de texte",
+  nsfw: "{{emoji}} - Cette commande ne fonctionne que sur les canaux NSFW",
+  clientPermissions: "{{emoji}} - uhh, je n'ai **pas les permis nécessaires** pour exécuter cette commande. :(\n> **permet**: {{missing}}",
+  userPermissions: "{{emoji}} - Uhh, vous n'avez **pas les permis nécessaires** pour exécuter cette commande. :(\n> **permet**: {{missing}}",
+  threadOnly: "{{emoji}} - Cette commande ne fonctionne que dans les threads",
+}
