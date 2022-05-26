@@ -30,7 +30,6 @@
 		"chalk": "4.1.2",
 		"discord.js": "13.7.0",
 		"eslint": "8.16.0",
-		"prisma": "3.14.0",
 		"ts-dotenv": "0.8.3"
 	},
 	"devDependencies": {
@@ -44,7 +43,8 @@
 		"eslint-plugin-promise": "^6.0.0",
 		"tsc-watch": "5.0.3",
 		"tsup": "6.0.1",
-		"typescript": "4.7.2"
+		"typescript": "4.7.2",
+		"prisma": "3.14.0"
 	},
 	"imports": {
 		"#utils/*": "./dist/lib/utils/*.js",
