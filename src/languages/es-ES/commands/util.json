@@ -4,8 +4,8 @@
 		"description": "> Hola, soy **Nino** un bot con un poco de todo. Con el propósito de mejorar la actividad en su servidor y hacerla la mejor `💜`",
 		"field_devs": "Desarrolladores",
 		"field_devs_content": "> - **Sebazz**: {{github}} [GitHub](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: {{github}} [GitHub](https://github.com/ddiablou) | {{twitter}} [Twitter](https://twitter.com/EnBraix)",
-		"field_statics": "Estadisticas",
-		"field_statics_content": "> - **Usuarios**: {{users}}\n> - **Servidores**: {{guilds}}\n> - **Canales**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Libreria**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
+		"field_statics": "Estadísticas",
+		"field_statics_content": "> - **Usuarios**: {{users}}\n> - **Servidores**: {{guilds}}\n> - **Canales**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Librería**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
 		"field_system": "Sistema",
 		"field_system_content": "> - **RAM Usada**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usado**: {{cpuLoad}}\n> - **Modelo**: {{cpuModel}}"
 	}
