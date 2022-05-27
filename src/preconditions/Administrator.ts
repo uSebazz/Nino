@@ -1,7 +1,6 @@
 import { Emojis } from '#utils/constans'
 import { Precondition } from '@sapphire/framework'
 import { resolveKey } from '@sapphire/plugin-i18next'
-
 import type { Message, CommandInteraction, GuildMember } from 'discord.js'
 
 export class Administrator extends Precondition {

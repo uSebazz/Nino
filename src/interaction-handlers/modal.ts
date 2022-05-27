@@ -10,6 +10,7 @@ import type { ModalSubmitInteraction } from 'discord.js'
 @ApplyOptions<InteractionHandlerOptions>({
 	interactionHandlerType: InteractionHandlerTypes.ModalSubmit
 })
+
 export class ModalSubmitHandler extends InteractionHandler {
 	public override async run(interaction: ModalSubmitInteraction) {
 		const message = interaction.fields.getTextInputValue('favoriteColorInput')

@@ -1,4 +1,4 @@
-// Import the plugins of Sapphire
+/* eslint-disable no-unused-vars */
 import '@sapphire/plugin-logger/register'
 import '@sapphire/plugin-i18next/register'
 import '@sapphire/plugin-editable-commands/register'
@@ -31,7 +31,6 @@ declare module '@sapphire/pieces' {
 declare module '@skyra/env-utilities' {
 	interface Env {
 		DISCORD_TOKEN: string
-		API_URL: string
 		CLIENT_OWNERS: ArrayString
 	}
 }

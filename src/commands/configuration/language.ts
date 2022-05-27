@@ -18,6 +18,7 @@ import type { Message, SelectMenuInteraction, CommandInteraction } from 'discord
 		idHints: ['974699587501715566']
 	}
 })
+
 export class UserCommand extends NinoCommand {
 	public override async chatInputRun(interaction: CommandInteraction) {
 		const content = await resolveKey(interaction, 'commands/config:language.select', {
@@ -65,7 +66,7 @@ export class UserCommand extends NinoCommand {
 		})
 
 		const collector = msg.createMessageComponentCollector({
-			filter: async(interaction) => {
+			filter: async (interaction) => {
 				const content = await resolveKey(interaction, 'commands/config:language.filter', {
 					emoji: Emojis.fail
 				})
@@ -80,7 +81,7 @@ export class UserCommand extends NinoCommand {
 			idle: 60000
 		})
 
-		collector.on('collect', async(interaction: SelectMenuInteraction) => {
+		collector.on('collect', async (interaction: SelectMenuInteraction) => {
 			const guildLocale = await fetchLanguage(interaction)
 			const values = interaction.values[0] as 'spanish' | 'english' | 'german'
 
@@ -118,7 +119,7 @@ export class UserCommand extends NinoCommand {
 			}
 		})
 
-		collector.on('end', async() => {
+		collector.on('end', async () => {
 			await msg.edit({
 				content: timefinish,
 				components: []

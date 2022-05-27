@@ -16,6 +16,21 @@ import { resolveKey } from '@sapphire/plugin-i18next'
 import { cpus, type CpuInfo } from 'node:os'
 import { reply } from '@sapphire/plugin-editable-commands'
 
+export interface StatsNino {
+	channels: number
+	users: number
+	guilds: number
+	commands: number
+	version: string
+	sapphireVersion: string
+}
+export interface StatsUsage {
+	cpuLoad: string
+	cpuModel: string
+	ramTotal: string
+	ramUsed: string
+}
+
 @ApplyOptions<NinoCommandOptions>({
 	description: 'shows nino statics',
 	chatInputCommand: {
@@ -25,6 +40,7 @@ import { reply } from '@sapphire/plugin-editable-commands'
 	},
 	aliases: ['botstatus', 'status']
 })
+
 export class UserCommand extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
@@ -132,7 +148,7 @@ export class UserCommand extends NinoCommand {
 	private get usageStatics(): StatsUsage {
 		const usage = process.memoryUsage()
 		return {
-			// eslint-disable-next-line newline-per-chained-call
+			// eslint-disable-next-line
 			cpuLoad: cpus().slice(0, 2).map(UserCommand.formatCpuInfo.bind(null)).join(' | '),
 			cpuModel: cpus()[0]!.model,
 			ramTotal: `${Math.round(usage.heapTotal / 1024 / 1024)}MB`,
@@ -141,24 +157,7 @@ export class UserCommand extends NinoCommand {
 	}
 
 	private static formatCpuInfo({ times }: CpuInfo) {
-		return `${
-						roundNumber(((times.user + times.nice + times.sys + times.irq) / times.idle) * 10000) /
-			100
-				}%`
+		return `${roundNumber(((times.user + times.nice + times.sys + times.irq) / times.idle) * 10000) / 100
+			}%`
 	}
-}
-
-export interface StatsNino {
-	channels: number
-	users: number
-	guilds: number
-	commands: number
-	version: string
-	sapphireVersion: string
-}
-export interface StatsUsage {
-	cpuLoad: string
-	cpuModel: string
-	ramTotal: string
-	ramUsed: string
 }

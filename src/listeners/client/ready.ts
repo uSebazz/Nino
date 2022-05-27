@@ -30,8 +30,7 @@ ${line02} ${pad}[${success}] Gateway
 ${line03}${dev
 					? `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MODE')}`
 					: `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('PRODUCTION MODE')}`
-				}
-		`.trim()
+				}`.trim()
 		)
 	}
 

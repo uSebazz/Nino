@@ -1,54 +1,49 @@
 {
 	"name": "nino",
-	"version": "2.0.2",
 	"description": "Multipurpose Discord Bot built on Sapphire Framework",
 	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
+	"version": "2.0.3",
 	"license": "Apache-2.0",
 	"main": "dist/Nino.js",
+	"scripts": {
+		"build": "yarn style && tsup src && node scripts/i18n.mjs",
+		"clean": "node scripts/clean.mjs",
+		"lang": "node scripts/i18n.mjs",
+		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
+		"dev": "tsc-watch --onSuccess \"yarn start\"",
+		"deploy": "yarn build && yarn start",
+		"style": "yarn run eclint fix 'src/**/*'"
+	},
+	"packageManager": "yarn@1.22.18",
+	"dependencies": {
+		"@prisma/client": "3.14.0",
+		"@sapphire/decorators": "4.3.4",
+		"@sapphire/discord.js-utilities": "4.11.0",
+		"@sapphire/fetch": "2.3.1",
+		"@sapphire/framework": "3.0.0-next.1f76366.0",
+		"@sapphire/plugin-editable-commands": "1.2.0",
+		"@sapphire/plugin-i18next": "2.5.2",
+		"@sapphire/plugin-logger": "2.2.1",
+		"@sapphire/type": "2.2.4",
+		"@sapphire/utilities": "3.6.2",
+		"@skyra/env-utilities": "1.0.0",
+		"chalk": "4.1.2",
+		"discord.js": "13.7.0",
+		"eslint": "8.16.0"
+	},
+	"devDependencies": {
+		"@types/node": "17.0.35",
+		"@typescript-eslint/eslint-plugin": "^5.26.0",
+		"@typescript-eslint/parser": "^5.26.0",
+		"tsc-watch": "5.0.3",
+		"tsup": "6.0.1",
+		"typescript": "4.7.2",
+		"prisma": "3.14.0"
+	},
 	"imports": {
 		"#utils/*": "./dist/lib/utils/*.js",
 		"#lib/*": "./dist/lib/*.js",
 		"#lib/structures": "./dist/lib/structures/index.js",
 		"#root/*": "./dist/*.js"
-	},
-	"dependencies": {
-		"@colors/colors": "^1.5.0",
-		"@prisma/client": "^3.14.0",
-		"@sapphire/decorators": "^4.3.4",
-		"@sapphire/discord.js-utilities": "^4.11.0",
-		"@sapphire/fetch": "^2.3.1",
-		"@sapphire/framework": "^3.0.0-next.1f76366.0",
-		"@sapphire/plugin-editable-commands": "^1.2.0",
-		"@sapphire/plugin-i18next": "^2.5.2",
-		"@sapphire/plugin-logger": "^2.2.1",
-		"@sapphire/type": "2.2.4",
-		"@sapphire/utilities": "^3.6.2",
-		"@skyra/env-utilities": "^1.0.0",
-		"canvas": "^2.9.1",
-		"discord-arts": "^0.0.4",
-		"discord.js": "^13.7.0",
-		"jimp": "^0.16.1"
-	},
-	"devDependencies": {
-		"@types/node": "^17.0.35",
-		"@typescript-eslint/eslint-plugin": "5.25.0",
-		"@typescript-eslint/parser": "5.25.0",
-		"eclint": "^2.8.1",
-		"eslint": "8.16.0",
-		"prisma": "^3.14.0",
-		"tsup": "^5.12.8",
-		"typescript": "4.6.4"
-	},
-	"scripts": {
-		"build": "tsup src && node scripts/i18n.mjs",
-		"clean": "node scripts/clean.mjs",
-		"language": "node scripts/i18n.mjs",
-		"lint:err": "eslint src/ --ext .ts --cache",
-		"lint:fix": "eslint src/ --fix --ext .ts --cache",
-		"start": "node --enable-source-maps ./dist/Nino.js",
-		"style": "eclint fix 'src/**/*'",
-		"dev": "tsc-watch --onSuccess \"node --enable-source-maps dist/Nino.js\"",
-		"build:run": "tsup src && node scripts/i18n.mjs && node --enable-source-maps ./dist/Nino.js"
-	},
-	"packageManager": "yarn@1.22.18"
+	}
 }

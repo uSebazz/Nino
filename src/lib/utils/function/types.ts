@@ -1,6 +1,6 @@
 export interface serverConfig {
-	guild: string
-	config: {
-		language: string
-	}
+  guild: string
+  config: {
+    language: string
+  }
 }

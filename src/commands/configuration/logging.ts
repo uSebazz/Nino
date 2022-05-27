@@ -9,6 +9,7 @@ import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10'
 	description: 'set events for logging system',
 	aliases: ['log', 'logs']
 })
+
 export class UserCommand extends NinoCommand {
 	public choices: Array<APIApplicationCommandOptionChoice<string>> = [
 		{
@@ -45,12 +46,12 @@ export class UserCommand extends NinoCommand {
 		registery.registerChatInputCommand(
 			(builder) =>
 				builder
-				//
+					//
 					.setName(this.name)
 					.setDescription(this.description)
 					.addSubcommand((subcommand) =>
 						subcommand
-						//
+							//
 							.setName('add')
 							.setDescription('add a new event to the logging system')
 							.addStringOption((listener) =>

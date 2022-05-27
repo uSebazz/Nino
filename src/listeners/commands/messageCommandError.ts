@@ -7,7 +7,6 @@ import type { Message } from 'discord.js'
 import { Emojis } from '#utils/constans'
 
 export class messageCommandError extends Listener<typeof Events.MessageCommandError> {
-	// eslint-disable-next-line consistent-return
 	public override run(error: Error, { message }: MessageCommandErrorPayload) {
 		if (typeof error === 'string') return this.stringError(message, error)
 		if (error instanceof ArgumentError) return this.argumentError(message, error)
@@ -35,8 +34,11 @@ export class messageCommandError extends Listener<typeof Events.MessageCommandEr
 	private async userError(message: Message, error: UserError) {
 		const identifier = translate(error.identifier)
 
-		return send(message, await resolveKey(message, identifier, {
-			emoji: Emojis.fail
-		}))
+		return send(
+			message,
+			await resolveKey(message, identifier, {
+				emoji: Emojis.fail
+			})
+		)
 	}
 }

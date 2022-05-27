@@ -9,13 +9,7 @@ import {
 import { resolveKey } from '@sapphire/plugin-i18next'
 
 export class chatInputCommandDeniedListener extends Listener<typeof Events.ChatInputCommandDenied> {
-	public override async run(error: UserError, { interaction }: ChatInputCommandDeniedPayload) {
-		const identifier = translate(error.identifier)
-
-		await interaction.reply(
-			await resolveKey(interaction, identifier, {
-				emoji: Emojis.fail
-			})
-		)
+	public override run(error: UserError) {
+		console.log(error)
 	}
 }
