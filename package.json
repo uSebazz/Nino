@@ -12,7 +12,7 @@
 		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
 		"dev": "tsc-watch --onSuccess \"yarn start\"",
 		"deploy": "yarn build && yarn start",
-		"style": "yarn run eclint fix 'src/**/*'"
+		"style": "eclint fix 'src/**/*'"
 	},
 	"packageManager": "yarn@1.22.18",
 	"dependencies": {
@@ -27,18 +27,18 @@
 		"@sapphire/type": "2.2.4",
 		"@sapphire/utilities": "3.6.2",
 		"@skyra/env-utilities": "1.0.0",
-		"chalk": "4.1.2",
-		"discord.js": "13.7.0",
-		"eslint": "8.16.0"
+		"discord.js": "13.7.0"
 	},
 	"devDependencies": {
 		"@types/node": "17.0.35",
 		"@typescript-eslint/eslint-plugin": "^5.26.0",
 		"@typescript-eslint/parser": "^5.26.0",
+		"eclint": "^2.8.1",
+		"eslint": "^8.16.0",
+		"prisma": "3.14.0",
 		"tsc-watch": "5.0.3",
 		"tsup": "6.0.1",
-		"typescript": "4.7.2",
-		"prisma": "3.14.0"
+		"typescript": "4.7.2"
 	},
 	"imports": {
 		"#utils/*": "./dist/lib/utils/*.js",
