@@ -21,7 +21,7 @@ import type { Message } from 'discord.js'
 	flags: ['async', 'no-timeout', 'json', 'silent', 'log', 'showHidden', 'hidden'],
 	options: ['lang', 'output', 'depth'],
 	preconditions: ['DevOnly'],
-	quotes: [],
+	quotes: []
 })
 export class UserCommand extends NinoCommand {
 	public readonly timeout = 60000
@@ -41,7 +41,7 @@ export class UserCommand extends NinoCommand {
 			code,
 			depth: Number(depth),
 			showHidden,
-			timeout,
+			timeout
 		})
 
 		if (silent) {
@@ -65,9 +65,10 @@ export class UserCommand extends NinoCommand {
 			time,
 			footer,
 			language,
-			outputTo: outputTo as 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none',
+			outputTo: outputTo as 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none'
 		})
 	}
+
 	private timedEval(message: Message, { timeout, ...evalParameters }: EvalParameters) {
 		if (timeout === Infinity || timeout === 0) {
 			return this.eval(message, { timeout, ...evalParameters })
@@ -78,9 +79,9 @@ export class UserCommand extends NinoCommand {
 				result: `Tardo más de ${seconds.fromMilliseconds(timeout)} segundos.`,
 				success: false,
 				time: '⏱ ...',
-				type: 'EvalTimeoutError',
+				type: 'EvalTimeoutError'
 			})),
-			this.eval(message, { timeout, ...evalParameters }),
+			this.eval(message, { timeout, ...evalParameters })
 		])
 	}
 
@@ -127,15 +128,15 @@ export class UserCommand extends NinoCommand {
 				result instanceof Error
 					? result.stack
 					: inspect(result, {
-							depth,
-							showHidden,
-					  })
+						depth,
+						showHidden
+					})
 		}
 		return {
 			success,
-			type: type,
+			type,
 			time: this.formatTime(syncTime, asyncTime),
-			result: clean(result as string),
+			result: clean(result as string)
 		}
 	}
 
@@ -258,9 +259,8 @@ export class UserCommand extends NinoCommand {
 				}
 
 				const output = codeBlock(options.language, options.result)
-				const content = `${bold('Error')}:${output}\n${bold('Type')}:${options.footer}\n${
-					options.time
-				}`
+				const content = `${bold('Error')}:${output}\n${bold('Type')}:${options.footer}\n${options.time
+					}`
 				return send(message, { content })
 			}
 		}
@@ -304,7 +304,7 @@ export class UserCommand extends NinoCommand {
 			'https://hastebin.skyra.pw/documents',
 			{
 				method: FetchMethods.Post,
-				body: result,
+				body: result
 			},
 			FetchResultTypes.JSON
 		)

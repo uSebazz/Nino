@@ -27,11 +27,10 @@ export class readyListener extends Listener<typeof Events.ClientReady> {
 			String.raw`
 ${line01} ${pad}${blc('2.0.2')}
 ${line02} ${pad}[${success}] Gateway
-${line03}${
-				dev
+${line03}${dev
 					? `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MODE')}`
 					: `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('PRODUCTION MODE')}`
-			}
+				}
 		`.trim()
 		)
 	}
@@ -48,8 +47,7 @@ ${line03}${
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private styleStore(store: Store<any>, last: boolean) {
 		return gray(
-			`${last ? '└─' : '├─'} Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${
-				store.name
+			`${last ? '└─' : '├─'} Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name
 			}.`
 		)
 	}

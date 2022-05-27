@@ -5,7 +5,7 @@ import type { Guild, User } from 'discord.js'
 import type { MessageCommandSuccessPayload, Command, ListenerOptions } from '@sapphire/framework'
 
 @ApplyOptions<ListenerOptions>({
-	event: Events.MessageCommandSuccess,
+	event: Events.MessageCommandSuccess
 })
 export class MessageCommandSuccess extends Listener<typeof Events.MessageCommandSuccess> {
 	public run({ message, command }: MessageCommandSuccessPayload) {

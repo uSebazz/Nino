@@ -20,7 +20,7 @@ export class messageCommandError extends Listener<typeof Events.MessageCommandEr
 		return send(
 			message,
 			await resolveKey(message, 'arguments:string', {
-				error,
+				error
 			})
 		)
 	}

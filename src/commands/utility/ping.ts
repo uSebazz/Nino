@@ -10,8 +10,8 @@ import { Emojis } from '#utils/constans'
 	aliases: ['pong', 'latency'],
 	chatInputCommand: {
 		register: true,
-		idHints: ['974700576971587584'],
-	},
+		idHints: ['974700576971587584']
+	}
 })
 export class UserCommand extends NinoCommand {
 	public override async messageRun(message: Message): Promise<void> {
@@ -25,7 +25,7 @@ export class UserCommand extends NinoCommand {
 	public override async chatInputRun(interaction: CommandInteraction): Promise<void> {
 		const msg = await interaction.reply({
 			content: `${Emojis.ninozzz} ping?`,
-			fetchReply: true,
+			fetchReply: true
 		})
 
 		if (msg instanceof Message) {

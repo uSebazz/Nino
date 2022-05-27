@@ -7,50 +7,50 @@ import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'set events for logging system',
-	aliases: ['log', 'logs'],
+	aliases: ['log', 'logs']
 })
 export class UserCommand extends NinoCommand {
 	public choices: Array<APIApplicationCommandOptionChoice<string>> = [
 		{
 			name: 'All listeners',
-			value: 'all',
+			value: 'all'
 		},
 		{
 			name: 'Message Delete',
-			value: 'messageDelete',
+			value: 'messageDelete'
 		},
 		{
 			name: 'Message Delete Bulk',
-			value: 'messageDeleteBulk',
+			value: 'messageDeleteBulk'
 		},
 		{
 			name: 'Message Update',
-			value: 'messageUpdate',
+			value: 'messageUpdate'
 		},
 		{
 			name: 'Channel Create',
-			value: 'channelCreate',
+			value: 'channelCreate'
 		},
 		{
 			name: 'Channel Delete',
-			value: 'channelDelete',
+			value: 'channelDelete'
 		},
 		{
 			name: 'Channel Update',
-			value: 'channelUpdate',
-		},
+			value: 'channelUpdate'
+		}
 	]
 
 	public override registerApplicationCommands(registery: NinoCommandRegistery) {
 		registery.registerChatInputCommand(
 			(builder) =>
 				builder
-					//
+				//
 					.setName(this.name)
 					.setDescription(this.description)
 					.addSubcommand((subcommand) =>
 						subcommand
-							//
+						//
 							.setName('add')
 							.setDescription('add a new event to the logging system')
 							.addStringOption((listener) =>
@@ -64,7 +64,7 @@ export class UserCommand extends NinoCommand {
 			{
 				guildIds: testServer,
 				idHints: ['978075912295833661'],
-				behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+				behaviorWhenNotIdentical: RegisterBehavior.Overwrite
 			}
 		)
 	}

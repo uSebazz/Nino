@@ -1,7 +1,7 @@
 import '#lib/setup'
 import { Nino } from '#lib/structures/NinoClient'
 import { container } from '@sapphire/framework'
-;(async () => {
+;(async() => {
 	const client = new Nino()
 	try {
 		await client.start()

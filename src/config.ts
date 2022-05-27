@@ -1,7 +1,6 @@
-import chalk from 'chalk'
+import { gray, blue, green, yellow, red, bgRed } from '@colors/colors'
 import { rootFolder } from '#utils/constans'
 import { minutes } from '#utils/function/times'
-//import { Model, defaultData } from '#root/lib/database/guildConfig'
 import { BucketScope, container, LogLevel } from '@sapphire/framework'
 import { Options } from 'discord.js'
 import { join } from 'node:path'
@@ -19,28 +18,28 @@ export const OWNERS = envParseArray('CLIENT_OWNERS')
 export const loggerOptions: LoggerFormatOptions = {
 	trace: {
 		timestamp: null,
-		infix: chalk.gray('[Trace]: '),
+		infix: gray('[Trace]: ')
 	},
 	info: {
 		timestamp: null,
-		infix: chalk.blue('[Info]: '),
+		infix: blue('[Info]: ')
 	},
 	debug: {
 		timestamp: null,
-		infix: chalk.green('[Debug]: '),
+		infix: green('[Debug]: ')
 	},
 	warn: {
 		timestamp: null,
-		infix: chalk.yellow('[Warn]: '),
+		infix: yellow('[Warn]: ')
 	},
 	error: {
 		timestamp: null,
-		infix: chalk.red('[Error]: '),
+		infix: red('[Error]: ')
 	},
 	fatal: {
 		timestamp: null,
-		infix: chalk.bgRed('[Fatal]: '),
-	},
+		infix: bgRed('[Fatal]: ')
+	}
 }
 
 export const CLIENT_OPTIONS: ClientOptions = {
@@ -57,7 +56,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		'925909747994071111',
 		'844856727517003818',
 		'726505646073315408',
-		'806611727684599838',
+		'806611727684599838'
 	],
 	restTimeOffset: 0,
 	shards: 'auto',
@@ -66,8 +65,8 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		...Options.defaultSweeperSettings,
 		messages: {
 			interval: minutes.toSeconds(3),
-			lifetime: minutes.toSeconds(15),
-		},
+			lifetime: minutes.toSeconds(15)
+		}
 	},
 	intents: [
 		'GUILDS',
@@ -78,20 +77,20 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		'GUILD_MESSAGES',
 		'GUILD_MESSAGE_REACTIONS',
 		'DIRECT_MESSAGES',
-		'DIRECT_MESSAGE_REACTIONS',
+		'DIRECT_MESSAGE_REACTIONS'
 	],
 	logger: {
 		level: envParseString('NODE_ENV') === 'production' ? LogLevel.Info : LogLevel.Debug,
-		format: loggerOptions,
+		format: loggerOptions
 	},
 	presence: {
 		activities: [
 			{
 				name: '🌸 inv.nino.fun | dc.nino.fun',
-				type: 'WATCHING',
-			},
+				type: 'WATCHING'
+			}
 		],
-		status: 'idle',
+		status: 'idle'
 	},
 	i18n: {
 		fetchLanguage: async (context: InternationalizationContext) => {
@@ -99,28 +98,28 @@ export const CLIENT_OPTIONS: ClientOptions = {
 
 			let data = await container.prisma.config.findUnique({
 				where: {
-					guildId: context.guild.id,
-				},
+					guildId: context.guild.id
+				}
 			})
 			let config: Prisma.ConfigCreateInput
 
 			if (!data) {
-				;(config = {
+				(config = {
 					guildId: context.guild.id,
-					lang: 'es-ES',
+					lang: 'es-ES'
 				}),
 					(data = await container.prisma.config.create({ data: config }))
 			}
 
 			return data.lang
-		},
+		}
 	},
 	defaultCooldown: {
 		delay: 10_000,
 		filteredUsers: OWNERS,
 		limit: 2,
-		scope: BucketScope.Channel,
-	},
+		scope: BucketScope.Channel
+	}
 }
 
 export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null

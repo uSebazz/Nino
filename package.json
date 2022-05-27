@@ -12,6 +12,7 @@
 		"#root/*": "./dist/*.js"
 	},
 	"dependencies": {
+		"@colors/colors": "^1.5.0",
 		"@prisma/client": "^3.14.0",
 		"@sapphire/decorators": "^4.3.4",
 		"@sapphire/discord.js-utilities": "^4.11.0",
@@ -23,20 +24,18 @@
 		"@sapphire/type": "2.2.4",
 		"@sapphire/utilities": "^3.6.2",
 		"@skyra/env-utilities": "^1.0.0",
-		"chalk": "4.1.2",
+		"canvas": "^2.9.1",
+		"discord-arts": "^0.0.4",
 		"discord.js": "^13.7.0",
-		"ts-dotenv": "^0.8.3"
+		"jimp": "^0.16.1"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.35",
 		"@typescript-eslint/eslint-plugin": "5.25.0",
 		"@typescript-eslint/parser": "5.25.0",
+		"eclint": "^2.8.1",
 		"eslint": "8.16.0",
-		"eslint-config-prettier": "8.5.0",
-		"eslint-plugin-prettier": "4.0.0",
-		"prettier": "2.6.2",
 		"prisma": "^3.14.0",
-		"tsc-watch": "^5.0.3",
 		"tsup": "^5.12.8",
 		"typescript": "4.6.4"
 	},
@@ -46,10 +45,10 @@
 		"language": "node scripts/i18n.mjs",
 		"lint:err": "eslint src/ --ext .ts --cache",
 		"lint:fix": "eslint src/ --fix --ext .ts --cache",
-		"style": "prettier --write --loglevel=warn \"src/**/*.ts\"",
-		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
-		"dev": "tsc-watch --onSuccess \"node --preserve-symlinks --enable-source-maps dist/Nino.js\"",
-		"build:run": "tsup src && node scripts/i18n.mjs && node --preserve-symlinks --enable-source-maps ./dist/Nino.js"
+		"start": "node --enable-source-maps ./dist/Nino.js",
+		"style": "eclint fix 'src/**/*'",
+		"dev": "tsc-watch --onSuccess \"node --enable-source-maps dist/Nino.js\"",
+		"build:run": "tsup src && node scripts/i18n.mjs && node --enable-source-maps ./dist/Nino.js"
 	},
 	"packageManager": "yarn@1.22.18"
 }

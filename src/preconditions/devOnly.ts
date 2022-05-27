@@ -7,14 +7,15 @@ export class DevOnly extends Precondition {
 		return OWNERS.includes(interaction.user.id)
 			? this.ok()
 			: this.error({
-					message: '> Oops... this command is restricted to my developer...',
-			  })
+				message: '> Oops... this command is restricted to my developer...'
+			})
 	}
+
 	public override messageRun(message: Message): PreconditionResult {
 		return OWNERS.includes(message.author.id)
 			? this.ok()
 			: this.error({
-					message: '> Oops... this command is restricted to my developer...',
-			  })
+				message: '> Oops... this command is restricted to my developer...'
+			})
 	}
 }

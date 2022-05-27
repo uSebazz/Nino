@@ -8,7 +8,7 @@ import {
 	MessageActionRow,
 	MessageButton,
 	type CommandInteraction,
-	type Message,
+	type Message
 } from 'discord.js'
 import { ApplyOptions } from '@sapphire/decorators'
 import { roundNumber } from '@sapphire/utilities'
@@ -21,9 +21,9 @@ import { reply } from '@sapphire/plugin-editable-commands'
 	chatInputCommand: {
 		register: true,
 		guildIds: testServer,
-		idHints: ['974699589993111612'],
+		idHints: ['974699589993111612']
 	},
-	aliases: ['botstatus', 'status'],
+	aliases: ['botstatus', 'status']
 })
 export class UserCommand extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
@@ -36,7 +36,7 @@ export class UserCommand extends NinoCommand {
 				await resolveKey(interaction, 'commands/util:stats.field_devs'),
 				await resolveKey(interaction, 'commands/util:stats.field_devs_content', {
 					twitter: Emojis.twitter,
-					github: Emojis.github,
+					github: Emojis.github
 				})
 			)
 			.addField(
@@ -47,7 +47,7 @@ export class UserCommand extends NinoCommand {
 					users: this.botStatics.users,
 					commands: this.botStatics.commands,
 					version: this.botStatics.version,
-					sapphireVersion: this.botStatics.sapphireVersion,
+					sapphireVersion: this.botStatics.sapphireVersion
 				})
 			)
 			.addField(
@@ -56,7 +56,7 @@ export class UserCommand extends NinoCommand {
 					ramUsed: this.usageStatics.ramUsed,
 					ramTotal: this.usageStatics.ramTotal,
 					cpuLoad: this.usageStatics.cpuLoad,
-					cpuModel: this.usageStatics.cpuModel,
+					cpuModel: this.usageStatics.cpuModel
 				})
 			)
 			.setColor(Colors.prettyPutunia)
@@ -72,7 +72,7 @@ export class UserCommand extends NinoCommand {
 				await resolveKey(message, 'commands/util:stats.field_devs'),
 				await resolveKey(message, 'commands/util:stats.field_devs_content', {
 					twitter: Emojis.twitter,
-					github: Emojis.github,
+					github: Emojis.github
 				})
 			)
 			.addField(
@@ -83,7 +83,7 @@ export class UserCommand extends NinoCommand {
 					users: this.botStatics.users,
 					commands: this.botStatics.commands,
 					version: this.botStatics.version,
-					sapphireVersion: this.botStatics.sapphireVersion,
+					sapphireVersion: this.botStatics.sapphireVersion
 				})
 			)
 			.addField(
@@ -92,7 +92,7 @@ export class UserCommand extends NinoCommand {
 					ramUsed: this.usageStatics.ramUsed,
 					ramTotal: this.usageStatics.ramTotal,
 					cpuLoad: this.usageStatics.cpuLoad,
-					cpuModel: this.usageStatics.cpuModel,
+					cpuModel: this.usageStatics.cpuModel
 				})
 			)
 			.setColor(Colors.prettyPutunia)
@@ -111,9 +111,10 @@ export class UserCommand extends NinoCommand {
 					.setStyle('LINK')
 					.setLabel('Support')
 					.setURL('https://dc.nino.fun')
-			),
+			)
 		]
 	}
+
 	private get botStatics(): StatsNino {
 		return {
 			users: this.container.client.guilds.cache.reduce(
@@ -124,7 +125,7 @@ export class UserCommand extends NinoCommand {
 			channels: this.container.client.channels.cache.size,
 			commands: this.container.stores.get('commands').size,
 			version: `v${discordVersion}`,
-			sapphireVersion: `v${sapphireVersion.replace(this.#sapphireVersion, '')}`,
+			sapphireVersion: `v${sapphireVersion.replace(this.#sapphireVersion, '')}`
 		}
 	}
 
@@ -135,15 +136,15 @@ export class UserCommand extends NinoCommand {
 			cpuLoad: cpus().slice(0, 2).map(UserCommand.formatCpuInfo.bind(null)).join(' | '),
 			cpuModel: cpus()[0]!.model,
 			ramTotal: `${Math.round(usage.heapTotal / 1024 / 1024)}MB`,
-			ramUsed: `${Math.round(usage.heapUsed / 1024 / 1024)}MB`,
+			ramUsed: `${Math.round(usage.heapUsed / 1024 / 1024)}MB`
 		}
 	}
 
 	private static formatCpuInfo({ times }: CpuInfo) {
 		return `${
-			roundNumber(((times.user + times.nice + times.sys + times.irq) / times.idle) * 10000) /
+						roundNumber(((times.user + times.nice + times.sys + times.irq) / times.idle) * 10000) /
 			100
-		}%`
+				}%`
 	}
 }
 

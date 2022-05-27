@@ -4,8 +4,16 @@ import '@sapphire/plugin-i18next/register'
 import '@sapphire/plugin-editable-commands/register'
 
 // declare things
+import { registerFont } from 'canvas'
 import type { ArrayString } from '@skyra/env-utilities'
 import type { PrismaClient } from '@prisma/client'
+
+registerFont(`${process.cwd()}/src/lib/fonts/Helvetica-Bold.ttf`, {
+	family: 'Helvetica Bold'
+})
+registerFont(`${process.cwd()}/src/lib/assets/fonts/Helvetica.ttf`, {
+	family: 'Helvetica Normal'
+})
 
 declare module '@sapphire/framework' {
 	interface Preconditions {
@@ -23,7 +31,7 @@ declare module '@sapphire/pieces' {
 declare module '@skyra/env-utilities' {
 	interface Env {
 		DISCORD_TOKEN: string
-		MONGO_URL: string
+		API_URL: string
 		CLIENT_OWNERS: ArrayString
 	}
 }

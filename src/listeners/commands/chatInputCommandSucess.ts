@@ -5,7 +5,7 @@ import { ApplyOptions } from '@sapphire/decorators'
 import type { Guild, User } from 'discord.js'
 
 @ApplyOptions<ListenerOptions>({
-	event: Events.ChatInputCommandSuccess,
+	event: Events.ChatInputCommandSuccess
 })
 export class ChatInputCommandSuccess extends Listener<typeof Events.ChatInputCommandSuccess> {
 	public run({ interaction, command }: ChatInputCommandSuccessPayload) {
