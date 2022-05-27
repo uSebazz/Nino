@@ -9,147 +9,148 @@ import { setTimeout as wait } from 'node:timers/promises'
 import type { Message, SelectMenuInteraction, CommandInteraction } from 'discord.js'
 
 @ApplyOptions<NinoCommandOptions>({
-	description: 'Configure the bot language',
-	aliases: ['config-lang', 'configure-language', 'setting-language', 'lang'],
-	preconditions: ['Administrator'],
-	chatInputCommand: {
-		register: true,
-		guildIds: testServer,
-		idHints: ['974699587501715566'],
-	},
+  description: 'Configure the bot language',
+  aliases: ['config-lang', 'configure-language', 'setting-language', 'lang'],
+  preconditions: ['Administrator'],
+  chatInputCommand: {
+    register: true,
+    guildIds: testServer,
+    idHints: ['974699587501715566']
+  }
 })
+
 export class UserCommand extends NinoCommand {
-	public override async chatInputRun(interaction: CommandInteraction) {
-		const content = await resolveKey(interaction, 'commands/config:language.select', {
-			emoji: Emojis.emergency,
-		})
+  public override async chatInputRun(interaction: CommandInteraction) {
+    const content = await resolveKey(interaction, 'commands/config:language.select', {
+      emoji: Emojis.emergency
+    })
 
-		await interaction.reply({ content: 'Enviado!', ephemeral: true })
+    await interaction.reply({ content: 'Enviado!', ephemeral: true })
 
-		const msg = await interaction.channel!.send({
-			content,
-			components: this.components,
-		})
+    const msg = await interaction.channel!.send({
+      content,
+      components: this.components
+    })
 
-		return this.collector(msg, {
-			int: interaction,
-		})
-	}
+    return this.collector(msg, {
+      int: interaction
+    })
+  }
 
-	public override async messageRun(message: Message) {
-		const content = await resolveKey(message, 'commands/config:language.select', {
-			emoji: Emojis.emergency,
-		})
+  public override async messageRun(message: Message) {
+    const content = await resolveKey(message, 'commands/config:language.select', {
+      emoji: Emojis.emergency
+    })
 
-		const msg = await send(message, {
-			content,
-			components: this.components,
-		})
+    const msg = await send(message, {
+      content,
+      components: this.components
+    })
 
-		return this.collector(msg, {
-			message,
-		})
-	}
+    return this.collector(msg, {
+      message
+    })
+  }
 
-	private async collector(
-		msg: Message<boolean>,
-		{ message, int }: { message?: Message; int?: CommandInteraction }
-	) {
-		const languages = {
-			spanish: 'es-ES',
-			english: 'en-US',
-			german: 'de-DE',
-		}
-		const timefinish = await resolveKey(msg, 'commands/config:language.timefinish', {
-			emoji: Emojis.pending,
-		})
+  private async collector(
+    msg: Message<boolean>,
+    { message, int }: { message?: Message; int?: CommandInteraction }
+  ) {
+    const languages = {
+      spanish: 'es-ES',
+      english: 'en-US',
+      german: 'de-DE'
+    }
+    const timefinish = await resolveKey(msg, 'commands/config:language.timefinish', {
+      emoji: Emojis.pending
+    })
 
-		const collector = msg.createMessageComponentCollector({
-			filter: async (interaction) => {
-				const content = await resolveKey(interaction, 'commands/config:language.filter', {
-					emoji: Emojis.fail,
-				})
+    const collector = msg.createMessageComponentCollector({
+      filter: async(interaction) => {
+        const content = await resolveKey(interaction, 'commands/config:language.filter', {
+          emoji: Emojis.fail
+        })
 
-				if (interaction.user.id === message?.author.id || int?.user.id) {
-					return true
-				} else {
-					await interaction.reply({ content, ephemeral: true })
-					return false
-				}
-			},
-			idle: 60000,
-		})
+        if (interaction.user.id === message?.author.id || int?.user.id) {
+          return true
+        } else {
+          await interaction.reply({ content, ephemeral: true })
+          return false
+        }
+      },
+      idle: 60000
+    })
 
-		collector.on('collect', async (interaction: SelectMenuInteraction) => {
-			const guildLocale = await fetchLanguage(interaction)
-			const values = interaction.values[0] as 'spanish' | 'english' | 'german'
+    collector.on('collect', async(interaction: SelectMenuInteraction) => {
+      const guildLocale = await fetchLanguage(interaction)
+      const values = interaction.values[0] as 'spanish' | 'english' | 'german'
 
-			// Keys of the language
-			const content = await resolveKey(interaction, 'commands/config:language.already', {
-				emoji: Emojis.fail,
-			})
-			const done = await resolveKey(interaction, 'commands/config:language.done', {
-				emoji: Emojis.check,
-				lang: languages[values],
-			})
+      // Keys of the language
+      const content = await resolveKey(interaction, 'commands/config:language.already', {
+        emoji: Emojis.fail
+      })
+      const done = await resolveKey(interaction, 'commands/config:language.done', {
+        emoji: Emojis.check,
+        lang: languages[values]
+      })
 
-			// If the language is already set
-			if (guildLocale === languages[values]) {
-				await interaction.reply({ content, ephemeral: true })
-			} else {
-				// Update the language of the guild
-				await this.container.prisma.config.update({
-					where: {
-						guildId: interaction.guildId as string,
-					},
-					data: {
-						lang: languages[values],
-					},
-				})
+      // If the language is already set
+      if (guildLocale === languages[values]) {
+        await interaction.reply({ content, ephemeral: true })
+      } else {
+        // Update the language of the guild
+        await this.container.prisma.config.update({
+          where: {
+            guildId: interaction.guildId as string
+          },
+          data: {
+            lang: languages[values]
+          }
+        })
 
-				// Send the message
-				await interaction.reply({
-					content: done,
-					ephemeral: true,
-				})
+        // Send the message
+        await interaction.reply({
+          content: done,
+          ephemeral: true
+        })
 
-				// Stop the collector
-				await wait(5000).then(() => collector.stop())
-			}
-		})
+        // Stop the collector
+        await wait(5000).then(() => collector.stop())
+      }
+    })
 
-		collector.on('end', async () => {
-			await msg.edit({
-				content: timefinish,
-				components: [],
-			})
-		})
-	}
+    collector.on('end', async() => {
+      await msg.edit({
+        content: timefinish,
+        components: []
+      })
+    })
+  }
 
-	private get components(): MessageActionRow[] {
-		return [
-			new MessageActionRow().addComponents([
-				new MessageSelectMenu()
-					.setCustomId('menu')
-					.setPlaceholder('Select a language')
-					.addOptions([
-						{
-							label: 'English - (USA).',
-							emoji: '🇺🇲',
-							value: 'english',
-						},
-						{
-							label: 'Español - (México)',
-							emoji: '🇲🇽',
-							value: 'spanish',
-						},
-						{
-							label: 'German - (Deutchland)',
-							emoji: '🇩🇪',
-							value: 'german',
-						},
-					]),
-			]),
-		]
-	}
+  private get components(): MessageActionRow[] {
+    return [
+      new MessageActionRow().addComponents([
+        new MessageSelectMenu()
+          .setCustomId('menu')
+          .setPlaceholder('Select a language')
+          .addOptions([
+            {
+              label: 'English - (USA).',
+              emoji: '🇺🇲',
+              value: 'english'
+            },
+            {
+              label: 'Español - (México)',
+              emoji: '🇲🇽',
+              value: 'spanish'
+            },
+            {
+              label: 'German - (Deutchland)',
+              emoji: '🇩🇪',
+              value: 'german'
+            }
+          ])
+      ])
+    ]
+  }
 }
