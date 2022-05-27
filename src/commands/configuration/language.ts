@@ -59,6 +59,7 @@ export class UserCommand extends NinoCommand {
 			spanish: 'es-ES',
 			english: 'en-US',
 			german: 'de-DE',
+			french: 'fr-FR'
 		}
 		const timefinish = await resolveKey(msg, 'commands/config:language.timefinish', {
 			emoji: Emojis.pending,
@@ -148,6 +149,11 @@ export class UserCommand extends NinoCommand {
 							emoji: '🇩🇪',
 							value: 'german',
 						},
+						{
+							label: 'French - (France)',
+							emoji: '🇩🇪',
+							value: 'french',
+						}
 					]),
 			]),
 		]
