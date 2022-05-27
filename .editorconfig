@@ -6,8 +6,8 @@ end_of_line = lf
 insert_final_newline = true
 
 [*.{js,ts,mjs}]
-indent_size = 2
-indent_style = space
+indent_size = 4
+indent_style = tab
 
 [*.{md,markdown}]
 tab_width = 4
