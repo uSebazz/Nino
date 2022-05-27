@@ -30,7 +30,6 @@
 		"chalk": "4.1.2",
 		"discord.js": "13.7.0",
 		"eslint": "8.16.0",
-		"ts-dotenv": "0.8.3"
 	},
 	"devDependencies": {
 		"@eslint/create-config": "^0.2.0",
