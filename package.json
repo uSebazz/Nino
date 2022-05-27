@@ -28,6 +28,7 @@
 		"@sapphire/type": "2.2.4",
 		"@sapphire/utilities": "3.6.2",
 		"@skyra/env-utilities": "1.0.0",
+		"canvas": "^2.9.1",
 		"discord.js": "13.7.0"
 	},
 	"devDependencies": {
