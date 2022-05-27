@@ -151,7 +151,7 @@ export class UserCommand extends NinoCommand {
 						},
 						{
 							label: 'French - (France)',
-							emoji: '🇩🇪',
+							emoji: '🇫🇷',
 							value: 'french',
 						}
 					]),
