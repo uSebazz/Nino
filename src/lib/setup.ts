@@ -4,16 +4,9 @@ import '@sapphire/plugin-i18next/register'
 import '@sapphire/plugin-editable-commands/register'
 
 // declare things
-import { registerFont } from 'canvas'
 import type { ArrayString } from '@skyra/env-utilities'
 import type { PrismaClient } from '@prisma/client'
 
-registerFont(`${process.cwd()}/src/lib/assets/fonts/Helvetica-Bold.ttf`, {
-	family: 'Helvetica Bold',
-})
-registerFont(`${process.cwd()}/src/lib/assets/fonts/Helvetica.ttf`, {
-	family: 'Helvetica Normal',
-})
 
 declare module '@sapphire/framework' {
 	interface Preconditions {
