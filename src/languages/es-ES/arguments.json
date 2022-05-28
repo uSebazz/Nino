@@ -1,4 +1,4 @@
 {
-	"string": "Uh, parece que sucedió un error. {{error}}",
-	"missing": "{{emoji}} - ¡Un parametro hace falta!\n> Usa n!help [comando] para ver ese parametro"
+    "string": "Uh, parece que sucedió un error. {{error}}",
+    "missing": "{{emoji}} - ¡Un parametro hace falta!\n> Usa n!help [comando] para ver ese parametro"
 }

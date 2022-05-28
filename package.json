@@ -6,7 +6,7 @@
 	"license": "Apache-2.0",
 	"main": "dist/Nino.js",
 	"scripts": {
-		"build": "yarn style && tsup src && node scripts/i18n.mjs",
+		"build": "tsup src && node scripts/i18n.mjs",
 		"clean": "node scripts/clean.mjs",
 		"lang": "node scripts/i18n.mjs",
 		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
@@ -29,6 +29,7 @@
 		"@sapphire/utilities": "3.6.2",
 		"@skyra/env-utilities": "1.0.0",
 		"canvas": "^2.9.1",
+		"discord-arts": "^0.0.4",
 		"discord.js": "13.7.0"
 	},
 	"devDependencies": {
@@ -45,6 +46,7 @@
 	"imports": {
 		"#utils/*": "./dist/lib/utils/*.js",
 		"#lib/*": "./dist/lib/*.js",
+		"#lib/i18n": "./dist/lib/i18n/index.js",
 		"#lib/structures": "./dist/lib/structures/index.js",
 		"#root/*": "./dist/*.js"
 	}

@@ -1,4 +1,7 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
+import {
+	NinoCommand,
+	type NinoCommandOptions,
+} from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
 import { Emojis } from '#utils/constans'
 import { ApplyOptions } from '@sapphire/decorators'
@@ -6,7 +9,11 @@ import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
 import { MessageActionRow, MessageSelectMenu } from 'discord.js'
 import { setTimeout as wait } from 'node:timers/promises'
-import type { Message, SelectMenuInteraction, CommandInteraction } from 'discord.js'
+import type {
+	Message,
+	SelectMenuInteraction,
+	CommandInteraction,
+} from 'discord.js'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Configure the bot language',
@@ -15,40 +22,47 @@ import type { Message, SelectMenuInteraction, CommandInteraction } from 'discord
 	chatInputCommand: {
 		register: true,
 		guildIds: testServer,
-		idHints: ['974699587501715566']
-	}
+		idHints: ['974699587501715566'],
+	},
 })
-
 export class UserCommand extends NinoCommand {
 	public override async chatInputRun(interaction: CommandInteraction) {
-		const content = await resolveKey(interaction, 'commands/config:language.select', {
-			emoji: Emojis.emergency
-		})
+		const content = await resolveKey(
+			interaction,
+			'commands/config:language.select',
+			{
+				emoji: Emojis.emergency,
+			}
+		)
 
 		await interaction.reply({ content: 'Enviado!', ephemeral: true })
 
 		const msg = await interaction.channel!.send({
 			content,
-			components: this.components
+			components: this.components,
 		})
 
 		return this.collector(msg, {
-			int: interaction
+			int: interaction,
 		})
 	}
 
 	public override async messageRun(message: Message) {
-		const content = await resolveKey(message, 'commands/config:language.select', {
-			emoji: Emojis.emergency
-		})
+		const content = await resolveKey(
+			message,
+			'commands/config:language.select',
+			{
+				emoji: Emojis.emergency,
+			}
+		)
 
 		const msg = await send(message, {
 			content,
-			components: this.components
+			components: this.components,
 		})
 
 		return this.collector(msg, {
-			message
+			message,
 		})
 	}
 
@@ -59,40 +73,62 @@ export class UserCommand extends NinoCommand {
 		const languages = {
 			spanish: 'es-ES',
 			english: 'en-US',
-			german: 'de-DE'
+			german: 'de-DE',
 		}
-		const timefinish = await resolveKey(msg, 'commands/config:language.timefinish', {
-			emoji: Emojis.pending
-		})
+		const timefinish = await resolveKey(
+			msg,
+			'commands/config:language.timefinish',
+			{
+				emoji: Emojis.pending,
+			}
+		)
 
 		const collector = msg.createMessageComponentCollector({
 			filter: async (interaction) => {
-				const content = await resolveKey(interaction, 'commands/config:language.filter', {
-					emoji: Emojis.fail
-				})
+				const content = await resolveKey(
+					interaction,
+					'commands/config:language.filter',
+					{
+						emoji: Emojis.fail,
+					}
+				)
 
-				if (interaction.user.id === message?.author.id || int?.user.id) {
+				if (
+					interaction.user.id === message?.author.id ||
+					int?.user.id
+				) {
 					return true
 				} else {
 					await interaction.reply({ content, ephemeral: true })
 					return false
 				}
 			},
-			idle: 60000
+			idle: 60000,
 		})
 
 		collector.on('collect', async (interaction: SelectMenuInteraction) => {
 			const guildLocale = await fetchLanguage(interaction)
-			const values = interaction.values[0] as 'spanish' | 'english' | 'german'
+			const values = interaction.values[0] as
+				| 'spanish'
+				| 'english'
+				| 'german'
 
 			// Keys of the language
-			const content = await resolveKey(interaction, 'commands/config:language.already', {
-				emoji: Emojis.fail
-			})
-			const done = await resolveKey(interaction, 'commands/config:language.done', {
-				emoji: Emojis.check,
-				lang: languages[values]
-			})
+			const content = await resolveKey(
+				interaction,
+				'commands/config:language.already',
+				{
+					emoji: Emojis.fail,
+				}
+			)
+			const done = await resolveKey(
+				interaction,
+				'commands/config:language.done',
+				{
+					emoji: Emojis.check,
+					lang: languages[values],
+				}
+			)
 
 			// If the language is already set
 			if (guildLocale === languages[values]) {
@@ -101,17 +137,17 @@ export class UserCommand extends NinoCommand {
 				// Update the language of the guild
 				await this.container.prisma.config.update({
 					where: {
-						guildId: interaction.guildId as string
+						guildId: interaction.guildId as string,
 					},
 					data: {
-						lang: languages[values]
-					}
+						lang: languages[values],
+					},
 				})
 
 				// Send the message
 				await interaction.reply({
 					content: done,
-					ephemeral: true
+					ephemeral: true,
 				})
 
 				// Stop the collector
@@ -122,7 +158,7 @@ export class UserCommand extends NinoCommand {
 		collector.on('end', async () => {
 			await msg.edit({
 				content: timefinish,
-				components: []
+				components: [],
 			})
 		})
 	}
@@ -137,20 +173,20 @@ export class UserCommand extends NinoCommand {
 						{
 							label: 'English - (USA).',
 							emoji: '🇺🇲',
-							value: 'english'
+							value: 'english',
 						},
 						{
 							label: 'Español - (México)',
 							emoji: '🇲🇽',
-							value: 'spanish'
+							value: 'spanish',
 						},
 						{
 							label: 'German - (Deutchland)',
 							emoji: '🇩🇪',
-							value: 'german'
-						}
-					])
-			])
+							value: 'german',
+						},
+					]),
+			]),
 		]
 	}
 }

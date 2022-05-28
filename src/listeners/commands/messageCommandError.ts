@@ -6,10 +6,14 @@ import type { Events, MessageCommandErrorPayload } from '@sapphire/framework'
 import type { Message } from 'discord.js'
 import { Emojis } from '#utils/constans'
 
-export class messageCommandError extends Listener<typeof Events.MessageCommandError> {
+export class messageCommandError extends Listener<
+	typeof Events.MessageCommandError
+> {
 	public override run(error: Error, { message }: MessageCommandErrorPayload) {
 		if (typeof error === 'string') return this.stringError(message, error)
-		if (error instanceof ArgumentError) return this.argumentError(message, error)
+		if (error instanceof ArgumentError) {
+			return this.argumentError(message, error)
+		}
 		if (error instanceof UserError) return this.userError(message, error)
 
 		return null
@@ -19,7 +23,7 @@ export class messageCommandError extends Listener<typeof Events.MessageCommandEr
 		return send(
 			message,
 			await resolveKey(message, 'arguments:string', {
-				error
+				error,
 			})
 		)
 	}
@@ -37,7 +41,7 @@ export class messageCommandError extends Listener<typeof Events.MessageCommandEr
 		return send(
 			message,
 			await resolveKey(message, identifier, {
-				emoji: Emojis.fail
+				emoji: Emojis.fail,
 			})
 		)
 	}

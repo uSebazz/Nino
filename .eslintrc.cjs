@@ -58,6 +58,7 @@ module.exports = {
 		'newline-per-chained-call': 'error',
 		'no-constructor-return': 'error',
 		'no-multiple-empty-lines': 'error',
+		'no-mixed-spaces-and-tabs': 'off',
 		'no-nested-ternary': 'error',
 		'no-return-await': 'error',
 		'no-template-curly-in-string': 'error',

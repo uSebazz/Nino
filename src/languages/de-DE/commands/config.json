@@ -1,9 +1,9 @@
 {
-	"language": {
-		"select": "{{emoji}} - Wählen Sie die Sprache für diesen Server",
-		"already": "{{emoji}} - Oh, diese Sprache ist bereits für diesen Server ausgewählt",
-		"filter": "{{emoji}} - Dieses Menü gehört nicht zu Ihnen...",
-		"done": "{{emoji}} - Die Serversprache ist jetzt `{{lang}}` :D",
-		"timefinish": "{{emoji}} - Fertige Interaktion. Danke, dass du das Menü benutzt hast! :D"
-	}
+    "language": {
+        "select": "{{emoji}} - Wählen Sie die Sprache für diesen Server",
+        "already": "{{emoji}} - Oh, diese Sprache ist bereits für diesen Server ausgewählt",
+        "filter": "{{emoji}} - Dieses Menü gehört nicht zu Ihnen...",
+        "done": "{{emoji}} - Die Serversprache ist jetzt `{{lang}}` :D",
+        "timefinish": "{{emoji}} - Fertige Interaktion. Danke, dass du das Menü benutzt hast! :D"
+    }
 }

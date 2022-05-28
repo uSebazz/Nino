@@ -7,7 +7,7 @@ import { roundNumber } from '@sapphire/utilities'
  * @returns The amount of milliseconds `seconds` equals to.
  */
 export function seconds(seconds: number): number {
-  return seconds * Time.Second
+	return seconds * Time.Second
 }
 
 /**
@@ -15,7 +15,8 @@ export function seconds(seconds: number): number {
  * @param milliseconds The amount of milliseconds
  * @returns The amount of seconds `milliseconds` equals to.
  */
-seconds.fromMilliseconds = (milliseconds: number): number => roundNumber(milliseconds / Time.Second)
+seconds.fromMilliseconds = (milliseconds: number): number =>
+	roundNumber(milliseconds / Time.Second)
 
 /**
  * Converts a number of minutes to milliseconds.
@@ -23,7 +24,7 @@ seconds.fromMilliseconds = (milliseconds: number): number => roundNumber(millise
  * @returns The amount of milliseconds `minutes` equals to.
  */
 export function minutes(minutes: number): number {
-  return minutes * Time.Minute
+	return minutes * Time.Minute
 }
 
 /**
@@ -31,7 +32,8 @@ export function minutes(minutes: number): number {
  * @param value The amount of minutes
  * @returns The amount of seconds `value` equals to.
  */
-minutes.toSeconds = (value: number): number => roundNumber(minutes(value) / Time.Second)
+minutes.toSeconds = (value: number): number =>
+	roundNumber(minutes(value) / Time.Second)
 
 /**
  * Converts a number of hours to milliseconds.
@@ -39,7 +41,7 @@ minutes.toSeconds = (value: number): number => roundNumber(minutes(value) / Time
  * @returns The amount of milliseconds `hours` equals to.
  */
 export function hours(hours: number): number {
-  return hours * Time.Hour
+	return hours * Time.Hour
 }
 
 /**
@@ -48,7 +50,7 @@ export function hours(hours: number): number {
  * @returns The amount of milliseconds `days` equals to.
  */
 export function days(days: number): number {
-  return days * Time.Day
+	return days * Time.Day
 }
 
 /**
@@ -57,7 +59,7 @@ export function days(days: number): number {
  * @returns The amount of milliseconds `months` equals to.
  */
 export function months(months: number): number {
-  return months * Time.Month
+	return months * Time.Month
 }
 
 /**
@@ -66,5 +68,5 @@ export function months(months: number): number {
  * @returns The amount of milliseconds `years` equals to.
  */
 export function years(years: number): number {
-  return years * Time.Year
+	return years * Time.Year
 }

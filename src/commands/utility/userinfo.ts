@@ -1,18 +1,21 @@
-import { NinoCommand, type NinoCommandOptions, type NinoCommandRegistery } from '#lib/structures'
+import {
+	NinoCommand,
+	type NinoCommandOptions,
+	type NinoCommandRegistery,
+} from '#lib/structures'
 import { ApplyOptions } from '@sapphire/decorators'
-//import { envParseString } from '@skyra/env-utilities'
-//import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch'
-//import { createCanvas } from 'canvas'
-//import { read } from 'jimp'
-import type { Message, CommandInteraction } from 'discord.js'
-//import moment from 'moment'
-
+import { createCanvas } from 'canvas'
+import { read } from 'jimp'
+import type { Message, CommandInteraction, User } from 'discord.js'
+import moment from 'moment'
 @ApplyOptions<NinoCommandOptions>({
 	description: 'view user information',
-	aliases: ['ui', 'user', 'info-user', 'whois']
+	aliases: ['ui', 'user', 'info-user', 'whois'],
 })
 export class UserCommand extends NinoCommand {
-	public override registerApplicationCommands(registery: NinoCommandRegistery) {
+	public override registerApplicationCommands(
+		registery: NinoCommandRegistery
+	) {
 		registery.registerChatInputCommand((builder) =>
 			builder
 				//
@@ -44,7 +47,7 @@ export class UserCommand extends NinoCommand {
 		return message.reply('Not implemented yet')
 	}
 
-	/*private async canvas(user: User) {
+	private async canvas(user: User) {
 		let userName = user.username
 		if (userName.length >= 10) userName = `${userName.substring(0, 10)}...`
 
@@ -66,27 +69,65 @@ export class UserCommand extends NinoCommand {
 		ctx.font = '23px Helvetica Normal'
 		ctx.textAlign = 'center'
 		ctx.fillStyle = '#c7c7c7'
-		ctx.fillText(`${moment(user.createdAt).format('MMM DD, YYYY')}`, 775, 273)
+		ctx.fillText(
+			`${moment(user.createdAt).format('MMM DD, YYYY')}`,
+			775,
+			273
+		)
 
-		const userAvatar = user.avatarURL({ format: 'png', size: 1024 }) as string
+		const userAvatar = user.avatarURL({
+			format: 'png',
+			size: 1024,
+		}) as string
 		let background = userAvatar
 
 		if (user.bannerURL()) {
-			background = user.bannerURL({ format: 'png', dynamic: false }) as string
+			background = user.bannerURL({
+				format: 'png',
+				dynamic: false,
+			}) as string
 		}
 
 		// read bases image for the background
 		const canvasJimp = await read(canvas.toBuffer())
-		const base = await read(`${process.cwd()}/src/lib/assets/canvas/base.png`)
-		const profile = await read(`${process.cwd()}/src/lib/assets/canvas/profile.png`)
-		const mask = await read(`${process.cwd()}/src/lib/assets/canvas/mask.png`)
-		const mark = await read(`${process.cwd()}/src/lib/assets/canvas/mark.png`)
-		const empty = await read(`${process.cwd()}/src/lib/assets/canvas/empty.png`)
+		const base = await read(
+			`${process.cwd()}/src/lib/assets/canvas/base.png`
+		)
+		const profile = await read(
+			`${process.cwd()}/src/lib/assets/canvas/profile.png`
+		)
+		const mask = await read(
+			`${process.cwd()}/src/lib/assets/canvas/mask.png`
+		)
+		const mark = await read(
+			`${process.cwd()}/src/lib/assets/canvas/mark.png`
+		)
+		const empty = await read(
+			`${process.cwd()}/src/lib/assets/canvas/empty.png`
+		)
 
 		// Avatar and background
 		const avatarBackground = await read(background)
 		const avatarProfile = await read(userAvatar)
 
+		if (user.bannerURL() !== null) {
+			avatarBackground.resize(885, 303)
+			avatarBackground.opaque()
+			avatarBackground.blur(5)
+			base.composite(avatarBackground, 0, 0)
+		} else {
+			avatarBackground.resize(900, -1)
+			avatarBackground.opaque()
+			avatarBackground.blur(5)
+			base.composite(avatarBackground, 0, -345)
+		}
 
-	}*/
+		canvasJimp.shadow({ size: 1, opacity: 0.3, y: 3, x: 0, blur: 2 })
+		base.composite(profile, 0, 0)
+		base.composite(canvasJimp, 0, 0)
+
+		avatarProfile.resize(225, 225)
+		avatarProfile.opaque()
+		avatarProfile.circle()
+	}
 }

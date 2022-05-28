@@ -1,15 +1,15 @@
 {
-	"disabled": "{{emoji}} - This command is disabled on this server",
-	"cooldown": "{{emoji}} - You just used the command, wait {{remaining, duration}} seconds to use it again",
-	"dmOnly": "{{emoji}} - This command only works on private messages.",
-	"guildNewsOnly": "{{emoji}} - This command only works on news feeds.",
-	"guildNewsThread": "{{emoji}} - This command only works on news channel threads.",
-	"guildOnly": "{{emoji}} - This command only works on servers.",
-	"guildPrivateThreadOnly": "{{emoji}} - This command only works on private threads.",
-	"guildPublicThreadOnly": "{{emoji}} - This command only works in public threads.",
-	"guildTextOnly": "{{emoji}} - This command only works in text channels.",
-	"nsfw": "{{emoji}} - This command only works on NSFW channels",
-	"clientPermissions": "{{emoji}} - Uhh, I don't have the **permissions needed** to run this command. :(\n> **Permissions**: {{missing}}",
-	"userPermissions": "{{emoji}} - Uhh, you don't have the **permissions required** to run this command. :(\n> **Permissions**: {{missing}}",
-	"threadOnly": "{{emoji}} - This command only works in threads."
+    "disabled": "{{emoji}} - This command is disabled on this server",
+    "cooldown": "{{emoji}} - You just used the command, wait {{remaining, duration}} seconds to use it again",
+    "dmOnly": "{{emoji}} - This command only works on private messages.",
+    "guildNewsOnly": "{{emoji}} - This command only works on news feeds.",
+    "guildNewsThread": "{{emoji}} - This command only works on news channel threads.",
+    "guildOnly": "{{emoji}} - This command only works on servers.",
+    "guildPrivateThreadOnly": "{{emoji}} - This command only works on private threads.",
+    "guildPublicThreadOnly": "{{emoji}} - This command only works in public threads.",
+    "guildTextOnly": "{{emoji}} - This command only works in text channels.",
+    "nsfw": "{{emoji}} - This command only works on NSFW channels",
+    "clientPermissions": "{{emoji}} - Uhh, I don't have the **permissions needed** to run this command. :(\n> **Permissions**: {{missing}}",
+    "userPermissions": "{{emoji}} - Uhh, you don't have the **permissions required** to run this command. :(\n> **Permissions**: {{missing}}",
+    "threadOnly": "{{emoji}} - This command only works in threads."
 }

@@ -1,11 +1,18 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures/NinoCommand'
+import {
+	NinoCommand,
+	type NinoCommandOptions,
+} from '#lib/structures/NinoCommand'
 import { clean } from '#utils/sanitizer/clean'
 import { seconds } from '#utils/function/times'
 import { send } from '@sapphire/plugin-editable-commands'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Stopwatch } from '@sapphire/stopwatch'
 import { canSendMessages } from '@sapphire/discord.js-utilities'
-import { isThenable, codeBlock, filterNullAndUndefinedAndEmpty } from '@sapphire/utilities'
+import {
+	isThenable,
+	codeBlock,
+	filterNullAndUndefinedAndEmpty,
+} from '@sapphire/utilities'
 import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch'
 import { Type } from '@sapphire/type'
 import { bold } from '@discordjs/builders'
@@ -46,10 +53,18 @@ interface EvalParameters {
 @ApplyOptions<NinoCommandOptions>({
 	aliases: ['e', 'ev'],
 	description: 'Evaluates JavaScript code',
-	flags: ['async', 'no-timeout', 'json', 'silent', 'log', 'showHidden', 'hidden'],
+	flags: [
+		'async',
+		'no-timeout',
+		'json',
+		'silent',
+		'log',
+		'showHidden',
+		'hidden',
+	],
 	options: ['lang', 'output', 'depth'],
 	preconditions: ['DevOnly'],
-	quotes: []
+	quotes: [],
 })
 export class UserCommand extends NinoCommand {
 	public readonly timeout = 60000
@@ -60,7 +75,8 @@ export class UserCommand extends NinoCommand {
 		const async = args.getFlags('async')
 		const depth = (args.getOption('depth') ?? 0) || 0
 		const showHidden = args.getFlags('showHidden', 'hidden')
-		const language = args.getOption('lang') ?? (args.getFlags('json') ? 'json' : 'js')
+		const language =
+			args.getOption('lang') ?? (args.getFlags('json') ? 'json' : 'js')
 		const outputTo = args.getOption('output') ?? 'reply'
 		const timeout = flagTime ? Infinity : this.timeout
 
@@ -69,7 +85,7 @@ export class UserCommand extends NinoCommand {
 			code,
 			depth: Number(depth),
 			showHidden,
-			timeout
+			timeout,
 		})
 
 		if (silent) {
@@ -93,27 +109,41 @@ export class UserCommand extends NinoCommand {
 			time,
 			footer,
 			language,
-			outputTo: outputTo as 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none'
+			outputTo: outputTo as
+				| 'reply'
+				| 'file'
+				| 'hastebin'
+				| 'console'
+				| 'exec'
+				| 'none',
 		})
 	}
 
-	private timedEval(message: Message, { timeout, ...evalParameters }: EvalParameters) {
+	private timedEval(
+		message: Message,
+		{ timeout, ...evalParameters }: EvalParameters
+	) {
 		if (timeout === Infinity || timeout === 0) {
 			return this.eval(message, { timeout, ...evalParameters })
 		}
 
 		return Promise.race([
 			sleep(timeout).then(() => ({
-				result: `Tardo más de ${seconds.fromMilliseconds(timeout)} segundos.`,
+				result: `Tardo más de ${seconds.fromMilliseconds(
+					timeout
+				)} segundos.`,
 				success: false,
 				time: '⏱ ...',
-				type: 'EvalTimeoutError'
+				type: 'EvalTimeoutError',
 			})),
-			this.eval(message, { timeout, ...evalParameters })
+			this.eval(message, { timeout, ...evalParameters }),
 		])
 	}
 
-	private async eval(message: Message, { code, async, depth, showHidden }: EvalParameters) {
+	private async eval(
+		message: Message,
+		{ code, async, depth, showHidden }: EvalParameters
+	) {
 		const stopwatch = new Stopwatch()
 		let success: boolean
 		let syncTime = ''
@@ -152,13 +182,16 @@ export class UserCommand extends NinoCommand {
 
 		stopwatch.stop()
 		if (typeof result !== 'string') {
-			result = result instanceof Error ? result.stack : inspect(result, { depth, showHidden })
+			result =
+				result instanceof Error
+					? result.stack
+					: inspect(result, { depth, showHidden })
 		}
 		return {
 			success,
 			type,
 			time: this.formatTime(syncTime, asyncTime),
-			result: clean(result as string)
+			result: clean(result as string),
 		}
 	}
 
@@ -180,7 +213,10 @@ export class UserCommand extends NinoCommand {
 					const attachment = Buffer.from(options.result)
 					const name = `output.${options.language}`
 
-					return send(message, { files: [{ attachment, name }], content })
+					return send(message, {
+						files: [{ attachment, name }],
+						content,
+					})
 				}
 
 				options.fileUnavailable = true
@@ -191,9 +227,10 @@ export class UserCommand extends NinoCommand {
 
 			case 'hastebin': {
 				if (!options.url) {
-					options.url = await this.getHaste(options.result, options.language).catch(
-						() => null
-					)
+					options.url = await this.getHaste(
+						options.result,
+						options.language
+					).catch(() => null)
 				}
 
 				if (options.url) {
@@ -230,7 +267,10 @@ export class UserCommand extends NinoCommand {
 					return send(message, { content: 'Invalid Command' })
 				}
 				if (stdout.length > 1950) {
-					options.url = await this.getHaste(stdout, options.language).catch(() => null)
+					options.url = await this.getHaste(
+						stdout,
+						options.language
+					).catch(() => null)
 				}
 
 				if (options.url) {
@@ -274,15 +314,21 @@ export class UserCommand extends NinoCommand {
 						options.result
 					)}`
 
-					const content = [parsedInput, parsedOutput, typeFooter, timeTaken]
+					const content = [
+						parsedInput,
+						parsedOutput,
+						typeFooter,
+						timeTaken,
+					]
 						.filter(Boolean)
 						.join('\n')
 					return send(message, { content })
 				}
 
 				const output = codeBlock(options.language, options.result)
-				const content = `${bold('Error')}:${output}\n${bold('Type')}:${options.footer}\n${options.time
-					}`
+				const content = `${bold('Error')}:${output}\n${bold('Type')}:${
+					options.footer
+				}\n${options.time}`
 				return send(message, { content })
 			}
 		}
@@ -326,7 +372,7 @@ export class UserCommand extends NinoCommand {
 			'https://hastebin.skyra.pw/documents',
 			{
 				method: FetchMethods.Post,
-				body: result
+				body: result,
 			},
 			FetchResultTypes.JSON
 		)
