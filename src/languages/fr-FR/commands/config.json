@@ -1,0 +1,11 @@
+
+  
+{
+	"language": {
+		"select": "{{emoji}} - Sélectionnez la langue de ce serveur",
+		"already": "{{emoji}} - Euh, il semble que cette langue est déjà établie",
+		"filter": "{{emoji}} - Ce menu n'est pas pour vous :)",
+		"done": "{{emoji}} - La langue du serveur sera désormais `{{lang}}` :D",
+		"timefinish": "{{emoji}} - Interaction terminée, merci d'utiliser le menu! :D"
+	}
+}
