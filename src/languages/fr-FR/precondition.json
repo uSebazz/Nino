@@ -11,5 +11,5 @@
   "nsfw": "{{emoji}} - Cette commande ne fonctionne que sur les canaux NSFW",
   "clientPermissions": "{{emoji}} - uhh, je n'ai **pas les permis nécessaires** pour exécuter cette commande. :(\n> **permet**: {{missing}}",
   "userPermissions": "{{emoji}} - Uhh, vous n'avez **pas les permis nécessaires** pour exécuter cette commande. :(\n> **permet**: {{missing}}",
-  "threadOnly": "{{emoji}} - Cette commande ne fonctionne que dans les threads",
+  "threadOnly": "{{emoji}} - Cette commande ne fonctionne que dans les threads"
 }
