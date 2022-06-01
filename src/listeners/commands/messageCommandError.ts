@@ -1,7 +1,7 @@
 import { ArgumentError, Listener, UserError } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import { translate } from '../../lib/i18n/translate'
+import { translate } from '#lib/i18n/translate'
 import type { Events, MessageCommandErrorPayload } from '@sapphire/framework'
 import type { Message } from 'discord.js'
 import { Emojis } from '#utils/constans'
@@ -28,11 +28,17 @@ export class messageCommandError extends Listener<
 		)
 	}
 
-	private argumentError(message: Message, error: ArgumentError) {
+	private async argumentError(message: Message, error: ArgumentError) {
 		const identifier = translate(error.identifier)
 		const argument = error.argument.name
 
-		return send(message, `${identifier} - ${argument}`)
+		return send(
+			message,
+			await resolveKey(message, identifier, {
+				argument,
+				emoji: Emojis.fail,
+			})
+		)
 	}
 
 	private async userError(message: Message, error: UserError) {

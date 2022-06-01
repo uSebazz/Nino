@@ -1,20 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Listener, type Store, type Events } from '@sapphire/framework'
 import { ApplyOptions } from '@sapphire/decorators'
-import {
-	blue,
-	gray,
-	green,
-	magenta,
-	magentaBright,
-	white,
-	yellow,
-} from 'colorette'
+import { createBanner } from '@skyra/start-banner'
+import colors from '@colors/colors'
+import gradient from 'gradient-string'
 
 const dev = process.env.NODE_ENV === 'development'
 @ApplyOptions<Listener.Options>({ event: 'ready', once: true })
 export class readyListener extends Listener<typeof Events.ClientReady> {
-	public readonly style = dev ? yellow : blue
+	public readonly style = dev ? colors.yellow : colors.blue
 
 	public run() {
 		this.printBanner()
@@ -22,29 +16,34 @@ export class readyListener extends Listener<typeof Events.ClientReady> {
 	}
 
 	private printBanner() {
-		const success = green('+')
-
-		const llc = dev ? magentaBright : white
-		const blc = dev ? magenta : blue
-
-		const line01 = llc('  ')
-		const line02 = llc('')
-		const line03 = llc('')
-		const pad = ' '.repeat(7)
-
 		console.log(
-			String.raw`
-${line01} ${pad}${blc('2.0.2')}
-${line02} ${pad}[${success}] Gateway
-${line03}${
-				dev
-					? `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc(
-							'DEVELOPMENT MODE'
-					  )}`
-					: `${pad}${blc('<')}${llc('/')}${blc('>')} ${llc(
-							'PRODUCTION MODE'
-					  )}`
-			}`.trim()
+			gradient.summer.multiline(
+				createBanner({
+					logo: [
+						String.raw`       \`*-.                    `,
+						String.raw`        )  _\`-.                 `,
+						String.raw`       .  : \`. .                `,
+						String.raw`       : _   '  \               `,
+						String.raw`       ; *\` _.   \`*-._          `,
+						String.raw`       \`-.-'          \`-.       `,
+						String.raw`         ;       \`       \`.     `,
+						String.raw`         :.       .        \    `,
+						String.raw`         . \  .   :   .-'   .   `,
+						String.raw`         '  \`+.;  ;  '      :   `,
+						String.raw`         :  '  |    ;       ;-. `,
+						String.raw`         ; '   : :\`-:     _.\`* ;`,
+						String.raw`       .*' /  .*' ; .*\`- +'  \`*' `,
+						String.raw`      \`*-*   \`*-*  \`*-*'`,
+					],
+					name: [
+						String.raw` _   _ _             `,
+						String.raw` | \ | (_)_ __   ___  `,
+						String.raw` |  \| | | '_ \ / _ \ `,
+						String.raw` | |\  | | | | | (_) |`,
+						String.raw` |_| \_|_|_| |_|\___/ `,
+					],
+				})
+			)
 		)
 	}
 
@@ -59,7 +58,7 @@ ${line03}${
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private styleStore(store: Store<any>, last: boolean) {
-		return gray(
+		return colors.gray(
 			`${last ? '└─' : '├─'} Loaded ${this.style(
 				store.size.toString().padEnd(3, ' ')
 			)} ${store.name}.`

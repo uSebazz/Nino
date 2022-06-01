@@ -1,4 +1,4 @@
-import { gray, blue, green, yellow, red, bgRed } from '@colors/colors'
+import colors from '@colors/colors'
 import { rootFolder } from '#utils/constans'
 import { minutes } from '#utils/function/times'
 import { BucketScope, container, LogLevel } from '@sapphire/framework'
@@ -23,27 +23,27 @@ export const OWNERS = envParseArray('CLIENT_OWNERS')
 export const loggerOptions: LoggerFormatOptions = {
 	trace: {
 		timestamp: null,
-		infix: gray('[Trace]: '),
+		infix: colors.gray('[Trace]: '),
 	},
 	info: {
 		timestamp: null,
-		infix: blue('[Info]: '),
+		infix: colors.blue('[Info]: '),
 	},
 	debug: {
 		timestamp: null,
-		infix: green('[Debug]: '),
+		infix: colors.green('[Debug]: '),
 	},
 	warn: {
 		timestamp: null,
-		infix: yellow('[Warn]: '),
+		infix: colors.yellow('[Warn]: '),
 	},
 	error: {
 		timestamp: null,
-		infix: red('[Error]: '),
+		infix: colors.red('[Error]: '),
 	},
 	fatal: {
 		timestamp: null,
-		infix: bgRed('[Fatal]: '),
+		infix: colors.bgRed('[Fatal]: '),
 	},
 }
 
@@ -52,7 +52,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,
 	defaultPrefix: ['.', 'n!', 'n?', 'n/', 'Nino', 'puta'],
-	loadDefaultErrorListeners: false,
+	loadDefaultErrorListeners: true,
 	loadMessageCommandListeners: true,
 	preventFailedToFetchLogForGuildIds: [
 		'876339668956893216',
@@ -104,12 +104,12 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		fetchLanguage: async (context: InternationalizationContext) => {
 			if (!context.guild) return 'en-US'
 
-			let data = await container.prisma.config.findUnique({
+			let data = await container.prisma.serverConfig.findUnique({
 				where: {
 					guildId: context.guild.id,
 				},
 			})
-			let config: Prisma.ConfigCreateInput
+			let config: Prisma.ServerConfigCreateInput
 
 			if (!data) {
 				// eslint-disable-next-line @typescript-eslint/no-extra-semi
@@ -117,7 +117,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 					guildId: context.guild.id,
 					lang: 'es-ES',
 				}),
-					(data = await container.prisma.config.create({
+					(data = await container.prisma.serverConfig.create({
 						data: config,
 					}))
 			}

@@ -6,13 +6,42 @@ export const mainFolder = getRootData().root
 export const rootFolder = join(mainFolder, '..')
 
 export enum Emojis {
+	// Emojis for messages, sucess, error, etc.
 	check = '<:Check_Mark:924321938715856951>',
 	fail = '<:Fail_Cross:924321864912875560>',
 	emergency = '<:Emergency:925219674038341642>',
 	pending = '<:pending:925219711430565949>',
+
+	// Emojis for reactions and embeds
 	ninozzz = '<a:NinoBuritoa:951482070583091240>',
 	twitter = '<:twitter:977614632292343848>',
 	github = '<:github:977614370722951168>',
+}
+
+export const Badges = {
+	EARLY_VERIFIED_BOT_DEVELOPER: '<:Discord_Bot_Developer:980632901328732210>',
+	DISCORD_CERTIFIED_MODERATOR:
+		'<:Discod_Certified_Moderator:980633106811846666>',
+	PARTNERED_SERVER_OWNER: '<:partner:980633289234722887>',
+	BUGHUNTER_LEVEL_1: '<:bughunter1:980641929433854012> ',
+	BUGHUNTER_LEVEL_2: '<:bughunter2:980642054386360362>',
+	DISCORD_EMPLOYEE: '<:discord_employee:980642330476433408>',
+	HYPESQUAD_EVENTS: '<:hypesquadevents:980642539436650496>',
+	EARLY_SUPPORTER: '<:earlysupporter:980642764607860777>',
+	VERIFIED_BOT: '<:Verified_Bot:980608177542422538>',
+	FUCK_MEE6: '<:Nomee6:980630747692040212>',
+	OWNER: '<:owner:980643113322287124>',
+}
+
+export const gateways = {
+	GATEWAY_PRESENCE: 1 << 12,
+	GATEWAY_PRESENCE_LIMITED: 1 << 13,
+	GATEWAY_GUILD_MEMBERS: 1 << 14,
+	GATEWAY_GUILD_MEMBERS_LIMITED: 1 << 15,
+	VERIFICATION_PENDING_GUILD_LIMIT: 1 << 16,
+	EMBEDDED: 1 << 17,
+	GATEWAY_MESSAGE_CONTENT: 1 << 18,
+	GATEWAY_MESSAGE_CONTENT_LIMITED: 1 << 19,
 }
 
 export enum Colors {

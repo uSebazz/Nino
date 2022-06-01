@@ -6,12 +6,16 @@ import '@sapphire/plugin-editable-commands/register'
 // declare things
 import type { ArrayString } from '@skyra/env-utilities'
 import type { PrismaClient } from '@prisma/client'
-
+import type { User } from 'discord.js'
 
 declare module '@sapphire/framework' {
 	interface Preconditions {
 		DevOnly: never
 		Administrator: never
+	}
+
+	interface ArgType {
+		resolveUser: User
 	}
 }
 

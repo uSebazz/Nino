@@ -7,7 +7,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Config {
+model EventsConfig {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  guildId String   @unique
+  all     Boolean  @default(false)
+  events  String[]
+}
+
+model ServerConfig {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   lang    String
   guildId String @unique

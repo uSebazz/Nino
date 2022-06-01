@@ -2,11 +2,11 @@
 	"ping": "Pong! (Je répondu en: {{diff}}ms. Total: {{ping}}ms)",
 	"stats": {
 		"description": "> Bonjour, je suis **Nino**, un bot avec un peu de tout. Afin d'améliorer l'activité sur votre serveur et de le rendre le meilleur possible. `💜`",
-		"field_devs": "Développeurs",
+		"field_devs": "» Développeurs",
 		"field_devs_content": "> - **Sebazz**: {{github}} [GitHub](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: {{github}} [GitHub](https://github.com/ddiablou) | {{twitter}} [Twitter](https://twitter.com/EnBraix)",
-		"field_statics": "Statistiques",
+		"field_statics": "» Statistiques",
 		"field_statics_content": "> - **Utilisateurs**: {{users}}\n> - **Serveurs**: {{guilds}}\n> - **Canaux**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Commandes**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
-		"field_system": "Système",
+		"field_system": "» Système",
 		"field_system_content": "> - **RAM Utilisé**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU utilisé**: {{cpuLoad}}\n> - **Modèle**: {{cpuModel}}"
 	}
 }

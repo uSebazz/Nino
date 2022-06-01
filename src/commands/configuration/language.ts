@@ -74,7 +74,7 @@ export class UserCommand extends NinoCommand {
 			spanish: 'es-ES',
 			english: 'en-US',
 			german: 'de-DE',
-			french: 'fr-FR'
+			french: 'fr-FR',
 		}
 		const timefinish = await resolveKey(
 			msg,
@@ -136,7 +136,7 @@ export class UserCommand extends NinoCommand {
 				await interaction.reply({ content, ephemeral: true })
 			} else {
 				// Update the language of the guild
-				await this.container.prisma.config.update({
+				await this.container.prisma.serverConfig.update({
 					where: {
 						guildId: interaction.guildId as string,
 					},
@@ -190,7 +190,7 @@ export class UserCommand extends NinoCommand {
 							label: 'French - (France)',
 							emoji: '🇫🇷',
 							value: 'french',
-						}
+						},
 					]),
 			]),
 		]

@@ -2,7 +2,7 @@ import {
 	NinoCommand,
 	type NinoCommandRegistery,
 	type NinoCommandOptions,
-} from '#lib/structures'
+} from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
 import { ApplyOptions } from '@sapphire/decorators'
 import { RegisterBehavior } from '@sapphire/framework'
@@ -89,9 +89,22 @@ export class UserCommand extends NinoCommand {
 	}
 
 	private async add(interaction: CommandInteraction) {
-		const hola = interaction.options.getString('listener', true)
+		const ok = await this.container.prisma.eventsConfig.findUnique({
+			where: {
+				guildId: interaction.guildId as string,
+			},
+		})
 
-		await interaction.reply(hola)
+		if (!ok) {
+			await this.container.prisma.eventsConfig.create({
+				data: {
+					guildId: interaction.guildId as string,
+					events: [
+						'a'
+					]
+				},
+			})
+		}
 	}
 
 	public override messageRun(message: Message) {

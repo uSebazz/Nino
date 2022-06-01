@@ -22,34 +22,6 @@ import { exec } from 'node:child_process'
 import type { Args } from '@sapphire/framework'
 import type { Message } from 'discord.js'
 
-interface HastebinResponse {
-	key: string
-}
-
-interface HandleMessageOptions {
-	hastebinUnavailable: boolean
-	replyUnavailable: boolean
-	consoleUnavailable: boolean
-	fileUnavailable: boolean
-	execUnavailable: boolean
-	url: string | null
-	code: string
-	success: boolean
-	result: string
-	time: string
-	footer: string
-	language: string
-	outputTo: 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none'
-}
-
-interface EvalParameters {
-	code: string
-	async: boolean
-	showHidden: boolean
-	depth: number
-	timeout: number
-}
-
 @ApplyOptions<NinoCommandOptions>({
 	aliases: ['e', 'ev'],
 	description: 'Evaluates JavaScript code',
@@ -378,4 +350,32 @@ export class UserCommand extends NinoCommand {
 		)
 		return `https://hastebin.skyra.pw/${key}.${language}`
 	}
+}
+
+interface HastebinResponse {
+	key: string
+}
+
+interface HandleMessageOptions {
+	hastebinUnavailable: boolean
+	replyUnavailable: boolean
+	consoleUnavailable: boolean
+	fileUnavailable: boolean
+	execUnavailable: boolean
+	url: string | null
+	code: string
+	success: boolean
+	result: string
+	time: string
+	footer: string
+	language: string
+	outputTo: 'reply' | 'file' | 'hastebin' | 'console' | 'exec' | 'none'
+}
+
+interface EvalParameters {
+	code: string
+	async: boolean
+	showHidden: boolean
+	depth: number
+	timeout: number
 }

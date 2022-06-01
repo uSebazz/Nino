@@ -4,13 +4,14 @@
 	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
 	"version": "2.0.3",
 	"license": "Apache-2.0",
+	"type": "module",
 	"main": "dist/Nino.js",
 	"scripts": {
 		"build": "tsup src && node scripts/i18n.mjs",
 		"clean": "node scripts/clean.mjs",
 		"lang": "node scripts/i18n.mjs",
 		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
-		"dev": "tsc-watch --onSuccess \"yarn start\"",
+		"dev": "tsc-watch --onSuccess \"node --preserve-symlinks --enable-source-maps ./dist/Nino.js\"",
 		"deploy": "yarn build && yarn start",
 		"style": "eclint fix 'src/**/*'"
 	},
@@ -28,11 +29,14 @@
 		"@sapphire/type": "2.2.4",
 		"@sapphire/utilities": "3.6.2",
 		"@skyra/env-utilities": "1.0.0",
+		"@skyra/start-banner": "^1.0.0",
 		"canvas": "^2.9.1",
 		"discord-arts": "^0.0.4",
-		"discord.js": "13.7.0"
+		"discord.js": "13.7.0",
+		"gradient-string": "^2.0.1"
 	},
 	"devDependencies": {
+		"@types/gradient-string": "^1.1.2",
 		"@types/node": "17.0.35",
 		"@typescript-eslint/eslint-plugin": "^5.26.0",
 		"@typescript-eslint/parser": "^5.26.0",

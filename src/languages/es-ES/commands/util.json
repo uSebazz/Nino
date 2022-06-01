@@ -1,12 +1,24 @@
 {
-    "ping": "Pong! (Respondí en: {{diff}}ms. Total: {{ping}}ms)",
-    "stats": {
-        "description": "> Hola, soy **Nino** un bot con un poco de todo. Con el propósito de mejorar la actividad en su servidor y hacerla la mejor `💜`",
-        "field_devs": "Desarrolladores",
-        "field_devs_content": "> - **Sebazz**: {{github}} [GitHub](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: {{github}} [GitHub](https://github.com/ddiablou) | {{twitter}} [Twitter](https://twitter.com/EnBraix)",
-        "field_statics": "Estadísticas",
-        "field_statics_content": "> - **Usuarios**: {{users}}\n> - **Servidores**: {{guilds}}\n> - **Canales**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Librería**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
-        "field_system": "Sistema",
-        "field_system_content": "> - **RAM Usada**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usado**: {{cpuLoad}}\n> - **Modelo**: {{cpuModel}}"
-    }
+	"ping": "Pong! (Respondí en: {{diff}}ms. Total: {{ping}}ms)",
+	"stats": {
+		"description": "> Hola, soy **Nino** un bot con un poco de todo. Con el propósito de mejorar la actividad en su servidor y hacerla la mejor `💜`",
+		"field_devs": "» Desarrolladores",
+		"field_devs_content": "> - **Sebazz**: {{github}} [GitHub](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: {{github}} [GitHub](https://github.com/ddiablou) | {{twitter}} [Twitter](https://twitter.com/EnBraix)",
+		"field_statics": "» Estadísticas",
+		"field_statics_content": "> - **Usuarios**: {{users}}\n> - **Servidores**: {{guilds}}\n> - **Canales**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Librería**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
+		"field_system": "» Sistema",
+		"field_system_content": "> - RAM Usada**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usado**: {{cpuLoad}}\n> - **Modelo**: {{cpuModel}}"
+	},
+	"user": {
+		"field_about": "» Información",
+		"field_about_content_user": "> - **Creada hace**: <t:{{createdAt}}:R>",
+		"field_about_content_member": "> - **Creada hace**: <t:{{createdAt}}:R>\n> - **Membresia**: <t:{{joinedAt}}:R>\n> - **Nick**: {{nickname}}",
+		"field_roles": "» Roles",
+		"field_permissions": "» Permisos",
+		"field_permissions_all": "> Todos los permisos (Administrador)",
+		"bot_public": "> {{emoji}} Bot publico",
+		"guild_members": "> {{emoji}} Guild Member Intent",
+		"gateway_presence": "> {{emoji}} Presence Intent",
+		"gateway_message_content": "> {{emoji}} Message Intent"
+	}
 }

@@ -1,7 +1,9 @@
 {
 	"compilerOptions": {
-		"module": "CommonJS",
-		"target": "es2021",
+		"lib": ["ESNext"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
 		"skipLibCheck": true,
 		"strict": true,
 		"sourceMap": true,
@@ -41,6 +43,6 @@
 		"resolveJsonModule": true,
 		"allowJs": true
 	},
-	"include": ["src", "./src/languages/**/*.json", "src/lib/utils/.ts"],
+	"include": ["src", "./src/languages/**/*.json"],
 	"exclude": ["node_modules"]
 }
