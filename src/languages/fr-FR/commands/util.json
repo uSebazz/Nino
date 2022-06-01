@@ -12,7 +12,7 @@
 	"user": {
 		"field_about": "» À propos de",
 		"field_about_content_user": "> - **Créé à**: <t:{{createdAt}}:R>",
-		"field_about_content_member": "> - **Créé à**: <t:{{createdAt}}:R>\n> - **Inscrit à**: <t:{{joinedAt}}:R>\n> - **Surnom**: {{nicnkame}}",
+		"field_about_content_member": "> - **Créé à**: <t:{{createdAt}}:R>\n> - **Inscrit à**: <t:{{joinedAt}}:R>\n> - **Surnom**: {{nickname}}",
 		"field_roles": "» Les rôles",
 		"field_permissions": "» Autorisations",
 		"field_permissions_all": "> Toutes les autorisations. (Administrateur)",

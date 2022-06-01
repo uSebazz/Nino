@@ -52,7 +52,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,
 	defaultPrefix: ['.', 'n!', 'n?', 'n/', 'Nino', 'puta'],
-	loadDefaultErrorListeners: true,
+	loadDefaultErrorListeners: false,
 	loadMessageCommandListeners: true,
 	preventFailedToFetchLogForGuildIds: [
 		'876339668956893216',
