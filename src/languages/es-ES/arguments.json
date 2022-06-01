@@ -1,5 +1,5 @@
 {
 	"string": "Uh, parece que sucedió un error. {{error}}",
-	"missing": "{{emoji}} - ¡Un parametro hace falta!\n> Usa n!help [comando] para ver ese parametro",
-	"userError": "{{emoji}} - No se pudo encontrar el usuario, lo siento."
+	"missing": "{{emoji}} - ¡Hace falta un parámetro!\n> Usa n!help [comando] para más información.",
+	"userError": "{{emoji}} - Lo siento, no he podido encontrar al usuario."
 }
