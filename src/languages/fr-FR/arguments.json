@@ -1,4 +1,5 @@
 {
-  "string": "Euh, il semble qu'une erreur s'est produite. {{error}}",
-  "missing": "{{emoji}} - Un paramètre est nécessaire!\n> Utilisez n!help [commande] pour voir ce paramètre"
+	"string": "Euh, il semble qu'une erreur s'est produite. {{error}}",
+	"missing": "{{emoji}} - Un paramètre est nécessaire!\n> Utilisez n!help [commande] pour voir ce paramètre",
+	"userError": "{{emoji}} - Désolé, l'utilisateur est introuvable"
 }

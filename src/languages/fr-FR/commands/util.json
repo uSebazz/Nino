@@ -8,5 +8,17 @@
 		"field_statics_content": "> - **Utilisateurs**: {{users}}\n> - **Serveurs**: {{guilds}}\n> - **Canaux**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Commandes**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
 		"field_system": "» Système",
 		"field_system_content": "> - **RAM Utilisé**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU utilisé**: {{cpuLoad}}\n> - **Modèle**: {{cpuModel}}"
+	},
+	"user": {
+		"field_about": "» À propos de",
+		"field_about_content_user": "> - **Créé à**: <t:{{createdAt}}:R>",
+		"field_about_content_member": "> - **Créé à**: <t:{{createdAt}}:R>\n> - **Inscrit à**: <t:{{joinedAt}}:R>\n> - **Surnom**: {{nicnkame}}",
+		"field_roles": "» Les rôles",
+		"field_permissions": "» Autorisations",
+		"field_permissions_all": "> Toutes les autorisations. (Administrateur)",
+		"bot_public": "> {{emoji}} robot public",
+		"guild_members": "> {{emoji}} Intention des membres de la guilde",
+		"gateway_presence": "> {{emoji}} Intention de présence de la passerelle",
+		"gateway_message_content": "> {{emoji}} Intention de contenu du message de la passerelle"
 	}
 }

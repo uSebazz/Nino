@@ -505,23 +505,14 @@ export class UserCommand extends NinoCommand {
 		return emojis
 	}
 
-	private async fetchBot(bot: Snowflake) {
-		const { name, id, description, bot_public, flags } =
-			await fetch<FetchResponse>(
-				`https://discord.com/api/v10/applications/${bot}/rpc`,
-				{
-					method: FetchMethods.Get,
-				},
-				FetchResultTypes.JSON
-			)
-
-		return {
-			name,
-			id,
-			description,
-			bot_public,
-			flags,
-		}
+	private fetchBot(bot: Snowflake) {
+		return fetch<FetchResponse>(
+			`https://discord.com/api/v10/applications/${bot}/rpc`,
+			{
+				method: FetchMethods.Get,
+			},
+			FetchResultTypes.JSON
+		)
 	}
 }
 

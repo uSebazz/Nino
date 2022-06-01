@@ -12,13 +12,13 @@
 	"user": {
 		"field_about": "» Información",
 		"field_about_content_user": "> - **Creada hace**: <t:{{createdAt}}:R>",
-		"field_about_content_member": "> - **Creada hace**: <t:{{createdAt}}:R>\n> - **Membresia**: <t:{{joinedAt}}:R>\n> - **Nick**: {{nickname}}",
+		"field_about_content_member": "> - **Creada hace**: <t:{{createdAt}}:R>\n> - **Membresia**: <t:{{joinedAt}}:R>\n> - **Apodo**: {{nickname}}",
 		"field_roles": "» Roles",
 		"field_permissions": "» Permisos",
-		"field_permissions_all": "> Todos los permisos (Administrador)",
+		"field_permissions_all": "> Todos los permisos. (Administrador)",
 		"bot_public": "> {{emoji}} Bot publico",
-		"guild_members": "> {{emoji}} Guild Member Intent",
-		"gateway_presence": "> {{emoji}} Presence Intent",
-		"gateway_message_content": "> {{emoji}} Message Intent"
+		"guild_members": "> {{emoji}} Guild members intent",
+		"gateway_presence": "> {{emoji}} Gateway presence intent",
+		"gateway_message_content": "> {{emoji}} Gateway message content intent"
 	}
 }

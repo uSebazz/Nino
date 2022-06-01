@@ -1,4 +1,5 @@
 {
-    "string": "Hier scheint ein Fehler vorzuliegen, {{error}}",
-    "missing": "Es wird ein Parameter benötigt!"
+	"string": "Hier scheint ein Fehler vorzuliegen, {{error}}",
+	"missing": "{{emoji}} - Es wird ein Parameter benötigt!\n> Verwenden Sie `n!help [command]` für weitere Informationen.",
+	"userError": "{{emoji}} - Sorry, ich konnte den Benutzer nicht finden."
 }

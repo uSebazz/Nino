@@ -8,5 +8,17 @@
 		"field_statics_content": "> - **Users**: {{users}}\n> - **Guilds**: {{guilds}}\n> - **Channels**: {{channels}}\n> - **Commands**: {{commands}}\n> - **Library**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
 		"field_system": "» System",
 		"field_system_content": "> - **RAM Used**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usage**: {{cpuLoad}}\n> - **Model**: {{cpuModel}}"
+	},
+	"user": {
+		"field_about": "» About",
+		"field_about_content_user": "> - **Created At**: <t:{{createdAt}}:R>",
+		"field_about_content_member": "> - **Created At**: <t:{{createdAt}}:R>\n> - **Joined At**: <t:{{joinedAt}}:R>\n> - **Nickname**: {{nickname}}",
+		"field_roles": "» Roles",
+		"field_permissions": "» Permissions",
+		"field_permissions_all": "> All permissions. (Administrator)",
+		"bot_public": "> {{emoji}} Bot public",
+		"guild_members": "> {{emoji}} Guild members intent",
+		"gateway_presence": "> {{emoji}} Gateway presence intent",
+		"gateway_message_content": "> {{emoji}} Gateway message content intent"
 	}
 }
