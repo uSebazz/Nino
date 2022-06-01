@@ -16,7 +16,7 @@
 		"field_roles": "» Les rôles",
 		"field_permissions": "» Autorisations",
 		"field_permissions_all": "> Toutes les autorisations. (Administrateur)",
-		"bot_public": "> {{emoji}} robot public",
+		"bot_public": "> {{emoji}} Robot public",
 		"guild_members": "> {{emoji}} Intention des membres de la guilde",
 		"gateway_presence": "> {{emoji}} Intention de présence de la passerelle",
 		"gateway_message_content": "> {{emoji}} Intention de contenu du message de la passerelle"
