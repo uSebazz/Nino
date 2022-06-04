@@ -20,6 +20,7 @@ export enum Emojis {
 
 export const Badges = {
 	EARLY_VERIFIED_BOT_DEVELOPER: '<:Discord_Bot_Developer:980632901328732210>',
+	NITRO: '<:nitro:982444209288142859>',
 	DISCORD_CERTIFIED_MODERATOR:
 		'<:Discod_Certified_Moderator:980633106811846666>',
 	PARTNERED_SERVER_OWNER: '<:partner:980633289234722887>',

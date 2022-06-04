@@ -1,5 +1,5 @@
 import { translate } from '#lib/i18n/translate'
-import { Emojis } from '#utils/constans'
+import { Emojis } from '#utils/constants'
 import {
 	Listener,
 	type Events,

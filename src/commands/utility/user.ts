@@ -5,7 +5,7 @@ import {
 	type NinoCommandOptions,
 	type NinoCommandRegistery,
 } from '#lib/structures/NinoCommand'
-import { Colors, Badges, Emojis } from '#utils/constans'
+import { Colors, Badges, Emojis } from '#utils/constants'
 import { ApplyOptions } from '@sapphire/decorators'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
@@ -194,10 +194,10 @@ export class UserCommand extends NinoCommand {
 
 			if (
 				(application.flags & ApplicationFlags.GatewayGuildMembers) ===
-					ApplicationFlags.GatewayGuildMembers ||
+				ApplicationFlags.GatewayGuildMembers ||
 				(application.flags &
 					ApplicationFlags.GatewayGuildMembersLimited) ===
-					ApplicationFlags.GatewayGuildMembersLimited
+				ApplicationFlags.GatewayGuildMembersLimited
 			) {
 				const guildMembersKey = await resolveKey(
 					message ?? interaction!,
@@ -205,7 +205,7 @@ export class UserCommand extends NinoCommand {
 					{
 						emoji:
 							application.flags &
-							ApplicationFlags.GatewayGuildMembers
+								ApplicationFlags.GatewayGuildMembers
 								? Emojis.check
 								: Emojis.pending,
 					}
@@ -216,10 +216,10 @@ export class UserCommand extends NinoCommand {
 
 			if (
 				(application.flags & ApplicationFlags.GatewayPresence) ===
-					ApplicationFlags.GatewayPresence ||
+				ApplicationFlags.GatewayPresence ||
 				(application.flags &
 					ApplicationFlags.GatewayPresenceLimited) ===
-					ApplicationFlags.GatewayPresenceLimited
+				ApplicationFlags.GatewayPresenceLimited
 			) {
 				const gatewayPresenceKey = await resolveKey(
 					message ?? interaction!,
@@ -246,10 +246,10 @@ export class UserCommand extends NinoCommand {
 			if (
 				(application.flags &
 					NewApplicationFlags.GatewayMessageContent) ===
-					NewApplicationFlags.GatewayMessageContent ||
+				NewApplicationFlags.GatewayMessageContent ||
 				(application.flags &
 					NewApplicationFlags.GatewayMessageContentLimited) ===
-					NewApplicationFlags.GatewayMessageContentLimited
+				NewApplicationFlags.GatewayMessageContentLimited
 			) {
 				const gatewayMessageContentKey = await resolveKey(
 					message ?? interaction!,
@@ -257,7 +257,7 @@ export class UserCommand extends NinoCommand {
 					{
 						emoji:
 							application.flags &
-							NewApplicationFlags.GatewayMessageContent
+								NewApplicationFlags.GatewayMessageContent
 								? Emojis.check
 								: Emojis.pending,
 					}
@@ -401,10 +401,10 @@ export class UserCommand extends NinoCommand {
 
 			if (
 				(application.flags & ApplicationFlags.GatewayGuildMembers) ===
-					ApplicationFlags.GatewayGuildMembers ||
+				ApplicationFlags.GatewayGuildMembers ||
 				(application.flags &
 					ApplicationFlags.GatewayGuildMembersLimited) ===
-					ApplicationFlags.GatewayGuildMembersLimited
+				ApplicationFlags.GatewayGuildMembersLimited
 			) {
 				const guildMembersKey = await resolveKey(
 					message ?? interaction!,
@@ -412,7 +412,7 @@ export class UserCommand extends NinoCommand {
 					{
 						emoji:
 							application.flags &
-							ApplicationFlags.GatewayGuildMembers
+								ApplicationFlags.GatewayGuildMembers
 								? Emojis.check
 								: Emojis.emergency,
 					}
@@ -423,10 +423,10 @@ export class UserCommand extends NinoCommand {
 
 			if (
 				(application.flags & ApplicationFlags.GatewayPresence) ===
-					ApplicationFlags.GatewayPresence ||
+				ApplicationFlags.GatewayPresence ||
 				(application.flags &
 					ApplicationFlags.GatewayPresenceLimited) ===
-					ApplicationFlags.GatewayPresenceLimited
+				ApplicationFlags.GatewayPresenceLimited
 			) {
 				const gatewayPresenceKey = await resolveKey(
 					message ?? interaction!,
@@ -453,10 +453,10 @@ export class UserCommand extends NinoCommand {
 			if (
 				(application.flags &
 					NewApplicationFlags.GatewayMessageContent) ===
-					NewApplicationFlags.GatewayMessageContent ||
+				NewApplicationFlags.GatewayMessageContent ||
 				(application.flags &
 					NewApplicationFlags.GatewayMessageContentLimited) ===
-					NewApplicationFlags.GatewayMessageContentLimited
+				NewApplicationFlags.GatewayMessageContentLimited
 			) {
 				const gatewayMessageContentKey = await resolveKey(
 					message ?? interaction!,
@@ -464,7 +464,7 @@ export class UserCommand extends NinoCommand {
 					{
 						emoji:
 							application.flags &
-							NewApplicationFlags.GatewayMessageContent
+								NewApplicationFlags.GatewayMessageContent
 								? Emojis.check
 								: Emojis.emergency,
 					}
@@ -493,6 +493,8 @@ export class UserCommand extends NinoCommand {
 	private getBadges(user: User, guild?: Guild) {
 		const flags = user.flags?.toArray() || []
 		const emojis = []
+		//* Manual recognition to know if user has NITRO, could work.
+		if (user.avatar.startsWith('_a')) emojis.push(Badges.NITRO)
 		if (guild && guild.ownerId === user.id) emojis.push(Badges.OWNER)
 		emojis.push(
 			...Object.keys(Badges)
