@@ -4,7 +4,7 @@ import { resolveKey } from '@sapphire/plugin-i18next'
 import { translate } from '#lib/i18n/translate'
 import type { Events, MessageCommandErrorPayload } from '@sapphire/framework'
 import type { Message } from 'discord.js'
-import { Emojis } from '#utils/constans'
+import { Emojis } from '#utils/constants'
 
 export class messageCommandError extends Listener<
 	typeof Events.MessageCommandError

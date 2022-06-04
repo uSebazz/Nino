@@ -1,5 +1,5 @@
 import colors from '@colors/colors'
-import { rootFolder } from '#utils/constans'
+import { rootFolder } from '#utils/constants'
 import { minutes } from '#utils/function/times'
 import { BucketScope, container, LogLevel } from '@sapphire/framework'
 import { Options } from 'discord.js'
@@ -113,7 +113,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 
 			if (!data) {
 				// eslint-disable-next-line @typescript-eslint/no-extra-semi
-				;(config = {
+				; (config = {
 					guildId: context.guild.id,
 					lang: 'es-ES',
 				}),

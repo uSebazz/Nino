@@ -3,7 +3,7 @@ import {
 	type NinoCommandOptions,
 } from '#lib/structures/NinoCommand'
 import { testServer } from '#root/config'
-import { Colors, Emojis } from '#utils/constans'
+import { Colors, Emojis } from '#utils/constants'
 import { version as sapphireVersion } from '@sapphire/framework'
 import {
 	version as discordVersion,
@@ -208,12 +208,11 @@ export class UserCommand extends NinoCommand {
 	}
 
 	private static formatCpuInfo({ times }: CpuInfo) {
-		return `${
-			roundNumber(
-				((times.user + times.nice + times.sys + times.irq) /
-					times.idle) *
-					10000
-			) / 100
-		}%`
+		return `${roundNumber(
+			((times.user + times.nice + times.sys + times.irq) /
+				times.idle) *
+			10000
+		) / 100
+			}%`
 	}
 }

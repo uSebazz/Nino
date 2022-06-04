@@ -6,7 +6,7 @@ import { ApplyOptions } from '@sapphire/decorators'
 import { Message, type CommandInteraction } from 'discord.js'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
-import { Emojis } from '#utils/constans'
+import { Emojis } from '#utils/constants'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Ping of the bot',
