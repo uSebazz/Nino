@@ -36,7 +36,7 @@ export class messageCommandError extends Listener<
 			message,
 			await resolveKey(message, identifier, {
 				argument,
-				emoji: Emojis.fail,
+				emoji: Emojis.wrong,
 			})
 		)
 	}
@@ -47,7 +47,7 @@ export class messageCommandError extends Listener<
 		return send(
 			message,
 			await resolveKey(message, identifier, {
-				emoji: Emojis.fail,
+				emoji: Emojis.wrong,
 			})
 		)
 	}

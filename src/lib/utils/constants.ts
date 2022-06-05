@@ -7,10 +7,10 @@ export const rootFolder = join(mainFolder, '..')
 
 export enum Emojis {
 	// Emojis for messages, sucess, error, etc.
-	check = '<:Check_Mark:924321938715856951>',
-	fail = '<:Fail_Cross:924321864912875560>',
-	emergency = '<:Emergency:925219674038341642>',
-	pending = '<:pending:925219711430565949>',
+	right = '<:eg_right:983109974970474587>',
+	wrong = '<:eg_wrong:983110026363297832>',
+	excl = '<:eg_excl:983109713979928716>',
+	netual = '<:eg_netual:983110520628473978>',
 
 	// Emojis for reactions and embeds
 	ninozzz = '<a:NinoBuritoa:951482070583091240>',
@@ -18,7 +18,7 @@ export enum Emojis {
 	github = '<:github:977614370722951168>',
 }
 
-export const Badges = {
+/*export const Badges = {
 	EARLY_VERIFIED_BOT_DEVELOPER: '<:Discord_Bot_Developer:980632901328732210>',
 	NITRO: '<:nitro:982444209288142859>',
 	DISCORD_CERTIFIED_MODERATOR: '<:Discod_Certified_Moderator:980633106811846666>',
@@ -30,7 +30,7 @@ export const Badges = {
 	EARLY_SUPPORTER: '<:earlysupporter:980642764607860777>',
 	VERIFIED_BOT: '<:Verified_Bot:980608177542422538>',
 	OWNER: '<:owner:980643113322287124>',
-}
+}*/
 
 export const gateways = {
 	GATEWAY_PRESENCE: 1 << 12,

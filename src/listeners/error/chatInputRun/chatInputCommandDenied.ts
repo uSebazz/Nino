@@ -19,7 +19,7 @@ export class chatInputCommandDeniedListener extends Listener<
 
 		await interaction.reply(
 			await resolveKey(interaction, identifier, {
-				emoji: Emojis.fail,
+				emoji: Emojis.wrong,
 			})
 		)
 	}

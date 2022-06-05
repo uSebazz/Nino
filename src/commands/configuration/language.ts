@@ -29,7 +29,7 @@ export class UserCommand extends NinoCommand {
 			interaction,
 			'commands/config:language.select',
 			{
-				emoji: Emojis.emergency,
+				emoji: Emojis.excl,
 			}
 		)
 
@@ -50,7 +50,7 @@ export class UserCommand extends NinoCommand {
 			message,
 			'commands/config:language.select',
 			{
-				emoji: Emojis.emergency,
+				emoji: Emojis.excl,
 			}
 		)
 
@@ -78,7 +78,7 @@ export class UserCommand extends NinoCommand {
 			msg,
 			'commands/config:language.timefinish',
 			{
-				emoji: Emojis.pending,
+				emoji: Emojis.netual,
 			}
 		)
 
@@ -88,7 +88,7 @@ export class UserCommand extends NinoCommand {
 					interaction,
 					'commands/config:language.filter',
 					{
-						emoji: Emojis.fail,
+						emoji: Emojis.wrong,
 					}
 				)
 
@@ -117,14 +117,14 @@ export class UserCommand extends NinoCommand {
 				interaction,
 				'commands/config:language.already',
 				{
-					emoji: Emojis.fail,
+					emoji: Emojis.wrong,
 				}
 			)
 			const done = await resolveKey(
 				interaction,
 				'commands/config:language.done',
 				{
-					emoji: Emojis.check,
+					emoji: Emojis.right,
 					lang: languages[values],
 				}
 			)
