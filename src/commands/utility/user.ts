@@ -250,7 +250,6 @@ export class UserCommand extends NinoCommand {
 				// @ts-expect-error - we know the type of the array
 				.map((badge) => Badges[badge])
 		)
-		if (user.id === '159985870458322944') emojis.push(Badges.FUCK_MEE6)
 
 		return emojis
 	}
