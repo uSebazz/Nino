@@ -242,6 +242,7 @@ export class UserCommand extends NinoCommand {
 	private getBadges(user: User, guild?: Guild) {
 		const flags = user.flags?.toArray() || []
 		const emojis = []
+		if (user.avatar!.startsWith('_a')) emojis.push(Badges.NITRO)
 		if (guild && guild.ownerId === user.id) emojis.push(Badges.OWNER)
 		emojis.push(
 			...Object.keys(Badges)

@@ -113,7 +113,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 
 			if (!data) {
 				// eslint-disable-next-line @typescript-eslint/no-extra-semi
-				;(config = {
+				; (config = {
 					guildId: context.guild.id,
 					lang: 'es-ES',
 				}),

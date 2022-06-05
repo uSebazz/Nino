@@ -192,12 +192,11 @@ export class UserCommand extends NinoCommand {
 	}
 
 	private static formatCpuInfo({ times }: CpuInfo) {
-		return `${
-			roundNumber(
-				((times.user + times.nice + times.sys + times.irq) /
-					times.idle) *
-					10000
-			) / 100
-		}%`
+		return `${roundNumber(
+			((times.user + times.nice + times.sys + times.irq) /
+				times.idle) *
+			10000
+		) / 100
+			}%`
 	}
 }

@@ -1,7 +1,7 @@
 {
-	"ping": "Pong! (roundtrip took: {{diff}}ms. Hearbeat: {{ping}}ms.)",
+	"ping": "Pong! (roundtrip took: {{diff}}ms. Heartbeat: {{ping}}ms.)",
 	"stats": {
-		"description": "> Hi, I'm **Nino** a bot with a little bit of everything. With the purpose of improving the activity on your server and make it the best `💜`",
+		"description": "> Hi, I'm **Nino** a bot with a little of everything. With the purpose of improving the activity on your server and make it the best `💜`",
 		"field_devs": "» Developers",
 		"field_statics": "» Statics",
 		"field_statics_content": "> - **Users**: {{users}}\n> - **Guilds**: {{guilds}}\n> - **Channels**: {{channels}}\n> - **Commands**: {{commands}}\n> - **Library**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
