@@ -2,8 +2,7 @@ import {
 	NinoCommand,
 	type NinoCommandOptions,
 } from '#lib/structures/NinoCommand'
-import { testServer } from '#root/config'
-import { Colors, Emojis } from '#utils/constans'
+import { Colors, Emojis } from '#utils/constants'
 import { version as sapphireVersion } from '@sapphire/framework'
 import {
 	version as discordVersion,
@@ -38,7 +37,6 @@ export interface StatsUsage {
 	description: 'shows nino statics',
 	chatInputCommand: {
 		register: true,
-		guildIds: testServer,
 		idHints: ['974699589993111612'],
 	},
 	aliases: ['botstatus', 'status'],
@@ -57,14 +55,7 @@ export class UserCommand extends NinoCommand {
 			)
 			.addField(
 				await resolveKey(interaction, 'commands/util:stats.field_devs'),
-				await resolveKey(
-					interaction,
-					'commands/util:stats.field_devs_content',
-					{
-						twitter: Emojis.twitter,
-						github: Emojis.github,
-					}
-				)
+				`> - **Sebazz**: ${Emojis.github} [GitHub](https://github.com/uSebazz) | ${Emojis.twitter} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: ${Emojis.github} [GitHub](https://github.com/ddiablou) |  ${Emojis.twitter} [Twitter](https://twitter.com/EnBraix)\n> - **Hyduez**: ${Emojis.github} [Github](https://github.com/hyduez)`
 			)
 			.addField(
 				await resolveKey(
@@ -119,14 +110,7 @@ export class UserCommand extends NinoCommand {
 			)
 			.addField(
 				await resolveKey(message, 'commands/util:stats.field_devs'),
-				await resolveKey(
-					message,
-					'commands/util:stats.field_devs_content',
-					{
-						twitter: Emojis.twitter,
-						github: Emojis.github,
-					}
-				)
+				`> - **Sebazz**: ${Emojis.github} [GitHub](https://github.com/uSebazz) | ${Emojis.twitter} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: ${Emojis.github} [GitHub](https://github.com/ddiablou) |  ${Emojis.twitter} [Twitter](https://twitter.com/EnBraix)\n> - **Hyduez**: ${Emojis.github} [Github](https://github.com/hyduez)`
 			)
 			.addField(
 				await resolveKey(message, 'commands/util:stats.field_statics'),

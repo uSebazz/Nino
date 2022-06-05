@@ -3,7 +3,6 @@
 	"stats": {
 		"description": "> Hi, I'm **Nino** a bot with a little bit of everything. With the purpose of improving the activity on your server and make it the best `💜`",
 		"field_devs": "» Developers",
-		"field_devs_content": "> - **Sebazz**: {{github}} [GitHub](https://github.com/uSebazz) | {{twitter}} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: {{github}} [GitHub](https://github.com/ddiablou) | {{twitter}} [Twitter](https://twitter.com/EnBraix)",
 		"field_statics": "» Statics",
 		"field_statics_content": "> - **Users**: {{users}}\n> - **Guilds**: {{guilds}}\n> - **Channels**: {{channels}}\n> - **Commands**: {{commands}}\n> - **Library**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
 		"field_system": "» System",

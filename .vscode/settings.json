@@ -1,5 +1,8 @@
 {
 	"editor.tabSize": 4,
 	"editor.useTabStops": true,
-	"editor.insertSpaces": false
+	"editor.insertSpaces": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	}
 }

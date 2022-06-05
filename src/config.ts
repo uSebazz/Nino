@@ -1,5 +1,5 @@
 import colors from '@colors/colors'
-import { rootFolder } from '#utils/constans'
+import { rootFolder } from '#utils/constants'
 import { minutes } from '#utils/function/times'
 import { BucketScope, container, LogLevel } from '@sapphire/framework'
 import { Options } from 'discord.js'
@@ -51,7 +51,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	allowedMentions: { users: [], roles: [] },
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,
-	defaultPrefix: ['.', 'n!', 'n?', 'n/', 'Nino', 'puta'],
+	defaultPrefix: ['n!', 'n?', 'n/', 'Nino', 'nakano'],
 	loadDefaultErrorListeners: false,
 	loadMessageCommandListeners: true,
 	preventFailedToFetchLogForGuildIds: [

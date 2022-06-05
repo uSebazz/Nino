@@ -59,13 +59,13 @@ export class UserCommand extends NinoCommand {
 							//
 							.setName('add')
 							.setDescription(
-								'add a new event to the logging system'
+								'add a event to the logging system'
 							)
-							.addStringOption((listener) =>
-								listener
-									.setName('listener')
+							.addStringOption((option) =>
+								option
+									.setName('event')
 									.setDescription(
-										'the name of the event to add'
+										'the event you want to add'
 									)
 									.addChoices(...this.choices)
 									.setRequired(true)
@@ -84,30 +84,28 @@ export class UserCommand extends NinoCommand {
 			case 'add':
 				return this.add(interaction)
 			default:
-				return this.add(interaction)
+				return interaction.reply('peo')
 		}
 	}
 
-	private async add(interaction: CommandInteraction) {
-		const ok = await this.container.prisma.eventsConfig.findUnique({
-			where: {
-				guildId: interaction.guildId as string,
-			},
-		})
+	private add(interaction: CommandInteraction) {
+		const event = interaction.options.getString('event')
+		this.events({ event: event as 'messageDelete' | 'messageDeleteBulk' | 'messageUpdate' | 'channelCreate' | 'channelDelete' | 'channelUpdate' })
+	}
 
-		if (!ok) {
-			await this.container.prisma.eventsConfig.create({
-				data: {
-					guildId: interaction.guildId as string,
-					events: [
-						'a'
-					]
-				},
-			})
+	private events(config: LoggingEvents) {
+		switch (config.event) {
+			case 'messageDelete': {
+				break
+			}
 		}
 	}
 
 	public override messageRun(message: Message) {
 		return message.reply('Not implemented yet')
 	}
+}
+
+interface LoggingEvents {
+	event: 'messageDelete' | 'messageDeleteBulk' | 'messageUpdate' | 'channelCreate' | 'channelDelete' | 'channelUpdate'
 }

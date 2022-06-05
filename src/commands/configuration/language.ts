@@ -2,8 +2,7 @@ import {
 	NinoCommand,
 	type NinoCommandOptions,
 } from '#lib/structures/NinoCommand'
-import { testServer } from '#root/config'
-import { Emojis } from '#utils/constans'
+import { Emojis } from '#utils/constants'
 import { ApplyOptions } from '@sapphire/decorators'
 import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
@@ -21,7 +20,6 @@ import type {
 	preconditions: ['Administrator'],
 	chatInputCommand: {
 		register: true,
-		guildIds: testServer,
 		idHints: ['974699587501715566'],
 	},
 })

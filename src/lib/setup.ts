@@ -28,6 +28,7 @@ declare module '@sapphire/pieces' {
 declare module '@skyra/env-utilities' {
 	interface Env {
 		DISCORD_TOKEN: string
+		WEBHOOK_TOKEN: string
 		CLIENT_OWNERS: ArrayString
 	}
 }

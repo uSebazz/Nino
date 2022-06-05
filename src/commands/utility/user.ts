@@ -5,12 +5,10 @@ import {
 	type NinoCommandOptions,
 	type NinoCommandRegistery,
 } from '#lib/structures/NinoCommand'
-import { Colors, Badges, Emojis } from '#utils/constans'
+import { Colors, Badges } from '#utils/constants'
 import { ApplyOptions } from '@sapphire/decorators'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
-import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch'
-import { ApplicationFlags } from 'discord-api-types/v10'
 import { MessageEmbed, Permissions } from 'discord.js'
 import { RegisterBehavior, type Args } from '@sapphire/framework'
 import type {
@@ -18,21 +16,10 @@ import type {
 	CommandInteraction,
 	User,
 	Guild,
-	Snowflake,
 	UserFlagsString,
 	GuildMember,
 	PermissionString,
 } from 'discord.js'
-
-/*const isValidURL = (url: string) => {
-	try {
-		new URL(url)
-		return true
-	} catch {
-		return false
-	}
-}*/
-
 @ApplyOptions<NinoCommandOptions>({
 	description: 'view user information',
 	aliases: ['ui', 'user', 'info-user', 'whois'],
@@ -119,7 +106,6 @@ export class UserCommand extends NinoCommand {
 			message,
 		}: { interaction?: CommandInteraction; message?: Message }
 	) {
-		let application
 		const permissions: string[] = []
 		const badges = this.getBadges(
 			member.user,
@@ -131,10 +117,6 @@ export class UserCommand extends NinoCommand {
 			.join(' ')
 			.replace('@everyone', '')
 
-		if (member.user.bot) {
-			application = await this.fetchBot(member.user.id).catch(() => null)
-		}
-
 		const embed = new MessageEmbed()
 			.setColor(Colors.prettyPutunia)
 			.setAuthor({
@@ -144,12 +126,8 @@ export class UserCommand extends NinoCommand {
 
 		if (badges.length) {
 			embed.setDescription(
-				application
-					? `${badges.join('  ')}\n\n${application.description}`
-					: badges.join('  ')
+				badges.join(' ')
 			)
-		} else if (member.user.bot) {
-			embed.setDescription(`${application?.description as string}`)
 		}
 
 		embed.addField(
@@ -167,116 +145,6 @@ export class UserCommand extends NinoCommand {
 				}
 			)
 		)
-
-		if (application) {
-			const appInfo: string[] = []
-
-			if (application.bot_public) {
-				const botPublicKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.bot_public',
-					{
-						emoji: Emojis.check,
-					}
-				)
-
-				appInfo.push(botPublicKey)
-			} else {
-				const noBotPublicKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.bot_public',
-					{
-						emoji: Emojis.fail,
-					}
-				)
-				appInfo.push(noBotPublicKey)
-			}
-
-			if (
-				(application.flags & ApplicationFlags.GatewayGuildMembers) ===
-					ApplicationFlags.GatewayGuildMembers ||
-				(application.flags &
-					ApplicationFlags.GatewayGuildMembersLimited) ===
-					ApplicationFlags.GatewayGuildMembersLimited
-			) {
-				const guildMembersKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.guild_members',
-					{
-						emoji:
-							application.flags &
-							ApplicationFlags.GatewayGuildMembers
-								? Emojis.check
-								: Emojis.pending,
-					}
-				)
-
-				appInfo.push(guildMembersKey)
-			}
-
-			if (
-				(application.flags & ApplicationFlags.GatewayPresence) ===
-					ApplicationFlags.GatewayPresence ||
-				(application.flags &
-					ApplicationFlags.GatewayPresenceLimited) ===
-					ApplicationFlags.GatewayPresenceLimited
-			) {
-				const gatewayPresenceKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_presence',
-					{
-						emoji:
-							application.flags & ApplicationFlags.GatewayPresence
-								? Emojis.check
-								: Emojis.pending,
-					}
-				)
-				appInfo.push(gatewayPresenceKey)
-			} else {
-				const noGatewayPresenceKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_presence',
-					{
-						emoji: Emojis.fail,
-					}
-				)
-				appInfo.push(noGatewayPresenceKey)
-			}
-
-			if (
-				(application.flags &
-					NewApplicationFlags.GatewayMessageContent) ===
-					NewApplicationFlags.GatewayMessageContent ||
-				(application.flags &
-					NewApplicationFlags.GatewayMessageContentLimited) ===
-					NewApplicationFlags.GatewayMessageContentLimited
-			) {
-				const gatewayMessageContentKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_message_content',
-					{
-						emoji:
-							application.flags &
-							NewApplicationFlags.GatewayMessageContent
-								? Emojis.check
-								: Emojis.pending,
-					}
-				)
-
-				appInfo.push(gatewayMessageContentKey)
-			} else {
-				const noGatewayMessageContentKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_message_content',
-					{
-						emoji: Emojis.fail,
-					}
-				)
-				appInfo.push(noGatewayMessageContentKey)
-			}
-
-			embed.addField('» Bot', appInfo.join('\n'))
-		}
 
 		if (roles.length) {
 			embed.addField(
@@ -334,15 +202,10 @@ export class UserCommand extends NinoCommand {
 			message?: Message
 		}
 	) {
-		let application
 		const badges = this.getBadges(
 			user,
 			message?.guild ?? interaction!.guild!
 		)
-
-		if (user.bot) {
-			application = await this.fetchBot(user.id).catch(() => null)
-		}
 
 		const embed = new MessageEmbed()
 			.setColor(Colors.pastelGreen)
@@ -353,12 +216,8 @@ export class UserCommand extends NinoCommand {
 
 		if (badges.length) {
 			embed.setDescription(
-				application
-					? `${badges.join('  ')}\n\n${application.description}`
-					: badges.join('  ')
+				badges.join('  ')
 			)
-		} else if (user.bot) {
-			embed.setDescription(`${application?.description as string}`)
 		}
 
 		embed.addField(
@@ -374,116 +233,6 @@ export class UserCommand extends NinoCommand {
 				}
 			)
 		)
-
-		if (application) {
-			const appInfo: string[] = []
-
-			if (application.bot_public) {
-				const botPublicKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.bot_public',
-					{
-						emoji: Emojis.check,
-					}
-				)
-
-				appInfo.push(botPublicKey)
-			} else {
-				const noBotPublicKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.bot_public',
-					{
-						emoji: Emojis.fail,
-					}
-				)
-				appInfo.push(noBotPublicKey)
-			}
-
-			if (
-				(application.flags & ApplicationFlags.GatewayGuildMembers) ===
-					ApplicationFlags.GatewayGuildMembers ||
-				(application.flags &
-					ApplicationFlags.GatewayGuildMembersLimited) ===
-					ApplicationFlags.GatewayGuildMembersLimited
-			) {
-				const guildMembersKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.guild_members',
-					{
-						emoji:
-							application.flags &
-							ApplicationFlags.GatewayGuildMembers
-								? Emojis.check
-								: Emojis.emergency,
-					}
-				)
-
-				appInfo.push(guildMembersKey)
-			}
-
-			if (
-				(application.flags & ApplicationFlags.GatewayPresence) ===
-					ApplicationFlags.GatewayPresence ||
-				(application.flags &
-					ApplicationFlags.GatewayPresenceLimited) ===
-					ApplicationFlags.GatewayPresenceLimited
-			) {
-				const gatewayPresenceKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_presence',
-					{
-						emoji:
-							application.flags & ApplicationFlags.GatewayPresence
-								? Emojis.check
-								: Emojis.pending,
-					}
-				)
-				appInfo.push(gatewayPresenceKey)
-			} else {
-				const noGatewayPresenceKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_presence',
-					{
-						emoji: Emojis.fail,
-					}
-				)
-				appInfo.push(noGatewayPresenceKey)
-			}
-
-			if (
-				(application.flags &
-					NewApplicationFlags.GatewayMessageContent) ===
-					NewApplicationFlags.GatewayMessageContent ||
-				(application.flags &
-					NewApplicationFlags.GatewayMessageContentLimited) ===
-					NewApplicationFlags.GatewayMessageContentLimited
-			) {
-				const gatewayMessageContentKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_message_content',
-					{
-						emoji:
-							application.flags &
-							NewApplicationFlags.GatewayMessageContent
-								? Emojis.check
-								: Emojis.emergency,
-					}
-				)
-
-				appInfo.push(gatewayMessageContentKey)
-			} else {
-				const noGatewayMessageContentKey = await resolveKey(
-					message ?? interaction!,
-					'commands/util:user.gateway_message_content',
-					{
-						emoji: Emojis.fail,
-					}
-				)
-				appInfo.push(noGatewayMessageContentKey)
-			}
-
-			embed.addField('» Bot', appInfo.join('\n'))
-		}
 
 		embed.setFooter({ text: user.id })
 
@@ -504,28 +253,4 @@ export class UserCommand extends NinoCommand {
 
 		return emojis
 	}
-
-	private fetchBot(bot: Snowflake) {
-		return fetch<FetchResponse>(
-			`https://discord.com/api/v10/applications/${bot}/rpc`,
-			{
-				method: FetchMethods.Get,
-			},
-			FetchResultTypes.JSON
-		)
-	}
-}
-
-interface FetchResponse {
-	name: string
-	id: string
-	description: string
-	bot_public: boolean
-	flags: number
-}
-
-// !TODO: Remove this when the discord-api-types is updated
-enum NewApplicationFlags {
-	GatewayMessageContent = 262144,
-	GatewayMessageContentLimited = 524288,
 }

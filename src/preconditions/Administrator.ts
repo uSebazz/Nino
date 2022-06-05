@@ -1,4 +1,4 @@
-import { Emojis } from '#utils/constans'
+import { Emojis } from '#utils/constants'
 import { Precondition } from '@sapphire/framework'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import type { Message, CommandInteraction, GuildMember } from 'discord.js'
