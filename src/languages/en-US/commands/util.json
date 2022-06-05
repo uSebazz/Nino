@@ -14,10 +14,6 @@
 		"field_about_content_member": "> - **Created At**: <t:{{createdAt}}:R>\n> - **Joined At**: <t:{{joinedAt}}:R>\n> - **Nickname**: {{nickname}}",
 		"field_roles": "» Roles",
 		"field_permissions": "» Permissions",
-		"field_permissions_all": "> All permissions. (Administrator)",
-		"bot_public": "> {{emoji}} Bot public",
-		"guild_members": "> {{emoji}} Guild members intent",
-		"gateway_presence": "> {{emoji}} Gateway presence intent",
-		"gateway_message_content": "> {{emoji}} Gateway message content intent"
+		"field_permissions_all": "> All permissions. (Administrator)"
 	}
 }

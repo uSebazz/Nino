@@ -14,10 +14,6 @@
 		"field_about_content_member": "> - **Erstellt** vor: <t:{{createdAt}}:R>\n> - **Mitgliedschaft**: <t:{{joinedAt}}:R>\n> - **Spitzname**: {{nickname}}",
 		"field_roles": "» Rollen",
 		"field_permissions": "» Berechtigungen",
-		"field_permissions_all": "> Alle Berechtigungen, (Administrator)",
-		"bot_public": "> {{emoji}} Öffentlicher bot",
-		"guild_members": "> {{emoji}} Server-Mitglieder Intent",
-		"gateway_presence": "> {{emoji}} Gateway-Präsenz Intent",
-		"gateway_message_content": "> {{emoji}} Gateway Nachricht Inhalt Absicht"
+		"field_permissions_all": "> Alle Berechtigungen, (Administrator)"
 	}
 }
