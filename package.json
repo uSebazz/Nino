@@ -1,7 +1,7 @@
 {
 	"name": "nino",
 	"description": "Multipurpose Discord Bot built on Sapphire Framework",
-	"author": "Sebazz & Nino Team (https://github.com/Nino-bot)",
+	"author": "Sebazz",
 	"version": "2.0.3",
 	"license": "Apache-2.0",
 	"type": "module",
@@ -10,12 +10,12 @@
 		"build": "tsup src && node scripts/i18n.mjs",
 		"clean": "node scripts/clean.mjs",
 		"lang": "node scripts/i18n.mjs",
-		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
-		"dev": "tsc-watch --onSuccess \"node --preserve-symlinks --enable-source-maps ./dist/Nino.js\"",
+		"start": "node --enable-source-maps ./dist/Nino.js",
+		"dev": "tsc-watch --onSuccess \"node --enable-source-maps ./dist/Nino.js\"",
 		"deploy": "yarn build && yarn start",
 		"style": "eclint fix 'src/**/*'"
 	},
-	"packageManager": "yarn@1.22.19",
+	"packageManager": "yarn@3.2.1",
 	"dependencies": {
 		"@colors/colors": "^1.5.0",
 		"@prisma/client": "3.14.0",
@@ -30,8 +30,6 @@
 		"@sapphire/utilities": "3.6.2",
 		"@skyra/env-utilities": "1.0.0",
 		"@skyra/start-banner": "^1.0.0",
-		"canvas": "^2.9.1",
-		"discord-arts": "^0.0.4",
 		"discord.js": "13.7.0",
 		"gradient-string": "^2.0.1"
 	},
@@ -51,6 +49,7 @@
 		"#utils/*": "./dist/lib/utils/*.js",
 		"#lib/*": "./dist/lib/*.js",
 		"#lib/i18n": "./dist/lib/i18n/index.js",
+		"#lib/i18n/Language": "./dist/lib/i18n/Language/index.js",
 		"#lib/structures": "./dist/lib/structures/index.js",
 		"#root/*": "./dist/*.js"
 	}

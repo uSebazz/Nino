@@ -5,7 +5,7 @@ import {
 	type NinoCommandOptions,
 	type NinoCommandRegistery,
 } from '#lib/structures/NinoCommand'
-import { Colors } from '#utils/constants'
+import { Colors, Badges } from '#utils/constants'
 import { ApplyOptions } from '@sapphire/decorators'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
@@ -15,8 +15,8 @@ import type {
 	Message,
 	CommandInteraction,
 	User,
-	//Guild,
-	//UserFlagsString,
+	Guild,
+	UserFlagsString,
 	GuildMember,
 	PermissionString,
 } from 'discord.js'
@@ -107,10 +107,10 @@ export class UserCommand extends NinoCommand {
 		}: { interaction?: CommandInteraction; message?: Message }
 	) {
 		const permissions: string[] = []
-		/*const badges = this.getBadges(
+		const badges = this.getBadges(
 			member.user,
 			message?.guild ?? interaction!.guild!
-		)*/
+		)
 		const roles = member.roles.cache
 			.sorted((a, b) => a.position - b.position)
 			.map((role) => role.toString())
@@ -124,11 +124,11 @@ export class UserCommand extends NinoCommand {
 				iconURL: member.user.displayAvatarURL({ dynamic: true }),
 			})
 
-		/*if (badges.length) {
+		if (badges.length) {
 			embed.setDescription(
 				badges.join('  ')
 			)
-		}*/
+		}
 
 		embed.addField(
 			await resolveKey(
@@ -202,10 +202,10 @@ export class UserCommand extends NinoCommand {
 			message?: Message
 		}
 	) {
-		/*const badges = this.getBadges(
+		const badges = this.getBadges(
 			user,
 			message?.guild ?? interaction!.guild!
-		)*/
+		)
 
 		const embed = new MessageEmbed()
 			.setColor(Colors.pastelGreen)
@@ -214,11 +214,11 @@ export class UserCommand extends NinoCommand {
 				iconURL: user.displayAvatarURL({ dynamic: true }),
 			})
 
-		/*if (badges.length) {
+		if (badges.length) {
 			embed.setDescription(
 				badges.join('  ')
 			)
-		}*/
+		}
 
 		embed.addField(
 			await resolveKey(
@@ -239,17 +239,17 @@ export class UserCommand extends NinoCommand {
 		return embed
 	}
 
-	/*private getBadges(user: User, guild?: Guild) {
+	private getBadges(user: User, guild?: Guild) {
 		const flags = user.flags?.toArray() || []
 		const emojis = []
-		if (user.avatar!.startsWith('_a')) emojis.push(Badges.NITRO)
+		if (user.avatar?.startsWith('_a') && user.banner?.length) emojis.push(Badges.NITRO)
 		if (guild && guild.ownerId === user.id) emojis.push(Badges.OWNER)
 		emojis.push(
 			...Object.keys(Badges)
 				.filter((badge) => flags.includes(badge as UserFlagsString))
+				// @ts-expect-error okay
 				.map((badge) => Badges[badge])
 		)
-
 		return emojis
-	}*/
+	}
 }

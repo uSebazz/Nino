@@ -1,9 +1,13 @@
 {
-    "language": {
-        "select": "{{emoji}} - Selecciona el idioma para este servidor",
-        "already": "{{emoji}} - Uh, parece que este idioma ya está establecido",
-        "filter": "{{emoji}} - Este menú no es para ti :)",
-        "done": "{{emoji}} - El idioma del servidor ahora será `{{lang}}` :D",
-        "timefinish": "{{emoji}} - Interacción terminada, ¡gracias por usar el menú! :D"
-    }
+	"language": {
+		"select": "{{emoji}} - Selecciona el idioma para este servidor",
+		"already": "{{emoji}} - Uh, parece que este idioma ya está establecido",
+		"filter": "{{emoji}} - Este menú no es para ti :)",
+		"done": "{{emoji}} - El idioma del servidor ahora será `{{lang}}` :D",
+		"timefinish": "{{emoji}} - Interacción terminada, ¡gracias por usar el menú! :D"
+	},
+	"logging": {
+		"unknown_command": "{{emoji}} - Comando desconocido o no implementado",
+		"all_already_enabled": "{{emoji}} - Parece que ya todos los eventos estan activados"
+	}
 }
