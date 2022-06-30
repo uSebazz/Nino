@@ -1,19 +1,16 @@
 {
-	"ping": "Pong! (roundtrip took: {{diff}}ms. Heartbeat: {{ping}}ms.)",
-	"stats": {
-		"description": "> Hi, I'm **Nino** a bot with a little of everything. With the purpose of improving the activity on your server and make it the best `💜`",
-		"field_devs": "» Developers",
-		"field_statics": "» Statics",
-		"field_statics_content": "> - **Users**: {{users}}\n> - **Guilds**: {{guilds}}\n> - **Channels**: {{channels}}\n> - **Commands**: {{commands}}\n> - **Library**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
-		"field_system": "» System",
-		"field_system_content": "> - **RAM Used**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usage**: {{cpuLoad}}\n> - **Model**: {{cpuModel}}"
-	},
-	"user": {
-		"field_about": "» About",
-		"field_about_content_user": "> - **Created At**: <t:{{createdAt}}:R>",
-		"field_about_content_member": "> - **Created At**: <t:{{createdAt}}:R>\n> - **Joined At**: <t:{{joinedAt}}:R>\n> - **Nickname**: {{nickname}}",
-		"field_roles": "» Roles",
-		"field_permissions": "» Permissions",
-		"field_permissions_all": "> All permissions. (Administrator)"
-	}
+	"PING_MESSAGE": "🏓 Pong! (Took: {{diff}}ms. Total: {{ping}}ms)",
+	"STATS_EMBED_DESCRIPTION": "> Hi, im **Nino** a bot with a little bit of everything. With the purpose of improving the activity on your server and make it the best `💜`.",
+	"STATS_FIELD_DEVS": "» Developers",
+	"STATS_FIELD_STATICS": "» Statics",
+	"STATS_FIELD_SYSTEM": "» System",
+	"STATS_FIELD_SYSTEM_CONTENT": "> - **RAM Usage**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usage**: {{cpuLoad}}\n> - **Model**: {{cpuModel}}",
+	"STATS_FIELD_STATICS_CONTENT": "> - **Users**: {{users}}\n> - **Servers**: {{guilds}}\n> - **Channels**: {{channels}}\n> - **Commands**: {{commands}}\n> - **Library**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
+	"USER_FIELD_ABOUT": "» Information",
+	"USER_FIELD_ROLES": "» Roles",
+	"USER_FIELD_PERMISSIONS": "» Permissions",
+	"USER_FIELD_PERMISSIONS_ALL": "> All permissions. (Administrator)",
+	"USER_FIELD_ABOUT_CONTENT_USER": "> - **Created At**: <t:{{createdAt}}:R>",
+	"USER_FIELD_ABOUT_CONTENT_MEMBER": "> - **Created At**: <t:{{createdAt}}:R>\n> - **Joined At**: <t:{{joidnedAt}}:R>\n> - **Nickname**: {{nickname}}",
+	"HELP_EMBED_DESCRIPTION": "Hi, im **Nino** a bot with a little bit of everything, made with `❤️` for {{user}} using {{sapphire}} and {{prisma}} <3"
 }

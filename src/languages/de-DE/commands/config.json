@@ -1,9 +1,24 @@
 {
-    "language": {
-        "select": "{{emoji}} - Wählen Sie die Sprache für diesen Server",
-        "already": "{{emoji}} - Oh, diese Sprache ist bereits für diesen Server ausgewählt",
-        "filter": "{{emoji}} - Dieses Menü gehört nicht zu Ihnen...",
-        "done": "{{emoji}} - Die Serversprache ist jetzt `{{lang}}` :D",
-        "timefinish": "{{emoji}} - Fertige Interaktion. Danke, dass du das Menü benutzt hast! :D"
-    }
+	"LANGUAGE_SELECT": "{{excl}} - Wählen Sie die Sprache für diesen Server",
+	"LANGUAGE_ALREADY": "{{wrong}} - Es scheint, dass diese Sprache bereits etabliert ist ",
+	"LANGUAGE_BUTTON_FILTER": "{{excl}} - Dieses Menü ist nicht für Sie :)",
+	"LANGUAGE_SET": "{{right}} - Die Sprache des Servers ist nun `{{lang}}` :D",
+	"LANGUAGE_COLLECTOR_FINISH": "{{netual}} - Interaktion beendet, danke für die Nutzung des Menüs! :D",
+	"LOGGING_ONLY_SLASH_COMMAND": "{{wrong}} - Sie können diesen Befehl nur in einem Schrägstrich-Befehl verwenden",
+	"LOGGING_CHANNEL_NOT_SET": "{{wrong}} - Kein Registrierungskanal gefunden\n> verwenden Sie `/logging config` um es zu konfigurieren",
+	"LOGGING_ALL_EVENTS_ENABLED": "{{right}} - Registrierung für alle Veranstaltungen möglich :D",
+	"LOGGING_ALREADY_ALL_EVENTS_ENABLED": "{{wrong}} - Es scheint, dass alle Ereignisse jetzt aktiviert sind",
+	"LOGGING_EVENT_ENABLED": "{{right}} - Registrierung von `{{event}}` aktiviert :p",
+	"LOGGING_EVENT_BLOCKED": "{{excl}} - Dieses Ereignis ist blockiert, da alle Ereignisse aktiviert sind",
+	"LOGGING_EVENT_ALREADY_ENABLED": "{{wrong}} - Es scheint, dass dieses Ereignis bereits aktiviert ist",
+	"LOGGING_ALL_EVENTS_DISABLED": "{{right}} - Alle Ereignisse wurden deaktiviert",
+	"LOGGING_ALL_EVENTS_ALREADY_DISABLED": "{{wrong}} - Es scheint, dass alle Ereignisse bereits deaktiviert sind",
+	"LOGGING_EVENT_DISABLED": "{{right}} - Registrierung von `{event}} deaktiviert",
+	"LOGGING_EVENT_ALREADY_DISABLED": "{{wrong}} - Es scheint, dass dieses Ereignis deaktiviert worden ist",
+	"LOGGING_CHANNEL_INVALID": "{{wrong}} - Der angegebene Kanal ist nicht gültig, es muss sich um einen Textkanal handeln",
+	"LOGGING_CHANNEL_SET": "{{ninoheart}} - Der Registrierungskanal wird nun {{channel}} sein. :D",
+	"LOGGING_CHANNEL_UPDATED": "{{ninoheart}} - Der Registrierungskanal wurde aktualisiert, er lautet jetzt {{channel}} :D",
+	"LOGGING_NO_DATA_FOUND": "{{ninozzz}} - Keine Daten gefunden, versuchen Sie zuerst das Registrierungssystem zu aktivieren ;)",
+	"LOGGING_ALL_EVENTS": "Alle Ereignisse",
+	"LOGGING_VIEW_INFO": "{{settings}} - **Einstellungen für die Registrierung**\n\n**Registrierungskanal**: {{channel}}\n**Ereignisse aktiviert**: {{events}}"
 }

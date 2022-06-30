@@ -1,26 +1,29 @@
 import {
 	NinoCommand,
-	type NinoCommandOptions,
-} from '#lib/structures/NinoCommand'
-import { clean } from '#utils/sanitizer/clean'
-import { seconds } from '#utils/function/times'
-import { send } from '@sapphire/plugin-editable-commands'
-import { ApplyOptions } from '@sapphire/decorators'
-import { Stopwatch } from '@sapphire/stopwatch'
-import { canSendMessages } from '@sapphire/discord.js-utilities'
-import {
-	isThenable,
-	codeBlock,
-	filterNullAndUndefinedAndEmpty,
-} from '@sapphire/utilities'
-import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch'
-import { Type } from '@sapphire/type'
+	type NinoCommandOptions
+} from '#lib/structures'
+import { seconds } from '#utils/function'
+import { clean } from '#utils/sanitizer'
 import { bold } from '@discordjs/builders'
+import { ApplyOptions } from '@sapphire/decorators'
+import { canSendMessages } from '@sapphire/discord.js-utilities'
+import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch'
+import type { Args } from '@sapphire/framework'
+import { send } from '@sapphire/plugin-editable-commands'
+import { Stopwatch } from '@sapphire/stopwatch'
+import { Type } from '@sapphire/type'
+import {
+	codeBlock,
+	filterNullAndUndefinedAndEmpty, isThenable
+} from '@sapphire/utilities'
+import type { Message } from 'discord.js'
+import { exec } from 'node:child_process'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { inspect, promisify } from 'node:util'
-import { exec } from 'node:child_process'
-import type { Args } from '@sapphire/framework'
-import type { Message } from 'discord.js'
+
+
+//import common from '#utils/constants'
+//const require = common(import.meta.url)
 
 @ApplyOptions<NinoCommandOptions>({
 	aliases: ['e', 'ev'],
@@ -298,9 +301,8 @@ export class UserCommand extends NinoCommand {
 				}
 
 				const output = codeBlock(options.language, options.result)
-				const content = `${bold('Error')}:${output}\n${bold('Type')}:${
-					options.footer
-				}\n${options.time}`
+				const content = `${bold('Error')}:${output}\n${bold('Type')}:${options.footer
+					}\n${options.time}`
 				return send(message, { content })
 			}
 		}

@@ -1,12 +1,13 @@
+import { LanguageKeys } from '#lib/i18n'
 import {
 	NinoCommand,
-	type NinoCommandOptions,
-} from '#lib/structures/NinoCommand'
-import { ApplyOptions } from '@sapphire/decorators'
-import { Message, type CommandInteraction } from 'discord.js'
-import { resolveKey } from '@sapphire/plugin-i18next'
-import { send } from '@sapphire/plugin-editable-commands'
+	type NinoCommandOptions
+} from '#lib/structures'
 import { Emojis } from '#utils/constants'
+import { ApplyOptions } from '@sapphire/decorators'
+import { send } from '@sapphire/plugin-editable-commands'
+import { resolveKey } from '@sapphire/plugin-i18next'
+import { Message, type CommandInteraction } from 'discord.js'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Ping of the bot',
@@ -18,13 +19,13 @@ import { Emojis } from '#utils/constants'
 })
 export class UserCommand extends NinoCommand {
 	public override async messageRun(message: Message): Promise<void> {
-		const msg = await send(message, `${Emojis.ninozzz} ping?`)
+		const msg = await send(message, `${Emojis.ninoburrito} ping?`)
 		const diff = msg.createdTimestamp - message.createdTimestamp
 		const ping = Math.round(this.container.client.ws.ping)
 
 		await send(
 			message,
-			await resolveKey(message, 'commands/util:ping', { diff, ping })
+			await resolveKey(message, LanguageKeys.Util.Ping, { diff, ping })
 		)
 	}
 
@@ -32,7 +33,7 @@ export class UserCommand extends NinoCommand {
 		interaction: CommandInteraction
 	): Promise<void> {
 		const msg = await interaction.reply({
-			content: `${Emojis.ninozzz} ping?`,
+			content: `${Emojis.ninoburrito} ping?`,
 			fetchReply: true,
 		})
 
@@ -40,10 +41,7 @@ export class UserCommand extends NinoCommand {
 			const { diff, ping } = this.getPing(msg, interaction)
 
 			await msg.edit(
-				await resolveKey(interaction, 'commands/util:ping', {
-					diff,
-					ping,
-				})
+				await resolveKey(interaction, LanguageKeys.Util.Ping, { diff, ping })
 			)
 		}
 	}

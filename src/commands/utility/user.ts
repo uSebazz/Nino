@@ -1,25 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { LanguageKeys } from '#lib/i18n'
 import {
 	NinoCommand,
 	type NinoCommandOptions,
-	type NinoCommandRegistery,
-} from '#lib/structures/NinoCommand'
-import { Colors, Badges } from '#utils/constants'
+	type NinoCommandRegistery
+} from '#lib/structures'
+import { Badges, Colors } from '#utils/constants'
 import { ApplyOptions } from '@sapphire/decorators'
-import { resolveKey } from '@sapphire/plugin-i18next'
-import { send } from '@sapphire/plugin-editable-commands'
-import { MessageEmbed, Permissions } from 'discord.js'
 import { RegisterBehavior, type Args } from '@sapphire/framework'
+import { send } from '@sapphire/plugin-editable-commands'
+import { resolveKey } from '@sapphire/plugin-i18next'
 import type {
-	Message,
-	CommandInteraction,
-	User,
-	Guild,
-	UserFlagsString,
-	GuildMember,
-	PermissionString,
+	CommandInteraction, Guild, GuildMember, Message, PermissionString, User, UserFlagsString
 } from 'discord.js'
+import { MessageEmbed, Permissions } from 'discord.js'
 @ApplyOptions<NinoCommandOptions>({
 	description: 'view user information',
 	aliases: ['ui', 'user', 'info-user', 'whois'],
@@ -133,11 +128,11 @@ export class UserCommand extends NinoCommand {
 		embed.addField(
 			await resolveKey(
 				message ?? interaction!,
-				'commands/util:user.field_about'
+				LanguageKeys.Util.User.FieldAbout
 			),
 			await resolveKey(
 				message ?? interaction!,
-				'commands/util:user.field_about_content_member',
+				LanguageKeys.Util.User.FieldAboutContentMember,
 				{
 					createdAt: (member.user.createdTimestamp / 1000) | 0,
 					joinedAt: (member.joinedTimestamp! / 1000) | 0,
@@ -150,7 +145,7 @@ export class UserCommand extends NinoCommand {
 			embed.addField(
 				await resolveKey(
 					message ?? interaction!,
-					'commands/util:user.field_roles'
+					LanguageKeys.Util.User.FieldRoles
 				),
 				`> ${roles}`
 			)
@@ -160,11 +155,11 @@ export class UserCommand extends NinoCommand {
 			embed.addField(
 				await resolveKey(
 					message ?? interaction!,
-					'commands/util:user.field_permissions'
+					LanguageKeys.Util.User.FieldPermissions
 				),
 				await resolveKey(
 					message ?? interaction!,
-					'commands/util:user.field_permissions_all'
+					LanguageKeys.Util.User.FieldPermissionsAll
 				)
 			)
 		} else {
@@ -181,7 +176,7 @@ export class UserCommand extends NinoCommand {
 				embed.addField(
 					await resolveKey(
 						message ?? interaction!,
-						'commands/util:user.field_permissions'
+						LanguageKeys.Util.User.FieldPermissions
 					),
 					`> ${permissions.join(', ')}`
 				)
@@ -223,11 +218,11 @@ export class UserCommand extends NinoCommand {
 		embed.addField(
 			await resolveKey(
 				message ?? interaction!,
-				'commands/util:user.field_about'
+				LanguageKeys.Util.User.FieldAbout
 			),
 			await resolveKey(
 				message ?? interaction!,
-				'commands/util:user.field_about_content_user',
+				LanguageKeys.Util.User.FieldAboutContentUser,
 				{
 					createdAt: (user.createdTimestamp / 1000) | 0,
 				}

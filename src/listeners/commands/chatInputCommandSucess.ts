@@ -43,6 +43,6 @@ export class ChatInputCommandSuccess extends Listener<
 	}
 
 	private guild(guild: Guild) {
-		return `${guild.name}[${guild.id}]`
+		return `${guild.name}[${cyan(guild.id)}]`
 	}
 }

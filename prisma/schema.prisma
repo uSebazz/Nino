@@ -8,14 +8,16 @@ generator client {
 }
 
 model EventsConfig {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  guildId String   @unique
-  all     Boolean  @default(false)
-  events  String[]
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  guildId   String   @unique // Guild Id
+  channelId String? // Channel id to send all logs.
+  events    String[] // The array of the events on, if all is true this array is empty.
+  //options   String[] // The array of the options on, if all is true this array is empty.
+  all       Boolean  @default(false) // If true, all logs will be sent to channelId.
 }
 
 model ServerConfig {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  lang    String
-  guildId String @unique
+  lang    String // The lang of the server
+  guildId String @unique // the id of the server
 }

@@ -1,18 +1,18 @@
+import { LanguageKeys } from '#lib/i18n'
 import {
 	NinoCommand,
-	type NinoCommandOptions,
-} from '#lib/structures/NinoCommand'
+	type NinoCommandOptions
+} from '#lib/structures'
 import { Emojis } from '#utils/constants'
 import { ApplyOptions } from '@sapphire/decorators'
-import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
 import { send } from '@sapphire/plugin-editable-commands'
+import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
+import type {
+	CommandInteraction, Message,
+	SelectMenuInteraction
+} from 'discord.js'
 import { MessageActionRow, MessageSelectMenu } from 'discord.js'
 import { setTimeout as wait } from 'node:timers/promises'
-import type {
-	Message,
-	SelectMenuInteraction,
-	CommandInteraction,
-} from 'discord.js'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Configure the bot language',
@@ -27,13 +27,10 @@ export class UserCommand extends NinoCommand {
 	public override async chatInputRun(interaction: CommandInteraction) {
 		const content = await resolveKey(
 			interaction,
-			'commands/config:language.select',
-			{
-				emoji: Emojis.excl,
-			}
+			LanguageKeys.Config.Language.SelectLanguage
 		)
 
-		await interaction.reply({ content: 'Enviado!', ephemeral: true })
+		await interaction.reply({ content: 'See channel.', ephemeral: true })
 
 		const msg = await interaction.channel!.send({
 			content,
@@ -48,10 +45,7 @@ export class UserCommand extends NinoCommand {
 	public override async messageRun(message: Message) {
 		const content = await resolveKey(
 			message,
-			'commands/config:language.select',
-			{
-				emoji: Emojis.excl,
-			}
+			LanguageKeys.Config.Language.SelectLanguage,
 		)
 
 		const msg = await send(message, {
@@ -72,24 +66,18 @@ export class UserCommand extends NinoCommand {
 			spanish: 'es-ES',
 			english: 'en-US',
 			german: 'de-DE',
-			french: 'fr-FR',
+			//french: 'fr-FR',
 		}
 		const timefinish = await resolveKey(
 			msg,
-			'commands/config:language.timefinish',
-			{
-				emoji: Emojis.netual,
-			}
+			LanguageKeys.Config.Language.LanguageTimeFinish,
 		)
 
 		const collector = msg.createMessageComponentCollector({
 			filter: async (interaction) => {
 				const content = await resolveKey(
 					interaction,
-					'commands/config:language.filter',
-					{
-						emoji: Emojis.wrong,
-					}
+					LanguageKeys.Config.Language.LanguageFilter,
 				)
 
 				if (
@@ -115,14 +103,12 @@ export class UserCommand extends NinoCommand {
 			// Keys of the language
 			const content = await resolveKey(
 				interaction,
-				'commands/config:language.already',
-				{
-					emoji: Emojis.wrong,
-				}
+				LanguageKeys.Config.Language.AlreadyLanguage,
 			)
+
 			const done = await resolveKey(
 				interaction,
-				'commands/config:language.done',
+				LanguageKeys.Config.Language.LanguageSet,
 				{
 					emoji: Emojis.right,
 					lang: languages[values],
@@ -184,11 +170,11 @@ export class UserCommand extends NinoCommand {
 							emoji: '🇩🇪',
 							value: 'german',
 						},
-						{
-							label: 'French - (France)',
-							emoji: '🇫🇷',
-							value: 'french',
-						},
+						//{
+						//	label: 'French - (France)',
+						//	emoji: '🇫🇷',
+						//	value: 'french',
+						//},
 					]),
 			]),
 		]

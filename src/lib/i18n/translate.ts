@@ -1,5 +1,6 @@
-import { Identifiers } from '@sapphire/framework'
+import { LanguageKeys } from '#lib/i18n'
 import { DecoratorIdentifiers } from '@sapphire/decorators'
+import { Identifiers } from '@sapphire/framework'
 
 export function translate(identifier: string) {
 	switch (identifier) {
@@ -46,7 +47,7 @@ export function translate(identifier: string) {
 		case Identifiers.CommandDisabled:
 			return 'precondition:disabled'
 		case Identifiers.PreconditionCooldown:
-			return 'precondition:cooldown'
+			return LanguageKeys.Precondition.CommandCooldown
 		case Identifiers.PreconditionDMOnly:
 			return 'precondition:dmOnly'
 		case Identifiers.PreconditionGuildNewsOnly:

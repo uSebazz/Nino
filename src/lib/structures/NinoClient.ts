@@ -1,7 +1,6 @@
-import { SapphireClient, container } from '@sapphire/framework'
-import { envParseString } from '@skyra/env-utilities'
 import { CLIENT_OPTIONS } from '#root/config'
 import { PrismaClient } from '@prisma/client'
+import { container, SapphireClient } from '@sapphire/framework'
 
 export class Nino extends SapphireClient {
 	public constructor() {
@@ -11,9 +10,9 @@ export class Nino extends SapphireClient {
 	}
 
 	public async start() {
-		await super.login(envParseString('DISCORD_TOKEN'))
+		await super.login()
 		await container.prisma.$connect().then(() => {
-			container.logger.info('Connected to Prisma 🔹')
+			container.logger.info('Connected to Prisma')
 		})
 	}
 }

@@ -1,14 +1,14 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-import { Listener, type Store, type Events } from '@sapphire/framework'
 import { ApplyOptions } from '@sapphire/decorators'
+import { Listener, type Events, type Store } from '@sapphire/framework'
+import { envParseString } from '@skyra/env-utilities'
 import { createBanner } from '@skyra/start-banner'
-import colors from '@colors/colors'
+import { blue, gray, yellow } from 'colorette'
 import gradient from 'gradient-string'
 
-const dev = process.env.NODE_ENV === 'development'
+
 @ApplyOptions<Listener.Options>({ event: 'ready', once: true })
 export class readyListener extends Listener<typeof Events.ClientReady> {
-	public readonly style = dev ? colors.yellow : colors.blue
+	public readonly style = this.isDev ? yellow : blue
 
 	public run() {
 		this.printBanner()
@@ -17,34 +17,28 @@ export class readyListener extends Listener<typeof Events.ClientReady> {
 
 	private printBanner() {
 		console.log(
-			gradient.summer.multiline(
+			gradient.cristal.multiline(
 				createBanner({
 					logo: [
-						String.raw`       \`*-.                    `,
-						String.raw`        )  _\`-.                 `,
-						String.raw`       .  : \`. .                `,
-						String.raw`       : _   '  \               `,
-						String.raw`       ; *\` _.   \`*-._          `,
-						String.raw`       \`-.-'          \`-.       `,
-						String.raw`         ;       \`       \`.     `,
-						String.raw`         :.       .        \    `,
-						String.raw`         . \  .   :   .-'   .   `,
-						String.raw`         '  \`+.;  ;  '      :   `,
-						String.raw`         :  '  |    ;       ;-. `,
-						String.raw`         ; '   : :\`-:     _.\`* ;`,
-						String.raw`       .*' /  .*' ; .*\`- +'  \`*' `,
-						String.raw`      \`*-*   \`*-*  \`*-*'`,
+						String.raw` ⟋|､`,
+						String.raw`(°､ ｡ 7`,
+						String.raw` |､  ~ヽ`,
+						String.raw` じしf_,)〳`
 					],
 					name: [
-						String.raw` _   _ _             `,
-						String.raw` | \ | (_)_ __   ___  `,
-						String.raw` |  \| | | '_ \ / _ \ `,
-						String.raw` | |\  | | | | | (_) |`,
-						String.raw` |_| \_|_|_| |_|\___/ `,
+						String.raw`  Nino Bot v2.0.3`,
 					],
+					extra: [
+						'  [+] Gateway',
+						this.isDev ? ' </> DEVELOPMENT MODE' : ''
+					]
 				})
 			)
 		)
+	}
+
+	private get isDev() {
+		return envParseString('NODE_ENV') === 'development'
 	}
 
 	private printStoreDebugInformation() {
@@ -58,7 +52,7 @@ export class readyListener extends Listener<typeof Events.ClientReady> {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private styleStore(store: Store<any>, last: boolean) {
-		return colors.gray(
+		return gray(
 			`${last ? '└─' : '├─'} Loaded ${this.style(
 				store.size.toString().padEnd(3, ' ')
 			)} ${store.name}.`

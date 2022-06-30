@@ -9,3 +9,5 @@ dist
 
 # Ignoring lint cache
 .eslintcache
+.yarn/cache
+.yarn/install-state.gz

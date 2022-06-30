@@ -1,2 +1,2 @@
-export * from './NinoClient'
-export * from './NinoCommand'
+export * from '#lib/structures/NinoClient'
+export * from '#lib/structures/NinoCommand'

@@ -1,22 +1,22 @@
+import { translate } from '#lib/i18n'
 import { ArgumentError, Listener, UserError } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import { translate } from '#lib/i18n/translate'
+//import { Emojis } from '#utils/constants'
 import type { Events, MessageCommandErrorPayload } from '@sapphire/framework'
 import type { Message } from 'discord.js'
-import { Emojis } from '#utils/constants'
 
-export class messageCommandError extends Listener<
-	typeof Events.MessageCommandError
-> {
+
+export class MessageCommandError extends Listener<typeof Events.MessageCommandError> {
 	public override run(error: Error, { message }: MessageCommandErrorPayload) {
+		//console.log(error)
 		if (typeof error === 'string') return this.stringError(message, error)
 		if (error instanceof ArgumentError) {
 			return this.argumentError(message, error)
 		}
 		if (error instanceof UserError) return this.userError(message, error)
 
-		return null
+		return this.container.logger.error(error)
 	}
 
 	private async stringError(message: Message, error: string) {
@@ -35,8 +35,7 @@ export class messageCommandError extends Listener<
 		return send(
 			message,
 			await resolveKey(message, identifier, {
-				argument,
-				emoji: Emojis.wrong,
+				argument
 			})
 		)
 	}
@@ -46,9 +45,7 @@ export class messageCommandError extends Listener<
 
 		return send(
 			message,
-			await resolveKey(message, identifier, {
-				emoji: Emojis.wrong,
-			})
+			await resolveKey(message, identifier)
 		)
 	}
 }

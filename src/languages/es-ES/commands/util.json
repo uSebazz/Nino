@@ -1,19 +1,16 @@
 {
-	"ping": "Pong! (Respondí en: {{diff}}ms. Total: {{ping}}ms)",
-	"stats": {
-		"description": "> Hola, soy **Nino** un bot con un poco de todo. Con el propósito de mejorar la actividad en su servidor y hacerla la mejor `💜`",
-		"field_devs": "» Desarrolladores",
-		"field_statics": "» Estadísticas",
-		"field_statics_content": "> - **Usuarios**: {{users}}\n> - **Servidores**: {{guilds}}\n> - **Canales**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Librería**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
-		"field_system": "» Sistema",
-		"field_system_content": "> - **RAM Usada**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usado**: {{cpuLoad}}\n> - **Modelo**: {{cpuModel}}"
-	},
-	"user": {
-		"field_about": "» Información",
-		"field_about_content_user": "> - **Creada hace**: <t:{{createdAt}}:R>",
-		"field_about_content_member": "> - **Creada hace**: <t:{{createdAt}}:R>\n> - **Membresia**: <t:{{joinedAt}}:R>\n> - **Apodo**: {{nickname}}",
-		"field_roles": "» Roles",
-		"field_permissions": "» Permisos",
-		"field_permissions_all": "> Todos los permisos. (Administrador)"
-	}
+	"PING_MESSAGE": "🏓 Pong! (Respondí en: {{diff}}ms. Total: {{ping}}ms)",
+	"STATS_EMBED_DESCRIPTION": "> Hola, soy **Nino** un bot con un poco de todo. Con el propósito de mejorar la actividad en su servidor y hacerla la mejor `💜`",
+	"STATS_FIELD_DEVS": "» Desarrolladores",
+	"STATS_FIELD_STATICS": "» Estadísticas",
+	"STATS_FIELD_SYSTEM": "» Sistema",
+	"STATS_FIELD_SYSTEM_CONTENT": "> - **RAM Usada**: {{ramUsed}}\n> - **RAM Total**: {{ramTotal}}\n> - **CPU usado**: {{cpuLoad}}\n> - **Modelo**: {{cpuModel}}",
+	"STATS_FIELD_STATICS_CONTENT": "> - **Usuarios**: {{users}}\n> - **Servidores**: {{guilds}}\n> - **Canales**: {{channels}}\n> - **Comandos**: {{commands}}\n> - **Librería**: {{version}}\n> - **Framework**: {{sapphireVersion}}",
+	"USER_FIELD_ABOUT": "» Información",
+	"USER_FIELD_ROLES": "» Roles",
+	"USER_FIELD_PERMISSIONS": "» Permisos",
+	"USER_FIELD_PERMISSIONS_ALL": "> Todos los permisos. (Administrador)",
+	"USER_FIELD_ABOUT_CONTENT_USER": "> - **Creada hace**: <t:{{createdAt}}:R>",
+	"USER_FIELD_ABOUT_CONTENT_MEMBER": "> - **Creada hace**: <t:{{createdAt}}:R>\n> - **Membresia**: <t:{{joinedAt}}:R>\n> - **Apodo**: {{nickname}}",
+	"HELP_EMBED_DESCRIPTION": "Hola, soy **Nino** una bot con un poco de todo, creada con `❤️`  por {{user}} usando {{sapphire}} y {{prisma}} <3"
 }

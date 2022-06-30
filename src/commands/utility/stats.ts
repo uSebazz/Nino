@@ -1,7 +1,7 @@
 import {
 	NinoCommand,
 	type NinoCommandOptions,
-} from '#lib/structures/NinoCommand'
+} from '#lib/structures'
 import { Colors, Emojis } from '#utils/constants'
 import { version as sapphireVersion } from '@sapphire/framework'
 import {
@@ -17,21 +17,7 @@ import { roundNumber } from '@sapphire/utilities'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { cpus, type CpuInfo } from 'node:os'
 import { reply } from '@sapphire/plugin-editable-commands'
-
-export interface StatsNino {
-	channels: number
-	users: number
-	guilds: number
-	commands: number
-	version: string
-	sapphireVersion: string
-}
-export interface StatsUsage {
-	cpuLoad: string
-	cpuModel: string
-	ramTotal: string
-	ramUsed: string
-}
+import { LanguageKeys } from '#lib/i18n'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'shows nino statics',
@@ -45,78 +31,41 @@ export class UserCommand extends NinoCommand {
 	readonly #sapphireVersion = /-next\.[a-z0-9]+\.\d{1,}/i
 
 	public override async chatInputRun(interaction: CommandInteraction) {
-		const embed = new MessageEmbed()
-			.setAuthor({
-				name: interaction.user.tag,
-				iconURL: interaction.user.displayAvatarURL(),
-			})
-			.setDescription(
-				await resolveKey(interaction, 'commands/util:stats.description')
-			)
-			.addField(
-				await resolveKey(interaction, 'commands/util:stats.field_devs'),
-				`> - **Sebazz**: ${Emojis.github} [GitHub](https://github.com/uSebazz) | ${Emojis.twitter} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: ${Emojis.github} [GitHub](https://github.com/ddiablou) |  ${Emojis.twitter} [Twitter](https://twitter.com/EnBraix)\n> - **Hyduez**: ${Emojis.github} [Github](https://github.com/hyduez)`
-			)
-			.addField(
-				await resolveKey(
-					interaction,
-					'commands/util:stats.field_statics'
-				),
-				await resolveKey(
-					interaction,
-					'commands/util:stats.field_statics_content',
-					{
-						channels: this.botStatics.channels,
-						guilds: this.botStatics.guilds,
-						users: this.botStatics.users,
-						commands: this.botStatics.commands,
-						version: this.botStatics.version,
-						sapphireVersion: this.botStatics.sapphireVersion,
-					}
-				)
-			)
-			.addField(
-				await resolveKey(
-					interaction,
-					'commands/util:stats.field_system'
-				),
-				await resolveKey(
-					interaction,
-					'commands/util:stats.field_system_content',
-					{
-						ramUsed: this.usageStatics.ramUsed,
-						ramTotal: this.usageStatics.ramTotal,
-						cpuLoad: this.usageStatics.cpuLoad,
-						cpuModel: this.usageStatics.cpuModel,
-					}
-				)
-			)
-			.setColor(Colors.prettyPutunia)
+		const embed = await this.embed({ interaction })
 
 		await interaction.reply({
 			embeds: [embed],
-			components: this.components,
+			components: UserCommand.components,
 		})
 	}
 
 	public override async messageRun(message: Message) {
+		const embed = await this.embed({ message })
+
+		await reply(message, { embeds: [embed], components: UserCommand.components })
+	}
+
+	private async embed({ message, interaction }: { message?: Message, interaction?: CommandInteraction }) {
 		const embed = new MessageEmbed()
 			.setAuthor({
-				name: message.author.tag,
-				iconURL: message.author.displayAvatarURL(),
+				name: message ? message.author.tag : interaction!.user.tag,
+				iconURL: message ? message.author.displayAvatarURL({ dynamic: true }) : interaction!.user.displayAvatarURL({ dynamic: true }),
 			})
 			.setDescription(
-				await resolveKey(message, 'commands/util:stats.description')
+				await resolveKey(message ?? interaction!, LanguageKeys.Util.Stats.EmbedDescription)
 			)
 			.addField(
-				await resolveKey(message, 'commands/util:stats.field_devs'),
-				`> - **Sebazz**: ${Emojis.github} [GitHub](https://github.com/uSebazz) | ${Emojis.twitter} [Twitter](https://twitter.com/uSebazz)\n> - **Braixz**: ${Emojis.github} [GitHub](https://github.com/ddiablou) |  ${Emojis.twitter} [Twitter](https://twitter.com/EnBraix)\n> - **Hyduez**: ${Emojis.github} [Github](https://github.com/hyduez)`
+				await resolveKey(message ?? interaction!, LanguageKeys.Util.Stats.FieldDevs),
+				`> - **Sebazz**: ${Emojis.github} [GitHub](https://github.com/uSebazz) | ${Emojis.twitter} [Twitter](https://twitter.com/uSebazz)\n> - **Hyduez**: ${Emojis.github} [Github](https://github.com/hyduez) | ${Emojis.twitter} [Twitter](https://twitter.com/hyduez)`,
 			)
 			.addField(
-				await resolveKey(message, 'commands/util:stats.field_statics'),
 				await resolveKey(
-					message,
-					'commands/util:stats.field_statics_content',
+					message ?? interaction!,
+					LanguageKeys.Util.Stats.FieldStatics
+				),
+				await resolveKey(
+					message ?? interaction!,
+					LanguageKeys.Util.Stats.FieldStaticsContent,
 					{
 						channels: this.botStatics.channels,
 						guilds: this.botStatics.guilds,
@@ -128,24 +77,27 @@ export class UserCommand extends NinoCommand {
 				)
 			)
 			.addField(
-				await resolveKey(message, 'commands/util:stats.field_system'),
 				await resolveKey(
-					message,
-					'commands/util:stats.field_system_content',
+					message ?? interaction!,
+					LanguageKeys.Util.Stats.FieldSystem
+				),
+				await resolveKey(
+					message ?? interaction!,
+					LanguageKeys.Util.Stats.FieldSystemContent,
 					{
-						ramUsed: this.usageStatics.ramUsed,
-						ramTotal: this.usageStatics.ramTotal,
-						cpuLoad: this.usageStatics.cpuLoad,
-						cpuModel: this.usageStatics.cpuModel,
+						ramUsed: UserCommand.usageStatics.ramUsed,
+						ramTotal: UserCommand.usageStatics.ramTotal,
+						cpuLoad: UserCommand.usageStatics.cpuLoad,
+						cpuModel: UserCommand.usageStatics.cpuModel,
 					}
 				)
 			)
 			.setColor(Colors.prettyPutunia)
 
-		await reply(message, { embeds: [embed], components: this.components })
+			return embed
 	}
 
-	private get components(): MessageActionRow[] {
+	private static get components(): MessageActionRow[] {
 		return [
 			new MessageActionRow().addComponents(
 				new MessageButton()
@@ -177,7 +129,7 @@ export class UserCommand extends NinoCommand {
 		}
 	}
 
-	private get usageStatics(): StatsUsage {
+	private static get usageStatics(): StatsUsage {
 		const usage = process.memoryUsage()
 		return {
 			// eslint-disable-next-line
@@ -199,4 +151,19 @@ export class UserCommand extends NinoCommand {
 		) / 100
 			}%`
 	}
+}
+
+export interface StatsNino {
+	channels: number
+	users: number
+	guilds: number
+	commands: number
+	version: string
+	sapphireVersion: string
+}
+export interface StatsUsage {
+	cpuLoad: string
+	cpuModel: string
+	ramTotal: string
+	ramUsed: string
 }

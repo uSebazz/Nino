@@ -1,5 +1,5 @@
 import { Listener, type Events } from '@sapphire/framework'
-import colors from '@colors/colors'
+import { cyan } from 'colorette'
 import type { RateLimitData } from 'discord.js'
 
 export class rateLimitListener extends Listener<typeof Events.RateLimit> {
@@ -24,26 +24,26 @@ export class rateLimitListener extends Listener<typeof Events.RateLimit> {
 	}
 
 	private timeout(time: number) {
-		return `[${colors.cyan(time.toString())}]`
+		return `[${cyan(time.toString())}]`
 	}
 
 	private limit(limit: number) {
-		return `[${colors.cyan(limit.toString())}]`
+		return `[${cyan(limit.toString())}]`
 	}
 
 	private method(method: string) {
-		return `[${colors.cyan(method.toString())}]`
+		return `[${cyan(method.toString())}]`
 	}
 
 	private path(path: string) {
-		return `[${colors.cyan(path.toString())}]`
+		return `[${cyan(path.toString())}]`
 	}
 
 	private route(route: string) {
-		return `[${colors.cyan(route.toString())}]`
+		return `[${cyan(route.toString())}]`
 	}
 
 	private global(global: boolean) {
-		return `[${colors.cyan(global.toString())}]`
+		return `[${cyan(global.toString())}]`
 	}
 }

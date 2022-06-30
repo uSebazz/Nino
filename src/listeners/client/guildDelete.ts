@@ -3,7 +3,7 @@ import { Listener, type Events } from '@sapphire/framework'
 import { envParseString } from '@skyra/env-utilities'
 import { WebhookClient, type Guild } from 'discord.js'
 
-export class guildCreateListener extends Listener<typeof Events.GuildCreate> {
+export class guildDeleteListener extends Listener<typeof Events.GuildCreate> {
 	public override async run(guild: Guild) {
 		await this.send(guild)
 	}
@@ -14,7 +14,7 @@ export class guildCreateListener extends Listener<typeof Events.GuildCreate> {
 		const owner = await guild.fetchOwner()
 
 		await webhook.send({
-			content: `${Emojis.ninozzz} **Nino** has joined to **${guild.name}**!\n> **Members**: ${guild.memberCount}\n> **Owner**: ${owner.user.tag}\n> **Date**: ${timeStamp}`,
+			content: `${Emojis.ninoburrito} **Nino** has removed to **${guild.name}**!\n> **Members**: ${guild.memberCount}\n> **Owner**: ${owner.user.tag}\n> **Date**: ${timeStamp}`,
 		})
 	}
 }

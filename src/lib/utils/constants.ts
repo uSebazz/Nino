@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { getRootData } from '@sapphire/pieces'
+import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10'
 import { join } from 'node:path'
+
 
 export const mainFolder = getRootData().root
 export const rootFolder = join(mainFolder, '..')
@@ -11,11 +13,21 @@ export enum Emojis {
 	wrong = '<:eg_wrong:983110026363297832>',
 	excl = '<:eg_excl:983109713979928716>',
 	netual = '<:eg_netual:983110520628473978>',
+	setting = '<:eg_setting:983110764330123315>',
 
 	// Emojis for reactions and embeds
-	ninozzz = '<a:NinoBuritoa:951482070583091240>',
-	twitter = '<:twitter:977614632292343848>',
+	twitter = '<:eg_twitter:986081387188715530>',
 	github = '<:github:977614370722951168>',
+
+	// Logs
+	messageDelete = '<:eg_deletemessage:991672466621608027>',
+
+	// Emojis for the bot
+	ninoheart = '<:co_ninoheart:990370569876807771>',
+	ninoburrito = '<a:NinoBuritoa:951482070583091240>',
+	ninozzz = '<:co_ninozzz:990370751389503579>',
+	ninouwu = '<:co_ninouwu:987914627033735178>',
+	ninowlc = '<:co_ninowlc:990370791612887070>'
 }
 
 export const Badges = {
@@ -53,4 +65,111 @@ export const gateways = {
 export enum Colors {
 	pastelGreen = '#c7e9a8',
 	prettyPutunia = '#ddb2e1',
+	invisible = '#2F3136'
 }
+
+export const LoggingEvents: Array<APIApplicationCommandOptionChoice<string>> = [
+	{
+		name: 'All listeners',
+		value: 'all'
+	},
+	{
+		name: 'Message Delete',
+		value: 'messageDelete'
+	},
+	{
+		name: 'Message Bulk Delete',
+		value: 'messageBulkDelete'
+	},
+	{
+		name: 'Message Update',
+		value: 'messageUpdate'
+	},
+	{
+		name: 'Channel Create',
+		value: 'channelCreate'
+	},
+	{
+		name: 'Channel Delete',
+		value: 'channelDelete'
+	},
+	{
+		name: 'Channel Update',
+		value: 'channelUpdate'
+	},
+	{
+		name: 'Channel Pins Update',
+		value: 'channelPinsUpdate'
+	},
+	{
+		name: 'Guild Ban Add',
+		value: 'guildBanAdd'
+	},
+	{
+		name: 'Guild Ban Remove',
+		value: 'guildBanRemove'
+	},
+	{
+		name: 'Guild Emoji Create',
+		value: 'guildEmojiCreate'
+	},
+	{
+		name: 'Guild Emoji Remove',
+		value: 'guildEmojiRemove'
+	},
+	{
+		name: 'Guild Emoji Update',
+		value: 'guildEmojiUpdate'
+	},
+	{
+		name: 'Guild Member Add',
+		value: 'guildMemberAdd'
+	},
+	{
+		name: 'Guild Member Remove',
+		value: 'guildMemberRemove'
+	},
+	{
+		name: 'Guild Member Update',
+		value: 'guildMemberUpdate'
+	},
+	{
+		name: 'Guild Role Create',
+		value: 'roleCreate',
+	},
+	{
+		name: 'Guild Role Delete',
+		value: 'roleDelete'
+	},
+	{
+		name: 'Guild Role Update',
+		value: 'roleUpdate'
+	},
+	{
+		name: 'Guild Sticker Create',
+		value: 'stickerCreate',
+	},
+	{
+		name: 'Guild Sticker Delete',
+		value: 'stickerDelete',
+	},
+	{
+		name: 'Guild Sticker Update',
+		value: 'stickerUpdate'
+	},
+	{
+		name: 'Guild Update',
+		value: 'guildUpdate'
+	}
+]
+
+export const LoggingOptions: Array<APIApplicationCommandOptionChoice<string>> = [
+	{
+		name: 'Ignore Bots',
+		value: 'ignoreBots'
+	},
+	{
+		name: 'Ignore Staff',
+		value: 'ignoreStaff'
+	}
+]

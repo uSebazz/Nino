@@ -1,19 +1,19 @@
-import colors from '@colors/colors'
-import { rootFolder } from '#utils/constants'
-import { minutes } from '#utils/function/times'
+import { Emojis, rootFolder } from '#utils/constants'
+import { minutes } from '#utils/function'
+import type { StatcordOptions } from '@kaname-png/plugin-statcord/dist/lib/types'
+import type { Prisma } from '@prisma/client'
 import { BucketScope, container, LogLevel } from '@sapphire/framework'
-import { Options } from 'discord.js'
-import { join } from 'node:path'
-import { envParseArray, envParseString, setup } from '@skyra/env-utilities'
 import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 import type { LoggerFormatOptions } from '@sapphire/plugin-logger'
+import { envParseArray, envParseString, setup } from '@skyra/env-utilities'
+import { cyan, green, red, white, yellow } from 'colorette'
 import type {
-	NewsChannel,
+	ClientOptions, NewsChannel,
 	TextChannel,
-	ThreadChannel,
-	ClientOptions,
+	ThreadChannel
 } from 'discord.js'
-import type { Prisma } from '@prisma/client'
+import { Options } from 'discord.js'
+import { join } from 'node:path'
 
 setup(join(rootFolder, 'src', '.env'))
 
@@ -23,28 +23,34 @@ export const OWNERS = envParseArray('CLIENT_OWNERS')
 export const loggerOptions: LoggerFormatOptions = {
 	trace: {
 		timestamp: null,
-		infix: colors.gray('[Trace]: '),
+		infix: white('[Trace]: 〢 '),
 	},
 	info: {
 		timestamp: null,
-		infix: colors.blue('[Info]: '),
+		infix: cyan('[Info]: 〢 '),
 	},
 	debug: {
 		timestamp: null,
-		infix: colors.green('[Debug]: '),
+		infix: green('[Debug]: 〢 '),
 	},
 	warn: {
 		timestamp: null,
-		infix: colors.yellow('[Warn]: '),
+		infix: yellow('[Warn]: 〢 '),
 	},
 	error: {
 		timestamp: null,
-		infix: colors.red('[Error]: '),
+		infix: red('[Error]: 〢 '),
 	},
 	fatal: {
 		timestamp: null,
-		infix: colors.bgRed('[Fatal]: '),
+		infix: red('[Fatal]: 〢 '),
 	},
+}
+
+export const STAT_CORD_OPTIONS: StatcordOptions = {
+	client_id: envParseString('CLIENT_ID'),
+	key: envParseString('STATCORD_TOKEN'),
+	autopost: false,
 }
 
 export const CLIENT_OPTIONS: ClientOptions = {
@@ -94,12 +100,13 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	presence: {
 		activities: [
 			{
-				name: '🌸 inv.nino.fun | dc.nino.fun',
+				name: 'Estamos en mantenimiento, volvemos pronto 👍',
 				type: 'WATCHING',
 			},
 		],
 		status: 'idle',
 	},
+	statcord: STAT_CORD_OPTIONS,
 	i18n: {
 		fetchLanguage: async (context: InternationalizationContext) => {
 			if (!context.guild) return 'en-US'
@@ -124,12 +131,31 @@ export const CLIENT_OPTIONS: ClientOptions = {
 
 			return data.lang
 		},
+		i18next: {
+			interpolation: {
+				defaultVariables: {
+					wrong: Emojis.wrong,
+					right: Emojis.right,
+					excl: Emojis.excl,
+					netual: Emojis.netual,
+					setting: Emojis.setting,
+					ninoheart: Emojis.ninoheart,
+					ninozzz: Emojis.ninozzz,
+				},
+				escapeValue: false
+			},
+
+		},
+		hmr: {
+			enabled: true
+		},
+		defaultLanguageDirectory: join(rootFolder, 'src', 'languages'),
 	},
 	defaultCooldown: {
-		delay: 10_000,
-		filteredUsers: OWNERS,
-		limit: 2,
-		scope: BucketScope.Channel,
+		delay: 10_000, // 10s
+		filteredUsers: OWNERS, // bot owners
+		limit: 2, // Limit 2 commands for second
+		scope: BucketScope.User, // Scope User
 	},
 }
 

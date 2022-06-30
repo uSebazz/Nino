@@ -1,2 +1,2 @@
-export * from './clean'
-export * from './initClean'
+export * from '#utils/sanitizer/clean'
+export * from '#utils/sanitizer/initClean'

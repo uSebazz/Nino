@@ -1,26 +1,12 @@
-import { translate } from '#lib/i18n/translate'
-import { Emojis } from '#utils/constants'
 import {
 	Listener,
 	type Events,
 	type UserError,
 	type ChatInputCommandDeniedPayload,
 } from '@sapphire/framework'
-import { resolveKey } from '@sapphire/plugin-i18next'
 
-export class chatInputCommandDeniedListener extends Listener<
-	typeof Events.ChatInputCommandDenied
-> {
-	public override async run(
-		error: UserError,
-		{ interaction }: ChatInputCommandDeniedPayload
-	) {
-		const identifier = translate(error.identifier)
-
-		await interaction.reply(
-			await resolveKey(interaction, identifier, {
-				emoji: Emojis.wrong,
-			})
-		)
+export class ChatInputCommandDenied extends Listener<typeof Events.ChatInputCommandDenied> {
+	public override async run(error: UserError, { interaction }: ChatInputCommandDeniedPayload) {
+		await interaction.reply(error.message)
 	}
 }

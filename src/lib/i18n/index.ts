@@ -1,2 +1,3 @@
-export * from './translate'
-export * from './Language'
+export * from '#lib/i18n/language/index'
+export * from '#lib/i18n/translate'
+

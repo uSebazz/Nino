@@ -1,9 +1,24 @@
 {
-    "language": {
-        "select": "{{emoji}} - Select a language for this server",
-        "already": "{{emoji}} - Uh. It seems that language is already set",
-        "filter": "{{emoji}} - This menu is not for you :)",
-        "done": "{{emoji}} - `{{lang}}` is now language for this server :D",
-        "timefinish": "{{emoji}} - Finished interaction, thanks for using the menu! :D"
-    }
+	"LANGUAGE_SELECT": "{{excl}} - Select a language for this server",
+	"LANGUAGE_ALREADY": "{{wrong}} - Uh, seems like this language is already in use",
+	"LANGUAGE_BUTTON_FILTER": "{{excl}} - This menu is not for you :)",
+	"LANGUAGE_SET": "{{right}} - The language of this server will now be `{{lang}}` :D",
+	"LANGUAGE_COLLECTOR_FINISH": "{{netual}} - Interaction finished, thanks for used the menu! :D",
+	"LOGGING_ONLY_SLASH_COMMAND": "{{wrong}} - You can only use this command with the slash command!",
+	"LOGGING_CHANNEL_NOT_SET": "{{wrong}} - A logging channel was not found\n> Use `/logging config` to configue it",
+	"LOGGING_ALL_EVENTS_ENABLED": "{{right}} - Logging of all events enable :D",
+	"LOGGING_ALREADY_ALL_EVENTS_ENABLED": "{{wrong}} - Seems like logging of all events is already enabled",
+	"LOGGING_EVENT_ENABLED": "{{right}} - Logging of `{{event}}` enabled :p",
+	"LOGGING_EVENT_BLOCKED": "{{excl}} - This event is blocked, because all events are already enabled :/",
+	"LOGGING_EVENT_ALREADY_ENABLED": "{{wrong}} - Seems like logging of this event is already enabled",
+	"LOGGING_ALL_EVENTS_DISABLED": "{{right}} - All events are now disabled :D",
+	"LOGGING_ALL_EVENTS_ALREADY_DISABLED": "{{wrong}} - Seems like all events are already disabled",
+	"LOGGING_EVENT_DISABLED": "{{right}} - Logging of `{{event}}` disabled :p",
+	"LOGGING_EVENT_ALREADY_DISABLED": "{{wrong}} - Seems like logging of this event is already disabled",
+	"LOGGING_CHANNEL_INVALID": "{{wrong}} - The specified channel is not valid, it must be a text channel",
+	"LOGGING_CHANNEL_SET": "{{ninoheart}} - The logging channel will now be {{channel}} :D",
+	"LOGGING_CHANNEL_UPDATED": "{{ninoheart}} - The logging channel was updated, now it will be {{channel}} :D",
+	"LOGGING_NO_DATA_FOUND": "{{ninozzz}} - No data were found, try to activate the first logging system ;)",
+	"LOGGING_ALL_EVENTS": "All events",
+	"LOGGING_VIEW_INFO": "{{setting}} - **Logging config**\n\n**Logging channel**: {{channel}}\n**Events enabled**: {{events}}"
 }

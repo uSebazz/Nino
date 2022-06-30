@@ -1,4 +1,4 @@
-import { initClean } from './clean'
+import { initClean } from '#utils/sanitizer'
 import { isNullishOrEmpty } from '@sapphire/utilities'
 
 const secrets = new Set<string>()

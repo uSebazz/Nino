@@ -1,10 +1,11 @@
-import { isGuildMessage } from '#utils/function/check'
-import { Argument, type ArgumentContext } from '@sapphire/framework'
+import { isGuildMessage } from '#utils/function'
+import { Argument, Identifiers, type ArgumentContext } from '@sapphire/framework'
 import {
 	SnowflakeRegex,
 	UserOrMemberMentionRegex,
 } from '@sapphire/discord.js-utilities'
-import type { GuildMessage } from '#lib/types/Discord'
+import { LanguageKeys } from '#lib/i18n'
+import type { GuildMessage } from '#lib/types'
 import type { User } from 'discord.js'
 
 export class UserArguments extends Argument<User> {
@@ -17,7 +18,6 @@ export class UserArguments extends Argument<User> {
 		context: ArgumentContext<User>
 	) {
 		const message = context.message as GuildMessage
-		const userErrorContent = 'arguments:userError'
 		if (!isGuildMessage(message)) return this.user.run(parameter, context)
 
 		const user = await this.resolveUser(message, parameter)
@@ -25,7 +25,8 @@ export class UserArguments extends Argument<User> {
 		if (user === null) {
 			return this.error({
 				parameter,
-				identifier: userErrorContent,
+				identifier: Identifiers.ArgumentUserError,
+				context
 			})
 		}
 
@@ -33,7 +34,8 @@ export class UserArguments extends Argument<User> {
 		if (result) return this.ok(result.user)
 		return this.error({
 			parameter,
-			identifier: userErrorContent,
+			identifier: LanguageKeys.Arguments.UserNotFound,
+			context
 		})
 	}
 

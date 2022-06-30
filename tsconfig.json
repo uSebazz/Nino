@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
-		"lib": ["ESNext"],
+		"lib": [
+			"ESNext"
+		],
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "node",
@@ -8,17 +10,21 @@
 		"strict": true,
 		"sourceMap": true,
 		"declaration": false,
-
 		/* Paths */
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"baseUrl": "./src",
 		"paths": {
-			"#utils/*": ["lib/utils/*"],
-			"#lib/*": ["lib/*"],
-			"#root/*": ["*"]
+			"#utils/*": [
+				"lib/utils/*"
+			],
+			"#lib/*": [
+				"lib/*"
+			],
+			"#root/*": [
+				"*"
+			]
 		},
-
 		/* The "No" Corner */
 		"noImplicitAny": true,
 		"noImplicitOverride": true,
@@ -27,14 +33,12 @@
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-
 		/* Strict */
 		"strictBindCallApply": true,
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
 		"strictPropertyInitialization": true,
 		"useUnknownInCatchVariables": true,
-
 		/* Other settings */
 		"esModuleInterop": true,
 		"exactOptionalPropertyTypes": true,
@@ -43,6 +47,10 @@
 		"resolveJsonModule": true,
 		"allowJs": true
 	},
-	"include": ["src", "./src/languages/**/*.json"],
-	"exclude": ["node_modules"]
+	"include": [
+		"src"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }

@@ -1,0 +1,3 @@
+{
+	"MESSAGE_DELETE_INFO": "🗑️ - Mensaje eliminado en <#{{channel.id}}>\n**Autor**: `{{message.author.tag}}` ({{message.author.id}})\n**Contenido**: {{content}}\n**Tiempo**: {{time}}"
+}
