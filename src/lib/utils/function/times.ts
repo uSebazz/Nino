@@ -15,8 +15,7 @@ export function seconds(seconds: number): number {
  * @param milliseconds The amount of milliseconds
  * @returns The amount of seconds `milliseconds` equals to.
  */
-seconds.fromMilliseconds = (milliseconds: number): number =>
-	roundNumber(milliseconds / Time.Second)
+seconds.fromMilliseconds = (milliseconds: number): number => roundNumber(milliseconds / Time.Second)
 
 /**
  * Converts a number of minutes to milliseconds.
@@ -32,8 +31,7 @@ export function minutes(minutes: number): number {
  * @param value The amount of minutes
  * @returns The amount of seconds `value` equals to.
  */
-minutes.toSeconds = (value: number): number =>
-	roundNumber(minutes(value) / Time.Second)
+minutes.toSeconds = (value: number): number => roundNumber(minutes(value) / Time.Second)
 
 /**
  * Converts a number of hours to milliseconds.

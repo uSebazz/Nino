@@ -13,10 +13,7 @@ const zws = String.fromCharCode(8203)
  * @param text The text to clean
  */
 export function clean(text: string) {
-	return text
-		.replace(sensitivePattern, '「ｒｅｄａｃｔｅｄ」')
-		.replace(/`/g, `\`${zws}`)
-		.replace(/@/g, `@${zws}`)
+	return text.replace(sensitivePattern, '「ｒｅｄａｃｔｅｄ」').replace(/`/g, `\`${zws}`).replace(/@/g, `@${zws}`)
 }
 
 /**

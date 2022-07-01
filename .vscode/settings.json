@@ -4,12 +4,12 @@
 	"editor.insertSpaces": false,
 	"editor.formatOnSave": true,
 	"[typescript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true,
 		"source.fixAll.eslint": true,
 		"source.organizeImports": true,
 	},
-	"rpc.enabled": true
+	//"rpc.enabled": true
 }

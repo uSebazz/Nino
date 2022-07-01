@@ -1,9 +1,5 @@
 import { Command } from '@sapphire/framework'
-import type {
-	ApplicationCommandRegistry,
-	CommandOptions,
-	PieceContext,
-} from '@sapphire/framework'
+import type { ApplicationCommandRegistry, CommandOptions, PieceContext } from '@sapphire/framework'
 
 export abstract class NinoCommand extends Command {
 	// eslint-disable-next-line no-useless-constructor

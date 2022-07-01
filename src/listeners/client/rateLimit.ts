@@ -3,14 +3,7 @@ import { cyan } from 'colorette'
 import type { RateLimitData } from 'discord.js'
 
 export class rateLimitListener extends Listener<typeof Events.RateLimit> {
-	public run({
-		timeout,
-		limit,
-		method,
-		path,
-		route,
-		global,
-	}: RateLimitData): void {
+	public run({ timeout, limit, method, path, route, global }: RateLimitData): void {
 		const rateTime = this.timeout(timeout)
 		const rateLimit = this.limit(limit)
 		const rateMethod = this.method(method)

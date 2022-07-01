@@ -8,7 +8,6 @@ import { MessageEmbed } from 'discord.js'
 @ApplyOptions<InteractionHandlerOptions>({
 	interactionHandlerType: InteractionHandlerTypes.SelectMenu
 })
-
 export class UserInteraction extends InteractionHandler {
 	public override async run(interaction: SelectMenuInteraction) {
 		const { values } = interaction

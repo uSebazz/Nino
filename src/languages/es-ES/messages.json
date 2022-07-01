@@ -1,3 +1,4 @@
 {
-	"MESSAGE_DELETE_INFO": "🗑️ - Mensaje eliminado en <#{{channel.id}}>\n**Autor**: `{{message.author.tag}}` ({{message.author.id}})\n**Contenido**: {{content}}\n**Tiempo**: {{time}}"
+	"MESSAGE_DELETE_INFO": "🗑️ - Mensaje eliminado en <#{{channel.id}}>\n**Autor**: `{{message.author.tag}}` ({{message.author.id}})\n**Contenido**: {{content}}\n**Tiempo**: {{time}}",
+	"MESSAGE_UPDATE_INFO": "📝 - Mensaje actualizado en <#{{channel.id}}>\n**Antes**: {{oldContent}}\n**Después**: {{newContent}}\n**Autor**: `{{newMessage.author.tag}}` ({{newMessage.author.id}})\n**Tiempo**: {{time}}"
 }

@@ -1,5 +1,5 @@
 # Base Stage
-FROM node:16.15.1-bullseye-slim as base
+FROM node:18.4.0-bullseye-slim as base
 
 WORKDIR /usr/src/app
 

@@ -16,7 +16,8 @@ import type { CommandInteraction, Message } from 'discord.js'
 				.setDescription('The event to enable')
 				.addChoices(...LoggingEvents)
 				.setRequired(true)
-		))
+		)
+)
 export class UserCommand extends Command {
 	public override chatInputRun(interaction: CommandInteraction) {
 		const event = interaction.options.getString('event')!
@@ -35,9 +36,7 @@ export class UserCommand extends Command {
 		})
 
 		if (!data?.channelId) {
-			return interaction.reply(
-				await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelNotSet)
-			)
+			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelNotSet))
 		}
 
 		switch (event) {
@@ -63,9 +62,7 @@ export class UserCommand extends Command {
 			})
 
 			// Send the message
-			return interaction.reply(
-				await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsEnabled)
-			)
+			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsEnabled))
 		}
 
 		const content = await resolveKey(interaction, LanguageKeys.Config.Logging.AlreadyAllEventsEnabled)

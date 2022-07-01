@@ -13,8 +13,8 @@ import { MessageActionRow, MessageEmbed, MessageSelectMenu } from 'discord.js'
 	aliases: ['ayuda', 'commands', 'command', 'cmd'],
 	chatInputCommand: {
 		register: true,
-		guildIds: testServer,
-	},
+		guildIds: testServer
+	}
 })
 export class UserCommand extends NinoCommand {
 	public override async messageRun(message: Message) {
@@ -22,7 +22,7 @@ export class UserCommand extends NinoCommand {
 
 		await reply(message, {
 			embeds: [embed],
-			components: this.components,
+			components: this.components
 		})
 	}
 
@@ -31,10 +31,9 @@ export class UserCommand extends NinoCommand {
 
 		await interaction.reply({
 			embeds: [embed],
-			components: this.components,
+			components: this.components
 		})
 	}
-
 
 	private get components(): MessageActionRow[] {
 		return [
@@ -45,11 +44,11 @@ export class UserCommand extends NinoCommand {
 					.addOptions([
 						{
 							label: 'Utility',
-							value: 'utility',
+							value: 'utility'
 						},
 						{
 							label: 'Configuration',
-							value: 'configuration',
+							value: 'configuration'
 						}
 					])
 			])
@@ -70,6 +69,5 @@ export class UserCommand extends NinoCommand {
 				})
 			)
 			.setColor(Colors.invisible)
-
 	}
 }

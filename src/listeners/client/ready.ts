@@ -5,7 +5,6 @@ import { createBanner } from '@skyra/start-banner'
 import { blue, gray, yellow } from 'colorette'
 import gradient from 'gradient-string'
 
-
 @ApplyOptions<Listener.Options>({ event: 'ready', once: true })
 export class readyListener extends Listener<typeof Events.ClientReady> {
 	public readonly style = this.isDev ? yellow : blue
@@ -19,19 +18,9 @@ export class readyListener extends Listener<typeof Events.ClientReady> {
 		console.log(
 			gradient.cristal.multiline(
 				createBanner({
-					logo: [
-						String.raw` ⟋|､`,
-						String.raw`(°､ ｡ 7`,
-						String.raw` |､  ~ヽ`,
-						String.raw` じしf_,)〳`
-					],
-					name: [
-						String.raw`  Nino Bot v2.0.3`,
-					],
-					extra: [
-						'  [+] Gateway',
-						this.isDev ? ' </> DEVELOPMENT MODE' : ''
-					]
+					logo: [String.raw` ⟋|､`, String.raw`(°､ ｡ 7`, String.raw` |､  ~ヽ`, String.raw` じしf_,)〳`],
+					name: [String.raw`  Nino Bot v2.0.3`],
+					extra: ['  [+] Gateway', this.isDev ? ' </> DEVELOPMENT MODE' : '']
 				})
 			)
 		)
@@ -52,10 +41,6 @@ export class readyListener extends Listener<typeof Events.ClientReady> {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private styleStore(store: Store<any>, last: boolean) {
-		return gray(
-			`${last ? '└─' : '├─'} Loaded ${this.style(
-				store.size.toString().padEnd(3, ' ')
-			)} ${store.name}.`
-		)
+		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name}.`)
 	}
 }

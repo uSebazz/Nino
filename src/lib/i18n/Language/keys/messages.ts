@@ -4,3 +4,4 @@
  */
 
 export const MessageDeleteInformation = 'messages:MESSAGE_DELETE_INFO'
+export const MessageUpdateInformation = 'messages:MESSAGE_UPDATE_INFO'

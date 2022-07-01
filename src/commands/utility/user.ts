@@ -1,23 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { LanguageKeys } from '#lib/i18n'
-import {
-	NinoCommand,
-	type NinoCommandOptions,
-	type NinoCommandRegistery
-} from '#lib/structures'
+import { NinoCommand, type NinoCommandOptions, type NinoCommandRegistery } from '#lib/structures'
 import { Badges, Colors } from '#utils/constants'
 import { ApplyOptions } from '@sapphire/decorators'
 import { RegisterBehavior, type Args } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import type {
-	CommandInteraction, Guild, GuildMember, Message, PermissionString, User, UserFlagsString
-} from 'discord.js'
+import type { CommandInteraction, Guild, GuildMember, Message, PermissionString, User, UserFlagsString } from 'discord.js'
 import { MessageEmbed, Permissions } from 'discord.js'
 @ApplyOptions<NinoCommandOptions>({
 	description: 'view user information',
-	aliases: ['ui', 'user', 'info-user', 'whois'],
+	aliases: ['ui', 'user', 'info-user', 'whois']
 })
 export class UserCommand extends NinoCommand {
 	public readonly keyAdminPermission = Permissions.FLAGS.ADMINISTRATOR
@@ -36,15 +30,10 @@ export class UserCommand extends NinoCommand {
 		['VIEW_GUILD_INSIGHTS', Permissions.FLAGS.VIEW_GUILD_INSIGHTS],
 		['MANAGE_THREADS', Permissions.FLAGS.MANAGE_THREADS],
 		['MODERATE_MEMBERS', Permissions.FLAGS.MODERATE_MEMBERS],
-		[
-			'MANAGE_EMOJIS_AND_STICKERS',
-			Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS,
-		],
+		['MANAGE_EMOJIS_AND_STICKERS', Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS]
 	]
 
-	public override registerApplicationCommands(
-		registery: NinoCommandRegistery
-	) {
+	public override registerApplicationCommands(registery: NinoCommandRegistery) {
 		registery.registerChatInputCommand(
 			(builder) =>
 				builder
@@ -55,131 +44,78 @@ export class UserCommand extends NinoCommand {
 						option
 							//
 							.setName('user')
-							.setDescription(
-								'the user to view information about'
-							)
+							.setDescription('the user to view information about')
 							.setRequired(false)
 					),
 			{
-				behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+				behaviorWhenNotIdentical: RegisterBehavior.Overwrite
 			}
 		)
 	}
 
 	public override async chatInputRun(interaction: CommandInteraction) {
 		const user = interaction.options.getUser('user') ?? interaction.user
-		const member = await interaction
-			.guild!.members.fetch(user.id)
-			.catch(() => null)
+		const member = await interaction.guild!.members.fetch(user.id).catch(() => null)
 
-		const embed = member
-			? await this.memberEmbed(member, { interaction })
-			: await this.userEmbed(user, { interaction })
+		const embed = member ? await this.memberEmbed(member, { interaction }) : await this.userEmbed(user, { interaction })
 
 		await interaction.reply({ embeds: [embed] })
 	}
 
 	public override async messageRun(message: Message, args: Args) {
-		const user = args.finished
-			? message.author
-			: await args.pick('resolveUser')
-		const member = await message
-			.guild!.members.fetch(user.id)
-			.catch(() => null)
+		const user = args.finished ? message.author : await args.pick('resolveUser')
+		const member = await message.guild!.members.fetch(user.id).catch(() => null)
 
-		const embed = member
-			? await this.memberEmbed(member, { message })
-			: await this.userEmbed(user, { message })
+		const embed = member ? await this.memberEmbed(member, { message }) : await this.userEmbed(user, { message })
 
 		return send(message, { embeds: [embed] })
 	}
 
-	private async memberEmbed(
-		member: GuildMember,
-		{
-			interaction,
-			message,
-		}: { interaction?: CommandInteraction; message?: Message }
-	) {
+	private async memberEmbed(member: GuildMember, { interaction, message }: { interaction?: CommandInteraction; message?: Message }) {
 		const permissions: string[] = []
-		const badges = this.getBadges(
-			member.user,
-			message?.guild ?? interaction!.guild!
-		)
+		const badges = this.getBadges(member.user, message?.guild ?? interaction!.guild!)
 		const roles = member.roles.cache
 			.sorted((a, b) => a.position - b.position)
 			.map((role) => role.toString())
 			.join(' ')
 			.replace('@everyone', '')
 
-		const embed = new MessageEmbed()
-			.setColor(Colors.prettyPutunia)
-			.setAuthor({
-				name: member.user.tag,
-				iconURL: member.user.displayAvatarURL({ dynamic: true }),
-			})
+		const embed = new MessageEmbed().setColor(Colors.prettyPutunia).setAuthor({
+			name: member.user.tag,
+			iconURL: member.user.displayAvatarURL({ dynamic: true })
+		})
 
 		if (badges.length) {
-			embed.setDescription(
-				badges.join('  ')
-			)
+			embed.setDescription(badges.join('  '))
 		}
 
 		embed.addField(
-			await resolveKey(
-				message ?? interaction!,
-				LanguageKeys.Util.User.FieldAbout
-			),
-			await resolveKey(
-				message ?? interaction!,
-				LanguageKeys.Util.User.FieldAboutContentMember,
-				{
-					createdAt: (member.user.createdTimestamp / 1000) | 0,
-					joinedAt: (member.joinedTimestamp! / 1000) | 0,
-					nickname: member.nickname ?? '-',
-				}
-			)
+			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAbout),
+			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAboutContentMember, {
+				createdAt: (member.user.createdTimestamp / 1000) | 0,
+				joinedAt: (member.joinedTimestamp! / 1000) | 0,
+				nickname: member.nickname ?? '-'
+			})
 		)
 
 		if (roles.length) {
-			embed.addField(
-				await resolveKey(
-					message ?? interaction!,
-					LanguageKeys.Util.User.FieldRoles
-				),
-				`> ${roles}`
-			)
+			embed.addField(await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldRoles), `> ${roles}`)
 		}
 
 		if (member.permissions.has(this.keyAdminPermission)) {
 			embed.addField(
-				await resolveKey(
-					message ?? interaction!,
-					LanguageKeys.Util.User.FieldPermissions
-				),
-				await resolveKey(
-					message ?? interaction!,
-					LanguageKeys.Util.User.FieldPermissionsAll
-				)
+				await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldPermissions),
+				await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldPermissionsAll)
 			)
 		} else {
 			for (const [name, value] of this.keyPermissions) {
-				const key = await resolveKey(
-					message ?? interaction!,
-					`permissions:${name}`
-				)
+				const key = await resolveKey(message ?? interaction!, `permissions:${name}`)
 
 				if (member.permissions.has(value)) permissions.push(key)
 			}
 
 			if (permissions.length) {
-				embed.addField(
-					await resolveKey(
-						message ?? interaction!,
-						LanguageKeys.Util.User.FieldPermissions
-					),
-					`> ${permissions.join(', ')}`
-				)
+				embed.addField(await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldPermissions), `> ${permissions.join(', ')}`)
 			}
 		}
 
@@ -191,42 +127,28 @@ export class UserCommand extends NinoCommand {
 		user: User,
 		{
 			interaction,
-			message,
+			message
 		}: {
 			interaction?: CommandInteraction
 			message?: Message
 		}
 	) {
-		const badges = this.getBadges(
-			user,
-			message?.guild ?? interaction!.guild!
-		)
+		const badges = this.getBadges(user, message?.guild ?? interaction!.guild!)
 
-		const embed = new MessageEmbed()
-			.setColor(Colors.pastelGreen)
-			.setAuthor({
-				name: user.tag,
-				iconURL: user.displayAvatarURL({ dynamic: true }),
-			})
+		const embed = new MessageEmbed().setColor(Colors.pastelGreen).setAuthor({
+			name: user.tag,
+			iconURL: user.displayAvatarURL({ dynamic: true })
+		})
 
 		if (badges.length) {
-			embed.setDescription(
-				badges.join('  ')
-			)
+			embed.setDescription(badges.join('  '))
 		}
 
 		embed.addField(
-			await resolveKey(
-				message ?? interaction!,
-				LanguageKeys.Util.User.FieldAbout
-			),
-			await resolveKey(
-				message ?? interaction!,
-				LanguageKeys.Util.User.FieldAboutContentUser,
-				{
-					createdAt: (user.createdTimestamp / 1000) | 0,
-				}
-			)
+			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAbout),
+			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAboutContentUser, {
+				createdAt: (user.createdTimestamp / 1000) | 0
+			})
 		)
 
 		embed.setFooter({ text: user.id })

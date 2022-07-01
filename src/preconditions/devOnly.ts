@@ -3,7 +3,7 @@ import { Precondition } from '@sapphire/framework'
 import type { CommandInteraction, ContextMenuInteraction, Message, Snowflake } from 'discord.js'
 
 export class DevOnly extends Precondition {
-	public readonly message = 'Oops! you aren\'t allowed to use this command!'
+	public readonly message = 'Oops! you arent allowed to use this command!'
 
 	public override chatInputRun(interaction: CommandInteraction) {
 		return this.isDev(interaction.user.id)

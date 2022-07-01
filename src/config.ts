@@ -7,11 +7,7 @@ import type { InternationalizationContext } from '@sapphire/plugin-i18next'
 import type { LoggerFormatOptions } from '@sapphire/plugin-logger'
 import { envParseArray, envParseString, setup } from '@skyra/env-utilities'
 import { cyan, green, red, white, yellow } from 'colorette'
-import type {
-	ClientOptions, NewsChannel,
-	TextChannel,
-	ThreadChannel
-} from 'discord.js'
+import type { ClientOptions, NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
 import { Options } from 'discord.js'
 import { join } from 'node:path'
 
@@ -23,34 +19,34 @@ export const OWNERS = envParseArray('CLIENT_OWNERS')
 export const loggerOptions: LoggerFormatOptions = {
 	trace: {
 		timestamp: null,
-		infix: white('[Trace]: 〢 '),
+		infix: white('[Trace]: 〢 ')
 	},
 	info: {
 		timestamp: null,
-		infix: cyan('[Info]: 〢 '),
+		infix: cyan('[Info]: 〢 ')
 	},
 	debug: {
 		timestamp: null,
-		infix: green('[Debug]: 〢 '),
+		infix: green('[Debug]: 〢 ')
 	},
 	warn: {
 		timestamp: null,
-		infix: yellow('[Warn]: 〢 '),
+		infix: yellow('[Warn]: 〢 ')
 	},
 	error: {
 		timestamp: null,
-		infix: red('[Error]: 〢 '),
+		infix: red('[Error]: 〢 ')
 	},
 	fatal: {
 		timestamp: null,
-		infix: red('[Fatal]: 〢 '),
-	},
+		infix: red('[Fatal]: 〢 ')
+	}
 }
 
 export const STAT_CORD_OPTIONS: StatcordOptions = {
 	client_id: envParseString('CLIENT_ID'),
 	key: envParseString('STATCORD_TOKEN'),
-	autopost: false,
+	autopost: false
 }
 
 export const CLIENT_OPTIONS: ClientOptions = {
@@ -67,7 +63,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		'925909747994071111',
 		'844856727517003818',
 		'726505646073315408',
-		'806611727684599838',
+		'806611727684599838'
 	],
 	restTimeOffset: 0,
 	shards: 'auto',
@@ -76,8 +72,8 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		...Options.defaultSweeperSettings,
 		messages: {
 			interval: minutes.toSeconds(3),
-			lifetime: minutes.toSeconds(15),
-		},
+			lifetime: minutes.toSeconds(15)
+		}
 	},
 	intents: [
 		'GUILDS',
@@ -88,23 +84,20 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		'GUILD_MESSAGES',
 		'GUILD_MESSAGE_REACTIONS',
 		'DIRECT_MESSAGES',
-		'DIRECT_MESSAGE_REACTIONS',
+		'DIRECT_MESSAGE_REACTIONS'
 	],
 	logger: {
-		level:
-			envParseString('NODE_ENV') === 'production'
-				? LogLevel.Info
-				: LogLevel.Debug,
-		format: loggerOptions,
+		level: envParseString('NODE_ENV') === 'production' ? LogLevel.Info : LogLevel.Debug,
+		format: loggerOptions
 	},
 	presence: {
 		activities: [
 			{
 				name: 'Estamos en mantenimiento, volvemos pronto 👍',
-				type: 'WATCHING',
-			},
+				type: 'WATCHING'
+			}
 		],
-		status: 'idle',
+		status: 'idle'
 	},
 	statcord: STAT_CORD_OPTIONS,
 	i18n: {
@@ -113,19 +106,19 @@ export const CLIENT_OPTIONS: ClientOptions = {
 
 			let data = await container.prisma.serverConfig.findUnique({
 				where: {
-					guildId: context.guild.id,
-				},
+					guildId: context.guild.id
+				}
 			})
 			let config: Prisma.ServerConfigCreateInput
 
 			if (!data) {
 				// eslint-disable-next-line @typescript-eslint/no-extra-semi
-				; (config = {
+				;(config = {
 					guildId: context.guild.id,
-					lang: 'es-ES',
+					lang: 'es-ES'
 				}),
 					(data = await container.prisma.serverConfig.create({
-						data: config,
+						data: config
 					}))
 			}
 
@@ -140,23 +133,22 @@ export const CLIENT_OPTIONS: ClientOptions = {
 					netual: Emojis.netual,
 					setting: Emojis.setting,
 					ninoheart: Emojis.ninoheart,
-					ninozzz: Emojis.ninozzz,
+					ninozzz: Emojis.ninozzz
 				},
 				escapeValue: false
-			},
-
+			}
 		},
 		hmr: {
 			enabled: true
 		},
-		defaultLanguageDirectory: join(rootFolder, 'src', 'languages'),
+		defaultLanguageDirectory: join(rootFolder, 'src', 'languages')
 	},
 	defaultCooldown: {
 		delay: 10_000, // 10s
 		filteredUsers: OWNERS, // bot owners
 		limit: 2, // Limit 2 commands for second
-		scope: BucketScope.User, // Scope User
-	},
+		scope: BucketScope.User // Scope User
+	}
 }
 
 export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null

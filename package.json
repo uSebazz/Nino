@@ -11,14 +11,16 @@
 		"clean": "node scripts/clean.mjs",
 		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
 		"prisma": "prisma generate",
+		"lint": "eslint src --ext ts --fix",
+		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
 		"dev": "tsc-watch --onSuccess \"yarn start\"",
 		"deploy": "yarn build && yarn start"
 	},
 	"packageManager": "yarn@3.2.1",
 	"dependencies": {
 		"@kaname-png/plugin-statcord": "2.1.0",
-		"@kaname-png/plugin-subcommands-advanced": "^1.2.0",
-		"@prisma/client": "3.15.2",
+		"@kaname-png/plugin-subcommands-advanced": "^1.2.1",
+		"@prisma/client": "4.0.0",
 		"@sapphire/decorators": "4.3.7",
 		"@sapphire/discord.js-utilities": "4.11.3",
 		"@sapphire/fetch": "2.4.0",
@@ -36,14 +38,18 @@
 	},
 	"devDependencies": {
 		"@commitlint/config-conventional": "17.0.3",
+		"@sapphire/eslint-config": "4.3.7",
+		"@sapphire/prettier-config": "1.4.3",
 		"@types/gradient-string": "1.1.2",
-		"@types/ms": "^0.7.31",
+		"@types/ms": "0.7.31",
 		"@types/node": "18.0.0",
+		"@types/prettier": "2",
 		"@typescript-eslint/eslint-plugin": "5.30.0",
 		"@typescript-eslint/parser": "5.30.0",
 		"commitlint": "17.0.3",
 		"eslint": "^8.18.0",
-		"prisma": "^3.15.2",
+		"prettier": "2.7.1",
+		"prisma": "^4.0.0",
 		"tsc-watch": "5.0.3",
 		"tsup": "6.1.2",
 		"typescript": "4.7.4"
@@ -62,5 +68,15 @@
 		"extends": [
 			"@commitlint/config-conventional"
 		]
+	},
+	"prettier": {
+		"endOfLine": "lf",
+		"printWidth": 150,
+		"quoteProps": "as-needed",
+		"semi": false,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"trailingComma": "none",
+		"useTabs": true
 	}
 }

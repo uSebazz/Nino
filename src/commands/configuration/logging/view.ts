@@ -22,22 +22,18 @@ export class UserCommand extends Command {
 		})
 
 		if (!data) {
-			return interaction.reply(
-				await resolveKey(interaction, LanguageKeys.Config.Logging.NoDataFound)
-			)
+			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.NoDataFound))
 		}
 
-		const events = data.all ?
-			await resolveKey(interaction, LanguageKeys.Config.Logging.AllEvents)
+		const events = data.all
+			? await resolveKey(interaction, LanguageKeys.Config.Logging.AllEvents)
 			: data.events.map((event) => inlineCode(event)).join(', ') || '-'
 
 		return interaction.reply(
 			await resolveKey(interaction, LanguageKeys.Config.Logging.ViewInfo, {
 				channel: data.channelId ? `<#${data.channelId}>` : 'none',
-				events,
+				events
 			})
 		)
 	}
 }
-
-

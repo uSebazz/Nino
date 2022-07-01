@@ -10,11 +10,11 @@ export class guildDeleteListener extends Listener<typeof Events.GuildCreate> {
 
 	private async send(guild: Guild) {
 		const webhook = new WebhookClient({ url: envParseString('WEBHOOK_TOKEN') })
-		const timeStamp = `<t:${Date.now() / 1000 | 0}:R>`
+		const timeStamp = `<t:${(Date.now() / 1000) | 0}:R>`
 		const owner = await guild.fetchOwner()
 
 		await webhook.send({
-			content: `${Emojis.ninoburrito} **Nino** has removed to **${guild.name}**!\n> **Members**: ${guild.memberCount}\n> **Owner**: ${owner.user.tag}\n> **Date**: ${timeStamp}`,
+			content: `${Emojis.ninoburrito} **Nino** has removed to **${guild.name}**!\n> **Members**: ${guild.memberCount}\n> **Owner**: ${owner.user.tag}\n> **Date**: ${timeStamp}`
 		})
 	}
 }

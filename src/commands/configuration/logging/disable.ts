@@ -36,9 +36,7 @@ export class UserCommand extends Command {
 		})
 
 		if (!data?.channelId) {
-			return interaction.reply(
-				await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelNotSet)
-			)
+			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelNotSet))
 		}
 
 		switch (event) {
@@ -63,9 +61,7 @@ export class UserCommand extends Command {
 			})
 
 			// Send the message
-			return interaction.reply(
-				await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsDisabled)
-			)
+			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsDisabled))
 		}
 
 		const content = await resolveKey(interaction, LanguageKeys.Config.Logging.AlreadyAllEventsDisabled)

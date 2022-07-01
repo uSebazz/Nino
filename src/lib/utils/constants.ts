@@ -3,7 +3,6 @@ import { getRootData } from '@sapphire/pieces'
 import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10'
 import { join } from 'node:path'
 
-
 export const mainFolder = getRootData().root
 export const rootFolder = join(mainFolder, '..')
 
@@ -43,12 +42,12 @@ export const Badges = {
 	DISCORD_EMPLOYEE: '<:Staff:983150210115043358>',
 	EARLY_SUPPORTER: '<:Supporter:983148943632392264>',
 
-	/*Two emojis for more resolution*/
+	/* Two emojis for more resolution*/
 	VERIFIED_BOT: '<:verifiedBot_1:983383644905283654><:verifiedBot_2:983383691264946216>',
 
 	// No badges, but still a role or payment method
 	NITRO: '<:Nitro:983148098358485032>',
-	OWNER: '<:eg_crown:983384657469014076>', // thanks blink<3
+	OWNER: '<:eg_crown:983384657469014076>' // thanks blink<3
 }
 
 export const gateways = {
@@ -59,7 +58,7 @@ export const gateways = {
 	VERIFICATION_PENDING_GUILD_LIMIT: 1 << 16,
 	EMBEDDED: 1 << 17,
 	GATEWAY_MESSAGE_CONTENT: 1 << 18,
-	GATEWAY_MESSAGE_CONTENT_LIMITED: 1 << 19,
+	GATEWAY_MESSAGE_CONTENT_LIMITED: 1 << 19
 }
 
 export enum Colors {
@@ -70,7 +69,7 @@ export enum Colors {
 
 export const LoggingEvents: Array<APIApplicationCommandOptionChoice<string>> = [
 	{
-		name: 'All listeners',
+		name: 'All events',
 		value: 'all'
 	},
 	{
@@ -135,7 +134,7 @@ export const LoggingEvents: Array<APIApplicationCommandOptionChoice<string>> = [
 	},
 	{
 		name: 'Guild Role Create',
-		value: 'roleCreate',
+		value: 'roleCreate'
 	},
 	{
 		name: 'Guild Role Delete',
@@ -147,11 +146,11 @@ export const LoggingEvents: Array<APIApplicationCommandOptionChoice<string>> = [
 	},
 	{
 		name: 'Guild Sticker Create',
-		value: 'stickerCreate',
+		value: 'stickerCreate'
 	},
 	{
 		name: 'Guild Sticker Delete',
-		value: 'stickerDelete',
+		value: 'stickerDelete'
 	},
 	{
 		name: 'Guild Sticker Update',

@@ -6,7 +6,7 @@ import type { Message, CommandInteraction, GuildMember } from 'discord.js'
 export class Administrator extends Precondition {
 	public override async messageRun(message: Message) {
 		const message2 = await resolveKey(message, 'precondition:admin', {
-			emoji: Emojis.wrong,
+			emoji: Emojis.wrong
 		})
 		if (!message.member!.permissions.has('ADMINISTRATOR')) {
 			return this.error({ message: message2 })
@@ -18,7 +18,7 @@ export class Administrator extends Precondition {
 	public override async chatInputRun(interaction: CommandInteraction) {
 		const member = interaction.member as GuildMember
 		const message2 = await resolveKey(interaction, 'precondition:admin', {
-			emoji: Emojis.wrong,
+			emoji: Emojis.wrong
 		})
 
 		if (!member.permissions.has('ADMINISTRATOR')) {
