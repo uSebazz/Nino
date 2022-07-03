@@ -26,7 +26,7 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 	}
 
 	private async getEmbed(message: Message) {
-		const attachment = message.attachments
+		const attachment = message.attachments.size > 0
 
 		const embed = new MessageEmbed()
 			.setColor(Colors.pastelGreen)
@@ -53,7 +53,7 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 				await resolveKey(message, LanguageKeys.Messages.MessageDeleteId),
 				codeBlock('ml', await resolveKey(message, LanguageKeys.Messages.MessageDeleteIdContent, { message }))
 			)
-		if (attachment) embed.setImage(attachment.first()!.proxyURL)
+		if (attachment) embed.setImage(message.attachments.first()!.proxyURL)
 		return [embed]
 	}
 }
