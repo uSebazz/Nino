@@ -2,9 +2,6 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
-    "mikestead.dotenv",
-    "ms-azuretools.vscode-docker",
     "prisma.prisma",
-    "eamodio.gitlens"
   ]
 }

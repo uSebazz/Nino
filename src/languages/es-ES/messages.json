@@ -1,4 +1,13 @@
 {
-	"MESSAGE_DELETE_INFO": "🗑️ - Mensaje eliminado en <#{{channel.id}}>\n**Autor**: `{{message.author.tag}}` ({{message.author.id}})\n**Contenido**: {{content}}\n**Tiempo**: {{time}}",
-	"MESSAGE_UPDATE_INFO": "📝 - Mensaje actualizado en <#{{channel.id}}>\n**Antes**: {{oldContent}}\n**Después**: {{newContent}}\n**Autor**: `{{newMessage.author.tag}}` ({{newMessage.author.id}})\n**Tiempo**: {{time}}"
+	"MESSAGE_DELETE": "🗑️ - Mensaje eliminado en <#{{channel.id}}>",
+	"MESSAGE_DELETE_INFO": "» Información",
+	"MESSAGE_DELETE_INFO_CONTENT": "> **Contenido**: {{content}}",
+	"MESSAGE_DELETE_ID": "» Identificaciónes",
+	"MESSAGE_DELETE_ID_CONTENT": "Usuario = {{message.author.id}}\nCanal = {{message.channelId}}\nMensaje = {{message.id}}",
+	"MESSAGE_UPDATE": "📝 - Mensaje actualizado en <#{{channel.id}}>",
+	"MESSAGE_UPDATE_INFO": "» Información",
+	"MESSAGE_UPDATE_INFO_CONTENT": "> **Antes**: ~~{{before}}~~\n> **Después**: {{after}}",
+	"MESSAGE_UPDATE_ID": "» Identificaciónes",
+	"MESSAGE_UPDATE_ID_CONTENT": "Usuario = {{newMessage.author.id}}\nCanal = {{newMessage.channelId}}\nMensaje = {{newMessage.id}}",
+	"MESSAGE_DELETE_BULK": "🔖 - **{{amount}}** Mensajes eliminados en <#{{channel.id}}>"
 }

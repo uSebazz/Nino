@@ -1,9 +1,10 @@
 import { LanguageKeys } from '#lib/i18n'
+import { Colors } from '#utils/constants'
 import { getContent } from '#utils/util'
 import { Listener, type Events } from '@sapphire/framework'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import { cutText } from '@sapphire/utilities'
-import type { Message, TextChannel } from 'discord.js'
+import { codeBlock, cutText } from '@sapphire/utilities'
+import { Message, MessageEmbed } from 'discord.js'
 
 export class UserListener extends Listener<typeof Events.MessageDelete> {
 	public override async run(message: Message) {
@@ -15,32 +16,44 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 		const channel = message.guild!.channels.cache.get(data!.channelId!)
 
 		if (message.author.bot || !channel || channel.type !== 'GUILD_TEXT') return
+		const embeds = await this.getEmbed(message)
 
 		if (data?.all || data?.events.includes('messageDelete')) {
-			if (message.attachments.size > 0) {
-				await this.attachement(message, channel)
-			} else {
-				await channel.send(
-					await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformation, {
-						message,
-						time: `<t:${(message.createdTimestamp / 1000) | 0}:R>`,
-						channel: message.channel,
-						content: cutText(getContent(message) || '', 1900)
-					})
-				)
-			}
+			await channel.send({
+				embeds
+			})
 		}
 	}
 
-	private async attachement(message: Message, channel: TextChannel) {
-		const content = await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformation, {
-			message,
-			time: `<t:${(message.createdTimestamp / 1000) | 0}:R>`,
-			channel: message.channel,
-			content: cutText(getContent(message) || 'Attachement', 1900)
-		})
-		const attachments = message.attachments.map((attachment) => attachment.proxyURL)
+	private async getEmbed(message: Message) {
+		const attachment = message.attachments
 
-		return channel.send({ content, files: attachments })
+		const embed = new MessageEmbed()
+			.setColor(Colors.pastelGreen)
+			.setAuthor({
+				name: message.author.tag,
+				iconURL: message.author.displayAvatarURL()
+			})
+			.setDescription(
+				await resolveKey(message, LanguageKeys.Messages.MessageDelete, {
+					channel: message.channel
+				})
+			)
+			.addField(
+				await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformation),
+				attachment
+					? await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
+							content: cutText(getContent(message) || 'Attachment', 1900)
+					  })
+					: await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
+							content: cutText(getContent(message) || '', 1900)
+					  })
+			)
+			.addField(
+				await resolveKey(message, LanguageKeys.Messages.MessageDeleteId),
+				codeBlock('ml', await resolveKey(message, LanguageKeys.Messages.MessageDeleteIdContent, { message }))
+			)
+		if (attachment) embed.setImage(attachment.first()!.proxyURL)
+		return [embed]
 	}
 }
