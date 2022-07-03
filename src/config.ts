@@ -54,7 +54,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,
 	defaultPrefix: ['n!', 'n?', 'n/', 'Nino', 'nakano'],
-	loadDefaultErrorListeners: false,
+	loadDefaultErrorListeners: true,
 	loadMessageCommandListeners: true,
 	preventFailedToFetchLogForGuildIds: [
 		'876339668956893216',

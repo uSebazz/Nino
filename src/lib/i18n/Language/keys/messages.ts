@@ -3,6 +3,7 @@
  * @date 2022-06-15 * @author Sebastián Camilo (Sebazz)
  */
 
+export const Mention = 'messages:MENTION'
 export const MessageDelete = 'messages:MESSAGE_DELETE'
 export const MessageDeleteInformation = 'messages:MESSAGE_DELETE_INFO'
 export const MessageDeleteInformationContent = 'messages:MESSAGE_DELETE_INFO_CONTENT'
