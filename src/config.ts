@@ -99,7 +99,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		],
 		status: 'idle'
 	},
-	statcord: STAT_CORD_OPTIONS,
+	// statcord: STAT_CORD_OPTIONS,
 	i18n: {
 		fetchLanguage: async (context: InternationalizationContext) => {
 			if (!context.guild) return 'en-US'
