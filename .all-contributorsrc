@@ -17,6 +17,16 @@
         "review",
         "doc"
       ]
+    },
+    {
+      "login": "ChikoShidori",
+      "name": "Chiko",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53100578?v=4",
+      "profile": "http://chikum.me",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
