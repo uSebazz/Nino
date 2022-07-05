@@ -1,13 +1,13 @@
 <div align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <img src="https://cdn.discordapp.com/attachments/956530001761673246/976512294278299680/image.png?size=4096" width="20%" alt="Nino Logo">
 
 ### Nino 
 
 [![Status](https://top.gg/api/widget/status/887306474097881100.svg?noavatar=true)](https://top.gg/bot/887306474097881100)
 [![Upvotes](https://top.gg/api/widget/upvotes/887306474097881100.svg?noavatar=true)](https://top.gg/bot/887306474097881100)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
 
 ## Developing Nino
@@ -40,6 +40,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://nino.fun"><img src="https://avatars.githubusercontent.com/u/90474850?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sebazz</b></sub></a><br /><a href="https://github.com/uSebazz/Nino/commits?author=uSebazz" title="Code">💻</a> <a href="https://github.com/uSebazz/Nino/issues?q=author%3AuSebazz" title="Bug reports">🐛</a> <a href="#maintenance-uSebazz" title="Maintenance">🚧</a> <a href="https://github.com/uSebazz/Nino/pulls?q=is%3Apr+reviewed-by%3AuSebazz" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/uSebazz/Nino/commits?author=uSebazz" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://chikum.me"><img src="https://avatars.githubusercontent.com/u/53100578?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chiko</b></sub></a><br /><a href="https://github.com/uSebazz/Nino/commits?author=ChikoShidori" title="Code">💻</a> <a href="https://github.com/uSebazz/Nino/issues?q=author%3AChikoShidori" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
