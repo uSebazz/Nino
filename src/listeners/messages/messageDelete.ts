@@ -13,6 +13,8 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 				guildId: message.guildId!
 			}
 		})
+		if (!data) return
+
 		const channel = message.guild!.channels.cache.get(data!.channelId!)
 
 		if (message.author.bot || !channel || channel.type !== 'GUILD_TEXT') return

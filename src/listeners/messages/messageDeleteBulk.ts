@@ -16,6 +16,7 @@ export class UserListener extends Listener<typeof Events.MessageBulkDelete> {
 				guildId: messageFirst.guildId!
 			}
 		})
+		if (!data) return
 
 		const channel = messageFirst.guild?.channels.cache.get(data!.channelId!)
 		if (!channel || channel.type !== 'GUILD_TEXT') return

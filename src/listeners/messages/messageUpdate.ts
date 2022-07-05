@@ -12,6 +12,7 @@ export class UserListener extends Listener<typeof Events.MessageUpdate> {
 				guildId: newMessage.guildId!
 			}
 		})
+		if (!data) return
 
 		const channel = newMessage.guild!.channels.cache.get(data!.channelId!)
 		if (oldMessage.author.bot || oldMessage.content === newMessage.content || !channel || channel.type !== 'GUILD_TEXT') return
