@@ -1,8 +1,8 @@
-import { isGuildMessage } from '#utils/function'
-import { Argument, Identifiers, type ArgumentContext } from '@sapphire/framework'
-import { SnowflakeRegex, UserOrMemberMentionRegex } from '@sapphire/discord.js-utilities'
 import { LanguageKeys } from '#lib/i18n'
 import type { GuildMessage } from '#lib/types'
+import { isGuildMessage } from '#utils/function'
+import { SnowflakeRegex, UserOrMemberMentionRegex } from '@sapphire/discord.js-utilities'
+import { Argument, Identifiers, type ArgumentContext } from '@sapphire/framework'
 import type { User } from 'discord.js'
 
 export class UserArguments extends Argument<User> {
@@ -35,21 +35,13 @@ export class UserArguments extends Argument<User> {
 
 	private async resolveUser(message: GuildMessage, argument: string) {
 		const result = UserOrMemberMentionRegex.exec(argument) ?? SnowflakeRegex.exec(argument)
-		if (result === null) return undefined
+		if (!result) return
 
-		try {
-			return await message.client.users.fetch(result[1] as string)
-		} catch {
-			return null
-		}
+		return message.client.users.fetch(result[1] as string).catch(() => null)
 	}
 
 	private async fetchMember(message: GuildMessage, query: string) {
-		try {
-			const results = await message.guild.members.fetch({ query })
-			return results.first() ?? null
-		} catch {
-			return null
-		}
+		const results = await message.guild.members.fetch({ query }).catch(() => null)
+		return results ? results.first() : null
 	}
 }
