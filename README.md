@@ -5,7 +5,6 @@
 
 [![Status](https://top.gg/api/widget/status/887306474097881100.svg?noavatar=true)](https://top.gg/bot/887306474097881100)
 [![Upvotes](https://top.gg/api/widget/upvotes/887306474097881100.svg?noavatar=true)](https://top.gg/bot/887306474097881100)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
