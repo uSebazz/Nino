@@ -14,7 +14,9 @@
 		"lint": "eslint src --ext ts --fix",
 		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
 		"dev": "tsc-watch --onSuccess \"yarn start\"",
-		"deploy": "yarn build && yarn start"
+		"deploy": "yarn build && yarn start",
+		"update": "yarn upgrade-interactive",
+		"prepare": "husky install .github/husky"
 	},
 	"packageManager": "yarn@3.2.1",
 	"dependencies": {
@@ -37,18 +39,23 @@
 		"gradient-string": "2.0.1"
 	},
 	"devDependencies": {
-		"@commitlint/config-conventional": "17.0.3",
+		"@commitlint/cli": "^17.0.3",
+		"@commitlint/config-conventional": "^17.0.3",
 		"@sapphire/eslint-config": "4.3.7",
 		"@sapphire/prettier-config": "1.4.3",
 		"@types/gradient-string": "1.1.2",
 		"@types/ms": "0.7.31",
 		"@types/node": "18.0.0",
 		"@types/prettier": "2",
-		"@typescript-eslint/eslint-plugin": "5.30.4",
-		"@typescript-eslint/parser": "5.30.4",
+		"@typescript-eslint/eslint-plugin": "5.30.5",
+		"@typescript-eslint/parser": "5.30.5",
 		"commitlint": "17.0.3",
+		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.19.0",
+		"husky": "^8.0.1",
+		"lint-staged": "^13.0.3",
 		"prettier": "2.7.1",
+		"pretty-quick": "^3.1.3",
 		"prisma": "^4.0.0",
 		"tsc-watch": "5.0.3",
 		"tsup": "6.1.3",
@@ -68,6 +75,17 @@
 		"extends": [
 			"@commitlint/config-conventional"
 		]
+	},
+	"lint-staged": {
+		"*.{mjs,js,ts}": [
+			"eslint --fix --ext mjs,js,ts",
+			"prettier --write --loglevel=warn"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	},
 	"prettier": {
 		"endOfLine": "lf",

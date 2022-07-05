@@ -1,0 +1,38 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "uSebazz",
+      "name": "Sebazz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/90474850?v=4",
+      "profile": "http://nino.fun",
+      "contributions": [
+        "code",
+        "bug",
+        "maintenance",
+        "review",
+        "doc"
+      ]
+    },
+    {
+      "login": "ChikoShidori",
+      "name": "Chiko",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53100578?v=4",
+      "profile": "http://chikum.me",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Nino",
+  "projectOwner": "uSebazz",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

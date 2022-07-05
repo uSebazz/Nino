@@ -35,21 +35,13 @@ export class UserArguments extends Argument<User> {
 
 	private async resolveUser(message: GuildMessage, argument: string) {
 		const result = UserOrMemberMentionRegex.exec(argument) ?? SnowflakeRegex.exec(argument)
-		if (result === null) return undefined
+		if (!result) return
 
-		try {
-			return await message.client.users.fetch(result[1] as string)
-		} catch {
-			return null
-		}
+		return message.client.users.fetch(result[1] as string).catch(() => null)
 	}
 
 	private async fetchMember(message: GuildMessage, query: string) {
-		try {
-			const results = await message.guild.members.fetch({ query })
-			return results.first() ?? null
-		} catch {
-			return null
-		}
+		const results = await message.guild.members.fetch({ query }).catch(() => null)
+		return results ? results.first() : null
 	}
 }
