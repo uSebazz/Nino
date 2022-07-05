@@ -1,0 +1,6 @@
+{
+	"DM": "Mensaje directo",
+	"GUILD_TEXT": "Canal de texto",
+	"GUILD_VOICE": "Canal de voz",
+	"GUILD_THREAD": "Hilo"
+}
