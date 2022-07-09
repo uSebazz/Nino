@@ -356,13 +356,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kaname-png/plugin-subcommands-advanced@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@kaname-png/plugin-subcommands-advanced@npm:1.2.1"
+"@kaname-png/plugin-subcommands-advanced@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@kaname-png/plugin-subcommands-advanced@npm:2.0.2"
   dependencies:
     "@sapphire/decorators": ^4.3.6
     tslib: ^2.4.0
-  checksum: b497771921482bb5604e7595d18368305baa831e3650a1ba826e4184fa0a90523691fc5fb538904abce10b6a7b3f60be3593f9807e7411675a47b11ced12d682
+  checksum: 96f8d0a3c09228208d83f031487d4cb1ac86935282782862e2f6f4b1e606c2cb8a5fa1893130134f66e94a1e54614a4add379c10ef9ac70a620dcbe0fb4f655c
   languageName: node
   linkType: hard
 
@@ -4006,7 +4006,7 @@ __metadata:
     "@commitlint/cli": ^17.0.3
     "@commitlint/config-conventional": ^17.0.3
     "@kaname-png/plugin-statcord": 2.1.0
-    "@kaname-png/plugin-subcommands-advanced": ^1.2.1
+    "@kaname-png/plugin-subcommands-advanced": ^2.0.2
     "@prisma/client": 4.0.0
     "@sapphire/decorators": 4.3.7
     "@sapphire/discord.js-utilities": 4.11.3

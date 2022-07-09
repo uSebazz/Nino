@@ -21,7 +21,7 @@
 	"packageManager": "yarn@3.2.1",
 	"dependencies": {
 		"@kaname-png/plugin-statcord": "2.1.0",
-		"@kaname-png/plugin-subcommands-advanced": "^1.2.1",
+		"@kaname-png/plugin-subcommands-advanced": "^2.0.2",
 		"@prisma/client": "4.0.0",
 		"@sapphire/decorators": "4.3.7",
 		"@sapphire/discord.js-utilities": "4.11.3",
