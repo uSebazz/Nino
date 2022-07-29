@@ -1,8 +1,3 @@
-/**
- * Language keys for the all permissions.
- * @date 2022-06-15 * @author Sebastián Camilo (Sebazz)
- */
-
 export const AddReactions = 'permissions:ADD_REACTIONS'
 export const Administrator = 'permissions:ADMINISTRATOR'
 export const AttachFiles = 'permissions:ATTACH_FILES'

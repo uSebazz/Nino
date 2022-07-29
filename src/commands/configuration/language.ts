@@ -1,147 +1,66 @@
 import { LanguageKeys } from '#lib/i18n'
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures'
-import { Emojis } from '#utils/constants'
-import { ApplyOptions } from '@sapphire/decorators'
-import { send } from '@sapphire/plugin-editable-commands'
-import { fetchLanguage, resolveKey } from '@sapphire/plugin-i18next'
-import type { CommandInteraction, Message, SelectMenuInteraction } from 'discord.js'
-import { MessageActionRow, MessageSelectMenu } from 'discord.js'
-import { setTimeout as wait } from 'node:timers/promises'
+import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced'
+import { Command } from '@sapphire/framework'
+import { resolveKey } from '@sapphire/plugin-i18next'
+import { CommandInteraction } from 'discord.js'
 
-@ApplyOptions<NinoCommandOptions>({
-	description: 'Configure the bot language',
-	aliases: ['config-lang', 'configure-language', 'setting-language', 'lang'],
-	preconditions: ['Administrator'],
-	chatInputCommand: {
-		register: true,
-		idHints: ['974699587501715566']
-	}
-})
-export class UserCommand extends NinoCommand {
-	public override async chatInputRun(interaction: CommandInteraction) {
-		const content = await resolveKey(interaction, LanguageKeys.Config.Language.SelectLanguage)
-
-		await interaction.reply({ content: 'See channel.', ephemeral: true })
-
-		const msg = await interaction.channel!.send({
-			content,
-			components: this.components
-		})
-
-		return this.collector(msg, {
-			int: interaction
-		})
-	}
-
-	public override async messageRun(message: Message) {
-		const content = await resolveKey(message, LanguageKeys.Config.Language.SelectLanguage)
-
-		const msg = await send(message, {
-			content,
-			components: this.components
-		})
-
-		return this.collector(msg, {
-			message
-		})
-	}
-
-	private async collector(msg: Message<boolean>, { message, int }: { message?: Message; int?: CommandInteraction }) {
-		const languages = {
-			spanish: 'es-ES',
-			english: 'en-US',
-			german: 'de-DE'
-			// french: 'fr-FR',
-		}
-		const timefinish = await resolveKey(msg, LanguageKeys.Config.Language.LanguageTimeFinish)
-
-		const collector = msg.createMessageComponentCollector({
-			filter: async (interaction) => {
-				const content = await resolveKey(interaction, LanguageKeys.Config.Language.LanguageFilter)
-
-				if (interaction.user.id === message?.author.id || int?.user.id) {
-					return true
-				}
-				await interaction.reply({ content, ephemeral: true })
-				return false
-			},
-			idle: 60000
-		})
-
-		collector.on('collect', async (interaction: SelectMenuInteraction) => {
-			const guildLocale = await fetchLanguage(interaction)
-			const values = interaction.values[0] as 'spanish' | 'english' | 'german'
-
-			// Keys of the language
-			const content = await resolveKey(interaction, LanguageKeys.Config.Language.AlreadyLanguage)
-
-			const done = await resolveKey(interaction, LanguageKeys.Config.Language.LanguageSet, {
-				emoji: Emojis.right,
-				lang: languages[values]
-			})
-
-			// If the language is already set
-			if (guildLocale === languages[values]) {
-				await interaction.reply({ content, ephemeral: true })
-			} else {
-				// Update the language of the guild
-				await this.container.prisma.serverConfig.update({
-					where: {
-						guildId: interaction.guildId as string
+@RegisterSubCommand('config', (ctx) =>
+	ctx //
+		.setName('language')
+		.setDescription('Configure the language of the bot.')
+		.addStringOption((op) =>
+			op //
+				.setName('locale')
+				.setDescription('The locale of the language')
+				.addChoices(
+					{
+						name: 'Español',
+						value: 'es-ES'
 					},
-					data: {
-						lang: languages[values]
+					{
+						name: 'English',
+						value: 'en-US'
+					},
+					{
+						name: 'Deutsch',
+						value: 'de-DE'
 					}
-				})
+				)
+				.setRequired(true)
+		)
+)
+export class UserCommand extends Command {
+	public override chatInputRun(ctx: CommandInteraction) {
+		const locale = ctx.options.getString('locale') as AllLocales
+		return this.setLocale(locale, ctx)
+	}
 
-				// Send the message
-				await interaction.reply({
-					content: done,
-					ephemeral: true
-				})
-
-				// Stop the collector
-				await wait(5000).then(() => collector.stop())
+	private async setLocale(locale: AllLocales, interaction: CommandInteraction) {
+		const data = await this.container.prisma.serverConfig.findUnique({
+			where: {
+				guildId: interaction.guildId!
 			}
 		})
 
-		collector.on('end', async () => {
-			await msg.edit({
-				content: timefinish,
-				components: []
-			})
-		})
-	}
+		if (data?.lang === locale) {
+			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Language.AlreadyLanguage))
+		}
 
-	private get components(): MessageActionRow[] {
-		return [
-			new MessageActionRow().addComponents([
-				new MessageSelectMenu()
-					.setCustomId('menu')
-					.setPlaceholder('Select a language')
-					.addOptions([
-						{
-							label: 'English - (USA).',
-							emoji: '🇺🇲',
-							value: 'english'
-						},
-						{
-							label: 'Español - (México)',
-							emoji: '🇲🇽',
-							value: 'spanish'
-						},
-						{
-							label: 'German - (Deutchland)',
-							emoji: '🇩🇪',
-							value: 'german'
-						}
-						// {
-						//	label: 'French - (France)',
-						//	emoji: '🇫🇷',
-						//	value: 'french',
-						// },
-					])
-			])
-		]
+		await this.container.prisma.serverConfig.update({
+			where: {
+				guildId: interaction.guildId!
+			},
+			data: {
+				lang: locale
+			}
+		})
+
+		return interaction.reply(
+			await resolveKey(interaction, LanguageKeys.Config.Language.LanguageSet, {
+				lang: locale
+			})
+		)
 	}
 }
+
+type AllLocales = 'es-ES' | 'en-US' | 'de-DE'

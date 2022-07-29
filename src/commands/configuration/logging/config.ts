@@ -1,10 +1,10 @@
 import { LanguageKeys } from '#lib/i18n'
-import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced'
+import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced'
 import { send } from '@sapphire/plugin-editable-commands'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import type { CommandInteraction, GuildBasedChannel, Message } from 'discord.js'
 
-@RegisterSubCommand('logging', (builder) =>
+@RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
 		.setName('config')
 		.setDescription('Configure the logging system')

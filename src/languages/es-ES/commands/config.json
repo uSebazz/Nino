@@ -1,7 +1,5 @@
 {
-	"LANGUAGE_SELECT": "{{excl}} - Selecciona el idioma para este servidor",
 	"LANGUAGE_ALREADY": "{{wrong}} - Uh, parece que este idioma ya está establecido",
-	"LANGUAGE_BUTTON_FILTER": "{{excl}} - Este menú no es para ti :)",
 	"LANGUAGE_SET": "{{right}} - El idioma del servidor ahora será `{{lang}}` :D",
 	"LANGUAGE_COLLECTOR_FINISH": "{{netual}} - Interacción terminada, ¡gracias por usar el menú! :D",
 	"LOGGING_ONLY_SLASH_COMMAND": "{{wrong}} - Solo puedes usar este comando en un comando de barra",

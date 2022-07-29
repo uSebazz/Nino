@@ -3,6 +3,7 @@ import { Colors } from '#utils/constants'
 import { Listener, type Events } from '@sapphire/framework'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import { codeBlock } from '@sapphire/utilities'
+import { diffWordsWithSpace } from 'diff'
 import { Message, MessageEmbed } from 'discord.js'
 
 export class UserListener extends Listener<typeof Events.MessageUpdate> {
@@ -35,7 +36,9 @@ export class UserListener extends Listener<typeof Events.MessageUpdate> {
 				await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateInformation),
 				await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateInformationContent, {
 					before: oldMessage.content,
-					after: newMessage.content
+					after: diffWordsWithSpace(oldMessage.content, newMessage.content)
+						.map((ctx) => (ctx.added ? `**${ctx.value}**` : ctx.removed ? `~~${ctx.value}~~` : ctx.value))
+						.join(' ')
 				})
 			)
 			.addField(

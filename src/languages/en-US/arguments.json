@@ -1,5 +1,0 @@
-{
-	"STRING_ERROR": "Uh, It seems that an error has happened. {{error}}",
-	"MISSING_ARGUMENTS": "{{wrong}} - A parameter is missing!\n> Use `n!help [command]` for more information.",
-	"USER_NOT_FOUND": "{{wrong}} - Sorry, i can't find this user."
-}

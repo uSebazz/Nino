@@ -1,12 +1,12 @@
 import { LanguageKeys } from '#lib/i18n'
 import { LoggingEvents } from '#utils/constants'
-import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced'
+import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced'
 import type { EventsConfig } from '@prisma/client'
 import { send } from '@sapphire/plugin-editable-commands'
 import { resolveKey } from '@sapphire/plugin-i18next'
 import type { CommandInteraction, Message } from 'discord.js'
 
-@RegisterSubCommand('logging', (builder) =>
+@RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
 		.setName('enable')
 		.setDescription('Enable a event for the logging system')

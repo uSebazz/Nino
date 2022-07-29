@@ -9,7 +9,9 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true,
 		"source.fixAll.eslint": true,
-		"source.organizeImports": true,
+		"source.organizeImports": true
 	},
+	"rpc.enabled": true,
+	"i18n-ally.localesPaths": ["src/languages", "src/lib/i18n", "src/listeners/messages"]
 	//"rpc.enabled": true
 }

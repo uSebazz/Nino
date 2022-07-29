@@ -1,19 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { LanguageKeys } from '#lib/i18n'
-import { NinoCommand, type NinoCommandOptions, type NinoCommandRegistery } from '#lib/structures'
-import { Badges, Colors } from '#utils/constants'
-import { ApplyOptions } from '@sapphire/decorators'
-import { RegisterBehavior, type Args } from '@sapphire/framework'
-import { send } from '@sapphire/plugin-editable-commands'
+import { Badges, Colors, Emojis } from '#utils/constants'
+import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import type { CommandInteraction, Guild, GuildMember, Message, PermissionString, User, UserFlagsString } from 'discord.js'
-import { MessageEmbed, Permissions } from 'discord.js'
-@ApplyOptions<NinoCommandOptions>({
-	description: 'view user information',
-	aliases: ['ui', 'user', 'info-user', 'whois']
-})
-export class UserCommand extends NinoCommand {
+import { CommandInteraction, Guild, GuildMember, MessageEmbed, Permissions, PermissionString, Snowflake, User, UserFlagsString } from 'discord.js'
+
+// Delete this when discord-api-types is updated to include this
+enum NewApplicationsFlags {
+	ApplicationCommands = 8388608
+}
+
+@RegisterSubCommand('info', (ctx) =>
+	ctx //
+		.setName('user')
+		.setDescription('view information for a user.')
+		.addUserOption((op) =>
+			op //
+				.setName('user')
+				.setDescription('the user to view information for.')
+				.setRequired(false)
+		)
+)
+export class UserCommand extends Command {
 	public readonly keyAdminPermission = Permissions.FLAGS.ADMINISTRATOR
 	public readonly keyPermissions: Array<[PermissionString, bigint]> = [
 		['BAN_MEMBERS', Permissions.FLAGS.BAN_MEMBERS],
@@ -33,140 +40,141 @@ export class UserCommand extends NinoCommand {
 		['MANAGE_EMOJIS_AND_STICKERS', Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS]
 	]
 
-	public override registerApplicationCommands(registery: NinoCommandRegistery) {
-		registery.registerChatInputCommand(
-			(builder) =>
-				builder
-					//
-					.setName(this.name)
-					.setDescription(this.description)
-					.addUserOption((option) =>
-						option
-							//
-							.setName('user')
-							.setDescription('the user to view information about')
-							.setRequired(false)
-					),
-			{
-				behaviorWhenNotIdentical: RegisterBehavior.Overwrite
-			}
-		)
+	public override async chatInputRun(ctx: CommandInteraction) {
+		const user = ctx.options.getUser('user') ?? ctx.user
+		const member = await ctx.guild!.members.fetch(user.id).catch(() => null)
+		const { bot } = user
+
+		if (bot) {
+			const embeds = await this.getBotInfo(user)
+			return ctx.reply({ embeds })
+		} else if (member) {
+			const embeds = await this.getMemberInfo(member, ctx)
+			return ctx.reply({ embeds })
+		}
+
+		const embeds = await this.getUserInfo(user, ctx)
+		return ctx.reply({ embeds })
 	}
 
-	public override async chatInputRun(interaction: CommandInteraction) {
-		const user = interaction.options.getUser('user') ?? interaction.user
-		const member = await interaction.guild!.members.fetch(user.id).catch(() => null)
+	private async getUserInfo(user: User, ctx: CommandInteraction) {
+		const registration = `<t:${Math.round(user.createdTimestamp! / 1000)}:R>`
+		const embed = new MessageEmbed()
+			.setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() })
+			.setColor(Colors.prettyPutunia)
+			.setDescription(this.getUserBadges(user, ctx.guild!).join(' '))
+			.addFields([
+				{
+					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.About),
+					value: await resolveKey(ctx.guild!, LanguageKeys.Util.User.AboutValue, {
+						user,
+						registration
+					})
+				}
+			])
 
-		const embed = member ? await this.memberEmbed(member, { interaction }) : await this.userEmbed(user, { interaction })
-
-		await interaction.reply({ embeds: [embed] })
+		return [embed]
 	}
 
-	public override async messageRun(message: Message, args: Args) {
-		const user = args.finished ? message.author : await args.pick('resolveUser')
-		const member = await message.guild!.members.fetch(user.id).catch(() => null)
+	private async getBotInfo(user: User) {
+		// @ts-expect-error No puedo obtener el tipo, porque no se cual es xd
+		const info = (await (this.container.client.api as any).applications[user.id].rpc.get()) as BotResponse
+		const badges = this.getUserBadges(user).join(' ')
+		const { flags } = info
 
-		const embed = member ? await this.memberEmbed(member, { message }) : await this.userEmbed(user, { message })
+		const embed = new MessageEmbed().setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() }).setColor(Colors.overtone)
 
-		return send(message, { embeds: [embed] })
+		if ((flags! & NewApplicationsFlags.ApplicationCommands) === NewApplicationsFlags.ApplicationCommands) {
+			embed.setDescription(info.description ? `${badges} ${Emojis.slashBot}\n${info.description}` : `${badges} ${Emojis.slashBot}`)
+		} else {
+			embed.setDescription(info.description ? `${badges}\n${info.description}` : `${badges}`)
+		}
+
+		return [embed]
 	}
 
-	private async memberEmbed(member: GuildMember, { interaction, message }: { interaction?: CommandInteraction; message?: Message }) {
-		const permissions: string[] = []
-		const badges = this.getBadges(member.user, message?.guild ?? interaction!.guild!)
+	private async getMemberInfo(member: GuildMember, ctx: CommandInteraction) {
+		const joined = `<t:${Math.round(member.joinedTimestamp! / 1000)}:R>`
+		const registration = `<t:${Math.round(member.user.createdTimestamp! / 1000)}:R>`
+		const nickname = member.nickname ?? 'None'
+		const memberIsBooster = member.premiumSince ? `Yes (<t:${Math.round(member.premiumSinceTimestamp! / 1000)}:R>)` : 'No'
 		const roles = member.roles.cache
 			.sorted((a, b) => a.position - b.position)
 			.map((role) => role.toString())
 			.join(' ')
 			.replace('@everyone', '')
 
-		const embed = new MessageEmbed().setColor(Colors.prettyPutunia).setAuthor({
-			name: member.user.tag,
-			iconURL: member.user.displayAvatarURL({ dynamic: true })
-		})
+		const embed = new MessageEmbed()
+			.setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL() })
+			.setColor(Colors.pickFord)
+			.setDescription(this.getUserBadges(member.user, ctx.guild!).join(' '))
+			.addFields([
+				{
+					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.About),
+					value: await resolveKey(ctx.guild!, LanguageKeys.Util.User.AboutValue, {
+						user: member.user,
+						registration
+					})
+				},
+				{
+					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.GuildMember),
+					value: await resolveKey(ctx.guild!, LanguageKeys.Util.User.GuildMemberValue, {
+						joined,
+						nickname,
+						memberIsBooster
+					})
+				},
+				{
+					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.Roles),
+					value: `> ${roles}`
+				},
+				{
+					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.Permissions),
+					value: await this.getPermissions(member)
+				}
+			])
 
-		if (badges.length) {
-			embed.setDescription(badges.join('  '))
-		}
+		return [embed]
+	}
 
-		embed.addField(
-			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAbout),
-			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAboutContentMember, {
-				createdAt: (member.user.createdTimestamp / 1000) | 0,
-				joinedAt: (member.joinedTimestamp! / 1000) | 0,
-				nickname: member.nickname ?? '-'
-			})
-		)
-
-		if (roles.length) {
-			embed.addField(await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldRoles), `> ${roles}`)
-		}
+	private async getPermissions(member: GuildMember) {
+		const permissions: Array<string> = []
 
 		if (member.permissions.has(this.keyAdminPermission)) {
-			embed.addField(
-				await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldPermissions),
-				await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldPermissionsAll)
-			)
+			const content = await resolveKey(member.guild!, LanguageKeys.Util.User.PermissionsAll)
+			permissions.push(content)
 		} else {
 			for (const [name, value] of this.keyPermissions) {
-				const key = await resolveKey(message ?? interaction!, `permissions:${name}`)
+				const key = await resolveKey(member.guild, `permissions:${name}`)
 
 				if (member.permissions.has(value)) permissions.push(key)
 			}
-
-			if (permissions.length) {
-				embed.addField(await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldPermissions), `> ${permissions.join(', ')}`)
-			}
 		}
 
-		embed.setFooter({ text: member.user.id })
-		return embed
+		return permissions.join(', ')
 	}
 
-	private async userEmbed(
-		user: User,
-		{
-			interaction,
-			message
-		}: {
-			interaction?: CommandInteraction
-			message?: Message
-		}
-	) {
-		const badges = this.getBadges(user, message?.guild ?? interaction!.guild!)
-
-		const embed = new MessageEmbed().setColor(Colors.pastelGreen).setAuthor({
-			name: user.tag,
-			iconURL: user.displayAvatarURL({ dynamic: true })
-		})
-
-		if (badges.length) {
-			embed.setDescription(badges.join('  '))
-		}
-
-		embed.addField(
-			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAbout),
-			await resolveKey(message ?? interaction!, LanguageKeys.Util.User.FieldAboutContentUser, {
-				createdAt: (user.createdTimestamp / 1000) | 0
-			})
-		)
-
-		embed.setFooter({ text: user.id })
-
-		return embed
-	}
-
-	private getBadges(user: User, guild?: Guild) {
-		const flags = user.flags?.toArray() || []
-		const emojis = []
+	private getUserBadges(user: User, guild?: Guild) {
+		const userFlags = user.flags?.toArray() || []
+		const emojis: string[] = []
 		if (user.avatar?.startsWith('_a') && user.banner?.length) emojis.push(Badges.NITRO)
 		if (guild && guild.ownerId === user.id) emojis.push(Badges.OWNER)
 		emojis.push(
 			...Object.keys(Badges)
-				.filter((badge) => flags.includes(badge as UserFlagsString))
-				// @ts-expect-error okay
-				.map((badge) => Badges[badge])
+				.filter((badge) => userFlags.includes(badge as UserFlagsString))
+				.map((badge) => Badges[badge as keyof typeof Badges])
 		)
 		return emojis
 	}
+}
+
+interface BotResponse {
+	id: Snowflake
+	name: string | null
+	icon: string | null
+	description: string | null
+	bot_public: boolean
+	terms_of_service_url: string | null
+	privacy_policy_url: string | null
+	flags: number
 }

@@ -1,16 +1,3 @@
 {
-	"PING_MESSAGE": "🏓 Pong! (Ich antwortete in: {{diff}}ms. Insgesamt: {{ping}}ms)",
-	"STATS_EMBED_DESCRIPTION": "> Hallo, ich bin **Nino** ein Bot mit ein bisschen von allem. Mit dem Ziel, die Aktivität auf Ihrem Server zu verbessern und ihn zum besten `💜` zu machen.",
-	"STATS_FIELD_DEVS": "» Entwickler",
-	"STATS_FIELD_STATICS": "» Statistiken",
-	"STATS_FIELD_SYSTEM": "» System",
-	"STATS_FIELD_SYSTEM_CONTENT": "> - **RAM-Nutzung**: {{ramUsed}}\n> - **RAM insgesamt**: {{ramTotal}}\n> - **CPU-Nutzung**: {{cpuLoad}}\n> - **Modell**: {{cpuModel}}",
-	"STATS_FIELD_STATICS_CONTENT": "> - **Benutzer**: {{users}}\n> - **Server**: {{guilds}}\n> - **Kanäle**: {{channels}}\n> - **Befehle**: {{commands}}\n> - **Bibliothek**: {{version}}\n> - **Rahmenwerk**: {{sapphireVersion}}",
-	"USER_FIELD_ABOUT": "» Informationen",
-	"USER_FIELD_ROLES": "» Rollen",
-	"USER_FIELD_PERMISSIONS": "» Erlaubt",
-	"USER_FIELD_PERMISSIONS_ALL": "> Alle Berechtigungen (Administrator)",
-	"USER_FIELD_ABOUT_CONTENT_USER": "> - **Gegründet**: <t:{{createdAt}}:R>",
-	"USER_FIELD_ABOUT_CONTENT_MEMBER": "> - **Gegründet**: <t:{{createdAt}}:R>\n> - **Mitgliedschaft**: <t:{{joinedAt}}:R>\n> - **Spitzname**: {{nickname}}",
-	"HELP_EMBED_DESCRIPTION": "Hallo, ich bin **Nino** ein Bot mit ein bisschen von allem, erstellt mit `❤️` von {{user}} mit {{sapphire}} und {{prisma}} <3"
+	"PING_MESSAGE": "🏓 Pong! (Ich antwortete in: {{diff}}ms. Insgesamt: {{ping}}ms)"
 }

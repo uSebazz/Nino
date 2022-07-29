@@ -1,10 +1,10 @@
 import { LanguageKeys } from '#lib/i18n'
 import { inlineCode } from '@discordjs/builders'
-import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced'
+import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import type { CommandInteraction } from 'discord.js'
+import type { CommandInteraction, Message } from 'discord.js'
 
-@RegisterSubCommand('logging', (builder) =>
+@RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
 		.setName('view')
 		.setDescription('View the current logging configuration')
@@ -14,7 +14,11 @@ export class UserCommand extends Command {
 		return this.showInfo(interaction)
 	}
 
-	private async showInfo(interaction: CommandInteraction) {
+	public override messageRun(message: Message) {
+		return this.showInfo(message)
+	}
+
+	private async showInfo(interaction: CommandInteraction | Message) {
 		const data = await this.container.prisma.eventsConfig.findUnique({
 			where: {
 				guildId: interaction.guildId!

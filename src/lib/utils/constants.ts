@@ -17,6 +17,7 @@ export enum Emojis {
 	// Emojis for reactions and embeds
 	twitter = '<:eg_twitter:986081387188715530>',
 	github = '<:github:977614370722951168>',
+	slashBot = '<:commands_badge:999745813376942121>',
 
 	// Logs
 	messageDelete = '<:eg_deletemessage:991672466621608027>',
@@ -64,6 +65,11 @@ export const gateways = {
 export enum Colors {
 	pastelGreen = '#c7e9a8',
 	prettyPutunia = '#ddb2e1',
+	tanagerTurquoise = '#92DCE5',
+	whaleMouth = '#C8D3D5',
+	hazyDaze = '#A4B8C4',
+	pickFord = '#C7EFCF',
+	overtone = '#A1E6B6',
 	invisible = '#2F3136'
 }
 

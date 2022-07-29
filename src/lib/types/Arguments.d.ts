@@ -11,6 +11,7 @@ declare module '@sapphire/framework' {
 
 	interface ArgType {
 		resolveUser: User
+		color: string
 	}
 }
 

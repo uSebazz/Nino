@@ -1,7 +1,3 @@
-/**
- * Language keys for the logging config.
- * @date 2022-06-27 * @author Sebastián Camilo (Sebazz)
- */
 export const OnlySlashCommand = 'commands/config:LOGGING_ONLY_SLASH_COMMAND'
 export const ChannelNotSet = 'commands/config:LOGGING_CHANNEL_NOT_SET'
 export const AllEventsEnabled = 'commands/config:LOGGING_ALL_EVENTS_ENABLED'

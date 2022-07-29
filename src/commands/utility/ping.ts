@@ -8,14 +8,10 @@ import { Message, type CommandInteraction } from 'discord.js'
 
 @ApplyOptions<NinoCommandOptions>({
 	description: 'Ping of the bot',
-	aliases: ['pong', 'latency'],
-	chatInputCommand: {
-		register: true,
-		idHints: ['974700576971587584']
-	}
+	aliases: ['pong', 'latency']
 })
 export class UserCommand extends NinoCommand {
-	public override async messageRun(message: Message): Promise<void> {
+	public override async messageRun(message: Message) {
 		const msg = await send(message, `${Emojis.ninoburrito} ping?`)
 		const diff = msg.createdTimestamp - message.createdTimestamp
 		const ping = Math.round(this.container.client.ws.ping)
@@ -23,7 +19,7 @@ export class UserCommand extends NinoCommand {
 		await send(message, await resolveKey(message, LanguageKeys.Util.Ping, { diff, ping }))
 	}
 
-	public override async chatInputRun(interaction: CommandInteraction): Promise<void> {
+	public override async chatInputRun(interaction: CommandInteraction) {
 		const msg = await interaction.reply({
 			content: `${Emojis.ninoburrito} ping?`,
 			fetchReply: true

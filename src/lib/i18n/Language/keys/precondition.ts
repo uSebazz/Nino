@@ -1,8 +1,3 @@
-/**
- * Language keys for precondition errors.
- * @date 2022-06-18 * @author Sebastián Camilo (Sebazz)
- */
-
 export const CommandDisabled = 'precondition:COMMAND_DISABLED'
 export const CommandCooldown = 'precondition:COMMAND_COOLDOWN'
 export const CommandDmOnly = 'precondition:COMMAND_DM_ONLY'
