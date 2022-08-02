@@ -51,7 +51,7 @@ export const Badges = {
 	OWNER: '<:eg_crown:983384657469014076>' // thanks blink<3
 }
 
-export const gateways = {
+export const Gateways = {
 	GATEWAY_PRESENCE: 1 << 12,
 	GATEWAY_PRESENCE_LIMITED: 1 << 13,
 	GATEWAY_GUILD_MEMBERS: 1 << 14,
@@ -60,6 +60,7 @@ export const gateways = {
 	EMBEDDED: 1 << 17,
 	GATEWAY_MESSAGE_CONTENT: 1 << 18,
 	GATEWAY_MESSAGE_CONTENT_LIMITED: 1 << 19
+	/* APPLICATION_COMMAND_BADGE: 1 << 23 */ // its a flag, but not a gateway intent
 }
 
 export enum Colors {
@@ -178,3 +179,12 @@ export const LoggingOptions: Array<APIApplicationCommandOptionChoice<string>> = 
 		value: 'ignoreStaff'
 	}
 ]
+
+export const isValidURL = (str: string) => {
+	try {
+		new URL(str)
+		return true
+	} catch (_) {
+		return false
+	}
+}

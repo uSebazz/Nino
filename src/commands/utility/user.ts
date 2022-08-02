@@ -1,8 +1,20 @@
 import { LanguageKeys } from '#lib/i18n'
-import { Badges, Colors, Emojis } from '#utils/constants'
+import { Badges, Colors, Emojis, Gateways, isValidURL } from '#utils/constants'
 import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced'
 import { resolveKey } from '@sapphire/plugin-i18next'
-import { CommandInteraction, Guild, GuildMember, MessageEmbed, Permissions, PermissionString, Snowflake, User, UserFlagsString } from 'discord.js'
+import {
+	CommandInteraction,
+	Guild,
+	GuildMember,
+	MessageActionRow,
+	MessageButton,
+	MessageEmbed,
+	Permissions,
+	PermissionString,
+	Snowflake,
+	User,
+	UserFlagsString
+} from 'discord.js'
 
 // Delete this when discord-api-types is updated to include this
 enum NewApplicationsFlags {
@@ -46,8 +58,7 @@ export class UserCommand extends Command {
 		const { bot } = user
 
 		if (bot) {
-			const embeds = await this.getBotInfo(user)
-			return ctx.reply({ embeds })
+			return this.getBotInfo(user, ctx)
 		} else if (member) {
 			const embeds = await this.getMemberInfo(member, ctx)
 			return ctx.reply({ embeds })
@@ -61,7 +72,7 @@ export class UserCommand extends Command {
 		const registration = `<t:${Math.round(user.createdTimestamp! / 1000)}:R>`
 		const embed = new MessageEmbed()
 			.setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() })
-			.setColor(Colors.prettyPutunia)
+			.setColor(Colors.prettyPutunia) // Rosado si no es un miembro
 			.setDescription(this.getUserBadges(user, ctx.guild!).join(' '))
 			.addFields([
 				{
@@ -76,21 +87,42 @@ export class UserCommand extends Command {
 		return [embed]
 	}
 
-	private async getBotInfo(user: User) {
+	private async getBotInfo(user: User, ctx: CommandInteraction) {
 		// @ts-expect-error No puedo obtener el tipo, porque no se cual es xd
 		const info = (await (this.container.client.api as any).applications[user.id].rpc.get()) as BotResponse
 		const badges = this.getUserBadges(user).join(' ')
 		const { flags } = info
+		const gatewaysFlags = this.getGatewaysFlags(flags)
+		const components: MessageActionRow[] = []
+		components.push(new MessageActionRow())
 
-		const embed = new MessageEmbed().setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() }).setColor(Colors.overtone)
+		const embed = new MessageEmbed()
+			.setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() })
+			.setColor(Colors.overtone) // Verde si es un bot
+			.addFields([
+				{
+					name: '» Flags',
+					value: gatewaysFlags.join('\n')
+				}
+			])
 
 		if ((flags! & NewApplicationsFlags.ApplicationCommands) === NewApplicationsFlags.ApplicationCommands) {
-			embed.setDescription(info.description ? `${badges} ${Emojis.slashBot}\n${info.description}` : `${badges} ${Emojis.slashBot}`)
+			embed.setDescription(info.description ? `${Emojis.slashBot} ${badges}\n${info.description}` : `${badges} ${Emojis.slashBot}`)
 		} else {
 			embed.setDescription(info.description ? `${badges}\n${info.description}` : `${badges}`)
 		}
 
-		return [embed]
+		if (info.privacy_policy_url && isValidURL(info.privacy_policy_url)) {
+			components[0]!.addComponents([new MessageButton().setStyle('LINK').setLabel('Privacy Policy').setURL(info.privacy_policy_url)])
+		}
+
+		if (info.terms_of_service_url && isValidURL(info.terms_of_service_url)) {
+			components[0]!.addComponents([new MessageButton().setStyle('LINK').setLabel('Terms of Service').setURL(info.terms_of_service_url)])
+		}
+
+		if (components.every((row) => !row.components.length)) while (components.length) components.pop()
+
+		return ctx.reply({ embeds: [embed], components })
 	}
 
 	private async getMemberInfo(member: GuildMember, ctx: CommandInteraction) {
@@ -106,7 +138,7 @@ export class UserCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL() })
-			.setColor(Colors.pickFord)
+			.setColor(Colors.tanagerTurquoise) // Azul si es un miembro
 			.setDescription(this.getUserBadges(member.user, ctx.guild!).join(' '))
 			.addFields([
 				{
@@ -165,6 +197,49 @@ export class UserCommand extends Command {
 				.map((badge) => Badges[badge as keyof typeof Badges])
 		)
 		return emojis
+	}
+
+	private getGatewaysFlags(flags: number) {
+		const gatewaysFlags: Array<string> = []
+
+		if (
+			(flags & Gateways.GATEWAY_MESSAGE_CONTENT) === Gateways.GATEWAY_MESSAGE_CONTENT ||
+			(flags & Gateways.GATEWAY_MESSAGE_CONTENT_LIMITED) === Gateways.GATEWAY_MESSAGE_CONTENT_LIMITED
+		) {
+			gatewaysFlags.push(
+				flags & Gateways.GATEWAY_MESSAGE_CONTENT
+					? `> **Gateway Message Content**: ${Emojis.right}`
+					: `> **Gateway Message Content**: ${Emojis.netual}`
+			)
+		} else {
+			gatewaysFlags.push(`> **Gateway Message Content**: ${Emojis.wrong}`)
+		}
+
+		if (
+			(flags & Gateways.GATEWAY_GUILD_MEMBERS) === Gateways.GATEWAY_GUILD_MEMBERS ||
+			(flags & Gateways.GATEWAY_GUILD_MEMBERS_LIMITED) === Gateways.GATEWAY_GUILD_MEMBERS_LIMITED
+		) {
+			gatewaysFlags.push(
+				flags & Gateways.GATEWAY_GUILD_MEMBERS
+					? `> **Gateway Guild Members**: ${Emojis.right}`
+					: `> **Gateway Guild Members**: ${Emojis.netual}`
+			)
+		} else {
+			gatewaysFlags.push(`> **Gateway Guild Members**: ${Emojis.wrong}`)
+		}
+
+		if (
+			(flags & Gateways.GATEWAY_PRESENCE) === Gateways.GATEWAY_PRESENCE ||
+			(flags & Gateways.GATEWAY_PRESENCE_LIMITED) === Gateways.GATEWAY_PRESENCE_LIMITED
+		) {
+			gatewaysFlags.push(
+				flags & Gateways.GATEWAY_PRESENCE ? `> **Gateway Presence**: ${Emojis.right}` : `> **Gateway Presence**: ${Emojis.netual}`
+			)
+		} else {
+			gatewaysFlags.push(`> **Gateway Presence**: ${Emojis.wrong}`)
+		}
+
+		return gatewaysFlags
 	}
 }
 
