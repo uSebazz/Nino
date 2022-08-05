@@ -22,6 +22,7 @@
 	"dependencies": {
 		"@kaname-png/plugin-statcord": "^2.1.0",
 		"@kaname-png/plugin-subcommands-advanced": "^2.0.2",
+		"@napi-rs/canvas": "^0.1.25",
 		"@prisma/client": "^4.1.1",
 		"@sapphire/decorators": "^4.3.8",
 		"@sapphire/discord.js-utilities": "^4.11.3",
@@ -69,6 +70,7 @@
 		"#lib/*": "./dist/lib/*.js",
 		"#lib/i18n": "./dist/lib/i18n/index.js",
 		"#lib/structures": "./dist/lib/structures/index.js",
+		"#lib/structures/colors": "./dist/lib/structures/colors/index.js",
 		"#lib/types": "./dist/lib/types/index.js",
 		"#root/*": "./dist/*.js"
 	},
