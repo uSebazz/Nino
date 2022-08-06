@@ -50,6 +50,8 @@ export class UserCommand extends Command {
 interface Response {
 	name: string
 	hex: string
+	shade: string[]
+	tint: string[]
 	image: string
 	image_gradient: string
 	brightness: string
