@@ -1,10 +1,10 @@
-import { LanguageKeys } from '#lib/i18n'
-import { Colors } from '#utils/constants'
-import { Listener, type Events } from '@sapphire/framework'
-import { resolveKey } from '@sapphire/plugin-i18next'
-import { codeBlock } from '@sapphire/utilities'
-import { diffWordsWithSpace } from 'diff'
-import { Message, MessageEmbed } from 'discord.js'
+import { LanguageKeys } from '#lib/i18n';
+import { Colors } from '#utils/constants';
+import { Listener, type Events } from '@sapphire/framework';
+import { resolveKey } from '@sapphire/plugin-i18next';
+import { codeBlock } from '@sapphire/utilities';
+import { diffWordsWithSpace } from 'diff';
+import { Message, MessageEmbed } from 'discord.js';
 
 export class UserListener extends Listener<typeof Events.MessageUpdate> {
 	public override async run(oldMessage: Message, newMessage: Message) {
@@ -12,21 +12,24 @@ export class UserListener extends Listener<typeof Events.MessageUpdate> {
 			where: {
 				guildId: newMessage.guildId!
 			}
-		})
-		if (!data) return
+		});
+		if (!data) return;
 
-		const channel = newMessage.guild!.channels.cache.get(data!.channelId!)
-		if (oldMessage.author.bot || oldMessage.content === newMessage.content || !channel || channel.type !== 'GUILD_TEXT') return
+		const channel = newMessage.guild!.channels.cache.get(data!.channelId!);
+		if (oldMessage.author.bot || oldMessage.content === newMessage.content || !channel || channel.type !== 'GUILD_TEXT') return;
 
 		if (data?.all || data?.events.includes('messageUpdate')) {
-			const embeds = await this.getEmbed(oldMessage, newMessage)
-			await channel.send({ embeds })
+			const embeds = await this.getEmbed(oldMessage, newMessage);
+			await channel.send({ embeds });
 		}
 	}
 
 	private async getEmbed(oldMessage: Message, newMessage: Message) {
 		const embed = new MessageEmbed()
-			.setAuthor({ name: newMessage.author.tag, iconURL: newMessage.author.displayAvatarURL() })
+			.setAuthor({
+				name: newMessage.author.tag,
+				iconURL: newMessage.author.displayAvatarURL()
+			})
 			.setDescription(
 				await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdate, {
 					channel: oldMessage.channel
@@ -50,8 +53,8 @@ export class UserListener extends Listener<typeof Events.MessageUpdate> {
 					})
 				)
 			)
-			.setColor(Colors.pastelGreen)
+			.setColor(Colors.pastelGreen);
 
-		return [embed]
+		return [embed];
 	}
 }

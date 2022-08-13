@@ -1,20 +1,20 @@
-import { Emojis, rootFolder } from '#utils/constants'
-import { minutes } from '#utils/function'
-import type { StatcordOptions } from '@kaname-png/plugin-statcord/dist/lib/types'
-import type { Prisma } from '@prisma/client'
-import { BucketScope, container, LogLevel } from '@sapphire/framework'
-import type { InternationalizationContext } from '@sapphire/plugin-i18next'
-import type { LoggerFormatOptions } from '@sapphire/plugin-logger'
-import { envParseArray, envParseString, setup } from '@skyra/env-utilities'
-import { blue, green, red, yellow } from 'colorette'
-import type { ClientOptions, NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
-import { Options } from 'discord.js'
-import { join } from 'node:path'
+import { Emojis, rootFolder } from '#utils/constants';
+import { minutes } from '#utils/function';
+import type { StatcordOptions } from '@kaname-png/plugin-statcord/dist/lib/types';
+import type { Prisma } from '@prisma/client';
+import { BucketScope, container, LogLevel } from '@sapphire/framework';
+import type { InternationalizationContext } from '@sapphire/plugin-i18next';
+import type { LoggerFormatOptions } from '@sapphire/plugin-logger';
+import { envParseArray, envParseString, setup } from '@skyra/env-utilities';
+import { blue, green, red, yellow } from 'colorette';
+import type { ClientOptions, NewsChannel, TextChannel, ThreadChannel } from 'discord.js';
+import { Options } from 'discord.js';
+import { join } from 'node:path';
 
-setup(join(rootFolder, 'src', '.env'))
+setup(join(rootFolder, 'src', '.env'));
 
-export const testServer = ['951101886684082176']
-export const OWNERS = envParseArray('CLIENT_OWNERS')
+export const testServer = ['951101886684082176'];
+export const OWNERS = envParseArray('CLIENT_OWNERS');
 
 export const loggerOptions: LoggerFormatOptions = {
 	info: {
@@ -45,13 +45,13 @@ export const loggerOptions: LoggerFormatOptions = {
 		},
 		infix: red('ERROR 〢 ')
 	}
-}
+};
 
 export const STAT_CORD_OPTIONS: StatcordOptions = {
 	client_id: envParseString('CLIENT_ID'),
 	key: envParseString('STATCORD_TOKEN'),
 	autopost: false
-}
+};
 
 export const CLIENT_OPTIONS: ClientOptions = {
 	allowedMentions: { users: [], roles: [] },
@@ -107,27 +107,27 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	// statcord: STAT_CORD_OPTIONS,
 	i18n: {
 		fetchLanguage: async (context: InternationalizationContext) => {
-			if (!context.guild) return 'en-US'
+			if (!context.guild) return 'en-US';
 
 			let data = await container.prisma.serverConfig.findUnique({
 				where: {
 					guildId: context.guild.id
 				}
-			})
-			let config: Prisma.ServerConfigCreateInput
+			});
+			let config: Prisma.ServerConfigCreateInput;
 
 			if (!data) {
 				// eslint-disable-next-line @typescript-eslint/no-extra-semi
-				;(config = {
+				(config = {
 					guildId: context.guild.id,
 					lang: 'es-ES'
 				}),
 					(data = await container.prisma.serverConfig.create({
 						data: config
-					}))
+					}));
 			}
 
-			return data.lang
+			return data.lang;
 		},
 		i18next: {
 			interpolation: {
@@ -154,6 +154,6 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		limit: 2, // Limit 2 commands for second
 		scope: BucketScope.User // Scope User
 	}
-}
+};
 
-export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null
+export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null;

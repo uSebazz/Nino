@@ -1,20 +1,20 @@
-import '#lib/setup'
-import { Nino } from '#lib/structures'
-import { container } from '@sapphire/framework'
+import '#lib/setup';
+import { Nino } from '#lib/structures';
+import { container } from '@sapphire/framework';
 
 const main = async () => {
-	const client = new Nino()
+	const client = new Nino();
 	try {
-		await client.start()
-		container.logger.info(`Logged in Discord as ${client.user!.tag}`)
+		await client.start();
+		container.logger.info(`Logged in Discord as ${client.user!.tag}`);
 	} catch (error) {
-		container.logger.fatal(error)
-		await container.prisma.$disconnect()
+		container.logger.fatal(error);
+		await container.prisma.$disconnect();
 	}
-}
+};
 
-void main()
+void main();
 
 process.on('unhandledRejection', (error) => {
-	container.logger.error(error)
-})
+	container.logger.error(error);
+});

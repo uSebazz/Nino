@@ -1,8 +1,8 @@
-import { LanguageKeys } from '#lib/i18n'
-import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced'
-import { Command } from '@sapphire/framework'
-import { resolveKey } from '@sapphire/plugin-i18next'
-import { CommandInteraction } from 'discord.js'
+import { LanguageKeys } from '#lib/i18n';
+import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
+import { Command } from '@sapphire/framework';
+import { resolveKey } from '@sapphire/plugin-i18next';
+import { CommandInteraction } from 'discord.js';
 
 @RegisterSubCommand('config', (ctx) =>
 	ctx //
@@ -31,8 +31,8 @@ import { CommandInteraction } from 'discord.js'
 )
 export class UserCommand extends Command {
 	public override chatInputRun(ctx: CommandInteraction) {
-		const locale = ctx.options.getString('locale') as AllLocales
-		return this.setLocale(locale, ctx)
+		const locale = ctx.options.getString('locale') as AllLocales;
+		return this.setLocale(locale, ctx);
 	}
 
 	private async setLocale(locale: AllLocales, interaction: CommandInteraction) {
@@ -40,10 +40,10 @@ export class UserCommand extends Command {
 			where: {
 				guildId: interaction.guildId!
 			}
-		})
+		});
 
 		if (data?.lang === locale) {
-			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Language.AlreadyLanguage))
+			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Language.AlreadyLanguage));
 		}
 
 		await this.container.prisma.serverConfig.update({
@@ -53,14 +53,14 @@ export class UserCommand extends Command {
 			data: {
 				lang: locale
 			}
-		})
+		});
 
 		return interaction.reply(
 			await resolveKey(interaction, LanguageKeys.Config.Language.LanguageSet, {
 				lang: locale
 			})
-		)
+		);
 	}
 }
 
-type AllLocales = 'es-ES' | 'en-US' | 'de-DE'
+type AllLocales = 'es-ES' | 'en-US' | 'de-DE';

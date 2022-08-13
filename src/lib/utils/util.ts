@@ -1,20 +1,20 @@
-import { send } from '@sapphire/plugin-editable-commands'
-import { resolveKey } from '@sapphire/plugin-i18next'
-import type { Guild, Message } from 'discord.js'
-import { setTimeout as wait } from 'node:timers/promises'
+import { send } from '@sapphire/plugin-editable-commands';
+import { resolveKey } from '@sapphire/plugin-i18next';
+import type { Guild, Message } from 'discord.js';
+import { setTimeout as wait } from 'node:timers/promises';
 
-export const ZeroWidthSpace = '\u200B'
+export const ZeroWidthSpace = '\u200B';
 
 export function getContent(message: Message) {
-	if (message.content) return message.content
+	if (message.content) return message.content;
 
 	for (const embed of message.embeds) {
-		if (embed.description) return embed.description
-		if (embed.title) return embed.title
-		if (embed.footer) return embed.footer.text
+		if (embed.description) return embed.description;
+		if (embed.title) return embed.title;
+		if (embed.footer) return embed.footer.text;
 	}
 
-	return null
+	return null;
 }
 
 /**
@@ -24,13 +24,13 @@ export function getContent(message: Message) {
  * @returns a message localized by the locale of the message
  */
 export async function sendLocalizedTemporaryMessage(message: Message, content: string) {
-	const key = await resolveKey(message, content)
+	const key = await resolveKey(message, content);
 
-	const msg = await send(message, { content: key })
+	const msg = await send(message, { content: key });
 
 	return wait(5000, async () => {
-		await msg.delete()
-	})
+		await msg.delete();
+	});
 }
 
 /**
@@ -242,19 +242,19 @@ export function cleanMentions(guild: Guild, input: string) {
 		switch (type) {
 			case '@':
 			case '@!': {
-				const tag = guild.client.users.cache.get(id)
-				return tag ? `@${tag.username}` : `<${type}${ZeroWidthSpace}${id}>`
+				const tag = guild.client.users.cache.get(id);
+				return tag ? `@${tag.username}` : `<${type}${ZeroWidthSpace}${id}>`;
 			}
 			case '@&': {
-				const role = guild.roles.cache.get(id)
-				return role ? `@${role.name}` : match
+				const role = guild.roles.cache.get(id);
+				return role ? `@${role.name}` : match;
 			}
 			case '#': {
-				const channel = guild.channels.cache.get(id)
-				return channel ? `#${channel.name}` : `<${type}${ZeroWidthSpace}${id}>`
+				const channel = guild.channels.cache.get(id);
+				return channel ? `#${channel.name}` : `<${type}${ZeroWidthSpace}${id}>`;
 			}
 			default:
-				return `<${type}${ZeroWidthSpace}${id}>`
+				return `<${type}${ZeroWidthSpace}${id}>`;
 		}
-	})
+	});
 }
