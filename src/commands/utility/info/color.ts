@@ -37,11 +37,11 @@ export class UserCommand extends Command {
 			.addFields([
 				{
 					name: '» Shades',
-					value: options.shade.map((v) => `> ${v}`).join(' ')
+					value: options.shade.map((v) => v).join('> ')
 				},
 				{
 					name: '» Tints',
-					value: options.tint.map((v) => `> ${v}`).join(' ')
+					value: options.tint.map((v) => v).join('> ')
 				}
 			])
 			.setThumbnail(options.image)
