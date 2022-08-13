@@ -34,6 +34,16 @@ export class UserCommand extends Command {
 		const embed = new MessageEmbed()
 			.setTitle(`Information about ${options.name}`)
 			.setDescription(`> **Hex:** ${color.hex}\n> **RGB:** ${color.rgb}\n> **HSL:** ${color.hsl}`)
+			.addFields([
+				{
+					name: '» Shades',
+					value: options.shade.map((v) => `> ${v}`).join(' ')
+				},
+				{
+					name: '» Tints',
+					value: options.tint.map((v) => `> ${v}`).join(' ')
+				}
+			])
 			.setThumbnail(options.image)
 			.setImage(options.image_gradient)
 			.setColor(color.hex.toString() as ColorResolvable);
@@ -48,6 +58,8 @@ export class UserCommand extends Command {
 interface Response {
 	name: string;
 	hex: string;
+	shade: string[];
+	tint: string[];
 	image: string;
 	image_gradient: string;
 	brightness: string;
