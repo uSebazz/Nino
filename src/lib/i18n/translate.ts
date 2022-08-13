@@ -1,6 +1,6 @@
-import { LanguageKeys } from '#lib/i18n'
-import { DecoratorIdentifiers } from '@sapphire/decorators'
-import { Identifiers } from '@sapphire/framework'
+import { LanguageKeys } from '#lib/i18n';
+import { DecoratorIdentifiers } from '@sapphire/decorators';
+import { Identifiers } from '@sapphire/framework';
 
 export function translate(identifier: string) {
 	switch (identifier) {
@@ -39,42 +39,42 @@ export function translate(identifier: string) {
 		case Identifiers.ArgumentStringTooLong:
 		case Identifiers.ArgumentStringTooShort:
 		case Identifiers.ArgumentUserError:
-			return `arguments:${identifier}`
+			return `arguments:${identifier}`;
 		case Identifiers.ArgsUnavailable:
-			return 'arguments:unavailable'
+			return 'arguments:unavailable';
 		case Identifiers.ArgsMissing:
-			return 'arguments:missing'
+			return 'arguments:missing';
 		case Identifiers.CommandDisabled:
-			return 'precondition:disabled'
+			return 'precondition:disabled';
 		case Identifiers.PreconditionCooldown:
-			return LanguageKeys.Precondition.CommandCooldown
+			return LanguageKeys.Precondition.CommandCooldown;
 		case Identifiers.PreconditionDMOnly:
-			return 'precondition:dmOnly'
+			return 'precondition:dmOnly';
 		case Identifiers.PreconditionGuildNewsOnly:
-			return 'precondition:guildNewsOnly'
+			return 'precondition:guildNewsOnly';
 		case Identifiers.PreconditionGuildNewsThreadOnly:
-			return 'precondition:guildNewsThreadOnly'
+			return 'precondition:guildNewsThreadOnly';
 		case Identifiers.PreconditionGuildOnly:
 		case DecoratorIdentifiers.RequiresClientPermissionsGuildOnly:
 		case DecoratorIdentifiers.RequiresUserPermissionsGuildOnly:
-			return 'precondition:guildOnly'
+			return 'precondition:guildOnly';
 		case Identifiers.PreconditionGuildPrivateThreadOnly:
-			return 'precondition:guildPrivateThreadOnly'
+			return 'precondition:guildPrivateThreadOnly';
 		case Identifiers.PreconditionGuildPublicThreadOnly:
-			return 'precondition:guildPublicThreadOnly'
+			return 'precondition:guildPublicThreadOnly';
 		case Identifiers.PreconditionGuildTextOnly:
-			return 'precondition:guildTextOnly'
+			return 'precondition:guildTextOnly';
 		case Identifiers.PreconditionNSFW:
-			return 'precondition:nsfw'
+			return 'precondition:nsfw';
 		case Identifiers.PreconditionClientPermissions:
 		case DecoratorIdentifiers.RequiresClientPermissionsMissingPermissions:
-			return 'precondition:clientPermissions'
+			return 'precondition:clientPermissions';
 		case Identifiers.PreconditionUserPermissions:
 		case DecoratorIdentifiers.RequiresUserPermissionsMissingPermissions:
-			return 'precondition:userPermissions'
+			return 'precondition:userPermissions';
 		case Identifiers.PreconditionThreadOnly:
-			return 'precondition:threadOnly'
+			return 'precondition:threadOnly';
 		default:
-			return identifier
+			return identifier;
 	}
 }

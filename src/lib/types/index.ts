@@ -1,1 +1,1 @@
-export { GuildMessage, DMMessage } from '#lib/types/Discord'
+export { GuildMessage, DMMessage } from '#lib/types/Discord';

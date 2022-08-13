@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { getRootData } from '@sapphire/pieces'
-import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10'
-import { join } from 'node:path'
+import { getRootData } from '@sapphire/pieces';
+import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10';
+import { join } from 'node:path';
 
-export const mainFolder = getRootData().root
-export const rootFolder = join(mainFolder, '..')
+export const mainFolder = getRootData().root;
+export const rootFolder = join(mainFolder, '..');
 
 export enum Emojis {
 	// Emojis for messages, sucess, error, etc.
@@ -18,6 +18,13 @@ export enum Emojis {
 	twitter = '<:eg_twitter:986081387188715530>',
 	github = '<:github:977614370722951168>',
 	slashBot = '<:commands_badge:999745813376942121>',
+	user = '<:eg_user:1005916131065868398>',
+	bot = '<:icons_bots:1005916230445694986>',
+
+	// Channels
+	guildText = '<:eg_channel:1005531859473661982>',
+	guildVoice = '<:eg_voice:1005532383560339557>',
+	guildStage = '<:eg_stage:1005909161051160698>',
 
 	// Logs
 	messageDelete = '<:eg_deletemessage:991672466621608027>',
@@ -48,8 +55,11 @@ export const Badges = {
 
 	// No badges, but still a role or payment method
 	NITRO: '<:Nitro:983148098358485032>',
-	OWNER: '<:eg_crown:983384657469014076>' // thanks blink<3
-}
+	OWNER: '<:eg_crown:983384657469014076>', // thanks blink<3
+
+	SERVER_VERIFIED: '<:eg_serververified:1006366008937828372>',
+	SERVER_PARTNER: '<:eg_serverpartnered:1006366203599650978>'
+};
 
 export const Gateways = {
 	GATEWAY_PRESENCE: 1 << 12,
@@ -61,7 +71,7 @@ export const Gateways = {
 	GATEWAY_MESSAGE_CONTENT: 1 << 18,
 	GATEWAY_MESSAGE_CONTENT_LIMITED: 1 << 19
 	/* APPLICATION_COMMAND_BADGE: 1 << 23 */ // its a flag, but not a gateway intent
-}
+};
 
 export enum Colors {
 	pastelGreen = '#c7e9a8',
@@ -167,7 +177,7 @@ export const LoggingEvents: Array<APIApplicationCommandOptionChoice<string>> = [
 		name: 'Guild Update',
 		value: 'guildUpdate'
 	}
-]
+];
 
 export const LoggingOptions: Array<APIApplicationCommandOptionChoice<string>> = [
 	{
@@ -178,13 +188,13 @@ export const LoggingOptions: Array<APIApplicationCommandOptionChoice<string>> = 
 		name: 'Ignore Staff',
 		value: 'ignoreStaff'
 	}
-]
+];
 
 export const isValidURL = (str: string) => {
 	try {
-		new URL(str)
-		return true
+		new URL(str);
+		return true;
 	} catch (_) {
-		return false
+		return false;
 	}
-}
+};

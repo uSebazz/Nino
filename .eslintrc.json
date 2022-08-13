@@ -1,7 +1,3 @@
 {
-	"extends": "@sapphire",
-	"rules": {
-		"semi": ["error", "never"],
-		"quotes": ["error", "single"]
-	}
+	"extends": "@sapphire"
 }
