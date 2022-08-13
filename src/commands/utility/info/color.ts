@@ -34,7 +34,7 @@ export class UserCommand extends Command {
 		const embed = new MessageEmbed()
 			.setTitle(`Information about ${options.name}`)
 			.setDescription(`> **Hex:** ${color.hex}\n> **RGB:** ${color.rgb}\n> **HSL:** ${color.hsl}`)
-		  .addField('Shades', options.shade.map((shade: string) => `> ${shade}`))
+		    .addField('Shades', options.shade.map((shade: string) => `> ${shade}`))
 			.addField('Tints', options.tint.map((tint: string) => `> ${tint}`))
 			.setThumbnail(options.image)
 			.setImage(options.image_gradient)
