@@ -606,6 +606,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sapphire/discord.js-utilities@npm:^4.12.0":
+  version: 4.12.0
+  resolution: "@sapphire/discord.js-utilities@npm:4.12.0"
+  dependencies:
+    "@sapphire/discord-utilities": ^2.11.5
+    "@sapphire/time-utilities": ^1.7.5
+    "@sapphire/utilities": ^3.9.0
+    tslib: ^2.4.0
+  checksum: 7f71f9205993be15fee97c9128997304cfadc3d5b420885e2588f3ec2c0653fcdda29138d277ec6f13950ecc8ac01fa904c94cf2414e355bb05edcd5fe9b54c9
+  languageName: node
+  linkType: hard
+
 "@sapphire/eslint-config@npm:^4.3.7":
   version: 4.3.7
   resolution: "@sapphire/eslint-config@npm:4.3.7"
@@ -746,7 +758,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/time-utilities@npm:^1.7.4":
+"@sapphire/time-utilities@npm:^1.7.4, @sapphire/time-utilities@npm:^1.7.5":
   version: 1.7.5
   resolution: "@sapphire/time-utilities@npm:1.7.5"
   dependencies:
@@ -4245,7 +4257,7 @@ __metadata:
     "@napi-rs/canvas": ^0.1.26
     "@prisma/client": ^4.2.1
     "@sapphire/decorators": ^4.3.8
-    "@sapphire/discord.js-utilities": ^4.11.3
+    "@sapphire/discord.js-utilities": ^4.12.0
     "@sapphire/eslint-config": ^4.3.7
     "@sapphire/fetch": ^2.4.1
     "@sapphire/framework": next
