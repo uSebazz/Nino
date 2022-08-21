@@ -1,55 +1,55 @@
 name: CI
 
 on:
-    push:
-        branches: [dev]
-    pull_request:
+  push:
+    branches: [dev]
+  pull_request:
 
 jobs:
-    Linting:
-        name: Linting
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout Project
-              uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
-            - name: Add problem matcher
-              run: echo "::add-matcher::.github/problemMatchers/eslint.json"
-            - name: Use Node.js v16
-              uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
-              with:
-                  node-version: 16
-            - name: Restore CI Cache
-              uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
-              id: cache-restore
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
-            - name: Install Dependencies if Cache Miss
-              if: ${{ !steps.cache-restore.outputs.cache-hit }}
-              run: yarn --immutable
-            - name: Run ESLint
-              run: yarn lint --fix=false
+  Linting:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+      - name: Add problem matcher
+        run: echo "::add-matcher::.github/problemMatchers/eslint.json"
+      - name: Use Node.js v16
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        with:
+          node-version: 16
+      - name: Restore CI Cache
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        id: cache-restore
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies if Cache Miss
+        if: ${{ !steps.cache-restore.outputs.cache-hit }}
+        run: yarn --immutable
+      - name: Run ESLint
+        run: yarn lint --fix=false
 
-    Build:
-        name: Compile source code
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout Project
-              uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
-            - name: Add problem matcher
-              run: echo "::add-matcher::.github/problemMatchers/tsc.json"
-            - name: Use Node.js v16
-              uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # tag=v3
-              with:
-                  node-version: 16
-            - name: Restore CI Cache
-              uses: actions/cache@f4278025ab0f432ce369118909e46deec636f50c # tag=v3
-              id: cache-restore
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
-            - name: Install Dependencies if Cache Miss
-              if: ${{ !steps.cache-restore.outputs.cache-hit }}
-              run: yarn --immutable
-            - name: Build Code
-              run: yarn build
+  Build:
+    name: Compile source code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+      - name: Add problem matcher
+        run: echo "::add-matcher::.github/problemMatchers/tsc.json"
+      - name: Use Node.js v16
+        uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # tag=v3
+        with:
+          node-version: 16
+      - name: Restore CI Cache
+        uses: actions/cache@a7c34adf76222e77931dedbf4a45b2e4648ced19 # tag=v3
+        id: cache-restore
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies if Cache Miss
+        if: ${{ !steps.cache-restore.outputs.cache-hit }}
+        run: yarn --immutable
+      - name: Build Code
+        run: yarn build
