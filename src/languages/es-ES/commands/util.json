@@ -6,5 +6,11 @@
 	"USER_GUILD_MEMBER_DESCRIPTION": "> **Unido**: {{joined}}\n> **Apodo**: {{nickname}}\n> **Mejorando**: {{memberIsBooster}}",
 	"USER_PERMISSIONS": "» Permisos",
 	"USER_PERMISSIONS_ALL": "> Todos los permisos (Administrador)",
-	"USER_ROLES": "» Roles"
+	"USER_ROLES": "» Roles",
+	"COLOR_INFO": "Información acerca de {{options.name}}",
+	"COLOR_SHADES": "» Sombras",
+	"COLOR_TINT": "» Tintas",
+	"SERVER_ISNT_IN_CACHE": "{{wrong}} - El servidor no está en la caché.",
+	"SERVER_INFO": "» Información",
+	"SERVER_INFO_VALUE": "> **ID**: {{server.id}}\n> **Created at**: <t:{{time}}:R>\n> **Owner**: {{owner.toString()}}"
 }

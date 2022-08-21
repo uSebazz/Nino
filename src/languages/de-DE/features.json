@@ -1,1 +1,24 @@
-{}
+{
+	"ANIMATED_ICON": "Animierte Ikone",
+	"BANNER": "Banner",
+	"COMMERCE": "Handel",
+	"COMMUNITY": "Gemeinschaft",
+	"DISCOVERABLE": "Entdeckbar",
+	"FEATURABLE": "Anschaulich",
+	"INVITE_SPLASH": "Einladen splash",
+	"MEMBER_VERIFICATION_GATE_ENABLED": "Mitgliederüberprüfung Gate aktiviert",
+	"NEWS": "Nachrichten",
+	"PARTNERED": "Partnerschaften",
+	"PREVIEW_ENABLED": "Vorschau aktiviert",
+	"VANITY_URL": "Eitelkeits-URL",
+	"VERIFIED": "Verifiziert",
+	"VIP_REGIONS": "Vip-Regionen",
+	"WELCOME_SCREEN_ENABLED": "Willkommensbildschirm Aktiviert",
+	"TICKETED_EVENTS_ENABLED": "Ticketed Events aktiviert",
+	"MONETIZATION_ENABLED": "Monetarisierung aktiviert",
+	"MORE_STICKERS": "Mehr Aufkleber",
+	"THREE_DAY_THREAD_ARCHIVE": "Drei-Tage-Themenarchiv",
+	"SEVEN_DAY_THREAD_ARCHIVE": "Sieben-Tage-Themenarchiv",
+	"PRIVATE_THREADS": "Private Themen",
+	"ROLE_ICONS": "Rollensymbole"
+}

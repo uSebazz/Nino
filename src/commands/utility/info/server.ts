@@ -1,3 +1,4 @@
+import { LanguageKeys } from '#lib/i18n';
 import { Badges, Colors, Emojis } from '#utils/constants';
 import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
 import { resolveKey } from '@sapphire/plugin-i18next';
@@ -58,10 +59,12 @@ export class UserCommand extends Command {
 			.setDescription(`${badges} ${server.description ?? ''}`)
 			.addFields([
 				{
-					name: '» Information',
-					value: `> **ID**: ${server.id}\n> **Created at**: <t:${Math.round(
-						server.createdTimestamp / 1000
-					)}:R>\n> **Owner**: ${owner.toString()}`
+					name: await resolveKey(server, LanguageKeys.Util.Server.ServerInfo),
+					value: await resolveKey(server, LanguageKeys.Util.Server.ServerInfoValue, {
+						owner,
+						server,
+						time: Math.round(server.createdTimestamp / 1000)
+					})
 				},
 				{
 					name: '» Statistics',

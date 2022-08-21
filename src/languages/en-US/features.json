@@ -1,1 +1,24 @@
-{}
+{
+	"ANIMATED_ICON": "Animated icon",
+	"BANNER": "Banner",
+	"COMMERCE": "Commerce",
+	"COMMUNITY": "Community",
+	"DISCOVERABLE": "Discoverable",
+	"FEATURABLE": "Featurable",
+	"INVITE_SPLASH": "Invite splash",
+	"MEMBER_VERIFICATION_GATE_ENABLED": "Member verification gate enabled",
+	"NEWS": "News",
+	"PARTNERED": "Partnered",
+	"PREVIEW_ENABLED": "Preview enabled",
+	"VANITY_URL": "Vanity URL",
+	"VERIFIED": "Verified",
+	"VIP_REGIONS": "Vip regions",
+	"WELCOME_SCREEN_ENABLED": "Welcome screen enabled",
+	"TICKETED_EVENTS_ENABLED": "Ticketed events enabled",
+	"MONETIZATION_ENABLED": "Monetization enabled",
+	"MORE_STICKERS": "More stickers",
+	"THREE_DAY_THREAD_ARCHIVE": "Three day thread archive",
+	"SEVEN_DAY_THREAD_ARCHIVE": "Seven day thread archive",
+	"PRIVATE_THREADS": "Private threads",
+	"ROLE_ICONS": "Role icons"
+}
