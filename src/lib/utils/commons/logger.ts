@@ -1,35 +1,6 @@
 import { cleanMentions } from '#utils/util';
-import { container } from '@sapphire/framework';
-import { resolveKey } from '@sapphire/plugin-i18next';
 import { Timestamp } from '@sapphire/time-utilities';
 import type { Guild, Message, MessageAttachment, MessageEmbed, User } from 'discord.js';
-
-export async function getCommandList(t: Guild, category: string) {
-	// const locale = await fetchLanguage(t)
-	const command = container.stores.get('commands').filter((c) => c.category === category);
-	const map = await Promise.all(
-		command.map(async (cmd) => {
-			const descriptionLocalized = await resolveKey(t, cmd.description);
-
-			return `${cmd.name} - ${descriptionLocalized}`;
-		})
-	);
-
-	return map.sort(sortCommandsAllphabetic);
-}
-
-export function sortCommandsAllphabetic(firstValue: string, secondValue: string): 1 | -1 | 0 {
-	if (firstValue > secondValue) return 1;
-	if (secondValue > firstValue) return -1;
-	return 0;
-}
-
-export function localizeChannelTypes(channelType: string) {
-	switch (channelType) {
-		default:
-			return `channels:${channelType}`;
-	}
-}
 
 export function formatMessage(message: Message) {
 	const header = formatHeader(message);
@@ -52,9 +23,11 @@ function formatAuthor(user: User) {
 
 function formatContents(message: Message) {
 	const output: string[] = [];
+	const attachment = message.attachments;
+
 	if (message.content.length > 0) output.push(formatContent(message.guild!, message.content));
 	if (message.embeds.length > 0) output.push(message.embeds.map((embed) => formatEmbed(embed)).join('\n'));
-	if (message.attachments.size > 0) output.push(message.attachments.map((attachment) => formatAttachment(attachment)).join('\n'));
+	if (message.attachments.size > 0) output.push(attachment.map((attachment) => formatAttachment(attachment)).join('\n'));
 	return output.join('\n');
 }
 

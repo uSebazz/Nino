@@ -1,5 +1,4 @@
-import type { ApplicationCommandRegistry, CommandOptions, PieceContext } from '@sapphire/framework';
-import { Command } from '@sapphire/framework';
+import { ApplicationCommandRegistry, Command, CommandOptions, PieceContext } from '@sapphire/framework';
 
 export abstract class NinoCommand extends Command {
 	public constructor(context: PieceContext, options: CommandOptions) {

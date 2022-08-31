@@ -5,13 +5,11 @@ import type { Prisma } from '@prisma/client';
 import { BucketScope, container, LogLevel } from '@sapphire/framework';
 import type { InternationalizationContext } from '@sapphire/plugin-i18next';
 import type { LoggerFormatOptions } from '@sapphire/plugin-logger';
-import { envParseArray, envParseString, setup } from '@skyra/env-utilities';
+import { envParseArray, envParseString } from '@skyra/env-utilities';
 import { blue, green, red, yellow } from 'colorette';
 import type { ClientOptions, NewsChannel, TextChannel, ThreadChannel } from 'discord.js';
 import { Options } from 'discord.js';
 import { join } from 'node:path';
-
-setup(join(rootFolder, 'src', '.env'));
 
 export const testServer = ['951101886684082176'];
 export const OWNERS = envParseArray('CLIENT_OWNERS');

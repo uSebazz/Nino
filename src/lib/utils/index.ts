@@ -1,3 +1,4 @@
+export * from '#utils/api';
 export * from '#utils/color';
 export * from '#utils/commons';
 export * from '#utils/constants';
