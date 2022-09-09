@@ -24,11 +24,11 @@ enum NewApplicationsFlags {
 @RegisterSubCommand('info', (ctx) =>
 	ctx //
 		.setName('user')
-		.setDescription('view information for a user.')
+		.setDescription('📍 Display information about a provided user.')
 		.addUserOption((op) =>
 			op //
 				.setName('user')
-				.setDescription('the user to view information for.')
+				.setDescription('👤 The user to display information of')
 				.setRequired(false)
 		)
 )

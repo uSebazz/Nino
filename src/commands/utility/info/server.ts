@@ -8,12 +8,12 @@ import { CommandInteraction, Guild, MessageEmbed } from 'discord.js';
 	ctx
 		//
 		.setName('server')
-		.setDescription('Get information about the server.')
+		.setDescription('📍 Get information about a target server.')
 		.addStringOption((op) =>
 			op
 				//
 				.setName('id')
-				.setDescription('The ID of the server. (this is only work if me is in the server)')
+				.setDescription('🆔 Server unique ID (Only works if i am in the server)')
 				.setRequired(false)
 		)
 )
@@ -67,11 +67,19 @@ export class UserCommand extends Command {
 					})
 				},
 				{
-					name: '» Statistics',
-					value: `> **Members [${server.memberCount}]**: ${Emojis.user} ${humans} | ${Emojis.bot} ${bots}\n> **Channels [${server.channels.cache.size}]**: ${Emojis.guildText} ${textChannels} | ${Emojis.guildVoice} ${voiceChannels} | ${Emojis.guildStage} ${stages}`
+					name: await resolveKey(server, LanguageKeys.Util.Server.ServerStats),
+					value: await resolveKey(server, LanguageKeys.Util.Server.ServerStatsValue, {
+						server,
+						Emojis,
+						humans,
+						bots,
+						textChannels,
+						voiceChannels,
+						stages
+					})
 				},
 				{
-					name: '» Features',
+					name: await resolveKey(server, LanguageKeys.Util.Server.ServerFeatures),
 					value: `> ${features}`
 				}
 			]);
