@@ -46,10 +46,10 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 				attachment
 					? await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
 							content: cutText(getContent(message) || 'Attachment', 1900)
-					  })
+					})
 					: await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
 							content: cutText(getContent(message) || '', 1900)
-					  })
+					})
 			)
 			.addField(
 				await resolveKey(message, LanguageKeys.Messages.MessageDeleteId),
