@@ -1,5 +1,5 @@
 # Install the following packages:
-FROM node:18.6.0-bullseye-slim as base
+FROM node:18-buster-slim as base
 
 WORKDIR /usr/src/app
 
