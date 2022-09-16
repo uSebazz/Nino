@@ -1,7 +1,5 @@
 # Ignoring environment
-src/.env
 src/.env.development
-.env
 
 # Ignoring node modules and other modules
 node_modules
