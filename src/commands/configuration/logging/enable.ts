@@ -9,11 +9,11 @@ import type { CommandInteraction, Message } from 'discord.js';
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
 		.setName('enable')
-		.setDescription('Enable a event for the logging system')
+		.setDescription('🔰 Enable a single event from logging system.')
 		.addStringOption((option) =>
 			option //
 				.setName('event')
-				.setDescription('The event to enable')
+				.setDescription('🔰 Target event to enable')
 				.addChoices(...LoggingEvents)
 				.setRequired(true)
 		)

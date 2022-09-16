@@ -7,7 +7,7 @@ import type { CommandInteraction, Message } from 'discord.js';
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
 		.setName('view')
-		.setDescription('View the current logging configuration')
+		.setDescription('👤 Display logging system current configuration')
 )
 export class UserCommand extends Command {
 	public override chatInputRun(interaction: CommandInteraction) {

@@ -11,7 +11,7 @@ ENV CI=true
 
 RUN apt-get update && \
 	apt-get upgrade -y --no-install-recommends && \
-	apt-get install -y --no-install-recommends build-essential python3 libfontconfig1 dumb-init && \
+	apt-get install -y --no-install-recommends openssl build-essential python3 libfontconfig1 dumb-init && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
@@ -32,7 +32,7 @@ FROM base as builder
 
 ENV NODE_ENV="development"
 
-COPY --chown=node:node tsconfig.json tsconfig.json
+COPY --chown=node:node tsconfig.base.json tsconfig.base.json
 COPY --chown=node:node src/ src/
 COPY --chown=node:node prisma/ prisma/
 

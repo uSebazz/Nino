@@ -7,7 +7,6 @@ export class UserCommand extends Subcommand {
 	public override registerApplicationCommands(registery: NinoCommandRegistery) {
 		registery.registerChatInputCommand(
 			(ctx) => {
-				// this.hooks.groups(this, ctx)
 				this.hooks.subcommands(this, ctx);
 
 				return ctx //

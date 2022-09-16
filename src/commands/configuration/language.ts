@@ -7,11 +7,11 @@ import { CommandInteraction } from 'discord.js';
 @RegisterSubCommand('config', (ctx) =>
 	ctx //
 		.setName('language')
-		.setDescription('Configure the language of the bot.')
+		.setDescription('🗨 Configure the language of the bot for this guild.')
 		.addStringOption((op) =>
 			op //
 				.setName('locale')
-				.setDescription('The locale of the language')
+				.setDescription('🗣 The new language for this guild.')
 				.addChoices(
 					{
 						name: 'Español',

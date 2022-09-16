@@ -9,11 +9,11 @@ import { ColorResolvable, CommandInteraction, MessageEmbed } from 'discord.js';
 @RegisterSubCommand('info', (ctx) =>
 	ctx //
 		.setName('color')
-		.setDescription('view information for a color. (hex/rgb/hsl)')
+		.setDescription('📍 Get information about a color HEX.')
 		.addStringOption((op) =>
 			op //
 				.setName('code')
-				.setDescription('the code of color to view information for. (hex/rgb/hsl)')
+				.setDescription('🆔 Hex code of the color.')
 				.setRequired(true)
 		)
 )
