@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { getRootData } from '@sapphire/pieces';
 import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10';
 import { join } from 'node:path';

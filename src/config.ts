@@ -1,20 +1,18 @@
-import { Emojis, rootFolder } from '#utils/constants';
+import { Emojis } from '#utils/constants';
 import { minutes } from '#utils/function';
-import type { StatcordOptions } from '@kaname-png/plugin-statcord/dist/lib/types';
 import type { Prisma } from '@prisma/client';
 import { BucketScope, container, LogLevel } from '@sapphire/framework';
 import type { InternationalizationContext } from '@sapphire/plugin-i18next';
 import type { LoggerFormatOptions } from '@sapphire/plugin-logger';
 import { envParseArray, envParseString } from '@skyra/env-utilities';
 import { blue, green, red, yellow } from 'colorette';
-import type { ClientOptions, NewsChannel, TextChannel, ThreadChannel } from 'discord.js';
-import { Options } from 'discord.js';
-import { join } from 'node:path';
+import type { ClientOptions } from 'discord.js';
+import { Intents, Options } from 'discord.js';
 
 export const testServer = ['951101886684082176'];
 export const OWNERS = envParseArray('CLIENT_OWNERS');
 
-export const loggerOptions: LoggerFormatOptions = {
+const loggerOptions: LoggerFormatOptions = {
 	info: {
 		timestamp: {
 			pattern: 'HH:mm:ss',
@@ -45,11 +43,11 @@ export const loggerOptions: LoggerFormatOptions = {
 	}
 };
 
-export const STAT_CORD_OPTIONS: StatcordOptions = {
+/* const STAT_CORD_OPTIONS: StatcordOptions = {
 	client_id: envParseString('CLIENT_ID'),
 	key: envParseString('STATCORD_TOKEN'),
 	autopost: false
-};
+}; */
 
 export const CLIENT_OPTIONS: ClientOptions = {
 	allowedMentions: { users: [], roles: [] },
@@ -78,17 +76,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 			lifetime: minutes.toSeconds(15)
 		}
 	},
-	intents: [
-		'GUILDS',
-		'GUILD_MEMBERS',
-		'GUILD_BANS',
-		'GUILD_EMOJIS_AND_STICKERS',
-		'GUILD_VOICE_STATES',
-		'GUILD_MESSAGES',
-		'GUILD_MESSAGE_REACTIONS',
-		'DIRECT_MESSAGES',
-		'DIRECT_MESSAGE_REACTIONS'
-	],
+	intents: Object.values(Intents),
 	logger: {
 		level: envParseString('NODE_ENV') === 'production' ? LogLevel.Info : LogLevel.Debug,
 		format: loggerOptions
@@ -143,8 +131,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		},
 		hmr: {
 			enabled: true
-		},
-		defaultLanguageDirectory: join(rootFolder, 'src', 'languages')
+		}
 	},
 	defaultCooldown: {
 		delay: 10_000, // 10s
@@ -153,5 +140,3 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		scope: BucketScope.User // Scope User
 	}
 };
-
-export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null;

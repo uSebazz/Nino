@@ -1,10 +1,7 @@
 {
 	"compilerOptions": {
-		"lib": [
-			"ESNext"
-		],
+		"lib": ["ESNext"],
 		"target": "ESNext",
-		"module": "ESNext",
 		"moduleResolution": "node",
 		"skipLibCheck": true,
 		"strict": true,
@@ -15,15 +12,9 @@
 		"rootDir": "./src",
 		"baseUrl": "./src",
 		"paths": {
-			"#utils/*": [
-				"lib/utils/*"
-			],
-			"#lib/*": [
-				"lib/*"
-			],
-			"#root/*": [
-				"*"
-			]
+			"#utils/*": ["lib/utils/*"],
+			"#lib/*": ["lib/*"],
+			"#root/*": ["*"]
 		},
 		/* The "No" Corner */
 		"noImplicitAny": true,
@@ -47,10 +38,6 @@
 		"resolveJsonModule": true,
 		"allowJs": true
 	},
-	"include": [
-		"src"
-	],
-	"exclude": [
-		"node_modules"
-	]
+	"include": ["src", "./src/**/*.json"],
+	"exclude": ["node_modules"]
 }
