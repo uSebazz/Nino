@@ -12,19 +12,19 @@ export class UserCommand extends Subcommand {
 	public override registerApplicationCommands(registery: NinoCommandRegistery) {
 		registery.registerChatInputCommand(
 			(ctx) => {
-				// subCommandGroup
+				// SubcommandGroup
 				ctx.addSubcommandGroup((sc) =>
 					sc //
 						.setName('logging')
 						.setDescription('Pattern of logging commands.')
 				);
 
-				// hooksy
+				// Hooks
 				this.hooks.groups(this, ctx);
 				this.hooks.subcommands(this, ctx);
 
 				// command
-				return ctx //
+				return ctx 
 					.setName('config')
 					.setDescription('The subcommand patern of config commands.');
 			},

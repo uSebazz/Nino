@@ -7,11 +7,11 @@ import type { CommandInteraction, GuildBasedChannel, Message } from 'discord.js'
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
 		.setName('config')
-		.setDescription('Configure the logging system')
+		.setDescription('🔧 Configure the logging system for this guild')
 		.addChannelOption((option) =>
 			option //
 				.setName('channel')
-				.setDescription('The channel to log to')
+				.setDescription('🌐 The channel to log to')
 				.setRequired(true)
 		)
 )
