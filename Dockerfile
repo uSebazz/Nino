@@ -34,7 +34,7 @@ ENV NODE_ENV="development"
 # Copy the source files to the build context
 COPY --chown=node:node tsconfig.json .
 COPY --chown=node:node tsup.config.ts .
-COPY --chown=node:node .env .
+# COPY --chown=node:node .env .
 COPY --chown=node:node src/ src/
 COPY --chown=node:node scripts/ scripts/
 COPY --chown=node:node prisma/ prisma/
@@ -56,13 +56,13 @@ ENV NODE_OPTIONS="--enable-source-maps --preserve-symlinks"
 WORKDIR /usr/src/app
 
 # Copy the environment variables to the container and language folder including the dist folder 
-COPY --chown=node:node src/.env src/.env
+# COPY --chown=node:node src/.env src/.env
 COPY --chown=node:node --from=builder /usr/src/app/dist dist
 COPY --chown=node:node --from=builder /usr/src/app/src/languages src/languages
 
 # Patch .prisma with the built files
 COPY --chown=node:node --from=builder /usr/src/app/node_modules/.prisma node_modules/.prisma
-COPY --chown=node:node --from=builder /usr/src/app/.env .env
+# COPY --chown=node:node --from=builder /usr/src/app/.env .env
 
 USER node
 
