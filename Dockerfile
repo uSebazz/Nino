@@ -2,7 +2,7 @@
 #    Base Stage    #
 # ================ #
 
-FROM --platform=linux/amd64 node:18-buster-slim as base
+FROM node:18-buster-slim as base
 
 WORKDIR /usr/src/app
 
