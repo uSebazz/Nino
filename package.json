@@ -7,7 +7,7 @@
 	"type": "module",
 	"main": "dist/Nino.js",
 	"scripts": {
-		"build": "tsup src",
+		"build": "tsup",
 		"clean": "node scripts/clean.mjs",
 		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
 		"prisma": "prisma generate",
