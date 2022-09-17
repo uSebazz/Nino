@@ -24,9 +24,7 @@ export class UserCommand extends Subcommand {
 				this.hooks.subcommands(this, ctx);
 
 				// command
-				return ctx 
-					.setName('config')
-					.setDescription('The subcommand patern of config commands.');
+				return ctx.setName('config').setDescription('The subcommand patern of config commands.');
 			},
 			{
 				guildIds: testServer,
