@@ -1,6 +1,6 @@
 import { container } from '@sapphire/framework';
 import { Awaitable, isThenable } from '@sapphire/utilities';
-import { RESTJSONErrorCodes } from 'discord-api-types/v10';
+import type { RESTJSONErrorCodes } from 'discord-api-types/v10';
 import { DiscordAPIError } from 'discord.js';
 
 export async function resolveOnErrorCodes<T>(promise: Promise<T>, ...codes: readonly RESTJSONErrorCodes[]) {

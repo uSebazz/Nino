@@ -1,15 +1,16 @@
 {
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
+		"allowJs": true,
 		"outDir": "../dist",
 		"rootDir": ".",
 		"baseUrl": ".",
-		"noEmit": true,
 		"paths": {
 			"#utils/*": ["lib/utils/*"],
 			"#lib/*": ["lib/*"],
 			"#root/*": ["*"]
 		}
 	},
-	"include": ["."]
+	"include": [".", "./**/*.json"],
+	"exclude": ["./tsconfig.json"]
 }

@@ -2,20 +2,34 @@
 	"name": "nino",
 	"description": "Multipurpose Discord Bot built on Sapphire Framework",
 	"author": "Sebazz",
-	"version": "2.0.4",
+	"version": "3.0.0",
 	"license": "Apache-2.0",
 	"main": "dist/Nino.js",
 	"scripts": {
-		"build": "tsc",
+		"build": "tsc -b src",
+		"start": "node --enable-source-maps .",
+		"dev": "yarn build && yarn start",
 		"clean": "node scripts/clean.mjs",
-		"start": "node --preserve-symlinks --enable-source-maps ./dist/Nino.js",
-		"prisma": "prisma generate",
+		"watch": "tsc -b src -w",
+		"watch:start": "tsc-watch -b src --onSuccess \"yarn start\"",
 		"lint": "eslint src --ext ts --fix",
-		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
-		"dev": "yarn build -w --onSuccess \"yarn start\"",
-		"deploy": "yarn build && yarn start",
+		"format": "prettier --write --loglevel=warn \"{src,tests}/**/*.{js,ts,json}\"",
 		"update": "yarn upgrade-interactive",
-		"prepare": "husky install .github/husky"
+		"postinstall": "husky install .github/husky",
+		"prisma:generate": "prisma generate"
+	},
+	"imports": {
+		"#utils/*": "./dist/lib/utils/*.js",
+		"#utils/function": "./dist/lib/utils/function/index.js",
+		"#utils/commons": "./dist/lib/utils/commons/index.js",
+		"#utils/sanitizer": "./dist/lib/utils/sanitizer/index.js",
+		"#utils/api": "./dist/lib/utils/api/index.js",
+		"#lib/*": "./dist/lib/*.js",
+		"#lib/i18n": "./dist/lib/i18n/index.js",
+		"#lib/structures": "./dist/lib/structures/index.js",
+		"#lib/structures/colors": "./dist/lib/structures/colors/index.js",
+		"#lib/types": "./dist/lib/types/index.js",
+		"#root/*": "./dist/*.js"
 	},
 	"packageManager": "yarn@3.2.3",
 	"dependencies": {
@@ -63,19 +77,6 @@
 		"prisma": "^4.3.1",
 		"tsc-watch": "^5.0.3",
 		"typescript": "^4.8.3"
-	},
-	"imports": {
-		"#utils/*": "./dist/lib/utils/*.js",
-		"#utils/function": "./dist/lib/utils/function/index.js",
-		"#utils/commons": "./dist/lib/utils/commons/index.js",
-		"#utils/sanitizer": "./dist/lib/utils/sanitizer/index.js",
-		"#utils/api": "./dist/lib/utils/api/index.js",
-		"#lib/*": "./dist/lib/*.js",
-		"#lib/i18n": "./dist/lib/i18n/index.js",
-		"#lib/structures": "./dist/lib/structures/index.js",
-		"#lib/structures/colors": "./dist/lib/structures/colors/index.js",
-		"#lib/types": "./dist/lib/types/index.js",
-		"#root/*": "./dist/*.js"
 	},
 	"commitlint": {
 		"extends": [

@@ -1,7 +1,7 @@
 import { localizeChannelTypes } from '#utils/commons';
 import { Listener, type Events } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { NonThreadGuildBasedChannel } from 'discord.js';
+import type { NonThreadGuildBasedChannel } from 'discord.js';
 
 export class UserListener extends Listener<typeof Events.ChannelCreate> {
 	public override run(channel: NonThreadGuildBasedChannel) {

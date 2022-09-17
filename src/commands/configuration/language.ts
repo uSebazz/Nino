@@ -1,8 +1,9 @@
 import { LanguageKeys } from '#lib/i18n';
 import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
+import { Language } from '@prisma/client';
 import { Command } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { CommandInteraction } from 'discord.js';
+import type { CommandInteraction } from 'discord.js';
 
 @RegisterSubCommand('config', (ctx) =>
 	ctx //
@@ -15,30 +16,32 @@ import { CommandInteraction } from 'discord.js';
 				.addChoices(
 					{
 						name: 'Español',
-						value: 'es-ES'
+						value: Language.ES
 					},
 					{
 						name: 'English',
-						value: 'en-US'
+						value: Language.EN
 					},
 					{
 						name: 'Deutsch',
-						value: 'de-DE'
+						value: Language.DE
 					}
 				)
 				.setRequired(true)
 		)
 )
 export class UserCommand extends Command {
-	public override chatInputRun(ctx: CommandInteraction) {
-		const locale = ctx.options.getString('locale') as AllLocales;
-		return this.setLocale(locale, ctx);
+	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
+		const locale = interaction.options.getString('locale') as Language;
+		console.log(locale);
+		return this.setLocale(locale, interaction);
 	}
 
-	private async setLocale(locale: AllLocales, interaction: CommandInteraction) {
-		const data = await this.container.prisma.serverConfig.findUnique({
+	private async setLocale(locale: Language, interaction: CommandInteraction<'cached'>) {
+		const id = BigInt(interaction.guildId);
+		const data = await this.container.prisma.guild.findUnique({
 			where: {
-				guildId: interaction.guildId!
+				id
 			}
 		});
 
@@ -46,11 +49,17 @@ export class UserCommand extends Command {
 			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Language.AlreadyLanguage));
 		}
 
-		await this.container.prisma.serverConfig.update({
+		await this.container.prisma.guild.upsert({
 			where: {
-				guildId: interaction.guildId!
+				id
 			},
-			data: {
+			update: {
+				lang: {
+					set: locale
+				}
+			},
+			create: {
+				id,
 				lang: locale
 			}
 		});
@@ -62,5 +71,3 @@ export class UserCommand extends Command {
 		);
 	}
 }
-
-type AllLocales = 'es-ES' | 'en-US' | 'de-DE';

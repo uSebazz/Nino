@@ -13,8 +13,7 @@ import { Message, type CommandInteraction } from 'discord.js';
 export class UserCommand extends NinoCommand {
 	public override async messageRun(message: Message) {
 		const msg = await send(message, `${Emojis.ninoburrito} ping?`);
-		const diff = msg.createdTimestamp - message.createdTimestamp;
-		const ping = Math.round(this.container.client.ws.ping);
+		const { diff, ping } = this.getPing(msg, message);
 
 		await send(message, await resolveKey(message, LanguageKeys.Util.Ping, { diff, ping }));
 	}
@@ -37,7 +36,7 @@ export class UserCommand extends NinoCommand {
 		}
 	}
 
-	private getPing(message: Message, interaction: CommandInteraction) {
+	private getPing(message: Message, interaction: CommandInteraction | Message) {
 		const diff = (message.editedTimestamp || message.createdTimestamp) - interaction.createdTimestamp;
 		const ping = Math.round(this.container.client.ws.ping);
 

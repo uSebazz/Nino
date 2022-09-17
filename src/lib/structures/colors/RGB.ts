@@ -1,4 +1,4 @@
-import { Colors } from '#lib/structures/colors';
+import type { Colors } from '#lib/structures/colors';
 import { HEX } from '#lib/structures/colors/HEX';
 import { HSL } from '#lib/structures/colors/HSL';
 

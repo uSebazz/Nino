@@ -1,9 +1,11 @@
 import { LanguageKeys } from '#lib/i18n';
 import { LoggingEvents } from '#utils/constants';
 import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
-import type { EventsConfig } from '@prisma/client';
+import { Event, LogChannel } from '@prisma/client';
+import type { GuildBasedChannelTypes } from '@sapphire/discord.js-utilities';
 import { send } from '@sapphire/plugin-editable-commands';
 import { resolveKey } from '@sapphire/plugin-i18next';
+import { ChannelType } from 'discord-api-types/v10';
 import type { CommandInteraction, Message } from 'discord.js';
 
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
@@ -17,25 +19,34 @@ import type { CommandInteraction, Message } from 'discord.js';
 				.addChoices(...LoggingEvents)
 				.setRequired(true)
 		)
+		.addChannelOption((option) =>
+			option //
+				.setName('channel')
+				.setDescription('🔰 Target channel to log')
+				.setRequired(true)
+				.addChannelTypes(ChannelType.GuildText)
+		)
 )
 export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction) {
-		const event = interaction.options.getString('event')!;
-		return this.storageData(event, interaction);
+	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
+		const event = interaction.options.getString('event', true) as Event;
+		const channel = interaction.options.getChannel('channel', true);
+		return this.storageData(event, interaction, channel);
 	}
 
 	public override async messageRun(message: Message) {
 		return send(message, await resolveKey(message, LanguageKeys.Config.Logging.OnlySlashCommand));
 	}
 
-	private async storageData(event: string, interaction: CommandInteraction) {
-		const data = await this.container.prisma.eventsConfig.findUnique({
+	private async storageData(event: Event, interaction: CommandInteraction<'cached'>, channel: GuildBasedChannelTypes) {
+		const data = await this.container.prisma.logChannel.findFirst({
 			where: {
-				guildId: interaction.guildId!
+				guildId: BigInt(interaction.guildId),
+				channelId: BigInt(channel.id)
 			}
 		});
 
-		if (!data?.channelId) {
+		if (!data) {
 			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelNotSet));
 		}
 
@@ -48,38 +59,43 @@ export class UserCommand extends Command {
 		}
 	}
 
-	private async allCase(data: EventsConfig, interaction: CommandInteraction) {
-		if (!data.all) {
-			// Save the data
-			await this.container.prisma.eventsConfig.update({
-				where: {
-					guildId: interaction.guildId!
-				},
-				data: {
-					all: true,
-					events: []
-				}
+	private async allCase(data: LogChannel, interaction: CommandInteraction<'cached'>) {
+		if (data.events.includes(Event.all) || data.events.length >= Object.keys(Event).length) {
+			const content = await resolveKey(interaction, LanguageKeys.Config.Logging.AlreadyAllEventsEnabled);
+			return interaction.reply({
+				content,
+				ephemeral: true
 			});
-
-			// Send the message
-			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsEnabled));
 		}
 
-		const content = await resolveKey(interaction, LanguageKeys.Config.Logging.AlreadyAllEventsEnabled);
-		return interaction.reply({
-			content,
-			ephemeral: true
+		// Save the data
+		await this.container.prisma.logChannel.update({
+			where: {
+				guildId: data.guildId
+			},
+			data: {
+				events: []
+			}
 		});
+
+		// Send the message
+		return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsEnabled));
 	}
 
-	private async defaultCase(event: string, data: EventsConfig, interaction: CommandInteraction) {
-		if (!data.all && !data.events.includes(event)) {
-			await this.container.prisma.eventsConfig.update({
+	private async defaultCase(event: Event, data: LogChannel, interaction: CommandInteraction) {
+		if (!data.events.includes(Event.all) && !data.events.includes(event)) {
+			await this.container.prisma.logChannel.update({
 				where: {
-					guildId: interaction.guildId!
+					guildId: data.guildId,
+					channelId_events: {
+						channelId: data.channelId,
+						events: data.events
+					}
 				},
 				data: {
-					events: [...data.events, event]
+					events: {
+						push: event
+					}
 				}
 			});
 
@@ -90,13 +106,13 @@ export class UserCommand extends Command {
 			);
 		}
 
-		if (data.all) {
-			const content = await resolveKey(interaction, LanguageKeys.Config.Logging.EventBlocked);
-			return interaction.reply({
-				content,
-				ephemeral: true
-			});
-		}
+		// if (data.all) {
+		// 	const content = await resolveKey(interaction, LanguageKeys.Config.Logging.EventBlocked);
+		// 	return interaction.reply({
+		// 		content,
+		// 		ephemeral: true
+		// 	});
+		// }
 
 		const content = await resolveKey(interaction, LanguageKeys.Config.Logging.EventAlreadyEnabled);
 		return interaction.reply({

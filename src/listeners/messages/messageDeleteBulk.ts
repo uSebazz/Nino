@@ -1,33 +1,40 @@
 import { LanguageKeys } from '#lib/i18n';
 import { formatMessage } from '#utils/commons';
 import { Colors } from '#utils/constants';
+import { Event } from '@prisma/client';
 import { Listener, type Events } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import { Collection, Message, MessageAttachment, MessageEmbed, Snowflake } from 'discord.js';
 
-type MessagesType = Collection<Snowflake, Message>;
+type MessagesType = Collection<Snowflake, Message<true>>;
 
 export class UserListener extends Listener<typeof Events.MessageBulkDelete> {
 	public override async run(messages: MessagesType) {
 		const messageFirst = messages.first()!;
 
-		const data = await this.container.prisma.eventsConfig.findUnique({
+		const data = await this.container.prisma.logChannel.findMany({
 			where: {
-				guildId: messageFirst.guildId!
+				guildId: BigInt(messageFirst.guildId),
+				events: {
+					has: Event.messageBulkDelete
+				}
 			}
 		});
-		if (!data) return;
 
-		const channel = messageFirst.guild?.channels.cache.get(data!.channelId!);
-		if (!channel || channel.type !== 'GUILD_TEXT') return;
+		if (!data.length) return;
 
-		if (data?.all || data?.events.includes('messageDeleteBulk')) {
+		for (const logModel of data) {
+			const channel = messageFirst.guild.channels.cache.get(logModel.channelId.toString());
+			if (!channel || channel.type !== 'GUILD_TEXT') return;
+
 			const embeds = await this.getEmbed(messages, messageFirst);
 
-			await channel.send({
-				files: [this.getAttachment(messages)],
-				embeds
-			});
+			if (logModel.events.includes(Event.messageBulkDelete) || logModel.events.includes(Event.all)) {
+				await channel.send({
+					files: [this.getAttachment(messages)],
+					embeds
+				});
+			}
 		}
 	}
 

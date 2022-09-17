@@ -1,15 +1,18 @@
-import { Emojis } from '#utils/constants';
+import { Emojis, LANGUAGES, rootFolder } from '#utils/constants';
 import { minutes } from '#utils/function';
-import type { Prisma } from '@prisma/client';
+import { Language } from '@prisma/client';
 import { BucketScope, container, LogLevel } from '@sapphire/framework';
 import type { InternationalizationContext } from '@sapphire/plugin-i18next';
 import type { LoggerFormatOptions } from '@sapphire/plugin-logger';
-import { envParseArray, envParseString } from '@skyra/env-utilities';
+import { envParseArray, envParseString, setup } from '@skyra/env-utilities';
 import { blue, green, red, yellow } from 'colorette';
 import type { ClientOptions } from 'discord.js';
 import { Intents, Options } from 'discord.js';
+import { join } from 'node:path';
 
-export const testServer = ['951101886684082176'];
+setup(join(rootFolder, 'src', '.env'));
+
+export const testServer = ['951101886684082176', '945033113673801799'];
 export const OWNERS = envParseArray('CLIENT_OWNERS');
 
 const loggerOptions: LoggerFormatOptions = {
@@ -77,7 +80,13 @@ export const CLIENT_OPTIONS: ClientOptions = {
 			lifetime: minutes.toSeconds(15)
 		}
 	},
-	intents: Object.values(Intents),
+	intents: [
+		Intents.FLAGS.MESSAGE_CONTENT,
+		Intents.FLAGS.GUILD_WEBHOOKS,
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILD_MESSAGES
+	],
 	logger: {
 		level: envParseString('NODE_ENV') === 'production' ? LogLevel.Info : LogLevel.Debug,
 		format: loggerOptions
@@ -94,27 +103,24 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	// statcord: STAT_CORD_OPTIONS,
 	i18n: {
 		fetchLanguage: async (context: InternationalizationContext) => {
-			if (!context.guild) return 'en-US';
+			if (!context.guild) return LANGUAGES[Language.EN];
 
-			let data = await container.prisma.serverConfig.findUnique({
-				where: {
-					guildId: context.guild.id
-				}
-			});
-			let config: Prisma.ServerConfigCreateInput;
+			const data = await container.prisma.guild
+				.findUniqueOrThrow({
+					where: {
+						id: BigInt(context.guild.id)
+					}
+				})
+				.catch(() =>
+					container.prisma.guild.create({
+						data: {
+							id: BigInt(context.guild!.id),
+							lang: Language.ES
+						}
+					})
+				);
 
-			if (!data) {
-				// eslint-disable-next-line @typescript-eslint/no-extra-semi
-				(config = {
-					guildId: context.guild.id,
-					lang: 'es-ES'
-				}),
-					(data = await container.prisma.serverConfig.create({
-						data: config
-					}));
-			}
-
-			return data.lang;
+			return LANGUAGES[data.lang];
 		},
 		i18next: {
 			interpolation: {

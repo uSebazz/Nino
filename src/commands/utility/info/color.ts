@@ -1,5 +1,5 @@
 import { LanguageKeys } from '#lib/i18n';
-import { Colors } from '#lib/structures/colors';
+import type { Colors } from '#lib/structures/colors';
 import { parse } from '#utils/color';
 import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
 import { fetch } from '@sapphire/fetch';

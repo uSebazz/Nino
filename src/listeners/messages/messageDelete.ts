@@ -1,29 +1,35 @@
 import { LanguageKeys } from '#lib/i18n';
 import { Colors } from '#utils/constants';
 import { getContent } from '#utils/util';
+import { Event } from '@prisma/client';
 import { Listener, type Events } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import { codeBlock, cutText } from '@sapphire/utilities';
 import { Message, MessageEmbed } from 'discord.js';
 
 export class UserListener extends Listener<typeof Events.MessageDelete> {
-	public override async run(message: Message) {
-		const data = await this.container.prisma.eventsConfig.findUnique({
+	public override async run(message: Message<true>) {
+		const data = await this.container.prisma.logChannel.findMany({
 			where: {
-				guildId: message.guildId!
+				guildId: BigInt(message.guildId),
+				events: {
+					has: Event.messageDelete
+				}
 			}
 		});
-		if (!data) return;
+		if (!data.length) return;
 
-		const channel = message.guild!.channels.cache.get(data!.channelId!);
+		for (const logModel of data) {
+			const channel = message.guild!.channels.cache.get(logModel.channelId.toString());
 
-		if (message.author.bot || !channel || channel.type !== 'GUILD_TEXT') return;
-		const embeds = await this.getEmbed(message);
+			if (message.author.bot || !channel || channel.type !== 'GUILD_TEXT') return;
+			const embeds = await this.getEmbed(message);
 
-		if (data?.all || data?.events.includes('messageDelete')) {
-			await channel.send({
-				embeds
-			});
+			if (logModel.events.includes(Event.messageDelete) || logModel.events.includes(Event.all)) {
+				await channel.send({
+					embeds
+				});
+			}
 		}
 	}
 
@@ -41,21 +47,25 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 					channel: message.channel
 				})
 			)
-			.addField(
-				await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformation),
-				attachment
-					? await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
-							content: cutText(getContent(message) || 'Attachment', 1900)
-					  })
-					: await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
-							content: cutText(getContent(message) || '', 1900)
-					  })
-			)
-			.addField(
-				await resolveKey(message, LanguageKeys.Messages.MessageDeleteId),
-				codeBlock('ml', await resolveKey(message, LanguageKeys.Messages.MessageDeleteIdContent, { message }))
+			.addFields(
+				{
+					name: await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformation),
+					value: attachment
+						? await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
+								content: cutText(getContent(message) || 'Attachment', 1900)
+						  })
+						: await resolveKey(message, LanguageKeys.Messages.MessageDeleteInformationContent, {
+								content: cutText(getContent(message) || '', 1900)
+						  })
+				},
+				{
+					name: await resolveKey(message, LanguageKeys.Messages.MessageDeleteId),
+					value: codeBlock('ml', await resolveKey(message, LanguageKeys.Messages.MessageDeleteIdContent, { message }))
+				}
 			);
+
 		if (attachment) embed.setImage(message.attachments.first()!.proxyURL);
+
 		return [embed];
 	}
 }

@@ -1,5 +1,6 @@
+import { Event, Language } from '@prisma/client';
 import { getRootData } from '@sapphire/pieces';
-import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10';
+import { Locale, type APIApplicationCommandOptionChoice } from 'discord-api-types/v10';
 import { join } from 'node:path';
 
 export const mainFolder = getRootData().root;
@@ -86,95 +87,95 @@ export enum Colors {
 export const LoggingEvents: Array<APIApplicationCommandOptionChoice<string>> = [
 	{
 		name: 'All events',
-		value: 'all'
+		value: Event.all
 	},
 	{
 		name: 'Message Delete',
-		value: 'messageDelete'
+		value: Event.messageDelete
 	},
 	{
 		name: 'Message Bulk Delete',
-		value: 'messageBulkDelete'
+		value: Event.messageBulkDelete
 	},
 	{
 		name: 'Message Update',
-		value: 'messageUpdate'
+		value: Event.messageUpdate
 	},
 	{
 		name: 'Channel Create',
-		value: 'channelCreate'
+		value: Event.channelCreate
 	},
 	{
 		name: 'Channel Delete',
-		value: 'channelDelete'
+		value: Event.channelDelete
 	},
 	{
 		name: 'Channel Update',
-		value: 'channelUpdate'
+		value: Event.channelUpdate
 	},
 	{
 		name: 'Channel Pins Update',
-		value: 'channelPinsUpdate'
+		value: Event.channelPinsUpdate
 	},
 	{
 		name: 'Guild Ban Add',
-		value: 'guildBanAdd'
+		value: Event.guildBanAdd
 	},
 	{
 		name: 'Guild Ban Remove',
-		value: 'guildBanRemove'
+		value: Event.guildBanRemove
 	},
 	{
 		name: 'Guild Emoji Create',
-		value: 'guildEmojiCreate'
+		value: Event.guildEmojiCreate
 	},
 	{
 		name: 'Guild Emoji Remove',
-		value: 'guildEmojiRemove'
+		value: Event.guildEmojiRemove
 	},
 	{
 		name: 'Guild Emoji Update',
-		value: 'guildEmojiUpdate'
+		value: Event.guildEmojiUpdate
 	},
 	{
 		name: 'Guild Member Add',
-		value: 'guildMemberAdd'
+		value: Event.guildMemberAdd
 	},
 	{
 		name: 'Guild Member Remove',
-		value: 'guildMemberRemove'
+		value: Event.guildMemberRemove
 	},
 	{
 		name: 'Guild Member Update',
-		value: 'guildMemberUpdate'
+		value: Event.guildMemberUpdate
 	},
 	{
 		name: 'Guild Role Create',
-		value: 'roleCreate'
+		value: Event.roleCreate
 	},
 	{
 		name: 'Guild Role Delete',
-		value: 'roleDelete'
+		value: Event.roleDelete
 	},
 	{
 		name: 'Guild Role Update',
-		value: 'roleUpdate'
+		value: Event.roleUpdate
 	},
 	{
 		name: 'Guild Sticker Create',
-		value: 'stickerCreate'
+		value: Event.stickerCreate
 	},
 	{
 		name: 'Guild Sticker Delete',
-		value: 'stickerDelete'
+		value: Event.stickerRemove
 	},
 	{
 		name: 'Guild Sticker Update',
-		value: 'stickerUpdate'
+		value: Event.stickerUpdate
 	},
 	{
 		name: 'Guild Update',
-		value: 'guildUpdate'
+		value: Event.guildUpdate
 	}
 ];
 
@@ -196,4 +197,10 @@ export const isValidURL = (str: string) => {
 	} catch (_) {
 		return false;
 	}
+};
+
+export const LANGUAGES = {
+	[Language.EN]: Locale.EnglishUS,
+	[Language.ES]: Locale.SpanishES,
+	[Language.DE]: 'de-DE'
 };

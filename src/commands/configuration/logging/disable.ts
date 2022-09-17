@@ -1,9 +1,11 @@
 import { LanguageKeys } from '#lib/i18n';
 import { LoggingEvents } from '#utils/constants';
 import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
-import type { EventsConfig } from '@prisma/client';
+import { Event, LogChannel } from '@prisma/client';
+import type { GuildBasedChannelTypes } from '@sapphire/discord.js-utilities';
 import { send } from '@sapphire/plugin-editable-commands';
 import { resolveKey } from '@sapphire/plugin-i18next';
+import { ChannelType } from 'discord-api-types/v10';
 import type { CommandInteraction, Message } from 'discord.js';
 
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
@@ -17,25 +19,34 @@ import type { CommandInteraction, Message } from 'discord.js';
 				.setRequired(true)
 				.setChoices(...LoggingEvents)
 		)
+		.addChannelOption((option) =>
+			option //
+				.setName('channel')
+				.setDescription('🔰 Target channel to log')
+				.setRequired(true)
+				.addChannelTypes(ChannelType.GuildText)
+		)
 )
 export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction) {
-		const event = interaction.options.getString('event')!;
-		return this.disable(event, interaction);
+	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
+		const event = interaction.options.getString('event', true) as Event;
+		const channel = interaction.options.getChannel('channel', true);
+		return this.disable(event, interaction, channel);
 	}
 
 	public override async messageRun(message: Message) {
 		return send(message, await resolveKey(message, LanguageKeys.Config.Logging.OnlySlashCommand));
 	}
 
-	private async disable(event: string, interaction: CommandInteraction) {
-		const data = await this.container.prisma.eventsConfig.findUnique({
+	private async disable(event: Event, interaction: CommandInteraction<'cached'>, channel: GuildBasedChannelTypes) {
+		const data = await this.container.prisma.logChannel.findFirst({
 			where: {
-				guildId: interaction.guildId!
+				guildId: BigInt(interaction.guildId),
+				channelId: BigInt(channel.id)
 			}
 		});
 
-		if (!data?.channelId) {
+		if (!data) {
 			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelNotSet));
 		}
 
@@ -47,42 +58,49 @@ export class UserCommand extends Command {
 		}
 	}
 
-	private async caseAll(data: EventsConfig, interaction: CommandInteraction) {
-		if (data.all) {
-			// Save the data
-			await this.container.prisma.eventsConfig.update({
-				where: {
-					guildId: interaction.guildId!
-				},
-				data: {
-					all: false,
-					events: []
-				}
+	private async caseAll(data: LogChannel, interaction: CommandInteraction<'cached'>) {
+		if (!data.events.length) {
+			const content = await resolveKey(interaction, LanguageKeys.Config.Logging.AlreadyAllEventsDisabled);
+			return interaction.reply({
+				content,
+				ephemeral: true
 			});
-
-			// Send the message
-			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsDisabled));
 		}
 
-		const content = await resolveKey(interaction, LanguageKeys.Config.Logging.AlreadyAllEventsDisabled);
-		return interaction.reply({
-			content,
-			ephemeral: true
+		// Save the data
+		await this.container.prisma.logChannel.update({
+			where: {
+				guildId: data.guildId,
+				channelId_events: {
+					channelId: data.channelId,
+					events: data.events
+				}
+			},
+			data: {
+				events: {
+					set: []
+				}
+			}
 		});
+
+		// Send the message
+		return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsDisabled));
 	}
 
-	private async caseDefault(data: EventsConfig, event: string, interaction: CommandInteraction) {
-		if (!data.all && data.events.includes(event)) {
-			const newEvents = data.events;
-			const eventIndex = newEvents.findIndex((index) => index === event);
-			newEvents.splice(eventIndex, 1);
+	private async caseDefault(data: LogChannel, event: Event, interaction: CommandInteraction<'cached'>) {
+		if (!data.events.includes(Event.all) && data.events.includes(event)) {
+			const eventIndex = data.events.findIndex((index) => index === event);
 
-			await this.container.prisma.eventsConfig.update({
+			await this.container.prisma.logChannel.update({
 				where: {
-					guildId: interaction.guildId!
+					guildId: data.guildId,
+					channelId_events: {
+						channelId: data.channelId,
+						events: data.events
+					}
 				},
 				data: {
-					events: newEvents
+					events: data.events.splice(eventIndex, 1)
 				}
 			});
 

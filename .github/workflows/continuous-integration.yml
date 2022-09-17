@@ -51,5 +51,7 @@ jobs:
       - name: Install Dependencies if Cache Miss
         if: ${{ !steps.cache-restore.outputs.cache-hit }}
         run: yarn --immutable
+      - name: Prisma schema
+        run: yarn prisma:generate
       - name: Build Code
         run: yarn build

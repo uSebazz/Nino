@@ -1,4 +1,4 @@
-import { Colors } from '#lib/structures/colors';
+import type { Colors } from '#lib/structures/colors';
 import { RGB } from '#lib/structures/colors/RGB';
 
 export class HEX implements Colors {

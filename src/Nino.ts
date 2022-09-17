@@ -14,7 +14,3 @@ const main = async () => {
 };
 
 void main();
-
-process.on('unhandledRejection', (error) => {
-	container.logger.error(error);
-});

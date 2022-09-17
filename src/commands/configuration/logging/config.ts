@@ -16,7 +16,7 @@ import type { CommandInteraction, GuildBasedChannel, Message } from 'discord.js'
 		)
 )
 export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction) {
+	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
 		const channel = interaction.options.getChannel('channel') as GuildBasedChannel;
 
 		return this.storageData(interaction, channel);
@@ -26,13 +26,7 @@ export class UserCommand extends Command {
 		return send(message, await resolveKey(message, LanguageKeys.Config.Logging.OnlySlashCommand));
 	}
 
-	private async storageData(interaction: CommandInteraction, channel: GuildBasedChannel) {
-		const data = await this.container.prisma.eventsConfig.findUnique({
-			where: {
-				guildId: interaction.guildId!
-			}
-		});
-
+	private async storageData(interaction: CommandInteraction<'cached'>, channel: GuildBasedChannel) {
 		if (channel.type !== 'GUILD_TEXT') {
 			const content = await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelInvalid);
 			return interaction.reply({
@@ -41,32 +35,53 @@ export class UserCommand extends Command {
 			});
 		}
 
-		if (!data) {
-			await this.container.prisma.eventsConfig.create({
-				data: {
-					guildId: interaction.guildId!,
-					channelId: channel.id
+		const guildId = BigInt(interaction.guildId);
+		const data = await this.container.prisma.guild.findFirst({
+			where: {
+				id: guildId,
+				logs: {
+					some: {
+						channelId: BigInt(channel.id)
+					}
 				}
-			});
+			}
+		});
 
+		if (data) {
 			return interaction.reply(
-				await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelSet, {
+				await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelInUse, {
 					channel: `<#${channel.id}>`
 				})
 			);
 		}
 
-		await this.container.prisma.eventsConfig.update({
+		await this.container.prisma.logChannel.upsert({
 			where: {
-				guildId: interaction.guildId!
+				guildId
 			},
-			data: {
-				channelId: channel.id
+			create: {
+				guildId,
+				channelId: BigInt(channel.id),
+				events: []
+			},
+			update: {
+				events: [],
+				channelId: BigInt(channel.id),
+				guild: {
+					connectOrCreate: {
+						where: {
+							id: guildId
+						},
+						create: {
+							id: guildId
+						}
+					}
+				}
 			}
 		});
 
 		return interaction.reply(
-			await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelUpdated, {
+			await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelSet, {
 				channel: `<#${channel.id}>`
 			})
 		);

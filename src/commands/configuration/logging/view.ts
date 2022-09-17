@@ -1,6 +1,7 @@
 import { LanguageKeys } from '#lib/i18n';
 import { inlineCode } from '@discordjs/builders';
 import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
+import { Event } from '@prisma/client';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import type { CommandInteraction, Message } from 'discord.js';
 
@@ -10,18 +11,18 @@ import type { CommandInteraction, Message } from 'discord.js';
 		.setDescription('👤 Display logging system current configuration')
 )
 export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction) {
+	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
 		return this.showInfo(interaction);
 	}
 
-	public override messageRun(message: Message) {
+	public override messageRun(message: Message<true>) {
 		return this.showInfo(message);
 	}
 
-	private async showInfo(interaction: CommandInteraction | Message) {
-		const data = await this.container.prisma.eventsConfig.findUnique({
+	private async showInfo(interaction: CommandInteraction<'cached'> | Message<true>) {
+		const data = await this.container.prisma.logChannel.findUnique({
 			where: {
-				guildId: interaction.guildId!
+				guildId: BigInt(interaction.guildId)
 			}
 		});
 
@@ -29,7 +30,7 @@ export class UserCommand extends Command {
 			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.NoDataFound));
 		}
 
-		const events = data.all
+		const events = data.events.includes(Event.all)
 			? await resolveKey(interaction, LanguageKeys.Config.Logging.AllEvents)
 			: data.events.map((event) => inlineCode(event)).join(', ') || '-';
 

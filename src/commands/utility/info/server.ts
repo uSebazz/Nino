@@ -35,7 +35,7 @@ export class UserCommand extends Command {
 	}
 
 	private async showServerInfoById(ctx: CommandInteraction, id: string) {
-		const server = await this.container.client.guilds.cache.get(id);
+		const server = this.container.client.guilds.cache.get(id);
 		if (!server) {
 			return ctx.reply(`Server [${id}] isn't in cache 😢`);
 		}

@@ -6,7 +6,7 @@ import { container } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { codeBlock } from '@sapphire/utilities';
 import { RESTJSONErrorCodes } from 'discord-api-types/v10';
-import { Message, MessageOptions } from 'discord.js';
+import type { Message, MessageOptions } from 'discord.js';
 import { setTimeout as sleep } from 'timers/promises';
 
 export async function handleMessage<ED extends ExtraDataPartial>(

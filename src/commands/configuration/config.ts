@@ -1,11 +1,10 @@
-import { NinoCommandRegistery } from '#lib/structures';
+import type { NinoCommandRegistery } from '#lib/structures';
 import { testServer } from '#root/config';
 import { Subcommand } from '@kaname-png/plugin-subcommands-advanced';
 import { ApplyOptions } from '@sapphire/decorators';
 import { RegisterBehavior } from '@sapphire/framework';
 
 @ApplyOptions<Subcommand.Options>({
-	description: 'The subcommand patern of config commands.',
 	preconditions: ['GuildOnly', 'Administrator']
 })
 export class UserCommand extends Subcommand {

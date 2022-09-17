@@ -1,4 +1,4 @@
-import { NinoCommandRegistery } from '#lib/structures';
+import type { NinoCommandRegistery } from '#lib/structures';
 import { testServer } from '#root/config';
 import { Subcommand } from '@kaname-png/plugin-subcommands-advanced';
 import { RegisterBehavior } from '@sapphire/framework';

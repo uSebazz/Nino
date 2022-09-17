@@ -1,5 +1,6 @@
 import { LanguageKeys } from '#lib/i18n';
 import { Colors } from '#utils/constants';
+import { Event } from '@prisma/client';
 import { Listener, type Events } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import { codeBlock } from '@sapphire/utilities';
@@ -7,24 +8,33 @@ import { diffWordsWithSpace } from 'diff';
 import { Message, MessageEmbed } from 'discord.js';
 
 export class UserListener extends Listener<typeof Events.MessageUpdate> {
-	public override async run(oldMessage: Message, newMessage: Message) {
-		const data = await this.container.prisma.eventsConfig.findUnique({
+	public override async run(oldMessage: Message<true>, newMessage: Message<true>) {
+		const data = await this.container.prisma.logChannel.findMany({
 			where: {
-				guildId: newMessage.guildId!
+				guildId: BigInt(oldMessage.guildId),
+				events: {
+					has: Event.messageUpdate
+				}
 			}
 		});
-		if (!data) return;
 
-		const channel = newMessage.guild!.channels.cache.get(data!.channelId!);
-		if (oldMessage.author.bot || oldMessage.content === newMessage.content || !channel || channel.type !== 'GUILD_TEXT') return;
+		if (!data.length) return;
 
-		if (data?.all || data?.events.includes('messageUpdate')) {
+		for (const logModel of data) {
+			const channel = newMessage.guild!.channels.cache.get(logModel.channelId.toString());
+
+			if (oldMessage.author.bot || oldMessage.content === newMessage.content || !channel || channel.type !== 'GUILD_TEXT') return;
 			const embeds = await this.getEmbed(oldMessage, newMessage);
-			await channel.send({ embeds });
+
+			if (logModel.events.includes(Event.messageUpdate) || logModel.events.includes(Event.all)) {
+				await channel.send({
+					embeds
+				});
+			}
 		}
 	}
 
-	private async getEmbed(oldMessage: Message, newMessage: Message) {
+	private async getEmbed(oldMessage: Message<true>, newMessage: Message<true>) {
 		const embed = new MessageEmbed()
 			.setAuthor({
 				name: newMessage.author.tag,
@@ -35,23 +45,25 @@ export class UserListener extends Listener<typeof Events.MessageUpdate> {
 					channel: oldMessage.channel
 				})
 			)
-			.addField(
-				await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateInformation),
-				await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateInformationContent, {
-					before: oldMessage.content,
-					after: diffWordsWithSpace(oldMessage.content, newMessage.content)
-						.map((ctx) => (ctx.added ? `**${ctx.value}**` : ctx.removed ? `~~${ctx.value}~~` : ctx.value))
-						.join(' ')
-				})
-			)
-			.addField(
-				await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateId),
-				codeBlock(
-					'ml',
-					await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateIdContent, {
-						newMessage
+			.addFields(
+				{
+					name: await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateInformation),
+					value: await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateInformationContent, {
+						before: oldMessage.content,
+						after: diffWordsWithSpace(oldMessage.content, newMessage.content)
+							.map((ctx) => (ctx.added ? `**${ctx.value}**` : ctx.removed ? `~~${ctx.value}~~` : ctx.value))
+							.join(' ')
 					})
-				)
+				},
+				{
+					name: await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateId),
+					value: codeBlock(
+						'ml',
+						await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateIdContent, {
+							newMessage
+						})
+					)
+				}
 			)
 			.setColor(Colors.pastelGreen);
 
