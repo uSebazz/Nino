@@ -6,7 +6,7 @@ import { container } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { codeBlock } from '@sapphire/utilities';
 import { RESTJSONErrorCodes } from 'discord-api-types/v10';
-import { Message, MessageOptions } from 'discord.js';
+import type { Message, MessageOptions } from 'discord.js';
 import { setTimeout as sleep } from 'timers/promises';
 
 export async function handleMessage<ED extends ExtraDataPartial>(
@@ -40,6 +40,10 @@ export async function handleMessage<ED extends ExtraDataPartial>(
 			}
 
 			if (options.success) {
+				const code = codeBlock(options.language ?? 'ts', options.result!);
+				const parsedOutput = `**Output**: ${code}\n**Type**: ${options.footer}\n**Time**: ${options.time}`;
+				const content = [parsedOutput, options.footer, options.time].filter(Boolean).join('\n');
+				return send(message, content);
 			}
 
 			const output = codeBlock(options.language ?? 'ts', options.result!);
