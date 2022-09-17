@@ -7,7 +7,7 @@ import type { LoggerFormatOptions } from '@sapphire/plugin-logger';
 import { envParseArray, envParseString, setup } from '@skyra/env-utilities';
 import { blue, green, red, yellow } from 'colorette';
 import type { ClientOptions } from 'discord.js';
-import { Intents, Options } from 'discord.js';
+import { Options } from 'discord.js';
 import { join } from 'node:path';
 
 setup(join(rootFolder, 'src', '.env'));
@@ -81,11 +81,13 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		}
 	},
 	intents: [
-		Intents.FLAGS.MESSAGE_CONTENT,
-		Intents.FLAGS.GUILD_WEBHOOKS,
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MEMBERS,
-		Intents.FLAGS.GUILD_MESSAGES
+		'GUILDS',
+		'GUILD_MEMBERS',
+		'GUILD_BANS',
+		'GUILD_EMOJIS_AND_STICKERS',
+		'GUILD_VOICE_STATES',
+		'GUILD_MESSAGES',
+		'GUILD_MESSAGE_REACTIONS'
 	],
 	logger: {
 		level: envParseString('NODE_ENV') === 'production' ? LogLevel.Info : LogLevel.Debug,
@@ -94,11 +96,11 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	presence: {
 		activities: [
 			{
-				name: 'nwn pepe',
-				type: 'WATCHING'
+				name: 'with logs 📋',
+				type: 'PLAYING'
 			}
 		],
-		status: 'idle'
+		status: 'online'
 	},
 	// statcord: STAT_CORD_OPTIONS,
 	i18n: {

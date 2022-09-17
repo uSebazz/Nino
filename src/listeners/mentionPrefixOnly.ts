@@ -6,6 +6,7 @@ import type { Message } from 'discord.js';
 export class UserListener extends Listener<typeof Events.MentionPrefixOnly> {
 	public override run(message: Message) {
 		if (message.author.bot) return;
+		if (message.author.system) return;
 
 		return sendLocalizedTemporaryMessage(message, LanguageKeys.Messages.Mention);
 	}
