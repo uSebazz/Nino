@@ -86,9 +86,7 @@ export const CLIENT_OPTIONS: ClientOptions = {
 		'GUILD_EMOJIS_AND_STICKERS',
 		'GUILD_VOICE_STATES',
 		'GUILD_MESSAGES',
-		'GUILD_MESSAGE_REACTIONS',
-		'DIRECT_MESSAGES',
-		'DIRECT_MESSAGE_REACTIONS'
+		'GUILD_MESSAGE_REACTIONS'
 	],
 	logger: {
 		level: envParseString('NODE_ENV') === 'production' ? LogLevel.Info : LogLevel.Debug,
@@ -97,11 +95,11 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	presence: {
 		activities: [
 			{
-				name: 'nwn pepe',
-				type: 'WATCHING'
+				name: 'with logs 📋',
+				type: 'PLAYING'
 			}
 		],
-		status: 'idle'
+		status: 'online'
 	},
 	// statcord: STAT_CORD_OPTIONS,
 	i18n: {
