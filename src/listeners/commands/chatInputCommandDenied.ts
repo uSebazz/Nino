@@ -1,7 +1,7 @@
 import { Listener, type ChatInputCommandDeniedPayload, type Events, type UserError } from '@sapphire/framework';
 
 export class ChatInputCommandDenied extends Listener<typeof Events.ChatInputCommandDenied> {
-	public override async run({ context, message: content }: UserError, { interaction }: ChatInputCommandDeniedPayload) {
+	public override async run({ context, message: content }: UserError, { interaction }: ChatInputCommandDeniedPayload): Promise<void> {
 		// `context: { silent: true }` should make UserError silent:
 		// Use cases for this are for example permissions error when running the `eval` command.
 		if (Reflect.get(Object(context), 'silent')) return;

@@ -9,7 +9,7 @@ import { Collection, Message, MessageAttachment, MessageEmbed, Snowflake } from 
 type MessagesType = Collection<Snowflake, Message<true>>;
 
 export class UserListener extends Listener<typeof Events.MessageBulkDelete> {
-	public override async run(messages: MessagesType) {
+	public override async run(messages: MessagesType): Promise<void> {
 		const messageFirst = messages.first()!;
 
 		const data = await this.container.prisma.logChannel.findMany({
@@ -38,9 +38,9 @@ export class UserListener extends Listener<typeof Events.MessageBulkDelete> {
 		}
 	}
 
-	private getAttachment(messages: MessagesType) {
+	private getAttachment(messages: MessagesType): MessageAttachment {
 		const procesed = messages
-			.map((messages) => formatMessage(messages))
+			.map((messages: Message<true>): string => formatMessage(messages))
 			.reverse()
 			.join('\n');
 
@@ -48,7 +48,7 @@ export class UserListener extends Listener<typeof Events.MessageBulkDelete> {
 		return new MessageAttachment(buffer, 'purge.txt');
 	}
 
-	private async getEmbed(collection: MessagesType, message: Message) {
+	private async getEmbed(collection: MessagesType, message: Message): Promise<MessageEmbed[]> {
 		const embed = new MessageEmbed()
 			.setDescription(
 				await resolveKey(message, LanguageKeys.Messages.MessageDeleteBulk, {

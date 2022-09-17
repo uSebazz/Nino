@@ -8,7 +8,7 @@ import { codeBlock, cutText } from '@sapphire/utilities';
 import { Message, MessageEmbed } from 'discord.js';
 
 export class UserListener extends Listener<typeof Events.MessageDelete> {
-	public override async run(message: Message<true>) {
+	public override async run(message: Message<true>): Promise<void> {
 		const data = await this.container.prisma.logChannel.findMany({
 			where: {
 				guildId: BigInt(message.guildId),
@@ -33,7 +33,7 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 		}
 	}
 
-	private async getEmbed(message: Message) {
+	private async getEmbed(message: Message): Promise<MessageEmbed[]> {
 		const attachment = message.attachments.size > 0;
 
 		const embed = new MessageEmbed()

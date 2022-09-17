@@ -4,11 +4,11 @@ import { envParseString } from '@skyra/env-utilities';
 import { WebhookClient, type Guild } from 'discord.js';
 
 export class guildDeleteListener extends Listener<typeof Events.GuildCreate> {
-	public override async run(guild: Guild) {
+	public override async run(guild: Guild): Promise<void> {
 		await this.send(guild);
 	}
 
-	private async send(guild: Guild) {
+	private async send(guild: Guild): Promise<void> {
 		const webhook = new WebhookClient({
 			url: envParseString('WEBHOOK_TOKEN')
 		});

@@ -4,11 +4,11 @@ import { Event } from '@prisma/client';
 import { Listener, type Events } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import { codeBlock } from '@sapphire/utilities';
-import { diffWordsWithSpace } from 'diff';
+import { Change, diffWordsWithSpace } from 'diff';
 import { Message, MessageEmbed } from 'discord.js';
 
 export class UserListener extends Listener<typeof Events.MessageUpdate> {
-	public override async run(oldMessage: Message<true>, newMessage: Message<true>) {
+	public override async run(oldMessage: Message<true>, newMessage: Message<true>): Promise<void> {
 		const data = await this.container.prisma.logChannel.findMany({
 			where: {
 				guildId: BigInt(oldMessage.guildId),
@@ -34,7 +34,7 @@ export class UserListener extends Listener<typeof Events.MessageUpdate> {
 		}
 	}
 
-	private async getEmbed(oldMessage: Message<true>, newMessage: Message<true>) {
+	private async getEmbed(oldMessage: Message<true>, newMessage: Message<true>): Promise<MessageEmbed[]> {
 		const embed = new MessageEmbed()
 			.setAuthor({
 				name: newMessage.author.tag,
@@ -51,7 +51,7 @@ export class UserListener extends Listener<typeof Events.MessageUpdate> {
 					value: await resolveKey(newMessage, LanguageKeys.Messages.MessageUpdateInformationContent, {
 						before: oldMessage.content,
 						after: diffWordsWithSpace(oldMessage.content, newMessage.content)
-							.map((ctx) => (ctx.added ? `**${ctx.value}**` : ctx.removed ? `~~${ctx.value}~~` : ctx.value))
+							.map((ctx: Change): string => (ctx.added ? `**${ctx.value}**` : ctx.removed ? `~~${ctx.value}~~` : ctx.value))
 							.join(' ')
 					})
 				},

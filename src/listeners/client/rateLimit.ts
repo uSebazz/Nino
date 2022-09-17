@@ -16,27 +16,27 @@ export class rateLimitListener extends Listener<typeof Events.RateLimit> {
 		);
 	}
 
-	private timeout(time: number) {
+	private timeout(time: number): string {
 		return `[${cyan(time.toString())}]`;
 	}
 
-	private limit(limit: number) {
+	private limit(limit: number): string {
 		return `[${cyan(limit.toString())}]`;
 	}
 
-	private method(method: string) {
+	private method(method: string): string {
 		return `[${cyan(method.toString())}]`;
 	}
 
-	private path(path: string) {
+	private path(path: string): string {
 		return `[${cyan(path.toString())}]`;
 	}
 
-	private route(route: string) {
+	private route(route: string): string {
 		return `[${cyan(route.toString())}]`;
 	}
 
-	private global(global: boolean) {
+	private global(global: boolean): string {
 		return `[${cyan(global.toString())}]`;
 	}
 }

@@ -7,15 +7,15 @@ import { blue, gray, yellow } from 'colorette';
 export class readyListener extends Listener<typeof Events.ClientReady> {
 	public readonly style = this.isDev ? yellow : blue;
 
-	public run() {
+	public run(): void {
 		this.printStoreDebugInformation();
 	}
 
-	private get isDev() {
+	private get isDev(): boolean {
 		return envParseString('NODE_ENV') === 'development';
 	}
 
-	private printStoreDebugInformation() {
+	private printStoreDebugInformation(): void {
 		const { client, logger } = this.container;
 		const stores = [...client.stores.values()];
 		const last = stores.pop()!;
@@ -25,7 +25,7 @@ export class readyListener extends Listener<typeof Events.ClientReady> {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private styleStore(store: Store<any>, last: boolean) {
+	private styleStore(store: Store<any>, last: boolean): string {
 		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name}.`);
 	}
 }
