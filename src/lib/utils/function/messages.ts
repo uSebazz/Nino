@@ -41,7 +41,7 @@ export async function handleMessage<ED extends ExtraDataPartial>(
 
 			if (options.success) {
 				const code = codeBlock(options.language ?? 'ts', options.result!);
-				const parsedOutput = `**Output**: ${code}\n**Type**: ${options.footer}\n**Time**: ${options.time}`;
+				const parsedOutput = `**Output**: ${code}\n**Type**: ${options.footer}`;
 				const content = [parsedOutput, options.footer, options.time].filter(Boolean).join('\n');
 				return send(message, content);
 			}
