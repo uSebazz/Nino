@@ -5,6 +5,7 @@
 
 # Ignoring node modules and other modules
 node_modules
+package-lock.json
 dist
 
 # Ignoring lint cache
