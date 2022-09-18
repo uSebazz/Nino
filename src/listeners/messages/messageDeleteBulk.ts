@@ -16,7 +16,7 @@ export class UserListener extends Listener<typeof Events.MessageBulkDelete> {
 			where: {
 				guildId: BigInt(messageFirst.guildId),
 				events: {
-					has: Event.messageBulkDelete
+					hasSome: [Event.all, Event.messageBulkDelete]
 				}
 			}
 		});

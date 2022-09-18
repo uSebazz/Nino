@@ -51,7 +51,7 @@ export class UserCommand extends Command {
 		}
 
 		switch (event) {
-			case 'all':
+			case Event.all:
 				return this.caseAll(data, interaction);
 			default:
 				return this.caseDefault(data, event, interaction);
@@ -70,7 +70,6 @@ export class UserCommand extends Command {
 		// Save the data
 		await this.container.prisma.logChannel.update({
 			where: {
-				guildId: data.guildId,
 				channelId_events: {
 					channelId: data.channelId,
 					events: data.events
@@ -93,7 +92,6 @@ export class UserCommand extends Command {
 
 			await this.container.prisma.logChannel.update({
 				where: {
-					guildId: data.guildId,
 					channelId_events: {
 						channelId: data.channelId,
 						events: data.events

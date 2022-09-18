@@ -51,7 +51,7 @@ export class UserCommand extends Command {
 		}
 
 		switch (event) {
-			case 'all':
+			case Event.all:
 				return this.allCase(data, interaction);
 
 			default:
@@ -74,7 +74,7 @@ export class UserCommand extends Command {
 				guildId: data.guildId
 			},
 			data: {
-				events: []
+				events: [Event.all]
 			}
 		});
 
@@ -86,7 +86,6 @@ export class UserCommand extends Command {
 		if (!data.events.includes(Event.all) && !data.events.includes(event)) {
 			await this.container.prisma.logChannel.update({
 				where: {
-					guildId: data.guildId,
 					channelId_events: {
 						channelId: data.channelId,
 						events: data.events
@@ -106,13 +105,13 @@ export class UserCommand extends Command {
 			);
 		}
 
-		// if (data.all) {
-		// 	const content = await resolveKey(interaction, LanguageKeys.Config.Logging.EventBlocked);
-		// 	return interaction.reply({
-		// 		content,
-		// 		ephemeral: true
-		// 	});
-		// }
+		if (data.events.includes(Event.all)) {
+			const content = await resolveKey(interaction, LanguageKeys.Config.Logging.EventBlocked);
+			return interaction.reply({
+				content,
+				ephemeral: true
+			});
+		}
 
 		const content = await resolveKey(interaction, LanguageKeys.Config.Logging.EventAlreadyEnabled);
 		return interaction.reply({

@@ -13,7 +13,7 @@ export class UserListener extends Listener<typeof Events.MessageDelete> {
 			where: {
 				guildId: BigInt(message.guildId),
 				events: {
-					has: Event.messageDelete
+					hasSome: [Event.all, Event.messageDelete]
 				}
 			}
 		});
