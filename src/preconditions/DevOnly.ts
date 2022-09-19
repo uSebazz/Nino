@@ -1,4 +1,4 @@
-import { OWNERS } from '#root/config';
+import { CLIENT_OWNERS } from '#root/config';
 import { Precondition } from '@sapphire/framework';
 import type { CommandInteraction, ContextMenuInteraction, Message, Snowflake } from 'discord.js';
 
@@ -18,6 +18,6 @@ export class DevOnly extends Precondition {
 	}
 
 	private isDev(userId: Snowflake) {
-		return OWNERS.includes(userId) ? this.ok() : this.error({ message: this.message });
+		return CLIENT_OWNERS.includes(userId) ? this.ok() : this.error({ message: this.message });
 	}
 }

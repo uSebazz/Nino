@@ -1,14 +1,25 @@
-# Ignoring environment
+# Ignore a blackhole and the folder for development
+node_modules/
+.vs/
+.idea/
+*.iml
+
+# Yarn files
+.yarn/install-state.gz
+.yarn/build-state.yml
+
+# Ignore the dist output
+dist/
+
+# Ignore heapsnapshot and log files
+*.heapsnapshot
+*.log
+
+# Ignore package locks
+package-lock.json
+
+# Environment variables
+.env.local
 .env.development.local
 .env.test.local
-.env.local
-
-# Ignoring node modules and other modules
-node_modules
-package-lock.json
-dist
-
-# Ignoring lint cache
-.eslintcache
-.yarn/cache
-.yarn/install-state.gz
+.env.production.local

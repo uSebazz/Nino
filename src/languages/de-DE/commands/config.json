@@ -17,8 +17,11 @@
 	"LOGGING_EVENT_ALREADY_DISABLED": "{{wrong}} - Es scheint, dass dieses Ereignis deaktiviert worden ist",
 	"LOGGING_CHANNEL_INVALID": "{{wrong}} - Der angegebene Kanal ist nicht gültig, es muss sich um einen Textkanal handeln",
 	"LOGGING_CHANNEL_SET": "{{ninoheart}} - Der Registrierungskanal wird nun {{channel}} sein. :D",
+	"LOGGIN_CHANNEL_ALREADY_SET": "{{wrong}} - Dit kanaal is al in gebruik.",
 	"LOGGING_CHANNEL_UPDATED": "{{ninoheart}} - Der Registrierungskanal wurde aktualisiert, er lautet jetzt {{channel}} :D",
 	"LOGGING_NO_DATA_FOUND": "{{ninozzz}} - Keine Daten gefunden, versuchen Sie zuerst das Registrierungssystem zu aktivieren ;)",
 	"LOGGING_ALL_EVENTS": "Alle Ereignisse",
-	"LOGGING_VIEW_INFO": "{{settings}} - **Einstellungen für die Registrierung**\n\n**Registrierungskanal**: {{channel}}\n**Ereignisse aktiviert**: {{events}}"
+	"LOGGING_VIEW_INFO": "{{setting}} - **Konfiguration der Protokollierung**",
+	"LOGGING_VIEW_INFO_CHANNEL": "**Kanaal**: {{kanaal}}",
+	"LOGGING_VIEW_INFO_EVENTS_ENABLED": "**Gebeurtenissen ingeschakeld**: {{events}}"
 }

@@ -1,9 +1,11 @@
 import { LanguageKeys } from '#lib/i18n';
+import { Colors } from '#utils/constants';
 import { inlineCode } from '@discordjs/builders';
 import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
 import { Event } from '@prisma/client';
+import { PaginatedFieldMessageEmbed } from '@sapphire/discord.js-utilities';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import type { CommandInteraction, Message } from 'discord.js';
+import { CommandInteraction, MessageEmbed } from 'discord.js';
 
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
@@ -15,14 +17,13 @@ export class UserCommand extends Command {
 		return this.showInfo(interaction);
 	}
 
-	public override messageRun(message: Message<true>) {
-		return this.showInfo(message);
-	}
-
-	private async showInfo(interaction: CommandInteraction<'cached'> | Message<true>) {
-		const data = await this.container.prisma.logChannel.findUnique({
+	private async showInfo(interaction: CommandInteraction<'cached'>) {
+		const data = await this.container.prisma.guild.findFirst({
 			where: {
-				guildId: BigInt(interaction.guildId)
+				id: BigInt(interaction.guildId)
+			},
+			include: {
+				logs: true
 			}
 		});
 
@@ -30,15 +31,34 @@ export class UserCommand extends Command {
 			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.NoDataFound));
 		}
 
-		const events = data.events.includes(Event.all)
-			? await resolveKey(interaction, LanguageKeys.Config.Logging.AllEvents)
-			: data.events.map((event) => inlineCode(event)).join(', ') || '-';
+		const formatedData = await Promise.all(
+			data.logs.map(async (log) => {
+				const channel = await resolveKey(interaction, LanguageKeys.Config.Logging.ViewChannelInfo, {
+					channel: `<#${log.channelId}>`
+				});
 
-		return interaction.reply(
-			await resolveKey(interaction, LanguageKeys.Config.Logging.ViewInfo, {
-				channel: data.channelId ? `<#${data.channelId}>` : 'none',
-				events
+				const events = log.events.includes(Event.all)
+					? await resolveKey(interaction, LanguageKeys.Config.Logging.AllEvents)
+					: log.events.map((event) => inlineCode(event)).join(', ') || '-';
+
+				return `${channel}\n${await resolveKey(interaction, LanguageKeys.Config.Logging.ViewEventsInfo, { events })}\n`;
 			})
 		);
+
+		const paginated = new PaginatedFieldMessageEmbed<typeof formatedData[0]>()
+			.setTitleField(await resolveKey(interaction, LanguageKeys.Config.Logging.ViewInfo))
+			.setItems(formatedData)
+			.setItemsPerPage(5)
+			.setTemplate(this.embedTemplate)
+			.make();
+
+		return paginated.run(interaction, interaction.user);
+	}
+
+	private get embedTemplate() {
+		return new MessageEmbed()
+			.setThumbnail(this.container.client.user!.displayAvatarURL({ size: 128, format: 'png', dynamic: true }))
+			.setColor(Colors.hazyDaze)
+			.setTimestamp();
 	}
 }

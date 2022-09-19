@@ -17,8 +17,11 @@
 	"LOGGING_EVENT_ALREADY_DISABLED": "{{wrong}} - Seems like logging of this event is already disabled",
 	"LOGGING_CHANNEL_INVALID": "{{wrong}} - The specified channel is not valid, it must be a text channel",
 	"LOGGING_CHANNEL_SET": "{{ninoheart}} - The logging channel will now be {{channel}} :D",
+	"LOGGIN_CHANNEL_ALREADY_SET": "{{wrong}} - This channel is already in use",
 	"LOGGING_CHANNEL_UPDATED": "{{ninoheart}} - The logging channel was updated, now it will be {{channel}} :D",
 	"LOGGING_NO_DATA_FOUND": "{{ninozzz}} - No data were found, try to activate the first logging system ;)",
 	"LOGGING_ALL_EVENTS": "All events",
-	"LOGGING_VIEW_INFO": "{{setting}} - **Logging config**\n\n**Logging channel**: {{channel}}\n**Events enabled**: {{events}}"
+	"LOGGING_VIEW_INFO": "{{setting}} - **Logging config**",
+	"LOGGING_VIEW_INFO_CHANNEL": "**Channel**: {{channel}}",
+	"LOGGING_VIEW_INFO_EVENTS_ENABLED": "**Events enabled**: {{events}}"
 }

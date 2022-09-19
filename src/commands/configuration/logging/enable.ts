@@ -71,7 +71,10 @@ export class UserCommand extends Command {
 		// Save the data
 		await this.container.prisma.logChannel.update({
 			where: {
-				guildId: data.guildId
+				guildId_channelId: {
+					channelId: data.channelId,
+					guildId: data.guildId
+				}
 			},
 			data: {
 				events: [Event.all]
@@ -86,9 +89,9 @@ export class UserCommand extends Command {
 		if (!data.events.includes(Event.all) && !data.events.includes(event)) {
 			await this.container.prisma.logChannel.update({
 				where: {
-					channelId_events: {
+					guildId_channelId: {
 						channelId: data.channelId,
-						events: data.events
+						guildId: data.guildId
 					}
 				},
 				data: {

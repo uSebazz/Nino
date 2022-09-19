@@ -35,7 +35,7 @@ enum Event {
 
 model LogChannel {
   /// Guild Id
-  guildId   BigInt  @id @map("guild_id")
+  guildId   BigInt  @map("guild_id")
   /// The Guild this log channel belongs to
   guild     Guild   @relation(fields: [guildId], references: [id])
   /// Channel id to send all logs.
@@ -44,7 +44,7 @@ model LogChannel {
   /// if it is empty, it does not send any logs.
   events    Event[] @default([all])
 
-  @@unique([channelId, events])
+  @@id([guildId, channelId])
   @@map("log_channels")
 }
 

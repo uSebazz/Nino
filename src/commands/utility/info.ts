@@ -1,5 +1,5 @@
 import type { NinoCommandRegistery } from '#lib/structures';
-import { testServer } from '#root/config';
+import { ALLOWED_SERVERS } from '#root/config';
 import { Subcommand } from '@kaname-png/plugin-subcommands-advanced';
 import { RegisterBehavior } from '@sapphire/framework';
 
@@ -14,7 +14,7 @@ export class UserCommand extends Subcommand {
 					.setDescription('The subcommand patern of info commands.');
 			},
 			{
-				guildIds: testServer,
+				guildIds: ALLOWED_SERVERS,
 				behaviorWhenNotIdentical: RegisterBehavior.Overwrite
 			}
 		);

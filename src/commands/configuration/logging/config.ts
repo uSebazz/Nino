@@ -57,7 +57,10 @@ export class UserCommand extends Command {
 
 		await this.container.prisma.logChannel.upsert({
 			where: {
-				guildId
+				guildId_channelId: {
+					guildId,
+					channelId: BigInt(channel.id)
+				}
 			},
 			create: {
 				guildId,
