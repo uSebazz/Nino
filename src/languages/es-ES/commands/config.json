@@ -15,7 +15,7 @@
 	"LOGGING_EVENT_ALREADY_DISABLED": "{{wrong}} - Parece que ya esta desactivado este evento",
 	"LOGGING_CHANNEL_INVALID": "{{wrong}} - El canal especificado no es valido, debe ser un canal de texto",
 	"LOGGING_CHANNEL_SET": "{{ninoheart}} - El canal de registro ahora será {{channel}} :D",
-	"LOGGIN_CHANNEL_ALREADY_SET": "{{wrong}} - Este canal ya está en uso.",
+	"LOGGING_CHANNEL_ALREADY_SET": "{{wrong}} - Este canal ya está en uso.",
 	"LOGGING_CHANNEL_UPDATED": "{{ninoheart}} - El canal de registro se actualizó, ahora será {{channel}} :D",
 	"LOGGING_NO_DATA_FOUND": "{{ninozzz}} - No se encontraron datos, intenta activar el sistema de registro primero ;)",
 	"LOGGING_ALL_EVENTS": "Todos los eventos",
