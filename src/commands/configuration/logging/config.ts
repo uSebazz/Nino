@@ -36,13 +36,11 @@ export class UserCommand extends Command {
 		}
 
 		const guildId = BigInt(interaction.guildId);
-		const data = await this.container.prisma.guild.findFirst({
+		const data = await this.container.prisma.logChannel.findUnique({
 			where: {
-				id: guildId,
-				logs: {
-					some: {
-						channelId: BigInt(channel.id)
-					}
+				guildId_channelId: {
+					guildId,
+					channelId: BigInt(channel.id)
 				}
 			}
 		});

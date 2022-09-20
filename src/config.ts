@@ -16,12 +16,6 @@ setup(join(rootFolder, 'src', '.env'));
 export const ALLOWED_SERVERS = ['951101886684082176', '945033113673801799'];
 export const CLIENT_OWNERS = envParseArray('CLIENT_OWNERS');
 
-/* const STAT_CORD_OPTIONS: StatcordOptions = {
-	client_id: envParseString('CLIENT_ID'),
-	key: envParseString('STATCORD_TOKEN'),
-	autopost: false
-}; */
-
 const loggerOptions: LoggerFormatOptions = {
 	info: {
 		timestamp: {
@@ -167,7 +161,6 @@ export const CLIENT_OPTIONS: ClientOptions = {
 	],
 	logger: parseLoggerOptions(),
 	presence: { activities: parsePresenceActivities() },
-	// statcord: STAT_CORD_OPTIONS,
 	i18n: parseInternationalizationOptions(),
 	defaultCooldown: {
 		delay: 10_000, // 10s
