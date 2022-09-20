@@ -20,5 +20,7 @@
 	"THREE_DAY_THREAD_ARCHIVE": "Three day thread archive",
 	"SEVEN_DAY_THREAD_ARCHIVE": "Seven day thread archive",
 	"PRIVATE_THREADS": "Private threads",
-	"ROLE_ICONS": "Role icons"
+	"ROLE_ICONS": "Role icons",
+	"AUTO_MODERATION": "Auto moderation",
+	"TEXT_IN_VOICE_ENABLED": "Text in voice channels"
 }

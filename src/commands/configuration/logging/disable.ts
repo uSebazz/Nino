@@ -1,15 +1,16 @@
 import { LanguageKeys } from '#lib/i18n';
+import { NinoCommand } from '#lib/structures';
 import { LoggingEvents } from '#utils/constants';
-import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
+import { RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
 import { Event, LogChannel } from '@prisma/client';
 import type { GuildBasedChannelTypes } from '@sapphire/discord.js-utilities';
 import { send } from '@sapphire/plugin-editable-commands';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import { ChannelType } from 'discord-api-types/v10';
-import type { CommandInteraction, Message } from 'discord.js';
+import type { Message } from 'discord.js';
 
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
-	builder //
+	builder
 		.setName('disable')
 		.setDescription('🔰 Disable a single event from logging system.')
 		.addStringOption((option) =>
@@ -27,18 +28,18 @@ import type { CommandInteraction, Message } from 'discord.js';
 				.addChannelTypes(ChannelType.GuildText)
 		)
 )
-export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
+export class UserCommand extends NinoCommand {
+	public override chatInputRun(interaction: NinoCommand.Interaction<'cached'>) {
 		const event = interaction.options.getString('event', true) as Event;
 		const channel = interaction.options.getChannel('channel', true);
 		return this.disable(event, interaction, channel);
 	}
 
-	public override async messageRun(message: Message) {
+	public override async messageRun(message: Message<true>) {
 		return send(message, await resolveKey(message, LanguageKeys.Config.Logging.OnlySlashCommand));
 	}
 
-	private async disable(event: Event, interaction: CommandInteraction<'cached'>, channel: GuildBasedChannelTypes) {
+	private async disable(event: Event, interaction: NinoCommand.Interaction<'cached'>, channel: GuildBasedChannelTypes) {
 		const data = await this.container.prisma.logChannel.findFirst({
 			where: {
 				guildId: BigInt(interaction.guildId),
@@ -47,7 +48,7 @@ export class UserCommand extends Command {
 		});
 
 		if (!data) {
-			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelNotSet));
+			this.error(LanguageKeys.Config.Logging.ChannelNotSet);
 		}
 
 		switch (event) {
@@ -58,12 +59,10 @@ export class UserCommand extends Command {
 		}
 	}
 
-	private async caseAll(data: LogChannel, interaction: CommandInteraction<'cached'>) {
+	private async caseAll(data: LogChannel, interaction: NinoCommand.Interaction<'cached'>) {
 		if (!data.events.length) {
-			const content = await resolveKey(interaction, LanguageKeys.Config.Logging.AlreadyAllEventsDisabled);
-			return interaction.reply({
-				content,
-				ephemeral: true
+			this.error(LanguageKeys.Config.Logging.AlreadyAllEventsDisabled, {
+				silent: true
 			});
 		}
 
@@ -86,7 +85,7 @@ export class UserCommand extends Command {
 		return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.AllEventsDisabled));
 	}
 
-	private async caseDefault(data: LogChannel, event: Event, interaction: CommandInteraction<'cached'>) {
+	private async caseDefault(data: LogChannel, event: Event, interaction: NinoCommand.Interaction<'cached'>) {
 		if (!data.events.includes(Event.all) && data.events.includes(event)) {
 			const eventIndex = data.events.findIndex((index) => index === event);
 
@@ -110,11 +109,8 @@ export class UserCommand extends Command {
 			);
 		}
 
-		// Error
-		const content = await resolveKey(interaction, LanguageKeys.Config.Logging.EventAlreadyDisabled);
-		return interaction.reply({
-			content,
-			ephemeral: true
+		this.error(LanguageKeys.Config.Logging.EventAlreadyDisabled, {
+			silent: true
 		});
 	}
 }

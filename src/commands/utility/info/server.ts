@@ -1,11 +1,12 @@
 import { LanguageKeys } from '#lib/i18n';
+import { NinoCommand } from '#lib/structures';
 import { Badges, Colors, Emojis } from '#utils/constants';
-import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
+import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { CommandInteraction, Guild, MessageEmbed } from 'discord.js';
+import { Guild, MessageEmbed } from 'discord.js';
 
-@RegisterSubCommand('info', (ctx) =>
-	ctx
+@RegisterSubCommand('info', (builder) =>
+	builder
 		//
 		.setName('server')
 		.setDescription('📍 Get information about a target server.')
@@ -17,30 +18,29 @@ import { CommandInteraction, Guild, MessageEmbed } from 'discord.js';
 				.setRequired(false)
 		)
 )
-export class UserCommand extends Command {
-	public override chatInputRun(ctx: CommandInteraction) {
-		const id = ctx.options.getString('id', false);
+export class UserCommand extends NinoCommand {
+	public override chatInputRun(interaction: NinoCommand.Interaction<'cached'>) {
+		const id = interaction.options.getString('id', false);
 
 		if (id) {
-			return this.showServerInfoById(ctx, id);
+			return this.showServerInfoById(interaction, id);
 		}
 
-		return this.showServerInfo(ctx);
+		return this.showServerInfo(interaction);
 	}
 
-	private async showServerInfo(ctx: CommandInteraction) {
-		const server = ctx.guild!;
-		const embeds = await this.makeEmbed(server);
-		return ctx.reply({ embeds });
+	private async showServerInfo(interaction: NinoCommand.Interaction<'cached'>) {
+		const embeds = await this.makeEmbed(interaction.guild);
+		return interaction.reply({ embeds });
 	}
 
-	private async showServerInfoById(ctx: CommandInteraction, id: string) {
+	private async showServerInfoById(interaction: NinoCommand.Interaction, id: string) {
 		const server = this.container.client.guilds.cache.get(id);
 		if (!server) {
-			return ctx.reply(`Server [${id}] isn't in cache 😢`);
+			this.error(LanguageKeys.Util.Server.ServerIsntInCache);
 		}
 		const embeds = await this.makeEmbed(server);
-		return ctx.reply({ embeds });
+		return interaction.reply({ embeds });
 	}
 
 	private async makeEmbed(server: Guild) {
@@ -61,7 +61,7 @@ export class UserCommand extends Command {
 				{
 					name: await resolveKey(server, LanguageKeys.Util.Server.ServerInfo),
 					value: await resolveKey(server, LanguageKeys.Util.Server.ServerInfoValue, {
-						owner,
+						owner: owner.toString(),
 						server,
 						time: Math.round(server.createdTimestamp / 1000)
 					})
@@ -75,7 +75,8 @@ export class UserCommand extends Command {
 						bots,
 						textChannels,
 						voiceChannels,
-						stages
+						stages,
+						channels: server.channels.cache.size
 					})
 				},
 				{

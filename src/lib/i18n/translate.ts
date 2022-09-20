@@ -49,31 +49,31 @@ export function translate(identifier: string) {
 		case Identifiers.PreconditionCooldown:
 			return LanguageKeys.Precondition.CommandCooldown;
 		case Identifiers.PreconditionDMOnly:
-			return 'precondition:dmOnly';
+			return LanguageKeys.Precondition.CommandDmOnly;
 		case Identifiers.PreconditionGuildNewsOnly:
-			return 'precondition:guildNewsOnly';
+			return LanguageKeys.Precondition.CommandGuildNewsOnly;
 		case Identifiers.PreconditionGuildNewsThreadOnly:
-			return 'precondition:guildNewsThreadOnly';
+			return LanguageKeys.Precondition.CommandGuildNewsThread;
 		case Identifiers.PreconditionGuildOnly:
 		case DecoratorIdentifiers.RequiresClientPermissionsGuildOnly:
 		case DecoratorIdentifiers.RequiresUserPermissionsGuildOnly:
-			return 'precondition:guildOnly';
+			return LanguageKeys.Precondition.CommandGuildOnly;
 		case Identifiers.PreconditionGuildPrivateThreadOnly:
-			return 'precondition:guildPrivateThreadOnly';
+			return LanguageKeys.Precondition.CommandGuildPrivateThreadOnly;
 		case Identifiers.PreconditionGuildPublicThreadOnly:
-			return 'precondition:guildPublicThreadOnly';
+			return LanguageKeys.Precondition.CommandGuildPublicThreadOnly;
 		case Identifiers.PreconditionGuildTextOnly:
-			return 'precondition:guildTextOnly';
+			return LanguageKeys.Precondition.CommandGuildTextOnly;
 		case Identifiers.PreconditionNSFW:
-			return 'precondition:nsfw';
+			return LanguageKeys.Precondition.CommandNSFW;
 		case Identifiers.PreconditionClientPermissions:
 		case DecoratorIdentifiers.RequiresClientPermissionsMissingPermissions:
-			return 'precondition:clientPermissions';
+			return LanguageKeys.Precondition.RequireClientPermissions;
 		case Identifiers.PreconditionUserPermissions:
 		case DecoratorIdentifiers.RequiresUserPermissionsMissingPermissions:
-			return 'precondition:userPermissions';
+			return LanguageKeys.Precondition.RequireUserPermissions;
 		case Identifiers.PreconditionThreadOnly:
-			return 'precondition:threadOnly';
+			return LanguageKeys.Precondition.CommandThreadOnly;
 		default:
 			return identifier;
 	}

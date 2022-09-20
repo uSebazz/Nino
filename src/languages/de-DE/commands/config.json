@@ -22,6 +22,6 @@
 	"LOGGING_NO_DATA_FOUND": "{{ninozzz}} - Keine Daten gefunden, versuchen Sie zuerst das Registrierungssystem zu aktivieren ;)",
 	"LOGGING_ALL_EVENTS": "Alle Ereignisse",
 	"LOGGING_VIEW_INFO": "{{setting}} - **Logging-Konfiguration**",
-	"LOGGING_VIEW_INFO_CHANNEL": "**Kanal**: {{Kanal}}",
+	"LOGGING_VIEW_INFO_CHANNEL": "**Kanal**: {{channel}}",
 	"LOGGING_VIEW_INFO_EVENTS_ENABLED": "**Ereignisse aktiviert**: {{events}}"
 }

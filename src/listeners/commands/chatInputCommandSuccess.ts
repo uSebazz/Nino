@@ -1,10 +1,6 @@
 import { logSuccessCommand } from '#utils/util';
-import { ApplyOptions } from '@sapphire/decorators';
-import { ChatInputCommandSuccessPayload, Events, Listener, ListenerOptions, Logger, LogLevel } from '@sapphire/framework';
+import { ChatInputCommandSuccessPayload, Events, Listener, Logger, LogLevel } from '@sapphire/framework';
 
-@ApplyOptions<ListenerOptions>({
-	event: Events.ChatInputCommandSuccess
-})
 export class ChatInputCommandSuccess extends Listener<typeof Events.ChatInputCommandSuccess> {
 	public run(payload: ChatInputCommandSuccessPayload): void {
 		return logSuccessCommand(payload);

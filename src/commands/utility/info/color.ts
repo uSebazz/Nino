@@ -1,38 +1,39 @@
 import { LanguageKeys } from '#lib/i18n';
+import { NinoCommand } from '#lib/structures';
 import type { Colors } from '#lib/structures/colors';
 import { parse } from '#utils/color';
-import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
+import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
 import { fetch } from '@sapphire/fetch';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { ColorResolvable, CommandInteraction, MessageEmbed } from 'discord.js';
+import { ColorResolvable, MessageEmbed } from 'discord.js';
 
-@RegisterSubCommand('info', (ctx) =>
-	ctx //
+@RegisterSubCommand('info', (builder) =>
+	builder
 		.setName('color')
 		.setDescription('📍 Get information about a color HEX.')
-		.addStringOption((op) =>
-			op //
+		.addStringOption((option) =>
+			option //
 				.setName('code')
 				.setDescription('🆔 Hex code of the color.')
 				.setRequired(true)
 		)
 )
-export class UserCommand extends Command {
-	public override chatInputRun(ctx: CommandInteraction) {
+export class UserCommand extends NinoCommand {
+	public override chatInputRun(ctx: NinoCommand.Interaction) {
 		const code = ctx.options.getString('code')!;
 		const color = parse(code)!;
 
 		return this.getColorInfo(color, ctx);
 	}
 
-	private async getColorInfo(color: Colors, ctx: CommandInteraction) {
+	private async getColorInfo(color: Colors, ctx: NinoCommand.Interaction) {
 		const info = await this.apiCall(color.hex.toString().replace('#', ''));
 		const embeds = await this.getEmbed(info, color, ctx);
 
 		return ctx.reply({ embeds });
 	}
 
-	private async getEmbed(options: Response, color: Colors, ctx: CommandInteraction) {
+	private async getEmbed(options: Response, color: Colors, ctx: NinoCommand.Interaction) {
 		const embed = new MessageEmbed()
 			.setTitle(
 				await resolveKey(ctx, LanguageKeys.Util.Color.ColorInfo, {

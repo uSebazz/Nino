@@ -20,5 +20,7 @@
 	"THREE_DAY_THREAD_ARCHIVE": "Archivo de hilos de tres días",
 	"SEVEN_DAY_THREAD_ARCHIVE": "Archivo de hilos de siete días",
 	"PRIVATE_THREADS": "Hilos privados",
-	"ROLE_ICONS": "Iconos de roles"
+	"ROLE_ICONS": "Iconos de roles",
+	"AUTO_MODERATION": "Moderación Automática",
+	"TEXT_IN_VOICE_ENABLED": "Texto en canales de voz"
 }

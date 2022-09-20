@@ -20,5 +20,7 @@
 	"THREE_DAY_THREAD_ARCHIVE": "Drei-Tage-Themenarchiv",
 	"SEVEN_DAY_THREAD_ARCHIVE": "Sieben-Tage-Themenarchiv",
 	"PRIVATE_THREADS": "Private Themen",
-	"ROLE_ICONS": "Rollensymbole"
+	"ROLE_ICONS": "Rollensymbole",
+	"AUTO_MODERATION": "Automatische Moderation",
+	"TEXT_IN_VOICE_ENABLED": "Text in Sprachkanälen"
 }

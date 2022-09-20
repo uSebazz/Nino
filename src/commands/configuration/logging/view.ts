@@ -1,23 +1,24 @@
 import { LanguageKeys } from '#lib/i18n';
+import { NinoCommand } from '#lib/structures';
 import { Colors } from '#utils/constants';
 import { inlineCode } from '@discordjs/builders';
-import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
+import { RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
 import { Event } from '@prisma/client';
 import { PaginatedFieldMessageEmbed } from '@sapphire/discord.js-utilities';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { CommandInteraction, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
 	builder //
 		.setName('view')
 		.setDescription('👤 Display logging system current configuration')
 )
-export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
+export class UserCommand extends NinoCommand {
+	public override chatInputRun(interaction: NinoCommand.Interaction<'cached'>) {
 		return this.showInfo(interaction);
 	}
 
-	private async showInfo(interaction: CommandInteraction<'cached'>) {
+	private async showInfo(interaction: NinoCommand.Interaction<'cached'>) {
 		const data = await this.container.prisma.guild.findFirst({
 			where: {
 				id: BigInt(interaction.guildId)
@@ -28,7 +29,7 @@ export class UserCommand extends Command {
 		});
 
 		if (!data) {
-			return interaction.reply(await resolveKey(interaction, LanguageKeys.Config.Logging.NoDataFound));
+			this.error(LanguageKeys.Config.Logging.NoDataFound);
 		}
 
 		const formatedData = await Promise.all(

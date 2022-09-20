@@ -1,22 +1,25 @@
 import { LanguageKeys } from '#lib/i18n';
-import { Command, RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
+import { NinoCommand } from '#lib/structures';
+import { RegisterSubCommandGroup } from '@kaname-png/plugin-subcommands-advanced';
 import { send } from '@sapphire/plugin-editable-commands';
 import { resolveKey } from '@sapphire/plugin-i18next';
+import { ChannelType } from 'discord-api-types/v10';
 import type { CommandInteraction, GuildBasedChannel, Message } from 'discord.js';
 
 @RegisterSubCommandGroup('config', 'logging', (builder) =>
-	builder //
+	builder
 		.setName('config')
 		.setDescription('🔧 Configure the logging system for this guild')
 		.addChannelOption((option) =>
 			option //
 				.setName('channel')
 				.setDescription('🌐 The channel to log to')
+				.addChannelTypes(ChannelType.GuildText)
 				.setRequired(true)
 		)
 )
-export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
+export class UserCommand extends NinoCommand {
+	public override chatInputRun(interaction: NinoCommand.Interaction<'cached'>) {
 		const channel = interaction.options.getChannel('channel') as GuildBasedChannel;
 
 		return this.storageData(interaction, channel);
@@ -28,10 +31,8 @@ export class UserCommand extends Command {
 
 	private async storageData(interaction: CommandInteraction<'cached'>, channel: GuildBasedChannel) {
 		if (channel.type !== 'GUILD_TEXT') {
-			const content = await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelInvalid);
-			return interaction.reply({
-				content,
-				ephemeral: true
+			this.error(LanguageKeys.Config.Logging.ChannelInvalid, {
+				silent: true
 			});
 		}
 
@@ -46,11 +47,7 @@ export class UserCommand extends Command {
 		});
 
 		if (data) {
-			return interaction.reply(
-				await resolveKey(interaction, LanguageKeys.Config.Logging.ChannelInUse, {
-					channel: `<#${channel.id}>`
-				})
-			);
+			this.error(LanguageKeys.Config.Logging.ChannelInUse);
 		}
 
 		await this.container.prisma.logChannel.upsert({

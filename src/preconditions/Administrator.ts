@@ -1,17 +1,16 @@
-import { Emojis } from '#utils/constants';
+import { LanguageKeys } from '#lib/i18n';
+import { RequiresGuildContext } from '@sapphire/decorators';
 import { Precondition } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import type { CommandInteraction, GuildMember } from 'discord.js';
+import type { CommandInteraction } from 'discord.js';
 
 export class Administrator extends Precondition {
-	public override async chatInputRun(interaction: CommandInteraction) {
-		const member = interaction.member as GuildMember;
-		const message2 = await resolveKey(interaction, 'precondition:admin', {
-			emoji: Emojis.wrong
-		});
+	@RequiresGuildContext()
+	public override async chatInputRun(interaction: CommandInteraction<'cached'>) {
+		const message = await resolveKey(interaction, LanguageKeys.Precondition.RequireAdminPermission);
 
-		if (!member.permissions.has('ADMINISTRATOR')) {
-			return this.error({ message: message2 });
+		if (!interaction.member.permissions.has('ADMINISTRATOR')) {
+			return this.error({ message });
 		}
 
 		return this.ok();

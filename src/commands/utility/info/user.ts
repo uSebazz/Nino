@@ -1,9 +1,9 @@
 import { LanguageKeys } from '#lib/i18n';
+import { NinoCommand } from '#lib/structures';
 import { Badges, Colors, Emojis, Gateways, isValidURL } from '#utils/constants';
-import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
+import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
 import { resolveKey } from '@sapphire/plugin-i18next';
 import {
-	CommandInteraction,
 	Guild,
 	GuildMember,
 	MessageActionRow,
@@ -21,18 +21,18 @@ enum NewApplicationsFlags {
 	ApplicationCommands = 8388608
 }
 
-@RegisterSubCommand('info', (ctx) =>
-	ctx //
+@RegisterSubCommand('info', (builder) =>
+	builder //
 		.setName('user')
 		.setDescription('📍 Display information about a provided user.')
-		.addUserOption((op) =>
-			op //
+		.addUserOption((option) =>
+			option //
 				.setName('user')
 				.setDescription('👤 The user to display information of')
 				.setRequired(false)
 		)
 )
-export class UserCommand extends Command {
+export class UserCommand extends NinoCommand {
 	public readonly keyAdminPermission = Permissions.FLAGS.ADMINISTRATOR;
 	public readonly keyPermissions: Array<[PermissionString, bigint]> = [
 		['BAN_MEMBERS', Permissions.FLAGS.BAN_MEMBERS],
@@ -52,32 +52,32 @@ export class UserCommand extends Command {
 		['MANAGE_EMOJIS_AND_STICKERS', Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS]
 	];
 
-	public override async chatInputRun(ctx: CommandInteraction) {
-		const user = ctx.options.getUser('user') ?? ctx.user;
-		const member = await ctx.guild!.members.fetch(user.id).catch(() => null);
+	public override async chatInputRun(interaction: NinoCommand.Interaction<'cached'>) {
+		const user = interaction.options.getUser('user') ?? interaction.user;
+		const member = await interaction.guild!.members.fetch(user.id).catch(() => null);
 		const { bot } = user;
 
 		if (bot) {
-			return this.getBotInfo(user, ctx);
+			return this.getBotInfo(user, interaction);
 		} else if (member) {
-			const embeds = await this.getMemberInfo(member, ctx);
-			return ctx.reply({ embeds });
+			const embeds = await this.getMemberInfo(member, interaction);
+			return interaction.reply({ embeds });
 		}
 
-		const embeds = await this.getUserInfo(user, ctx);
-		return ctx.reply({ embeds });
+		const embeds = await this.getUserInfo(user, interaction);
+		return interaction.reply({ embeds });
 	}
 
-	private async getUserInfo(user: User, ctx: CommandInteraction) {
+	private async getUserInfo(user: User, interaction: NinoCommand.Interaction<'cached'>) {
 		const registration = `<t:${Math.round(user.createdTimestamp! / 1000)}:R>`;
 		const embed = new MessageEmbed()
 			.setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() })
 			.setColor(Colors.prettyPutunia) // Rosado si no es un miembro
-			.setDescription(this.getUserBadges(user, ctx.guild!).join(' '))
+			.setDescription(this.getUserBadges(user, interaction.guild!).join(' '))
 			.addFields([
 				{
-					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.About),
-					value: await resolveKey(ctx.guild!, LanguageKeys.Util.User.AboutValue, {
+					name: await resolveKey(interaction.guild!, LanguageKeys.Util.User.About),
+					value: await resolveKey(interaction.guild!, LanguageKeys.Util.User.AboutValue, {
 						user,
 						registration
 					})
@@ -87,7 +87,7 @@ export class UserCommand extends Command {
 		return [embed];
 	}
 
-	private async getBotInfo(user: User, ctx: CommandInteraction) {
+	private async getBotInfo(user: User, interaction: NinoCommand.Interaction<'cached'>) {
 		// @ts-expect-error No puedo obtener el tipo, porque no se cual es xd
 		const info = (await (this.container.client.api as any).applications[user.id].rpc.get()) as BotResponse;
 		const badges = this.getUserBadges(user).join(' ');
@@ -122,10 +122,10 @@ export class UserCommand extends Command {
 
 		if (components.every((row) => !row.components.length)) while (components.length) components.pop();
 
-		return ctx.reply({ embeds: [embed], components });
+		return interaction.reply({ embeds: [embed], components });
 	}
 
-	private async getMemberInfo(member: GuildMember, ctx: CommandInteraction) {
+	private async getMemberInfo(member: GuildMember, interaction: NinoCommand.Interaction<'cached'>) {
 		const joined = `<t:${Math.round(member.joinedTimestamp! / 1000)}:R>`;
 		const registration = `<t:${Math.round(member.user.createdTimestamp! / 1000)}:R>`;
 		const nickname = member.nickname ?? 'None';
@@ -142,29 +142,29 @@ export class UserCommand extends Command {
 				iconURL: member.user.displayAvatarURL()
 			})
 			.setColor(Colors.tanagerTurquoise) // Azul si es un miembro
-			.setDescription(this.getUserBadges(member.user, ctx.guild!).join(' '))
+			.setDescription(this.getUserBadges(member.user, interaction.guild!).join(' '))
 			.addFields([
 				{
-					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.About),
-					value: await resolveKey(ctx.guild!, LanguageKeys.Util.User.AboutValue, {
+					name: await resolveKey(interaction.guild!, LanguageKeys.Util.User.About),
+					value: await resolveKey(interaction.guild!, LanguageKeys.Util.User.AboutValue, {
 						user: member.user,
 						registration
 					})
 				},
 				{
-					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.GuildMember),
-					value: await resolveKey(ctx.guild!, LanguageKeys.Util.User.GuildMemberValue, {
+					name: await resolveKey(interaction.guild!, LanguageKeys.Util.User.GuildMember),
+					value: await resolveKey(interaction.guild!, LanguageKeys.Util.User.GuildMemberValue, {
 						joined,
 						nickname,
 						memberIsBooster
 					})
 				},
 				{
-					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.Roles),
+					name: await resolveKey(interaction.guild!, LanguageKeys.Util.User.Roles),
 					value: `> ${roles}`
 				},
 				{
-					name: await resolveKey(ctx.guild!, LanguageKeys.Util.User.Permissions),
+					name: await resolveKey(interaction.guild!, LanguageKeys.Util.User.Permissions),
 					value: await this.getPermissions(member)
 				}
 			]);

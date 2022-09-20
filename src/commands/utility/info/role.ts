@@ -1,9 +1,10 @@
+import { NinoCommand } from '#lib/structures';
 import { Colors } from '#utils/constants';
-import { Command, RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
-import { CommandInteraction, MessageEmbed, Role } from 'discord.js';
+import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
+import { MessageEmbed, Role } from 'discord.js';
 
-@RegisterSubCommand('info', (ctx) =>
-	ctx //
+@RegisterSubCommand('info', (builder) =>
+	builder
 		.setName('role')
 		.setDescription('📍 Get info about a role.')
 		.addRoleOption((op) =>
@@ -13,11 +14,11 @@ import { CommandInteraction, MessageEmbed, Role } from 'discord.js';
 				.setRequired(true)
 		)
 )
-export class UserCommand extends Command {
-	public override chatInputRun(ctx: CommandInteraction) {
-		const role = ctx.options.getRole('role') as Role;
+export class UserCommand extends NinoCommand {
+	public override chatInputRun(interaction: NinoCommand.Interaction) {
+		const role = interaction.options.getRole('role') as Role;
 
-		return this.makeEmbed(ctx, {
+		return this.makeEmbed(interaction, {
 			title: role.name,
 			id: role.id,
 			createdAt: role.createdTimestamp,
@@ -29,7 +30,7 @@ export class UserCommand extends Command {
 		});
 	}
 
-	private makeEmbed(ctx: CommandInteraction, options: RoleOptions) {
+	private makeEmbed(interaction: NinoCommand.Interaction, options: RoleOptions) {
 		const embed = new MessageEmbed()
 			.setAuthor({ name: options.title, iconURL: options.iconURL ?? '' })
 			.setColor(Colors.hazyDaze)
@@ -45,9 +46,9 @@ export class UserCommand extends Command {
 					value: `> **Color**: ${options.color}\n> **Hoisted**: ${options.hoist}\n> **Mentionable**: ${options.mentionable}`
 				}
 			])
-			.setFooter({ text: `Request by ${ctx.user.tag}`, iconURL: ctx.user.displayAvatarURL() });
+			.setFooter({ text: `Request by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() });
 
-		return ctx.reply({
+		return interaction.reply({
 			embeds: [embed]
 		});
 	}

@@ -1,16 +1,15 @@
 import { LanguageKeys } from '#lib/i18n';
+import { NinoCommand } from '#lib/structures';
 import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
 import { Language } from '@prisma/client';
-import { Command } from '@sapphire/framework';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import type { CommandInteraction } from 'discord.js';
 
-@RegisterSubCommand('config', (ctx) =>
-	ctx //
+@RegisterSubCommand('config', (builder) =>
+	builder
 		.setName('language')
 		.setDescription('🗨 Configure the language of the bot for this guild.')
-		.addStringOption((op) =>
-			op //
+		.addStringOption((option) =>
+			option
 				.setName('locale')
 				.setDescription('🗣 The new language for this guild.')
 				.addChoices(
@@ -30,14 +29,14 @@ import type { CommandInteraction } from 'discord.js';
 				.setRequired(true)
 		)
 )
-export class UserCommand extends Command {
-	public override chatInputRun(interaction: CommandInteraction<'cached'>) {
+export class UserCommand extends NinoCommand {
+	public override chatInputRun(interaction: NinoCommand.Interaction<'cached'>) {
 		const locale = interaction.options.getString('locale') as Language;
 		console.log(locale);
 		return this.setLocale(locale, interaction);
 	}
 
-	private async setLocale(locale: Language, interaction: CommandInteraction<'cached'>) {
+	private async setLocale(locale: Language, interaction: NinoCommand.Interaction<'cached'>) {
 		const id = BigInt(interaction.guildId);
 		const data = await this.container.prisma.guild.findUnique({
 			where: {

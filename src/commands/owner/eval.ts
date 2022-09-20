@@ -1,4 +1,4 @@
-import { NinoCommand, type NinoCommandOptions } from '#lib/structures';
+import { NinoCommand } from '#lib/structures';
 import { EvalExtraData, handleMessage, seconds } from '#utils/function';
 import { clean } from '#utils/sanitizer';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -10,7 +10,7 @@ import type { Message } from 'discord.js';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { inspect } from 'node:util';
 
-@ApplyOptions<NinoCommandOptions>({
+@ApplyOptions<NinoCommand.Options>({
 	name: 'eval',
 	description: 'Evaluates arbitrary JavaScript code.',
 	preconditions: ['DevOnly'],
