@@ -9,5 +9,6 @@
 	"MESSAGE_UPDATE_INFO_CONTENT": "> **Vor**: ~~{{before}}~~\n> **Nach**: {{after}}",
 	"MESSAGE_UPDATE_ID": "» IDs",
 	"MESSAGE_UPDATE_ID_CONTENT": "Benutzer = {{newMessag.author.id}}\nKanal = {{newMessage.channelId}}\nNachricht = {{newMessage.id}}",
-	"MESSAGE_DELETE_BULK": "🔖 - **{{amount}}** Nachrichten gelöscht in <#{{channel.id}}>"
+	"MESSAGE_DELETE_BULK": "🔖 - **{{amount}}** Nachrichten gelöscht in <#{{channel.id}}>",
+	"MENTION": "{{ninozzz}} - **Hallo**, mein Präfix ist `n!`, obwohl man auch Schrägstrichbefehle {{ninoheart}}} verwenden kann"
 }

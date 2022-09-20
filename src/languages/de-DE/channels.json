@@ -1,1 +1,8 @@
-{}
+{
+	"GUILD_CATEGORY": "Kategorie",
+	"GUILD_NEWS": "Nachrichten",
+	"GUILD_STAGE_VOICE": "Bühnenkanal",
+	"GUILD_STORE": "Laden Sie",
+	"GUILD_TEXT": "Text-Kanal",
+	"GUILD_VOICE": "Sprachkanal"
+}

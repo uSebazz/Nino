@@ -9,5 +9,6 @@
 	"MESSAGE_UPDATE_INFO_CONTENT": "> **Before**: ~~{{before}}~~\n> **After**: {{after}}",
 	"MESSAGE_UPDATE_ID": "» IDs",
 	"MESSAGE_UPDATE_ID_CONTENT": "User = {{newMessage.author.id}}\nChannel = {{newMessage.channelId}}\nMessage = {{newMessage.id}}",
-	"MESSAGE_DELETE_BULK": "🔖 - **{{amount}}** messages deleted in <#{{channel.id}}>"
+	"MESSAGE_DELETE_BULK": "🔖 - **{{amount}}** messages deleted in <#{{channel.id}}>",
+	"MENTION": "{{ninozzz}} - **Hello**, my prefix is `n!`, although you can also use slash commands {{{ninoheart}}}"
 }

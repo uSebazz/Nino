@@ -10,14 +10,14 @@
 	"COLOR_INFO": "Información acerca de {{options.name}}",
 	"COLOR_SHADES": "» Sombras",
 	"COLOR_TINT": "» Tintas",
-	"SERVER_ISNT_IN_CACHE": "{{wrong}} - El servidor no está en la caché.",
+	"SERVER_ISNT_IN_CACHE": "{{wrong}} - El servidor no está en caché.",
 	"SERVER_INFO": "» Información",
-	"SERVER_INFO_VALUE": "> **ID**: {{server.id}}\n> **Created at**: <t:{{time}}:R>\n> **Owner**: {{owner.toString()}}",
+	"SERVER_INFO_VALUE": "> **ID**: {{server.id}}\n> **Creado en**: <t:{{time}}:R>\n> **Propietario**: {{owner.toString()}}",
 	"SERVER_STATS": "» Estadísticas",
-	"SERVER_STATS_VALUE": "> **Members [{{server.memberCount}}]**: {{Emojis.user}} {{humans}} | {{Emojis.bot}} {{bots}}\n> **Channels [{{server.channels.cache.size}}]**: {{Emojis.guildText}} {{textChannels}} | {{Emojis.guildVoice}} {{voiceChannels}} | {{Emojis.guildStage}} {{stages}}",
+	"SERVER_STATS_VALUE": "> **Miembros [{{server.memberCount}}]**: {{Emojis.user}} {{humans}} | {{Emojis.bot}} {{bots}}\n> **Canales [{{server.channels.cache.size}}]**: {{Emojis.guildText}} {{textChannels}} | {{Emojis.guildVoice}} {{voiceChannels}} | {{Emojis.guildStage}} {{stages}}",
 	"SERVER_FEATURES": "» Características",
 	"ROLE_INFO": "» Información",
-	"ROLE_INFO_VALUE": "**ID**: {{options.id}}\n> **Position**: {{options.position}}\n> **Created At**: {{time}}",
+	"ROLE_INFO_VALUE": "**ID**: {{options.id}}\n> **Posición**: {{options.position}}\n> **Creado en**: {{time}}",
 	"ROLE_EXTRA_DATA": "» Datos extra",
-	"ROLE_EXTRA_DATA_VALUE": "> **Color**: {{options.color}}\n> **Hoisted**: {{options.hoist}}\n> **Mentionable**: {{options.mentionable}}"
+	"ROLE_EXTRA_DATA_VALUE": "> **Color**: {{options.color}}\n> **Izamiento**: {{options.hoist}}\n> **Mencionable**: {{options.mentionable}}"
 }

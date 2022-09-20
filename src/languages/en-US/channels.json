@@ -1,8 +1,8 @@
 {
 	"GUILD_CATEGORY": "Category",
 	"GUILD_NEWS": "News",
-	"GUILD_STAGE_VOICE": "Stage Voice",
+	"GUILD_STAGE_VOICE": "Stage channel",
 	"GUILD_STORE": "Store",
-	"GUILD_TEXT": "Text",
-	"GUILD_VOICE": "Voice"
+	"GUILD_TEXT": "Text channel",
+	"GUILD_VOICE": "Voice channel"
 }

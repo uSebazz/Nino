@@ -1,3 +1,23 @@
 {
-	"PING_MESSAGE": "🏓 Pong! (Took: {{diff}}ms. Total: {{ping}}ms)"
+	"PING_MESSAGE": "🏓 Pong! (Took: {{diff}}ms. Total: {{ping}}ms)",
+	"COLOR_INFO": "Information about {{options.name}}",
+	"COLOR_SHADES": "» Shadows",
+	"COLOR_TINT": "» Inks",
+	"ROLE_EXTRA_DATA": "» Extra data",
+	"ROLE_EXTRA_DATA_VALUE": "> **Color**: {{options.color}}\n> **Hoisted**: {{options.hoist}}\n> **Mentionable**: {{options.mentionable}}",
+	"ROLE_INFO": "» Information",
+	"ROLE_INFO_VALUE": "**ID**: {{options.id}}\n> **Position**: {{options.position}}\n> **Created at**: {{time}}",
+	"SERVER_FEATURES": "» Features",
+	"SERVER_INFO": "» Information",
+	"SERVER_INFO_VALUE": "> **ID**: {{server.id}}\n> **Created at**: <t:{{time}}:R>\n> **Owner**: {{owner.toString()}}",
+	"SERVER_ISNT_IN_CACHE": "{{wrong}} - The server is not cached.",
+	"SERVER_STATS": "» Statistics",
+	"SERVER_STATS_VALUE": "> **Members [{{server.memberCount}}]**: {{Emojis.user}} {{humans}} | {{Emojis.bot}} {{bots}}\n> **Channels [{{server.channels.cache.size}}]**: {{Emojis.guildText}} {{textChannels}} | {{Emojis.guildVoice}} {{voiceChannels}} | {{Emojis.guildStage}} {{stages}}",
+	"USER_ABOUT": "» About",
+	"USER_ABOUT_DESCRIPTION": "> **ID**: {{user.id}}\n> **Registration**: {{registration}}",
+	"USER_GUILD_MEMBER": "» Server member",
+	"USER_GUILD_MEMBER_DESCRIPTION": "> **Join date**: {{joined}}\n> **Nickname**: {{nickname}}\n> **Boosting**: {{memberIsBooster}}",
+	"USER_PERMISSIONS": "» Permissions",
+	"USER_PERMISSIONS_ALL": "> All permissions (administrator)",
+	"USER_ROLES": "» Roles"
 }

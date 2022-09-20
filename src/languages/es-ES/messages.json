@@ -1,5 +1,5 @@
 {
-	"MENTION": "{{ninozzz}} - **Hallo**, mi prefix es `n!`, aunque tambien puedes usar comandos de `/` {{ninoheart}}.",
+	"MENTION": "{{ninozzz}} - **Hola**, mi prefijo es `n!`, aunque también puedes usar comandos de barra {{ninoheart}}",
 	"MESSAGE_DELETE": "🗑️ - Mensaje eliminado en <#{{channel.id}}>",
 	"MESSAGE_DELETE_INFO": "» Información",
 	"MESSAGE_DELETE_INFO_CONTENT": "> **Contenido**: {{content}}",

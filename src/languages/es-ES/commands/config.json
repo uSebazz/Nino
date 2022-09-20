@@ -21,5 +21,7 @@
 	"LOGGING_ALL_EVENTS": "Todos los eventos",
 	"LOGGING_VIEW_INFO": "{{setting}} - **Configuración de registro**",
 	"LOGGING_VIEW_INFO_CHANNEL": "**Canal**: {{canal}}",
-	"LOGGING_VIEW_INFO_EVENTS_ENABLED": "**Eventos habilitados**: {{events}}"
+	"LOGGING_VIEW_INFO_EVENTS_ENABLED": "**Eventos habilitados**: {{events}}",
+	"LANGUAGE_BUTTON_FILTER": "{{excl}} - Este menú no es para ti :)",
+	"LANGUAGE_SELECT": "{{excl}} - Seleccione un idioma para este servidor"
 }

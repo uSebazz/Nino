@@ -12,6 +12,7 @@
 		"source.organizeImports": true
 	},
 	"rpc.enabled": true,
-	"i18n-ally.localesPaths": ["src/languages", "src/lib/i18n", "src/listeners/messages"]
+	"i18n-ally.localesPaths": ["src/languages", "src/lib/i18n", "src/listeners/messages"],
+	"i18n-ally.keystyle": "flat"
 	//"rpc.enabled": true
 }
