@@ -1,10 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model LogChannel {
+  /// Guild Id
+  guildId   BigInt   @map("guild_id")
+  /// Channel id to send all logs.
+  channelId BigInt   @map("channel_id")
+  /// The array of the events on.
+  /// if it is empty, it does not send any logs.
+  events    Event[]  @default([])
+  /// The date of registration of this channel in the database.
+  createdAt DateTime @default(now()) @map("created_at")
+  /// The date of the last update of this channel in the database.
+  updatedAt DateTime @updatedAt @map("updated_at")
+  /// The Guild this log channel belongs to
+  guild     Guild    @relation(fields: [guildId], references: [id])
+
+  @@id([guildId, channelId])
+  @@map("log_channels")
+}
+
+model Guild {
+  /// The id of the server
+  id        BigInt       @id @unique
+  /// The lang of the server
+  lang      Language     @default(ES)
+  /// The date of registration of this guild in the database.
+  createdAt DateTime     @default(now()) @map("created_at")
+  /// The date of the last update of this guild in the database.
+  updatedAt DateTime     @updatedAt @map("updated_at")
+  /// The logs that are registered on the server
+  logs      LogChannel[]
+
+  @@map("guilds")
 }
 
 enum Event {
@@ -33,42 +67,8 @@ enum Event {
   guildUpdate
 }
 
-model LogChannel {
-  /// Guild Id
-  guildId   BigInt   @map("guild_id")
-  /// The Guild this log channel belongs to
-  guild     Guild    @relation(fields: [guildId], references: [id])
-  /// Channel id to send all logs.
-  channelId BigInt   @map("channel_id")
-  /// The array of the events on.
-  /// if it is empty, it does not send any logs.
-  events    Event[]  @default([])
-  /// The date of registration of this channel in the database.
-  createdAt DateTime @default(now()) @map("created_at")
-  /// The date of the last update of this channel in the database.
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  @@id([guildId, channelId])
-  @@map("log_channels")
-}
-
 enum Language {
   EN
   ES
   DE
-}
-
-model Guild {
-  /// The id of the server
-  id        BigInt       @id @unique
-  /// The lang of the server
-  lang      Language     @default(ES)
-  /// The logs that are registered on the server
-  logs      LogChannel[]
-  /// The date of registration of this guild in the database.
-  createdAt DateTime     @default(now()) @map("created_at")
-  /// The date of the last update of this guild in the database.
-  updatedAt DateTime     @updatedAt @map("updated_at")
-
-  @@map("guilds")
 }
