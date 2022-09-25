@@ -604,6 +604,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sapphire/discord.js-utilities@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@sapphire/discord.js-utilities@npm:5.0.1"
+  dependencies:
+    "@sapphire/discord-utilities": ^2.11.6
+    "@sapphire/duration": ^1.0.0
+    "@sapphire/utilities": ^3.9.3
+    tslib: ^2.4.0
+  checksum: a4569fe945d5d3d4064e2b8d7dacfb83c0677200daf5cfaa706fa6d34ce986f0005ee5a3fd058b9d2ce20f895cf62e5e599105d3720ee87487ec78dbfd597cd2
+  languageName: node
+  linkType: hard
+
+"@sapphire/duration@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@sapphire/duration@npm:1.0.0"
+  checksum: dadf3b5742742b5f724d1d78b0c59fd468ffe3ac817da2ba84361ac310528cb8c43f3d9d6032ff08f0f22fcaf61b495fb29b87800748e14abb0b780e86afda75
+  languageName: node
+  linkType: hard
+
 "@sapphire/eslint-config@npm:^4.3.8":
   version: 4.3.8
   resolution: "@sapphire/eslint-config@npm:4.3.8"
@@ -691,14 +710,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/plugin-logger@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@sapphire/plugin-logger@npm:3.0.0"
+"@sapphire/plugin-logger@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@sapphire/plugin-logger@npm:3.0.1"
   dependencies:
-    "@sapphire/time-utilities": ^1.7.6
+    "@sapphire/timestamp": ^1.0.0
     colorette: ^2.0.19
     tslib: ^2.4.0
-  checksum: b4323a7d319e53b9a7b01825d4eb73562fb767832d07cbbb00b02208577c36f0cffdbf0572203c53cf5f2348304765e0956661c31a21ad970c834ba295db1363
+  checksum: ed95258441b958e1618489c5e5ad336bf5a304a2d3efbfc15104c99133d92938bade2ed5eaf2739eba14d7e153db87af1d77891e15ad2b2414f4f3ecab6d3a27
   languageName: node
   linkType: hard
 
@@ -762,6 +781,13 @@ __metadata:
   dependencies:
     "@sapphire/utilities": ^3.9.2
   checksum: eadcdf2cbadcc15fa36d7d3b4719acb05f30ed0611f3f8bcfd47d8037221239168f190e79b2c05942cc66a66cbbf3c7d313eda15e9a2a3cff81cf25cec42f3ce
+  languageName: node
+  linkType: hard
+
+"@sapphire/timestamp@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@sapphire/timestamp@npm:1.0.0"
+  checksum: 2852210825626431cb7aee4da9cd04518778854f5b9e8eafc0fa0a57d499251030ad115f0d0c58e15e5b176cfb495301df7418d95e51c4826e9fadc09ff98bbb
   languageName: node
   linkType: hard
 
@@ -4196,13 +4222,13 @@ __metadata:
     "@napi-rs/canvas": ^0.1.29
     "@prisma/client": ^4.3.1
     "@sapphire/decorators": ^5.0.0
-    "@sapphire/discord.js-utilities": ^5.0.0
+    "@sapphire/discord.js-utilities": ^5.0.1
     "@sapphire/eslint-config": ^4.3.8
     "@sapphire/fetch": ^2.4.1
     "@sapphire/framework": ^3.1.1
     "@sapphire/plugin-editable-commands": ^2.0.1
     "@sapphire/plugin-i18next": ^3.0.0
-    "@sapphire/plugin-logger": ^3.0.0
+    "@sapphire/plugin-logger": ^3.0.1
     "@sapphire/plugin-subcommands": ^3.2.1
     "@sapphire/prettier-config": ^1.4.4
     "@sapphire/ts-config": ^3.3.4
