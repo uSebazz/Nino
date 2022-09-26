@@ -11,8 +11,14 @@
 		"source.fixAll.eslint": true,
 		"source.organizeImports": true
 	},
-	"rpc.enabled": true,
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/*.code-search": true,
+		"**/.yarn": true,
+		"**/dist/": true,
+		"**/.git/": true
+	},
 	"i18n-ally.localesPaths": ["src/languages", "src/lib/i18n", "src/listeners/messages"],
 	"i18n-ally.keystyle": "flat"
-	//"rpc.enabled": true
 }
