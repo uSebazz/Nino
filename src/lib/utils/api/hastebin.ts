@@ -1,16 +1,17 @@
-import { fetch, FetchMethods, FetchResultTypes } from '@sapphire/fetch';
+import { Json, safeFetch } from '@skyra/safe-fetch';
 interface HastebinResponse {
 	key: string;
 }
 
 export async function getHaste(result: string, language = 'js') {
-	const { key } = await fetch<HastebinResponse>(
-		`https://hastebin.skyra.pw/documents`,
-		{
-			method: FetchMethods.Post,
-			body: result
-		},
-		FetchResultTypes.JSON
-	);
+	const { key } = (
+		await Json<HastebinResponse>(
+			safeFetch(`https://hastebin.skyra.pw/documents`, {
+				method: 'POST',
+				body: result
+			})
+		)
+	).unwrap();
+
 	return `https://hastebin.skyra.pw/${key}.${language}`;
 }

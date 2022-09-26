@@ -3,8 +3,8 @@ import { NinoCommand } from '#lib/structures';
 import type { Colors } from '#lib/structures/colors';
 import { parse } from '#utils/color';
 import { RegisterSubCommand } from '@kaname-png/plugin-subcommands-advanced';
-import { fetch } from '@sapphire/fetch';
 import { resolveKey } from '@sapphire/plugin-i18next';
+import { Json, safeFetch } from '@skyra/safe-fetch';
 import { ColorResolvable, MessageEmbed } from 'discord.js';
 
 @RegisterSubCommand('info', (builder) =>
@@ -27,7 +27,7 @@ export class UserCommand extends NinoCommand {
 	}
 
 	private async getColorInfo(color: Colors, ctx: NinoCommand.Interaction) {
-		const info = await this.apiCall(color.hex.toString().replace('#', ''));
+		const info = await (await this.apiCall(color.hex.toString().replace('#', ''))).unwrap();
 		const embeds = await this.getEmbed(info, color, ctx);
 
 		return ctx.reply({ embeds });
@@ -58,7 +58,7 @@ export class UserCommand extends NinoCommand {
 	}
 
 	private apiCall(code: string) {
-		return fetch<Response>(`https://api.alexflipnote.dev/colour/${code}`);
+		return Json<Response>(safeFetch(`https://api.alexflipnote.dev/colour/${code}`));
 	}
 }
 
