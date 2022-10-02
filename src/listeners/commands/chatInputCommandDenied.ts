@@ -10,7 +10,7 @@ export class ChatInputCommandDenied extends Listener<typeof Events.ChatInputComm
 		const identifier = translate(error.identifier);
 
 		return interaction.reply({
-			content: await resolveKey(interaction, identifier, { interaction, command, ...(error.context as any) }),
+			content: await resolveKey(interaction, identifier, { interaction, command, ...(error.context as unknown) }),
 			allowedMentions: { users: [interaction.user.id], roles: [] },
 			ephemeral: Boolean(silent)
 		});
