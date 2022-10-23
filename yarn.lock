@@ -695,16 +695,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/plugin-i18next@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@sapphire/plugin-i18next@npm:3.0.1"
+"@sapphire/plugin-i18next@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@sapphire/plugin-i18next@npm:3.1.0"
   dependencies:
-    "@sapphire/utilities": ^3.10.0
+    "@sapphire/utilities": ^3.11.0
     "@skyra/i18next-backend": ^1.1.0
     chokidar: ^3.5.3
-    i18next: ^21.9.2
+    i18next: ^21.10.0
     tslib: ^2.4.0
-  checksum: bdecb43120d114df8fbd927cf4ea1f6f32ff296a42165969c0c74fdc3cb7cb924c938aafec0c9df63bfef254e6879bddf29524988f2da9d1d80e56aff487b314
+  checksum: 4a39f330eca6442ce239afecb9c0864c91428de5a1967b16a0962b01c9d26c5f67f35e1188badfa40eb8b1e96b346418e537db427e364e8e0f98840dae37c209
   languageName: node
   linkType: hard
 
@@ -3342,7 +3342,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.9.2":
+"i18next@npm:^21.10.0":
   version: 21.10.0
   resolution: "i18next@npm:21.10.0"
   dependencies:
@@ -4223,7 +4223,7 @@ __metadata:
     "@sapphire/fetch": ^2.4.1
     "@sapphire/framework": ^3.1.3
     "@sapphire/plugin-editable-commands": ^2.0.1
-    "@sapphire/plugin-i18next": ^3.0.1
+    "@sapphire/plugin-i18next": ^3.1.0
     "@sapphire/plugin-logger": ^3.0.1
     "@sapphire/plugin-subcommands": ^3.2.3
     "@sapphire/prettier-config": ^1.4.4
