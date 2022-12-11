@@ -708,13 +708,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/plugin-subcommands@npm:^3.2.3":
-  version: 3.2.3
-  resolution: "@sapphire/plugin-subcommands@npm:3.2.3"
+"@sapphire/plugin-subcommands@npm:^3.2.4":
+  version: 3.2.4
+  resolution: "@sapphire/plugin-subcommands@npm:3.2.4"
   dependencies:
     "@sapphire/utilities": ^3.11.0
-    tslib: ^2.4.0
-  checksum: 29d7b660eca2af9304b9a432253398a253b960c1b6dfcc547468ddaed2e9baa5f81bfc24534bb4d7d7d9a4b3c24e272c287b8910652641bf38f7ea83ba8bff39
+    tslib: ^2.4.1
+  checksum: 7ba661a71f65f3eb490412b01243ddd46b693ae08b249a447504ce5108bd264b01d20d3d0384f13d9b2fc767b23984534f08440af2cd0e40e2858ac9ff6cc158
   languageName: node
   linkType: hard
 
@@ -4207,7 +4207,7 @@ __metadata:
     "@sapphire/plugin-editable-commands": ^2.0.1
     "@sapphire/plugin-i18next": ^3.1.0
     "@sapphire/plugin-logger": ^3.0.1
-    "@sapphire/plugin-subcommands": ^3.2.3
+    "@sapphire/plugin-subcommands": ^3.2.4
     "@sapphire/prettier-config": ^1.4.4
     "@sapphire/ts-config": ^3.3.4
     "@sapphire/type": ^2.2.6
