@@ -32,7 +32,7 @@
 		"@sapphire/plugin-i18next": "^3.1.0",
 		"@sapphire/plugin-logger": "^3.0.1",
 		"@sapphire/plugin-subcommands": "^3.2.4",
-		"@sapphire/type": "^2.2.6",
+		"@sapphire/type": "^2.3.0",
 		"@sapphire/utilities": "^3.11.0",
 		"@skyra/env-utilities": "^1.0.2",
 		"@skyra/start-banner": "^1.0.2",
