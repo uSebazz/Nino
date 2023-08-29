@@ -29,7 +29,7 @@
 		"@sapphire/fetch": "^2.4.1",
 		"@sapphire/framework": "^3.2.0",
 		"@sapphire/plugin-editable-commands": "^2.0.1",
-		"@sapphire/plugin-i18next": "^3.1.0",
+		"@sapphire/plugin-i18next": "^5.1.0",
 		"@sapphire/plugin-logger": "^3.0.1",
 		"@sapphire/plugin-subcommands": "^3.2.4",
 		"@sapphire/type": "^2.3.0",
