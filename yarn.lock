@@ -674,13 +674,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/plugin-editable-commands@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@sapphire/plugin-editable-commands@npm:2.0.1"
+"@sapphire/plugin-editable-commands@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@sapphire/plugin-editable-commands@npm:3.1.0"
   dependencies:
-    "@skyra/editable-commands": ^2.1.4
-    tslib: ^2.4.0
-  checksum: 3878411476ac56c5ceb40072ee15916a103eac122186f386019a6d57a05a68a7f85229dab4dd17c74617678566fb118bc692060df7ea8a02d069ec521bd7d4b4
+    "@skyra/editable-commands": ^3.0.1
+  checksum: 0302d8c45b3396b5263cccce243bb72405e5934102a8326012b4adb30766c8005537fd86bb6466ebeeedc898c2b29ba162cfca54452fcc2bdc184fe522406b3c
   languageName: node
   linkType: hard
 
@@ -804,10 +803,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@skyra/editable-commands@npm:^2.1.4":
-  version: 2.1.4
-  resolution: "@skyra/editable-commands@npm:2.1.4"
-  checksum: 865c11201c1778543f64dc81e114efae3096bf50653e6301ee576d5d9f2d6623fb3387e39fe06e74ec1b655dd033184d850e5735ea74d54bce169743cc6ab7b3
+"@skyra/editable-commands@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@skyra/editable-commands@npm:3.0.1"
+  checksum: a945fa47d6f5df20396edc268ede830a79fcedb3f3fe57e91cca94e4d0a26af5e4e6f3c673e2eb3b2d182ae6c6acefcd3074df8e072dc647981d1dccda10ade8
   languageName: node
   linkType: hard
 
@@ -4204,7 +4203,7 @@ __metadata:
     "@sapphire/eslint-config": ^4.3.8
     "@sapphire/fetch": ^2.4.1
     "@sapphire/framework": ^3.2.0
-    "@sapphire/plugin-editable-commands": ^2.0.1
+    "@sapphire/plugin-editable-commands": ^3.1.0
     "@sapphire/plugin-i18next": ^3.1.0
     "@sapphire/plugin-logger": ^3.0.1
     "@sapphire/plugin-subcommands": ^3.2.4
@@ -5446,14 +5445,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "tslib@npm:2.4.0"
-  checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.4.1":
+"tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.4.1":
   version: 2.4.1
   resolution: "tslib@npm:2.4.1"
   checksum: 19480d6e0313292bd6505d4efe096a6b31c70e21cf08b5febf4da62e95c265c8f571f7b36fcc3d1a17e068032f59c269fab3459d6cd3ed6949eafecf64315fca
