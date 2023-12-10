@@ -55,7 +55,7 @@
 		"commitlint": "^17.1.2",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.23.1",
-		"eslint-config-prettier": "^8.5.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^4.2.1",
 		"husky": "^8.0.1",
 		"lint-staged": "^13.0.3",
