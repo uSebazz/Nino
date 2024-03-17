@@ -585,6 +585,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sapphire/decorators@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@sapphire/decorators@npm:6.1.0"
+  dependencies:
+    tslib: ^2.6.2
+  checksum: 9c9c8aef9bb00e422ab7b7fed0ef4713469d008d10a74dac340e142b67c3abeb822f35d410dcdac46f8beb30b9d17fbb51a2e7894caf0b4a8b6a62b3ef914180
+  languageName: node
+  linkType: hard
+
 "@sapphire/discord-utilities@npm:^2.12.0":
   version: 2.12.0
   resolution: "@sapphire/discord-utilities@npm:2.12.0"
@@ -4199,7 +4208,7 @@ __metadata:
     "@kaname-png/plugin-subcommands-advanced": ^2.1.3
     "@napi-rs/canvas": ^0.1.29
     "@prisma/client": ^4.3.1
-    "@sapphire/decorators": ^5.0.0
+    "@sapphire/decorators": ^6.1.0
     "@sapphire/discord.js-utilities": ^5.1.2
     "@sapphire/eslint-config": ^4.3.8
     "@sapphire/fetch": ^2.4.1
@@ -5446,17 +5455,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "tslib@npm:2.4.0"
-  checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "tslib@npm:2.4.1"
-  checksum: 19480d6e0313292bd6505d4efe096a6b31c70e21cf08b5febf4da62e95c265c8f571f7b36fcc3d1a17e068032f59c269fab3459d6cd3ed6949eafecf64315fca
+"tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "tslib@npm:2.6.2"
+  checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad
   languageName: node
   linkType: hard
 
