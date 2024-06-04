@@ -25,7 +25,7 @@
 		"@napi-rs/canvas": "^0.1.29",
 		"@prisma/client": "^4.3.1",
 		"@sapphire/decorators": "^5.0.0",
-		"@sapphire/discord.js-utilities": "^5.1.2",
+		"@sapphire/discord.js-utilities": "^7.3.0",
 		"@sapphire/fetch": "^2.4.1",
 		"@sapphire/framework": "^3.2.0",
 		"@sapphire/plugin-editable-commands": "^2.0.1",
